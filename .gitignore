@@ -1,0 +1,6 @@
+
+/node_modules
+/.yarn
+
+/src/quizes
+/src/quiz_config.json
