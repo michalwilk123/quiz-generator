@@ -12,7 +12,7 @@ import "./App.css";
 
 const App = () => {
   return (
-    <VStack>
+    <Flex direction="column" minH="100vh">
       <HStack width="100%" mb="20px" py="20px" px="40px" bgColor="gray.900">
         <Box alignItems="center">
           <Heading size="xl" textColor="whiteAlpha.800">
@@ -25,7 +25,7 @@ const App = () => {
       <Flex width="100%" height="100%">
         <Outlet />
       </Flex>
-    </VStack>
+    </Flex>
   );
 };
 
