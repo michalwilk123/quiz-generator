@@ -12,7 +12,7 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { getQuizDataFromFile, QuizContent } from "../utils/helpers";
 import QuestionCardGenerator from "./QuestionCardGenerator";
 
@@ -22,12 +22,20 @@ const Quiz = (props: Props) => {
   const [quizContent, setQuizContent] = useState<QuizContent>();
   const [loading, setLoading] = useState<boolean>(true);
   const { quiz } = useParams();
+  // const [ searchParameters ] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({});
   const [canSubmit, setCanSubmit] = useState<boolean>(true);
   const [chosenAnswers, setChosenAnswers] = useState<any[]>();
+  const [timer, setTimer] = useState<number>(0);
 
   const setupQuiz = () => {};
+  // console.log(searchParams.getAll("conf"));
 
   useEffect(() => {
+    const intervalIdx = setInterval(()=>
+      setTimer((t)=>t + 1)
+    , 1000);
+
     if (quiz) {
       getQuizDataFromFile(quiz)
         .then((qc) => {
@@ -37,6 +45,9 @@ const Quiz = (props: Props) => {
         .catch((e) => console.error(e));
     }
     setLoading(false);
+    return () => {
+      clearInterval(intervalIdx);
+    }
   }, []);
 
   if (loading) {
@@ -63,7 +74,7 @@ const Quiz = (props: Props) => {
     >
       <Heading color="whiteAlpha.800"> {quizContent.name}</Heading>
       <HStack spacing={5}>
-        <Text color="whiteAlpha.800">Time: /s</Text>
+        <Text color="whiteAlpha.800">Time: {timer} s</Text>
         <Link fontWeight="bold" color="teal">
           Reset
         </Link>
