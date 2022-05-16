@@ -5,7 +5,6 @@ import {
   Heading,
   HStack,
   Spacer,
-  VStack,
 } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import "./App.css";

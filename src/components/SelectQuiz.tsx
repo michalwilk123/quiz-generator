@@ -9,7 +9,6 @@ import {
   Button,
   FormControl,
 } from "@chakra-ui/react";
-import { type } from "os";
 import React, { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import quizConfig from "../quiz_config";
