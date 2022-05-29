@@ -28,8 +28,9 @@ export enum QuestionTypes {
 
 export enum QuizOptions {
   RANDOM_ORDER = "Random order of the questions",
-  SAVE = "Save current progress in the local storage",
+  SAVE_IN_LS = "Save current progress in the local storage",
   RUN_ALL = "Display all question once and show ending message at the end",
+  ALLOW_PARTIAL_CORRECT = "Allow partial correctness of given answer",
   CHECK_OPEN = "Check correctness of open type questions",
   CHECK_OPEN_PARTIAL = "Check for partial correctness of long open type questions",
   ALLOW_SKIP = "Allow skipping questions",
@@ -51,16 +52,15 @@ const MultiCheckboxWrap = ({
     const value = e.target.value.toString();
     const isChecked = e.target.checked;
 
-    if (chosenOptions.includes(value) && !isChecked){
+    if (chosenOptions.includes(value) && !isChecked) {
       const newArr = [...chosenOptions];
       newArr.splice(newArr.indexOf(value), 1);
       setChosenOptions(newArr);
-    } else if (!(chosenOptions.includes(value)) && isChecked){
+    } else if (!chosenOptions.includes(value) && isChecked) {
       const newArr = [...chosenOptions];
       newArr.push(value);
       setChosenOptions(newArr);
     }
-
   };
 
   return (
@@ -75,7 +75,6 @@ const MultiCheckboxWrap = ({
     </Wrap>
   );
 };
-
 
 const SelectQuiz = (props: Props) => {
   const navigate = useNavigate();

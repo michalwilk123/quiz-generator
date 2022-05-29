@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  HStack,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, HStack, Spacer } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import "./App.css";
 

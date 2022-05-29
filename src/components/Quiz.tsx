@@ -10,10 +10,16 @@ import {
   Link,
   HStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import _ from "lodash";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
-import { getQuizDataFromFile, QuizContent } from "../utils/helpers";
+import {
+  getQuizDataFromFile,
+  QuizContent,
+  QuizElement,
+} from "../utils/helpers";
 import QuestionCardGenerator from "./QuestionCardGenerator";
+import { QuizOptions } from "./SelectQuiz";
 
 type Props = {};
 
@@ -21,33 +27,78 @@ const Quiz = (props: Props) => {
   const [quizContent, setQuizContent] = useState<QuizContent>();
   const [loading, setLoading] = useState<boolean>(true);
   const { quiz } = useParams();
-  // const [ searchParameters ] = useSearchParams();
   const [searchParams, setSearchParams] = useSearchParams({});
   const [canSubmit, setCanSubmit] = useState<boolean>(true);
-  const [chosenAnswers, setChosenAnswers] = useState<any[]>();
   const [timer, setTimer] = useState<number>(0);
+  const [questionLimit, setQuestionLimit] = useState(20);
 
-  const setupQuiz = () => {};
-  // console.log(searchParams.getAll("conf"));
+  const searchOpts = useMemo(
+    () =>
+      searchParams
+        .getAll("conf")
+        .map(
+          (idx: string): QuizOptions =>
+            Object.values(QuizOptions)[parseInt(idx)] as QuizOptions
+        ),
+    [searchParams]
+  );
+
+  const saveQuizInLocalStorage = () => {
+    if (quizContent) {
+      localStorage.setItem(quizContent.name, JSON.stringify(quizContent));
+    }
+  };
 
   useEffect(() => {
-    const intervalIdx = setInterval(()=>
-      setTimer((t)=>t + 1)
-    , 1000);
+    const intervalIdx = setInterval(() => {
+      if (searchOpts.includes(QuizOptions.TIMER)) {
+        setTimer((t) => t + 1);
+      }
+    }, 1000);
 
     if (quiz) {
       getQuizDataFromFile(quiz)
         .then((qc) => {
-          setQuizContent(qc);
-          setChosenAnswers(Array(qc.quiz_elements.length));
+          setQuizContent(prepareQuestions(qc));
         })
         .catch((e) => console.error(e));
     }
     setLoading(false);
     return () => {
       clearInterval(intervalIdx);
-    }
+    };
   }, []);
+
+  const prepareQuestions = (newQuizContent: QuizContent): QuizContent => {
+    if (searchOpts.includes(QuizOptions.RANDOM_ORDER)) {
+      newQuizContent.quiz_elements.sort(() => Math.random() - 0.5);
+    }
+
+    if (searchOpts.includes(QuizOptions.RUN_ALL)) {
+      setQuestionLimit(Infinity);
+    }
+
+    newQuizContent.quiz_elements.forEach((val, idx) => {
+      if (newQuizContent.quiz_elements[idx].scale) {
+        newQuizContent.quiz_elements[idx].scale = 1.0;
+      }
+    });
+
+    return newQuizContent;
+  };
+
+  const handleResetQuiz = async () => {
+    let newQuizContent = _.clone(quizContent);
+    newQuizContent?.quiz_elements.map((quizElement) => {
+      quizElement.chosen_answer = undefined;
+      quizElement.chosen_answers = undefined;
+    });
+    await setQuizContent(newQuizContent);
+    if (searchOpts.includes(QuizOptions.SAVE_IN_LS)) {
+      saveQuizInLocalStorage();
+    }
+    setTimer(0);
+  };
 
   if (loading) {
     return <></>;
@@ -73,18 +124,26 @@ const Quiz = (props: Props) => {
     >
       <Heading color="whiteAlpha.800"> {quizContent.name}</Heading>
       <HStack spacing={5}>
-        <Text color="whiteAlpha.800">Time: {timer} s</Text>
-        <Link fontWeight="bold" color="teal">
+        {searchOpts.includes(QuizOptions.TIMER) && (
+          <Text color="whiteAlpha.800">Time: {timer} s</Text>
+        )}
+        <Link fontWeight="bold" color="teal" onClick={handleResetQuiz}>
           Reset
         </Link>
       </HStack>
       <VStack divider={<StackDivider />} spacing="10" mt="13px">
-        {quizContent.quiz_elements.slice(0, 4).map((el, idx) => (
+        {quizContent.quiz_elements.slice(0, questionLimit).map((el, idx) => (
           <QuestionCardGenerator
+            onAnswerSet={(el: QuizElement) => {
+              let newQuizContent = _.clone(quizContent);
+              newQuizContent.quiz_elements[idx] = el;
+              setQuizContent(newQuizContent);
+              if (searchOpts.includes(QuizOptions.SAVE_IN_LS)) {
+                saveQuizInLocalStorage();
+              }
+            }}
             quiz_element={el}
             num={idx + 1}
-            color="whiteAlpha.900"
-            minW="400px"
             key={idx}
           />
         ))}
