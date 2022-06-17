@@ -15,9 +15,12 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
   getQuizDataFromFile,
+  QuizAnswerResultType,
   QuizContent,
   QuizElement,
+  QuizStatusType,
 } from "../utils/helpers";
+import { validateSingleQuestion as validateQuestion } from "../utils/quizValidator";
 import QuestionCardGenerator from "./QuestionCardGenerator";
 import { QuizOptions } from "./SelectQuiz";
 
@@ -28,9 +31,12 @@ const Quiz = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(true);
   const { quiz } = useParams();
   const [searchParams, setSearchParams] = useSearchParams({});
-  const [canSubmit, setCanSubmit] = useState<boolean>(true);
+  const [quizStatus, setQuizStatus] = useState<QuizStatusType>(
+    QuizStatusType.CAN_SUBMIT
+  );
   const [timer, setTimer] = useState<number>(0);
   const [questionLimit, setQuestionLimit] = useState(20);
+  const [currentScore, setCurrentScore] = useState(0);
 
   const searchOpts = useMemo(
     () =>
@@ -43,11 +49,17 @@ const Quiz = (props: Props) => {
     [searchParams]
   );
 
-  const saveQuizInLocalStorage = () => {
-    if (quizContent) {
-      localStorage.setItem(quizContent.name, JSON.stringify(quizContent));
+  const maxScore = useMemo(() => {
+    if (!quizContent) {
+      return 0;
     }
-  };
+
+    let curr = 0;
+    quizContent.quiz_elements.forEach((element) => {
+      curr += element.scale ?? 1;
+    });
+    return curr;
+  }, [quizContent]);
 
   useEffect(() => {
     const intervalIdx = setInterval(() => {
@@ -57,17 +69,21 @@ const Quiz = (props: Props) => {
     }, 1000);
 
     if (quiz) {
-      getQuizDataFromFile(quiz)
-        .then((qc) => {
-          setQuizContent(prepareQuestions(qc));
-        })
-        .catch((e) => console.error(e));
+      getQuizDataFromFile(quiz).then((qc) => {
+        setQuizContent(prepareQuestions(qc));
+      });
     }
     setLoading(false);
     return () => {
       clearInterval(intervalIdx);
     };
   }, []);
+
+  const saveQuizInLocalStorage = () => {
+    if (quizContent) {
+      localStorage.setItem(quizContent.name, JSON.stringify(quizContent));
+    }
+  };
 
   const prepareQuestions = (newQuizContent: QuizContent): QuizContent => {
     if (searchOpts.includes(QuizOptions.RANDOM_ORDER)) {
@@ -77,12 +93,6 @@ const Quiz = (props: Props) => {
     if (searchOpts.includes(QuizOptions.RUN_ALL)) {
       setQuestionLimit(Infinity);
     }
-
-    newQuizContent.quiz_elements.forEach((val, idx) => {
-      if (newQuizContent.quiz_elements[idx].scale) {
-        newQuizContent.quiz_elements[idx].scale = 1.0;
-      }
-    });
 
     return newQuizContent;
   };
@@ -100,6 +110,25 @@ const Quiz = (props: Props) => {
     setTimer(0);
   };
 
+  const handleQuizSubmit = () => {
+    setQuizStatus(QuizStatusType.SUBMITTED);
+    scroll(0, 0);
+    if (!quizContent) {
+      return;
+    }
+
+    setCurrentScore(
+      quizContent.quiz_elements
+        .map((element) =>
+          validateQuestion(
+            element,
+            searchOpts.includes(QuizOptions.ALLOW_PARTIAL_CORRECT)
+          )
+        )
+        .reduce((a, b) => a + b, 0)
+    );
+  };
+
   if (loading) {
     return <></>;
   }
@@ -112,7 +141,42 @@ const Quiz = (props: Props) => {
     );
   }
 
-  const handleOnQuizSubmit = () => {};
+  const createQuizElement = (element: QuizElement, idx: number) => {
+    let answerResult = undefined;
+
+    if (quizStatus === QuizStatusType.SUBMITTED) {
+      const score = validateQuestion(
+        element,
+        searchOpts.includes(QuizOptions.ALLOW_PARTIAL_CORRECT)
+      );
+
+      if (score === 0) {
+        answerResult = QuizAnswerResultType.INCORRECT;
+      } else if (score < (element.scale ?? 1)) {
+        answerResult = QuizAnswerResultType.PARTIALLY_CORRECT;
+      } else {
+        answerResult = QuizAnswerResultType.CORRECT;
+      }
+    }
+
+    return (
+      <QuestionCardGenerator
+        onAnswerSet={(el: QuizElement) => {
+          let newQuizContent = _.clone(quizContent);
+          newQuizContent.quiz_elements[idx] = el;
+          setQuizContent(newQuizContent);
+          if (searchOpts.includes(QuizOptions.SAVE_IN_LS)) {
+            saveQuizInLocalStorage();
+          }
+        }}
+        quizElement={element}
+        num={idx + 1}
+        key={idx}
+        canAnswer={quizStatus != QuizStatusType.SUBMITTED}
+        questionResult={answerResult}
+      />
+    );
+  };
 
   return (
     <Flex
@@ -123,48 +187,58 @@ const Quiz = (props: Props) => {
       mb="30px"
     >
       <Heading color="whiteAlpha.800"> {quizContent.name}</Heading>
+      {quizStatus === QuizStatusType.SUBMITTED && (
+        <Text fontSize="2xl" color="whiteAlpha.800">
+          Result: {Math.floor((currentScore * 100) / maxScore)}% ({currentScore}{" "}
+          / {maxScore})
+        </Text>
+      )}
       <HStack spacing={5}>
         {searchOpts.includes(QuizOptions.TIMER) && (
           <Text color="whiteAlpha.800">Time: {timer} s</Text>
         )}
-        <Link fontWeight="bold" color="teal" onClick={handleResetQuiz}>
-          Reset
-        </Link>
+        {quizStatus !== QuizStatusType.SUBMITTED && (
+          <Link fontWeight="bold" color="teal" onClick={handleResetQuiz}>
+            Reset
+          </Link>
+        )}
       </HStack>
       <VStack divider={<StackDivider />} spacing="10" mt="13px">
-        {quizContent.quiz_elements.slice(0, questionLimit).map((el, idx) => (
-          <QuestionCardGenerator
-            onAnswerSet={(el: QuizElement) => {
-              let newQuizContent = _.clone(quizContent);
-              newQuizContent.quiz_elements[idx] = el;
-              setQuizContent(newQuizContent);
-              if (searchOpts.includes(QuizOptions.SAVE_IN_LS)) {
-                saveQuizInLocalStorage();
-              }
-            }}
-            quiz_element={el}
-            num={idx + 1}
-            key={idx}
-          />
-        ))}
+        {quizContent.quiz_elements
+          .slice(0, questionLimit)
+          .map(createQuizElement)}
       </VStack>
       <Spacer minHeight="30px" />
-      <Center>
-        <Button
-          py="24px"
-          colorScheme="teal"
-          isDisabled={!canSubmit}
-          maxW="700px"
-          width="100%"
-        >
-          Submit
-        </Button>
+      <Center flexDirection="column">
+        {quizStatus === QuizStatusType.CANNOT_SUBMIT && (
+          <Text color="red.700" fontWeight="bold" my="10px">
+            You have not filled the quiz correctly!
+          </Text>
+        )}
+        {quizStatus === QuizStatusType.CAN_SUBMIT && (
+          <Button
+            py="24px"
+            colorScheme="teal"
+            isDisabled={quizStatus != QuizStatusType.CAN_SUBMIT}
+            maxW="700px"
+            width="100%"
+            onClick={handleQuizSubmit}
+          >
+            Submit
+          </Button>
+        )}
+        {quizStatus === QuizStatusType.SUBMITTED && (
+          <Button
+            py="24px"
+            colorScheme="teal"
+            maxW="700px"
+            width="100%"
+            onClick={() => setQuizStatus(QuizStatusType.CAN_SUBMIT)}
+          >
+            Try again!
+          </Button>
+        )}
       </Center>
-      {canSubmit || (
-        <Text color="red.700" fontWeight="bold" my="10px">
-          You have not filled the quiz correctly!
-        </Text>
-      )}
     </Flex>
   );
 };
