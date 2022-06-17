@@ -3,6 +3,7 @@ import {
   BoxProps,
   Checkbox,
   CheckboxGroup,
+  Flex,
   Heading,
   Input,
   Radio,
@@ -12,13 +13,18 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import _ from "lodash";
-import { useCallback, useEffect, useState } from "react";
-import { QuizElement } from "../utils/helpers";
+import { memo } from "react";
+import {
+  isAnswerCorrect,
+  QuizAnswerResultType,
+  QuizElement,
+  userSelectedAnswer,
+} from "../utils/helpers";
 
 interface DefaultCardProps {
   question: QuizElement;
   score?: number;
-  userResult: "correct" | "partially_correct" | "incorrect" | "neutral";
+  canAnswer: boolean;
   onAnswerSelected: (answer: QuizElement) => any;
 }
 
@@ -35,183 +41,300 @@ const InvalidCard = ({ message }: { message: string }) => (
   </Box>
 );
 
-const LongOpenCard = ({ question, onAnswerSelected }: DefaultCardProps) => {
-  const [answer, setAnswer] = useState<string>(question.chosen_answer ?? "");
-
-  useEffect(() => {
-    setAnswer(question.chosen_answer ?? "");
-  }, [question]);
-
-  const debouncedHandler = useCallback(
-    _.debounce((e) => {
-      let newQuizElement = _.clone(question);
-      newQuizElement.chosen_answer = e.target.value;
-      onAnswerSelected(newQuizElement);
-    }, 400),
-    []
-  );
-
-  return (
-    <Textarea
-      borderColor="whiteAlpha.400"
-      backgroundColor="blackAlpha.400"
-      value={answer}
-      onChange={(e) => {
-        setAnswer(e.target.value);
-        debouncedHandler(e);
-      }}
-    />
-  );
-};
-
-const ShortOpenCard = ({ question, onAnswerSelected }: DefaultCardProps) => {
-  const [answer, setAnswer] = useState<string>(question.chosen_answer ?? "");
-
-  const debouncedHandler = useCallback(
-    _.debounce((e) => {
-      let newQuizElement = _.clone(question);
-      newQuizElement.chosen_answer = e.target.value;
-      onAnswerSelected(newQuizElement);
-    }, 300),
-    []
-  );
-
-  return (
-    <Input
-      borderColor="whiteAlpha.400"
-      backgroundColor="blackAlpha.400"
-      value={answer}
-      onChange={(e) => {
-        setAnswer(e.target.value);
-        debouncedHandler(e);
-      }}
-    />
-  );
-};
-
-const MultiChoiceCard = ({ question, onAnswerSelected }: DefaultCardProps) => {
-  const handleAnswersSelected = (checkboxVals: string[] | number[]) => {
-    checkboxVals = checkboxVals.map((el) => el.toString());
-    let questionCpy = _.cloneDeep(question);
-    questionCpy.chosen_answers = checkboxVals;
-    onAnswerSelected(questionCpy);
-  };
-
-  if (!question.answers) {
+const LongOpenCard = memo(
+  ({ question, onAnswerSelected, canAnswer }: DefaultCardProps) => {
     return (
-      <InvalidCard message="OneChoice Card should contain list of available answers!" />
+      <Textarea
+        borderColor="whiteAlpha.400"
+        backgroundColor="blackAlpha.400"
+        value={question.chosen_answer ?? ""}
+        onChange={(e) => {
+          let newQuizElement = _.clone(question);
+          newQuizElement.chosen_answer = e.target.value;
+          onAnswerSelected(newQuizElement);
+        }}
+        isDisabled={!canAnswer}
+      />
     );
   }
+);
 
-  return (
-    <CheckboxGroup
-      value={question.chosen_answers ?? []}
-      onChange={handleAnswersSelected}
-    >
-      {question.answers.map((el: any, idx: any) => {
+const ShortOpenCard = memo(
+  ({ question, onAnswerSelected, canAnswer }: DefaultCardProps) => {
+    return (
+      <Input
+        borderColor="whiteAlpha.400"
+        backgroundColor="blackAlpha.400"
+        value={question.chosen_answer ?? ""}
+        onChange={(e) => {
+          let newQuizElement = _.clone(question);
+          newQuizElement.chosen_answer = e.target.value;
+          onAnswerSelected(newQuizElement);
+        }}
+        isDisabled={!canAnswer}
+      />
+    );
+  }
+);
+
+const MultiChoiceCard = memo(
+  ({ question, onAnswerSelected, canAnswer }: DefaultCardProps) => {
+    const handleAnswersSelected = (checkboxVals: string[] | number[]) => {
+      if (!canAnswer) {
+        return;
+      }
+
+      checkboxVals = checkboxVals.map((el) => el.toString());
+      let questionCpy = _.cloneDeep(question);
+      questionCpy.chosen_answers = checkboxVals;
+      onAnswerSelected(questionCpy);
+    };
+
+    const createCheckboxElement = (el: any, idx: any) => {
+      if (canAnswer) {
         return (
-          <Checkbox value={el} key={idx} name={idx}>
+          <Checkbox
+            width="100%"
+            pl="7px"
+            py="3px"
+            value={el}
+            key={idx}
+            name={idx}
+          >
             {el}
           </Checkbox>
         );
-      })}
-    </CheckboxGroup>
-  );
-};
+      }
 
-const OneChoiceCard = ({ question, onAnswerSelected }: DefaultCardProps) => {
-  // const [value, setValue] = useState<string>(selectedAnswer ?? "-1");
+      let additionalChboxStyles = {};
 
-  const handleChoiceChange = (val: string) => {
-    // setValue(val);
-    let newQuestionEl = _.clone(question);
-    newQuestionEl.chosen_answer = val;
-    onAnswerSelected(newQuestionEl);
-  };
+      if (userSelectedAnswer(el, question)) {
+        if (isAnswerCorrect(el, question)) {
+          additionalChboxStyles = {
+            border: "solid",
+            py: "0px",
+            pl: "4px",
+            borderColor: "whiteAlpha.600",
+            bgColor: "green.700",
+          };
+        } else {
+          additionalChboxStyles = {
+            bgColor: "red.700",
+          };
+        }
+      } else {
+        if (isAnswerCorrect(el, question)) {
+          additionalChboxStyles = {
+            bgColor: "green.700",
+            opacity: "50%",
+          };
+        } else {
+        }
+      }
 
-  if (!question.answers) {
+      return (
+        <Checkbox
+          width="100%"
+          pl="7px"
+          py="3px"
+          value={el}
+          key={idx}
+          name={idx}
+          isDisabled
+          {...additionalChboxStyles}
+        >
+          {el}
+        </Checkbox>
+      );
+    };
+
+    if (!question.answers) {
+      return (
+        <InvalidCard message="OneChoice Card should contain list of available answers!" />
+      );
+    }
+
     return (
-      <InvalidCard message="OneChoice Card should contain list of available answers!" />
+      <CheckboxGroup
+        value={question.chosen_answers ?? []}
+        onChange={handleAnswersSelected}
+      >
+        {question.answers.map(createCheckboxElement)}
+      </CheckboxGroup>
     );
   }
+);
 
-  return (
-    <RadioGroup
-      minW="inherit"
-      onChange={handleChoiceChange}
-      value={question.chosen_answer}
-    >
-      <VStack align="baseline">
-        {question.answers.map((el: any, idx: any) => {
-          return (
-            <Radio value={el} key={idx} name={idx}>
+const OneChoiceCard = memo(
+  ({ question, canAnswer, onAnswerSelected }: DefaultCardProps) => {
+    const handleChoiceChange = (val: string) => {
+      let newQuestionEl = _.clone(question);
+      newQuestionEl.chosen_answer = val;
+      onAnswerSelected(newQuestionEl);
+    };
+
+    if (!question.answers) {
+      return (
+        <InvalidCard message="OneChoice Card should contain list of available answers!" />
+      );
+    }
+
+    const createRadioElement = (el: any, idx: any) => {
+      if (canAnswer) {
+        return (
+          <Flex as="label" my="7px" width="100%" py="7px" pl="10px">
+            <Radio value={el} key={idx} name={idx} width="100%">
               {el}
             </Radio>
-          );
-        })}
-      </VStack>
-    </RadioGroup>
-  );
-};
+          </Flex>
+        );
+      }
+
+      let additionalRadioStyles = {};
+
+      if (userSelectedAnswer(el, question)) {
+        if (isAnswerCorrect(el, question)) {
+          additionalRadioStyles = {
+            border: "solid",
+            py: "4px",
+            pl: "8px",
+            borderColor: "whiteAlpha.600",
+            bgColor: "green.700",
+          };
+        } else {
+          additionalRadioStyles = {
+            bgColor: "red.700",
+          };
+        }
+      } else {
+        if (isAnswerCorrect(el, question)) {
+          additionalRadioStyles = {
+            bgColor: "green.700",
+            opacity: "50%",
+          };
+        } else {
+        }
+      }
+
+      return (
+        <Flex
+          as="label"
+          my="7px"
+          width="100%"
+          key={idx}
+          py="7px"
+          pl="10px"
+          {...additionalRadioStyles}
+        >
+          <Radio value={el} name={idx} width="100%" isDisabled>
+            {el}
+          </Radio>
+        </Flex>
+      );
+    };
+
+    return (
+      <RadioGroup
+        width="100%"
+        onChange={handleChoiceChange}
+        value={question.chosen_answer}
+      >
+        {question.answers.map(createRadioElement)}
+      </RadioGroup>
+    );
+  }
+);
 
 interface Props extends BoxProps {
   onAnswerSet: (ans: QuizElement) => any;
-  quiz_element: QuizElement;
+  quizElement: QuizElement;
+  questionResult?: QuizAnswerResultType;
+  canAnswer: boolean;
   num: number;
 }
 
 const QuestionCardGenerator = (props: Props) => {
-  let comp = undefined;
-  switch (props.quiz_element.type) {
+  let questionComponent = undefined;
+  let answerResultMessage = null;
+  let componentProps = {
+    question: props.quizElement,
+    onAnswerSelected: props.onAnswerSet,
+    canAnswer: props.canAnswer,
+  };
+
+  switch (props.quizElement.type) {
     case "one_choice":
-      comp = (
-        <OneChoiceCard
-          question={props.quiz_element}
-          onAnswerSelected={props.onAnswerSet}
-          userResult="neutral"
-        />
-      );
+      questionComponent = <OneChoiceCard {...componentProps} />;
       break;
     case "multi_choice":
-      comp = (
-        <MultiChoiceCard
-          question={props.quiz_element}
-          onAnswerSelected={props.onAnswerSet}
-          userResult="neutral"
-        />
-      );
+      questionComponent = <MultiChoiceCard {...componentProps} />;
       break;
     case "long_open":
-      comp = (
-        <LongOpenCard
-          question={props.quiz_element}
-          onAnswerSelected={props.onAnswerSet}
-          userResult="neutral"
-        />
-      );
+      questionComponent = <LongOpenCard {...componentProps} />;
       break;
     case "short_open":
-      comp = (
-        <ShortOpenCard
-          question={props.quiz_element}
-          onAnswerSelected={props.onAnswerSet}
-          userResult="neutral"
-        />
-      );
+      questionComponent = <ShortOpenCard {...componentProps} />;
       break;
     default:
-      comp = (
+      questionComponent = (
         <InvalidCard
-          message={`Unknown quiz element type: ${props.quiz_element.type}`}
+          message={`Unknown quiz element type: ${props.quizElement.type}`}
         />
       );
   }
+
+  switch (props.questionResult) {
+    case QuizAnswerResultType.CORRECT:
+      answerResultMessage = (
+        <Text fontWeight="semibold" color="green.500">
+          Correct!
+        </Text>
+      );
+      break;
+    case QuizAnswerResultType.INCORRECT:
+      if (props.quizElement.correct_answer) {
+        answerResultMessage = (
+          <Text fontWeight="semibold" color="red.500">
+            {`Answer was not correct. Correct answer: ${props.quizElement.correct_answer}`}
+          </Text>
+        );
+      } else if (props.quizElement.correct_answers) {
+        answerResultMessage = (
+          <Text fontWeight="semibold" color="red.500">
+            {`Answer was not correct! Correct answers: ${props.quizElement.correct_answers.join(
+              ", "
+            )}`}
+          </Text>
+        );
+      }
+      break;
+    case QuizAnswerResultType.PARTIALLY_CORRECT:
+      if (props.quizElement.correct_answers) {
+        answerResultMessage = (
+          <Text fontWeight="semibold" color="orange.500">
+            {`Your answer was partially correct! Correct answers: ${props.quizElement.correct_answers.join(
+              ", "
+            )}`}
+          </Text>
+        );
+      }
+      if (props.quizElement.correct_answer) {
+        answerResultMessage = (
+          <Text fontWeight="semibold" color="orange.500">
+            {`Your answer was partially correct! Correct answer: ${props.quizElement.correct_answer}`}
+          </Text>
+        );
+      }
+      break;
+  }
+
   return (
     <VStack color="whiteAlpha.900" minW="400px" align="baseline" width="100%">
       <Text fontSize="xl" fontWeight="bold">
-        {props.num}) {props.quiz_element.question}
+        {props.num}) {props.quizElement.question}
       </Text>
-      {comp}
+      {!props.canAnswer && answerResultMessage}
+      {questionComponent}
     </VStack>
   );
 };
