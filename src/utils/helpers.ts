@@ -11,6 +11,18 @@ export interface QuizElement {
   scale?: number;
 }
 
+export enum QuizStatusType {
+  CANNOT_SUBMIT,
+  CAN_SUBMIT,
+  SUBMITTED,
+}
+
+export enum QuizAnswerResultType {
+  CORRECT,
+  INCORRECT,
+  PARTIALLY_CORRECT,
+}
+
 export interface QuizContent {
   name: string;
   filename: string;
@@ -48,4 +60,34 @@ export const getQuizDataFromFile = async (
     filename: quizConf?.filename,
     quiz_elements: quizContent["quiz_elements"],
   };
+};
+
+export const userSelectedAnswer = (
+  answer: string,
+  question: QuizElement
+): boolean => {
+  if (question.chosen_answer) {
+    return question.chosen_answer === answer;
+  }
+
+  if (question.chosen_answers) {
+    return question.chosen_answers.includes(answer);
+  }
+
+  return false;
+};
+
+export const isAnswerCorrect = (
+  answer: string,
+  question: QuizElement
+): boolean => {
+  if (question.correct_answer) {
+    return answer === question.correct_answer;
+  }
+
+  if (question.correct_answers) {
+    return question.correct_answers.includes(answer);
+  }
+
+  return false;
 };
