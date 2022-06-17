@@ -30,9 +30,8 @@ export enum QuizOptions {
   RANDOM_ORDER = "Random order of the questions",
   SAVE_IN_LS = "Save current progress in the local storage",
   RUN_ALL = "Display all question once and show ending message at the end",
-  ALLOW_PARTIAL_CORRECT = "Allow partial correctness of given answer",
+  ALLOW_PARTIAL_CORRECT = "Allow partial correctness",
   CHECK_OPEN = "Check correctness of open type questions",
-  CHECK_OPEN_PARTIAL = "Check for partial correctness of long open type questions",
   ALLOW_SKIP = "Allow skipping questions",
   TIMER = "Show quiz timer",
 }
