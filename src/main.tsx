@@ -12,7 +12,7 @@ const root = createRoot(container);
 
 root.render(
   <ChakraProvider>
-    <BrowserRouter>
+    <BrowserRouter basename="/quiz-generator">
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<SelectQuiz />} />
