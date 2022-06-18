@@ -39,7 +39,7 @@ export const getQuizDataFromFile = async (
     throw Error("No pathname specified!");
   }
 
-  const quizContent = await import(`../quizes/${quizConf.filename}`);
+  const quizContent = await import(`/src/quizes/${quizConf.filename}`);
 
   if (!forceReload) {
     const savedQuiz = localStorage.getItem(quizContent["name"]);
