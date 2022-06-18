@@ -1,4 +1,5 @@
 {
+  "homepage": "https://michalwilk123.github.io/quiz-generator",
   "name": "quiz-generator",
   "private": true,
   "version": "0.0.0",
@@ -24,6 +25,7 @@
     "@types/react-dom": "^18.0.0",
     "@types/string-similarity": "^4.0.0",
     "@vitejs/plugin-react": "^1.3.0",
+    "gh-pages": "^4.0.0",
     "typescript": "^4.6.3",
     "vite": "^2.9.5"
   },
