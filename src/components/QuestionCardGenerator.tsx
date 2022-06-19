@@ -182,8 +182,8 @@ const OneChoiceCard = memo(
     const createRadioElement = (el: any, idx: any) => {
       if (canAnswer) {
         return (
-          <Flex as="label" my="7px" width="100%" py="7px" pl="10px">
-            <Radio value={el} key={idx} name={idx} width="100%">
+          <Flex as="label" key={idx} my="7px" width="100%" py="7px" pl="10px">
+            <Radio value={el} name={idx} width="100%">
               {el}
             </Radio>
           </Flex>

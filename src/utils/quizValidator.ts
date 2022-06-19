@@ -36,7 +36,6 @@ export const validateSingleQuestion = (
         });
         correct_answers = Math.max(correct_answers, 0);
         score = correct_answers / quizElement.correct_answers.length;
-        console.log(`DSDSJKAN: ${score}`);
         if (!allowPartial) {
           score = Math.floor(score);
         }

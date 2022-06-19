@@ -1,5 +1,7 @@
 import quiz_config from "../quiz_config";
 
+const availableQuizes = import.meta.glob("../quizes/*.json");
+
 export interface QuizElement {
   question: string;
   type: "long_open" | "short_open" | "multi_choice" | "one_choice";
@@ -39,7 +41,9 @@ export const getQuizDataFromFile = async (
     throw Error("No pathname specified!");
   }
 
-  const quizContent = await import(`/src/quizes/${quizConf.filename}`);
+  const quizContent: any = await availableQuizes[
+    `../quizes/${quizConf.filename}`
+  ]();
 
   if (!forceReload) {
     const savedQuiz = localStorage.getItem(quizContent["name"]);
