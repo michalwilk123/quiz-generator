@@ -111,6 +111,7 @@ const SelectQuiz = (props: Props) => {
       search: createSearchParams(urlParameters).toString(),
     });
   };
+  // TODO: CHANGE SELECT TO MENU, BECAUSE WE NEED TO CHANGE BACKGROUND COLOR
 
   return (
     <FormControl onSubmit={handleOpenQuiz}>
@@ -119,7 +120,7 @@ const SelectQuiz = (props: Props) => {
           Create your quiz
         </Heading>
         <Select
-          textColor="whiteAlpha.900"
+          bgColor="whiteAlpha.800"
           size="lg"
           placeholder="Choose available quiz"
           maxW="min(80%, 500px)"
@@ -131,7 +132,6 @@ const SelectQuiz = (props: Props) => {
             </option>
           ))}
         </Select>
-
         <Box width="80%">
           <Heading textColor="whiteAlpha.600" size="md">
             Configure quiz
