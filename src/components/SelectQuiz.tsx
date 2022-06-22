@@ -52,12 +52,10 @@ const MultiCheckboxWrap = ({
   options,
   chosenOptions,
   setChosenOptions,
-  defaultChecked,
 }: {
   options: string[];
   chosenOptions: string[];
   setChosenOptions: (opt: string[]) => any;
-  defaultChecked?: boolean;
 }) => {
   const handleOptChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.toString();
@@ -81,7 +79,7 @@ const MultiCheckboxWrap = ({
           <Checkbox
             value={idx}
             onChange={handleOptChange}
-            defaultChecked={defaultChecked}
+            isChecked={chosenOptions.includes(idx.toString())}
           >
             <Box color="whiteAlpha.800">{opt}</Box>
           </Checkbox>
@@ -94,24 +92,30 @@ const MultiCheckboxWrap = ({
 const SelectQuiz = (props: Props) => {
   const navigate = useNavigate();
   const [configuration, setConfiguration] = useState<string[]>([]);
-  const [questionTypes, setQuestionTypes] = useState<string[]>([]);
+  const [questionTypes, setQuestionTypes] = useState<string[]>(
+    Object.values(QuestionTypes).map((el, idx) => idx.toString())
+  );
   const [chosenQuizUrl, setChosenQuizUrl] = useState<string>("");
   const [questionAmount, setQuestionAmount] = useState<string>(
     QuizQuestionAmounts.ALL
   );
 
   const handleOpenQuiz = (event: React.FormEvent) => {
-    const urlParameters = {
+    const urlParameters: any = {
       conf: configuration,
       qtype: questionTypes,
     };
+    console.log(questionTypes);
+
+    if (questionAmount !== QuizQuestionAmounts.ALL) {
+      urlParameters["amount"] = questionAmount;
+    }
 
     navigate({
       pathname: `/quizes/${chosenQuizUrl}`,
       search: createSearchParams(urlParameters).toString(),
     });
   };
-  // TODO: CHANGE SELECT TO MENU, BECAUSE WE NEED TO CHANGE BACKGROUND COLOR
 
   return (
     <FormControl onSubmit={handleOpenQuiz}>
@@ -150,7 +154,6 @@ const SelectQuiz = (props: Props) => {
             options={Object.values(QuestionTypes) as string[]}
             setChosenOptions={setQuestionTypes}
             chosenOptions={questionTypes}
-            defaultChecked
           />
         </Box>
         <Box width="80%">

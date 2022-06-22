@@ -22,7 +22,7 @@ import {
 } from "../utils/helpers";
 import { validateSingleQuestion as validateQuestion } from "../utils/quizValidator";
 import QuestionCardGenerator from "./QuestionCardGenerator";
-import { QuizOptions } from "./SelectQuiz";
+import { QuestionTypes, QuizOptions, QuizQuestionAmounts } from "./SelectQuiz";
 
 type Props = {};
 
@@ -48,6 +48,26 @@ const Quiz = (props: Props) => {
         ),
     [searchParams]
   );
+
+  const questionTypes = useMemo(
+    () =>
+      searchParams
+        .getAll("qtype")
+        .map(
+          (idx: string): QuestionTypes =>
+            Object.values(QuestionTypes)[parseInt(idx)] as QuestionTypes
+        ),
+    [searchParams]
+  );
+
+  const amountOfQuestions = useMemo(() => {
+    const param = searchParams.get("amount");
+
+    if (param === null) {
+      return QuizQuestionAmounts.ALL;
+    }
+    return param;
+  }, [searchParams]);
 
   const maxScore = useMemo(() => {
     if (!quizContent) {
@@ -85,6 +105,33 @@ const Quiz = (props: Props) => {
     }
   };
 
+  const limitNoOfQuestions = (newQuizContent: QuizContent) => {
+    if (amountOfQuestions === QuizQuestionAmounts.ALL) {
+      return;
+    }
+
+    const parsedAmount = parseInt(amountOfQuestions);
+    if (parsedAmount === undefined) {
+      throw Error("Cannot parse amount option!");
+    }
+    newQuizContent.quiz_elements = newQuizContent.quiz_elements.slice(
+      0,
+      parsedAmount
+    );
+  };
+
+  const removeQuestionTypes = (newQuizContent: QuizContent) => {
+    const qTypeDictionary = {
+      long_open: QuestionTypes.OPEN_LONG,
+      short_open: QuestionTypes.OPEN_SHORT,
+      multi_choice: QuestionTypes.MULTI,
+      one_choice: QuestionTypes.ONE_CHOICE,
+    };
+    newQuizContent.quiz_elements = newQuizContent.quiz_elements.filter((el) =>
+      questionTypes.includes(qTypeDictionary[el.type])
+    );
+  };
+
   const prepareQuestions = (newQuizContent: QuizContent): QuizContent => {
     if (searchOpts.includes(QuizOptions.RANDOM_ORDER)) {
       newQuizContent.quiz_elements.sort(() => Math.random() - 0.5);
@@ -94,7 +141,11 @@ const Quiz = (props: Props) => {
       setQuestionLimit(Infinity);
     }
 
+    removeQuestionTypes(newQuizContent);
+    limitNoOfQuestions(newQuizContent);
+
     return newQuizContent;
+    // return newQuizContent.quiz_elements.slice(0, questionLimit);
   };
 
   const handleResetQuiz = async () => {
@@ -204,9 +255,7 @@ const Quiz = (props: Props) => {
         )}
       </HStack>
       <VStack divider={<StackDivider />} spacing="10" mt="13px">
-        {quizContent.quiz_elements
-          .slice(0, questionLimit)
-          .map(createQuizElement)}
+        {quizContent.quiz_elements.map(createQuizElement)}
       </VStack>
       <Spacer minHeight="30px" />
       <Center flexDirection="column">
