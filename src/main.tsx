@@ -1,6 +1,6 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import NotFound from "./components/NotFound";
 import Quiz from "./components/Quiz";
@@ -12,7 +12,7 @@ const root = createRoot(container);
 
 root.render(
   <ChakraProvider>
-    <BrowserRouter basename="/quiz-generator">
+    <HashRouter>
       <Routes>
         <Route path="/" element={<App />}>
           <Route index element={<SelectQuiz />} />
@@ -20,6 +20,6 @@ root.render(
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </ChakraProvider>
 );
