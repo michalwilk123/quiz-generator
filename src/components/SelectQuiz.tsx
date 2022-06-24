@@ -100,6 +100,8 @@ const SelectQuiz = (props: Props) => {
     QuizQuestionAmounts.ALL
   );
 
+  document.title = "Configure quiz"
+
   const handleOpenQuiz = (event: React.FormEvent) => {
     const urlParameters: any = {
       conf: configuration,

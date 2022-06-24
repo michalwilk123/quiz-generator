@@ -35,7 +35,6 @@ const Quiz = (props: Props) => {
     QuizStatusType.CAN_SUBMIT
   );
   const [timer, setTimer] = useState<number>(0);
-  const [questionLimit, setQuestionLimit] = useState(20);
   const [currentScore, setCurrentScore] = useState(0);
 
   const searchOpts = useMemo(
@@ -94,6 +93,9 @@ const Quiz = (props: Props) => {
       });
     }
     setLoading(false);
+    if (quizContent){
+      document.title = `Quiz: ${quizContent.name}`;
+    }
     return () => {
       clearInterval(intervalIdx);
     };
@@ -135,10 +137,6 @@ const Quiz = (props: Props) => {
   const prepareQuestions = (newQuizContent: QuizContent): QuizContent => {
     if (searchOpts.includes(QuizOptions.RANDOM_ORDER)) {
       newQuizContent.quiz_elements.sort(() => Math.random() - 0.5);
-    }
-
-    if (searchOpts.includes(QuizOptions.RUN_ALL)) {
-      setQuestionLimit(Infinity);
     }
 
     removeQuestionTypes(newQuizContent);
