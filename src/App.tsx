@@ -1,13 +1,9 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  HStack,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, HStack, Spacer } from "@chakra-ui/react";
+import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./App.css";
-import { Footer } from "./components/Footer";
+
+const Footer = React.lazy(()=>import("./components/Footer"));
 
 const App = () => {
   return (
