@@ -1,13 +1,13 @@
 import { Flex, Link, Stack, Text } from "@chakra-ui/react";
 
-export const Footer = () => {
+const Footer = () => {
   return (
     <Flex
-      py={{ base: "10", md: "13" }}
+      mt="20px"
+      py={{ base: "10px", md: "13px" }}
       width="100%"
       height="150px"
       bgColor="gray.900"
-      pb="0px"
       mb="0px"
       color="whiteAlpha.800"
     >
@@ -41,13 +41,12 @@ export const Footer = () => {
             Michał Wilk
           </Link>
         </Text>
-        <Text>
-          You can contact me{" "}
-          <Link href="mailto:michalwilk139@gmail.com" color="teal">
-            here
-          </Link>
-        </Text>
+        <Link href="mailto:michalwilk139@gmail.com" color="teal">
+          Contact
+        </Link>
       </Stack>
     </Flex>
   );
 };
+
+export default Footer;
