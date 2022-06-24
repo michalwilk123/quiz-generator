@@ -329,8 +329,8 @@ const QuestionCardGenerator = (props: Props) => {
   }
 
   return (
-    <VStack color="whiteAlpha.900" minW="400px" align="baseline" width="100%">
-      <Text fontSize="xl" fontWeight="bold">
+    <VStack color="whiteAlpha.900" align="baseline" width="100%">
+      <Text fontSize={{xl:"xl", sm: "md"}} fontWeight="bold">
         {props.num}) {props.quizElement.question}
       </Text>
       {!props.canAnswer && answerResultMessage}
