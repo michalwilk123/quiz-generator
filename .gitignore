@@ -3,4 +3,4 @@
 /.yarn
 
 /src/quizes
-/src/quiz_config.json
+/src/quiz_config.ts
