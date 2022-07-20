@@ -3,7 +3,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./App.css";
 
-const Footer = React.lazy(()=>import("./components/Footer"));
+const Footer = React.lazy(() => import("./components/Footer"));
 
 const App = () => {
   return (
