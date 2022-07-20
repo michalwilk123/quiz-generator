@@ -50,8 +50,6 @@ export const getQuizDataFromFile = async (
 
     if (savedQuiz) {
       try {
-        console.log(quizUrl);
-        console.log(typeof savedQuiz);
         return JSON.parse(savedQuiz);
       } catch (e) {
         console.error(e);

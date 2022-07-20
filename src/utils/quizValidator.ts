@@ -53,7 +53,6 @@ export const validateSingleQuestion = (
           if (score < 0.4) {
             score = 0;
           }
-          console.log(`SCORE 4 QUSTION: ${score}`);
         } else {
           score = normalized_chosen === normalized_correct ? 1 : 0;
         }

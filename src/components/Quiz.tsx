@@ -79,7 +79,6 @@ const Quiz = () => {
 
   useEffect(() => {
     const intervalIdx = setInterval(() => {
-      console.log(countTimer);
       if (countTimer) {
         setTimer((t) => t + 1);
       }
@@ -101,7 +100,6 @@ const Quiz = () => {
   }, []);
 
   useEffect(() => {
-    console.log(searchOpts.includes(QuizOptions.TIMER));
     setCountTimer(searchOpts.includes(QuizOptions.TIMER));
   }, [searchParams]);
 
@@ -173,7 +171,7 @@ const Quiz = () => {
         searchOpts.includes(QuizOptions.ALLOW_PARTIAL_CORRECT)
       )
     );
-  }, [quizContent?.quiz_elements]);
+  }, [quizContent]);
 
   const handleQuizSubmit = () => {
     setQuizStatus(QuizStatusType.SUBMITTED);
@@ -246,6 +244,7 @@ const Quiz = () => {
         options={searchOpts}
         onResetButtonClick={handleResetQuiz}
         currentTime={timer}
+        onTryAgainButton={() => setQuizStatus(QuizStatusType.CAN_SUBMIT)}
       />
       <VStack divider={<StackDivider />} spacing="10" mt="13px">
         {quizContent.quiz_elements.map(createQuizElement)}

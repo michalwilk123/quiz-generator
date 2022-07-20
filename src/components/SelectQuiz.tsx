@@ -34,9 +34,10 @@ export enum QuizOptions {
   SAVE_IN_LS = "Save current progress in the local storage",
   RUN_ALL = "Display all question once and show ending message at the end",
   ALLOW_PARTIAL_CORRECT = "Allow partial correctness",
-  CHECK_OPEN = "Check correctness of open type questions",
   ALLOW_SKIP = "Allow skipping questions",
   TIMER = "Show quiz timer",
+  SHOW_SUMMARY = "Show short summary after submitting the quiz",
+  SHOW_NAVIGATION = "Display small listing of the quiz questions",
 }
 
 export enum QuizQuestionAmounts {
@@ -100,14 +101,13 @@ const SelectQuiz = (props: Props) => {
     QuizQuestionAmounts.ALL
   );
 
-  document.title = "Configure quiz"
+  document.title = "Configure quiz";
 
   const handleOpenQuiz = (event: React.FormEvent) => {
     const urlParameters: any = {
       conf: configuration,
       qtype: questionTypes,
     };
-    console.log(questionTypes);
 
     if (questionAmount !== QuizQuestionAmounts.ALL) {
       urlParameters["amount"] = questionAmount;
