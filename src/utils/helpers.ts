@@ -27,7 +27,6 @@ export enum QuizAnswerResultType {
 
 export interface QuizContent {
   name: string;
-  filename: string;
   quiz_elements: QuizElement[];
 }
 

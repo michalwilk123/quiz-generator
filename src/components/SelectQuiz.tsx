@@ -16,7 +16,7 @@ import React, { useState } from "react";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import quizConfig from "../quiz_config";
 
-interface QuizSchema {
+export interface QuizSchema {
   filename: string;
   name: string;
   urlName: string;
