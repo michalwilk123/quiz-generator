@@ -33,7 +33,7 @@ const Footer = () => {
             Chakra UI
           </Link>{" "}
           and{" "}
-          <Link textDecoration="underline" href="https://chakra-ui.com/">
+          <Link textDecoration="underline" href="https://reactjs.org/">
             React
           </Link>{" "}
           by{" "}
