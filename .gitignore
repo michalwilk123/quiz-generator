@@ -10,7 +10,6 @@ package.json
 package-lock.json
 README.md
 vite.config.ts
-index.html
 tsconfig.*
 yarn.lock
 
