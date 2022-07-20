@@ -1,7 +1,16 @@
 
+/src/*
 /node_modules
+/scripts
 /.yarn
+/.yarnrc.yml
+.editorconfig
 
-/src/quizes
-/src/quiz_config.ts
-dist
+package.json
+package-lock.json
+README.md
+vite.config.ts
+index.html
+tsconfig.*
+yarn.lock
+
