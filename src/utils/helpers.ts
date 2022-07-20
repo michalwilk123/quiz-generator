@@ -58,7 +58,6 @@ export const getQuizDataFromFile = async (
 
   return {
     name: quizContent["name"],
-    filename: quizConf?.filename,
     quiz_elements: quizContent["quiz_elements"],
   };
 };
