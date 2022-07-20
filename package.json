@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "publish": "./scripts/publish.sh",
+    "install": "./scripts/install.sh"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.0.0-next.0",
