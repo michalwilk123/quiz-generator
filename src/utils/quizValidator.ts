@@ -50,6 +50,9 @@ export const validateSingleQuestion = (
         if (allowPartial) {
           score = compareTwoStrings(normalized_chosen, normalized_correct);
           score = Math.round((score + Number.EPSILON) * 100) / 100;
+          if (score < 0.4) {
+            score = 0;
+          }
           console.log(`SCORE 4 QUSTION: ${score}`);
         } else {
           score = normalized_chosen === normalized_correct ? 1 : 0;
