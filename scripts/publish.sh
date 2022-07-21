@@ -13,12 +13,12 @@ cp src/quiz_config.ts "$TMP_CONFIG"
 git checkout gh-pages
 
 tar xf "$TMP_QUIZES"
-test -f assets && rm -r assets
+test -f assets && git rm -r assets
 yes | cp -r dist/* .
 cp "$TMP_CONFIG" quiz_config.ts
 
 git add -A
-git diff --cached --exit-code && git commit -m "Update pages: $(date -u +"%Y-%m-%d_%H:%M")" \
+git commit -m "Update pages: $(date -u +"%Y-%m-%d_%H:%M")" \
     && git push origin gh-pages && echo "Successfully updated your github site!" \
     2> /dev/null
 git checkout master
@@ -27,5 +27,6 @@ rm -r src/quizes
 mv quizes src
 cp "$TMP_CONFIG"  src/quiz_config.ts
 
+echo "Deploy has been successful"
 rm "$TMP_QUIZES" "$TMP_CONFIG"
 set -x
