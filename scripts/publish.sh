@@ -13,7 +13,7 @@ cp src/quiz_config.ts "$TMP_CONFIG"
 git checkout gh-pages
 
 tar xf "$TMP_QUIZES"
-rm -r assets
+test -f assets && rm -r assets
 yes | cp -r dist/* .
 cp "$TMP_CONFIG" quiz_config.ts
 
