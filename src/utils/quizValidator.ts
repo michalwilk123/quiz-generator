@@ -8,7 +8,7 @@ const normalizeText = (text: string): string =>
     .replace(/( +)([.,\-*+|&])( +)/g, "$2")
     .toLowerCase();
 
-export const validateSingleQuestion = (
+export const validateQuestion = (
   quizElement: QuizElement,
   allowPartial: boolean = false
 ): number => {
