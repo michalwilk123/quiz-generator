@@ -295,7 +295,7 @@ const QuestionCardGenerator = (props: Props) => {
       if (props.quizElement.correct_answer) {
         answerResultMessage = (
           <Text fontWeight="semibold" color="red.500">
-            {`Answer was not correct. Correct answer: ${props.quizElement.correct_answer}`}
+            Answer was not correct. Correct answer:<Text fontWeight="normal">{props.quizElement.correct_answer}</Text>
           </Text>
         );
       } else if (props.quizElement.correct_answers) {
