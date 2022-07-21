@@ -16,7 +16,7 @@ import {
   QuizElement,
   QuizStatusType,
 } from "../utils/helpers";
-import { validateSingleQuestion as validateQuestion } from "../utils/quizValidator";
+import { validateQuestion } from "../utils/quizValidator";
 import QuestionCardGenerator from "./QuestionCardGenerator";
 import QuizHeader from "./QuizHeader";
 import QuizStatusManager from "./QuizStatusManager";
@@ -31,8 +31,6 @@ const Quiz = () => {
     QuizStatusType.CAN_SUBMIT
   );
   const [timer, setTimer] = useState<number>(0);
-  const [currentScore, setCurrentScore] = useState<number>(0);
-  const [countTimer, setCountTimer] = useState<boolean>(false);
 
   const searchOpts = useMemo(
     () =>
@@ -43,6 +41,10 @@ const Quiz = () => {
             Object.values(QuizOptions)[parseInt(idx)] as QuizOptions
         ),
     [searchParams]
+  );
+
+  const [countTimer, setCountTimer] = useState<boolean>(
+    searchOpts.includes(QuizOptions.TIMER)
   );
 
   const questionTypes = useMemo(
@@ -65,17 +67,20 @@ const Quiz = () => {
     return param;
   }, [searchParams]);
 
-  const maxScore = useMemo(() => {
-    if (!quizContent) {
-      return 0;
+  useEffect(() => {
+    if (!searchOpts.includes(QuizOptions.TIMER)) {
+      return;
     }
 
-    let curr = 0;
-    quizContent.quiz_elements.forEach((element) => {
-      curr += element.scale ?? 1;
-    });
-    return curr;
-  }, [quizContent]);
+    switch (quizStatus) {
+      case QuizStatusType.CAN_SUBMIT:
+        setCountTimer(true);
+        break;
+      case QuizStatusType.SUBMITTED:
+        setCountTimer(false);
+        break;
+    }
+  }, [quizStatus, searchParams]);
 
   useEffect(() => {
     const intervalIdx = setInterval(() => {
@@ -83,7 +88,12 @@ const Quiz = () => {
         setTimer((t) => t + 1);
       }
     }, 1000);
+    return () => {
+      clearInterval(intervalIdx);
+    };
+  }, [countTimer]);
 
+  useEffect(() => {
     if (quiz) {
       getQuizDataFromFile(quiz).then((qc) => {
         const questions = prepareQuestions(qc);
@@ -92,16 +102,8 @@ const Quiz = () => {
       });
     }
     setLoading(false);
-
     document.title = "Loading quiz...";
-    return () => {
-      clearInterval(intervalIdx);
-    };
   }, []);
-
-  useEffect(() => {
-    setCountTimer(searchOpts.includes(QuizOptions.TIMER));
-  }, [searchParams]);
 
   const saveQuizInLocalStorage = () => {
     if (quizContent) {
@@ -176,7 +178,6 @@ const Quiz = () => {
   const handleQuizSubmit = () => {
     setQuizStatus(QuizStatusType.SUBMITTED);
     scroll(0, 0);
-    setCurrentScore(quizResults.reduce((a, b) => a + b, 0));
   };
 
   if (loading) {
@@ -239,8 +240,8 @@ const Quiz = () => {
       <QuizHeader
         quizName={quizContent.name}
         quizStatus={quizStatus}
-        currentScore={currentScore}
-        maxScore={maxScore}
+        quizResults={quizResults}
+        quizContent={quizContent}
         options={searchOpts}
         onResetButtonClick={handleResetQuiz}
         currentTime={timer}
