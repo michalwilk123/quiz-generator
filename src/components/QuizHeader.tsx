@@ -1,21 +1,14 @@
-import {
-  Heading,
-  Link,
-  Text,
-  Box,
-  Flex,
-  Button,
-} from "@chakra-ui/react";
+import { Heading, Link, Text, Box, Flex, Button } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { QuizStatusType } from "../utils/helpers";
+import { QuizContent, QuizStatusType } from "../utils/helpers";
 import QuizSummaryTable from "./QuizSummaryTable";
 import { QuizOptions } from "./SelectQuiz";
 
 interface QuizHeaderProps {
   quizName: string;
   quizStatus: QuizStatusType;
-  currentScore: number;
-  maxScore: number;
+  quizResults: number[];
+  quizContent: QuizContent;
   options: QuizOptions[];
   currentTime?: number;
   onResetButtonClick: () => any;
@@ -23,8 +16,20 @@ interface QuizHeaderProps {
 }
 
 const QuizHeader = (props: QuizHeaderProps) => {
+  const currentScore = useMemo<number>(
+    (): number => props.quizResults.reduce((a, b) => a + b, 0),
+    [props.quizResults]
+  );
+  const maxScore = useMemo<number>(
+    (): number =>
+      props.quizContent.quiz_elements
+        .map((el) => el.scale ?? 1)
+        .reduce((a, b) => a + b, 0),
+    [props.quizContent]
+  );
+
   const resultHeaderColor = useMemo<string>((): string => {
-    const ratio = props.currentScore / props.maxScore;
+    const ratio = currentScore / maxScore;
 
     if (ratio > 0.7) {
       return "green.500";
@@ -35,7 +40,7 @@ const QuizHeader = (props: QuizHeaderProps) => {
     }
 
     return "whiteAlpha.800";
-  }, [props.currentScore, props.maxScore]);
+  }, [props.quizResults]);
 
   return (
     <>
@@ -44,8 +49,8 @@ const QuizHeader = (props: QuizHeaderProps) => {
         <>
           <Flex flexDir="row">
             <Text my="auto" fontSize="2xl" color={resultHeaderColor}>
-              Result: {Math.floor((props.currentScore * 100) / props.maxScore)}%
-              ({props.currentScore} / {props.maxScore})
+              Result: {Math.floor((currentScore * 100) / maxScore)}% (
+              {currentScore} / {maxScore})
             </Text>
             <Button
               py={{ sm: "5px", xl: "24px" }}
@@ -58,14 +63,19 @@ const QuizHeader = (props: QuizHeaderProps) => {
             </Button>
           </Flex>
           {props.options.includes(QuizOptions.SHOW_SUMMARY) && (
-            <QuizSummaryTable quizName={""} quizResults={[]} quizScores={[]} />
+            <QuizSummaryTable
+              quizName={props.quizName}
+              quizResults={[]}
+              quizScores={[]}
+            />
           )}
         </>
       )}
       <Box>
-        {props.options.includes(QuizOptions.TIMER) && (
-          <Text color="whiteAlpha.800">Time: {props.currentTime} s</Text>
-        )}
+        {props.options.includes(QuizOptions.TIMER) &&
+          props.quizStatus !== QuizStatusType.SUBMITTED && (
+            <Text color="whiteAlpha.800">Time: {props.currentTime} s</Text>
+          )}
         {props.quizStatus !== QuizStatusType.SUBMITTED && (
           <Link
             fontWeight="bold"
