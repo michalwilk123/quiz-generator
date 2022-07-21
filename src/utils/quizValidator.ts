@@ -52,6 +52,8 @@ export const validateQuestion = (
           score = Math.round((score + Number.EPSILON) * 100) / 100;
           if (score < 0.4) {
             score = 0;
+          } else if (score > 0.85) {
+            score = 1;
           }
         } else {
           score = normalized_chosen === normalized_correct ? 1 : 0;
