@@ -65,8 +65,9 @@ const QuizHeader = (props: QuizHeaderProps) => {
           {props.options.includes(QuizOptions.SHOW_SUMMARY) && (
             <QuizSummaryTable
               quizName={props.quizName}
-              quizResults={[]}
-              quizScores={[]}
+              quizes={props.quizContent.quiz_elements}
+              quizScores={props.quizResults}
+              flexProps={{ mt: "60px", mb:"100px" }}
             />
           )}
         </>
