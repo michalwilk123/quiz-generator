@@ -1,8 +1,9 @@
 
 /node_modules
 /.yarn
+.yarnrc.yml
 
-/src/quizes
-/src/quiz_config.ts
+# /src/quizes
+# /src/quiz_config.ts
 dist
 /assets
