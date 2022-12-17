@@ -13,6 +13,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import _ from "lodash";
+import React from "react";
 import { memo } from "react";
 import {
   isAnswerCorrect,
@@ -84,7 +85,7 @@ const MultiChoiceCard = memo(
         return;
       }
 
-      checkboxVals = checkboxVals.map((el) => el.toString());
+      checkboxVals = checkboxVals.map((el) => el.toString()) as string[];
       let questionCpy = _.cloneDeep(question);
       questionCpy.chosen_answers = checkboxVals;
       onAnswerSelected(questionCpy);
@@ -254,8 +255,8 @@ interface Props extends BoxProps {
 }
 
 const QuestionCardGenerator = (props: Props) => {
-  let questionComponent = undefined;
-  let answerResultMessage = null;
+  let questionComponent;
+  let answerResultMessage;
   let componentProps = {
     question: props.quizElement,
     onAnswerSelected: props.onAnswerSet,

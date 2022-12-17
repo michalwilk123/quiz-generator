@@ -1,6 +1,6 @@
 import quizConfig from "../quiz_config";
 
-const availableQuizes = import.meta.glob("../quizes/*.json");
+const availableQuizes = ( import.meta as unknown as any).glob("../quizes/*.json");
 
 export interface QuizElement {
   question: string;

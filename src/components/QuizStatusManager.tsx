@@ -1,4 +1,5 @@
 import { Center, Text } from "@chakra-ui/react";
+import React from "react";
 import { QuizStatusType } from "../utils/helpers";
 import LargeSubmitButton from "./LargeSubmitButton";
 

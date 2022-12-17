@@ -7,6 +7,7 @@ import {
   StackDivider,
 } from "@chakra-ui/react";
 import _ from "lodash";
+import React from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import {
@@ -193,7 +194,7 @@ const Quiz = () => {
   }
 
   const createQuizElement = (element: QuizElement, idx: number) => {
-    let answerResult = undefined;
+    let answerResult;
 
     if (quizStatus === QuizStatusType.SUBMITTED) {
       const score = validateQuestion(

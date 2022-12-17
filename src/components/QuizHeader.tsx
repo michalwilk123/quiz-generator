@@ -1,4 +1,5 @@
 import { Heading, Link, Text, Box, Flex, Button } from "@chakra-ui/react";
+import React from "react";
 import { useMemo } from "react";
 import { QuizContent, QuizStatusType } from "../utils/helpers";
 import QuizSummaryTable from "./QuizSummaryTable";

@@ -10,6 +10,7 @@ import {
   Tbody,
   TableContainer,
 } from "@chakra-ui/react";
+import React from "react";
 import { QuizElement } from "../utils/helpers";
 
 interface QuizSummaryProps {

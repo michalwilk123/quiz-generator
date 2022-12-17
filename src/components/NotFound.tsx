@@ -1,4 +1,5 @@
 import { Center, Heading } from "@chakra-ui/react";
+import React from "react";
 
 const NotFound = () => {
   document.title = "404 - not found";
