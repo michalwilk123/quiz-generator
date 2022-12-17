@@ -1,215 +1,215 @@
 {
-  "name": "Interaktywne Systemy Programowalnych",
-  "quiz_elements": [
-    {
-      "question": "Wymień trzy kategorie układów programowalnych (podział pod względem złożoności architektury) i scharakteryzuj krótko każdą z nich.",
-      "type": "long_open",
-      "correct_answer": "a. SPLD - Simple Programmable Logic Devices: \nNajprostsze i najstarsze układy programowalne. Ich głównym \nkomponentem jest matryca bramek odpowiedzialna za przetwarzanie sygnałów. W tej kategori układów zawierają się takie podkategorie jak: PROM, PLA, PAL, GAL. \nb. CPLD - Complex Programmable Logic Devices: \nSą bardziej złożoną wersją układów SPLD, oferują większą pojemność logiczną. Składają się z wielu bloków podobnych do układów SPLD połączonych magistralami w jedną strukturę. Końcówki I/O układu mają połączenie zarówno z blokami jak i z magistralą. \nc. FPGA - Field-Programmable Gate Array: \nUkłady oparte o koncepcję morza bramek (ang. sea of gates), są zbudowane z bloków z bramkami logicznymi przedzielonych \npołączeniami programowalnymi. Bloki z biegiem czasu stawały się coraz bardziej złożone co umożliwiło zmniejszenie opóźnień układów wynikających z dużej liczby połączeń między blokami. Z tego samego powodu udoskonalano także połączenia między komórkami (np. poprzez routing).",
-      "scale": 10.0
-    },
-    {
-      "question": "Jakiej kategorii układów programowalnych dotyczy podział na: coarse grade, medium grade i fine grade. Scharakteryzuj krótko cechy wyżej wymienionych rodzajów układów. ",
-      "type": "long_open",
-      "correct_answer": "Podział dotyczy architektur układów FPGA, a poszczególne kategorie przedstawiają się następująco: \na. fine grade (drobne uziarnienie) : \nBloki połączone ze sobą mają bardzo prostą budowę, składają się z prostego układu programowalnego (2-3 wejścia) i przerzutnika. Mimo elastyczności rozwiązania, nadal występują w układach o takiej architekturze duże opóźnienia. \nb. medium grade (średnie uziarnienie): \nBloki o bardziej złożonej budowie niż fine grade opisują układy o większej ziarnistości. Wykorzystuje się w nich multipleksery, czyli połączenia aktywne, co zmniejszyło opóźnienia. \nc. coarse grade (grube uziarnienie): \nBloki o największej złożoności, charakteryzujące się bardzo dużą liczbę wejść (np. 32). Budowa wewnętrzna bloku jest \nskomplikowana, za to opóźnienia występujące w układach je \nwykorzystujących zmalały.",
-      "scale": 10.0
-    },
-    {
-      "question": "Jaki rodzaj pamięci konfiguracji dominuje w układach CPLD, a jaki w FPGA. ",
-      "type": "long_open",
-      "correct_answer": "W układach CPLD dominują pamięci nieulotne z możliwością elektrycznego kasowania EEPROM (E2PROM) oraz FLASH. \nW układach FPGA dominuje pamięć ulotna wymagająca każdorazowego programowania po ponownym włączeniu zasilania - static RAM - SRAM.",
-      "scale": 10.0
-    },
-    {
-      "question": "Wymień rodzaje pamięci konfiguracji",
-      "type": "long_open",
-      "correct_answer": "Rodzaje pamięci konfiguracji: \na. PROM - pamięć programowalna z możliwością pojedynczego zaprogramowania przepaleniem połączeń lub maskowaniem.\n    - fuse (bezpiecznik/rozłączenie) - występują połączenia bramki ze wszystkimi sygnałami w układzie, te które nie są wykorzystane zostają przepalone i w efekcie pozostałe ścieżki decydują o pracy układu. \n    - anti-fuse (anty-bezpiecznik/zwarcie) - żaden sygnał nie jest połączony z bramką, połączenia z tymi sygnałami, które mają być wykorzystane zostają wygenerowane (zwarte) i one decydują o pracy układu. \nb. EPROM - pamięć programowalna z możliwością kasowania zapisanej konfiguracji poprzez wystawienie na działanie światła UV. \nc. EEPROM/FLASH - pamięć programowalna z możliwością elektrycznego (programowalnego) kasowania zawartości \nd. SRAM - w połączeniu z tranzystorem umożliwia utworzenie połączenia programowalnego.",
-      "scale": 10.0
-    },
-    {
-      "question": "W układzie Spartan3E w jednej komórce LUT można zrealizować pewne funkcje logiki. Podaj ile maksymalnie zmiennych wejściowych może mieć dowolna funkcja logiczna zrealizowana w jednej komórce LUT, ile maksymalnie zmiennych wejściowych może mieć dowolna funkcja logiczna zrealizowana za pomocą jednego Slice oraz ile maksymalnie wejść mogą mieć pewne funkcje logiczne wykonane w oparciu o jeden Slice. Dowolna funkcja logiczna oparta o jeden: ",
-      "type": "long_open",
-      "correct_answer": "- LUT - maksymalnie 4 zmienne wejściowe, \n- Slice - maksymalnie 5 zmiennych wejściowych. \nPewne funkcje logiczne oparte o jeden Slice - maksymalnie 9 zmiennych wejściowych.",
-      "scale": 10.0
-    },
-    {
-      "question": "Wymień parametry końcówki I/O układu Spartan3E które można konfigurować. ",
-      "type": "long_open",
-      "correct_answer": "Konfigurowalne parametry statyczne końcówek Spartan3E: \n- standard napięciowy TTL/CMOS (kilka różnych odmian) - określa poziomy napięć stanów wysokich i niskich dla komórek wejściowych jak i wyjściowych. Trzeba na to zwracać uwagę gdyż nie wszystkie standardy można łączyć ze sobą (np. wyjść TTL z wejściami niskonapięciowymi CMOS). Złe dobranie standardów może spowodować uszkodzenie układów albo problem z identyfikacji stanu logicznego (gdy np. poziom stanu jednego standardu trafia akurat w zakres napięć nieustalonych drugiego standardu). \n- programowalny max prąd wyjściowy \n- programowalny pull-up/pull-down określa do jakiego potencjału ma być dołączony pin wejściowy. \n- „clamping” - do pad'u mogą być dołączone diody stanowiące zabezpieczający ogranicznik napięcia (3.3V), stosowane do aplikacji PCI. Włączenie tych diod i połączenie układu do jakiegoś wyjścia TTL (+5V) może spowodować przepływ znacznego prądu przez diody i uszkodzić układ. Diody te są domyślnie wyłączone. \nTo w starym opracowaniu (poniżej) jest źle! (skonsultowane z Mironem) Parametry: \n- FF/Latch (przerzutnik/zatrzask), \n- SYNC/ASYNC (sygnał set-reset asynchroniczny albo synchroniczny), - SRHIGH/SRLOW (sygnał set-reset czuły na wysoki/niski sygnał), \n- INIT1/INIT0 (inicjalizacja przerzutnika po konfiguracji na ‘1’ albo ‘0’)",
-      "scale": 10.0
-    },
-    {
-      "question": "Wymień tryby konfiguracji układu Spartan3E. ",
-      "type": "long_open",
-      "correct_answer": "Tryby: \n- Master Serial, \n- SPI, \n- BPI, \n- Slave Parallel, \n- Slave serial, \n- JTAG",
-      "scale": 10.0
-    },
-    {
-      "question": "Opisz właściwości i zastosowanie bloku „weak-keeper” w układzie Spartan3E.",
-      "type": "long_open",
-      "correct_answer": "Właściwości i zastosowanie: \nKrócej* - weak-keeper utrzymuje stan magistrali na ostatnim stanie użytecznym. Stosuje się go w celu zapobiegania zjawisku fluktuacji napięcia. Zjawisko to jest bardzo niekorzystne z racji na ciągłą obserwację tego napięcia przez bufory wejściowe i kiedy występują pośrednie napięcia (na granicy fizycznej realizacji ‘0’ i ‘1’) zwiększa się przepływ prądu i rośnie pobór mocy. \n*Dłużej weak-keeper (bus-keeper latch) - jest rodzajem słabego zatrzasku, który działa jak inteligentny pull-up i pull-down jednocześnie, jeżeli ostatnio wystawiono ‘0’ to weak-keeper będzie się zachowywał jak pulldown, a jeżeli ‘1’ to pull up. Ma zastosowanie, kiedy z równym prawdopodobieństwem na magistralę wystawiamy oba sygnały.",
-      "scale": 10.0
-    },
-    {
-      "question": "Wyjaśnij pojęcie „local routing”. ",
-      "type": "long_open",
-      "correct_answer": "Pojęcie oznacza połączenia w architekturze FPGA, pomiędzy sąsiednimi komórkami, bez wykorzystania uniwersalnego układu łączącego. Sąsiednie (czasem także na skos) komórki widzą się jakby bezpośrednio. Jest to także\ntechnika połączeń wewnątrz komórki - z wykorzystaniem multiplekserów ( dzięki temu szybkie wewnętrzne połączenia)",
-      "scale": 10.0
-    },
-    {
-      "question": "pojęcie „general purpose routing”. ",
-      "type": "long_open",
-      "correct_answer": "Pojęcie oznacza uniwersalne połączenia w architekturze FPGA, umożliwiające sygnałowi dotarcie do każdej komórki układu. Można taki routing podzielić na kilka warstw: \n- o krótkim dystansie - od 2 do kilku bloków \n- o średnim dystansie - kilka - kilkanaście \n- na cały układ scalony - np. linia pionowa/pozioma przez cały układ",
-      "scale": 10.0
-    },
-    {
-      "question": "pojęcie „global routing”. ",
-      "type": "long_open",
-      "correct_answer": "Pojęcie oznacza połączenia w architekturze FPGA, dla sygnałów, które muszą być rozprowadzone po całym systemie m. in. sygnały zegara, resetu, trzeciego stanu logicznego I/O. Takie połączenie musi zapewnić odpowiednie własności sygnałów, na przykład dla zegara mały skos - do wszystkich bloków sygnał dociera w tym samym czasie.",
-      "scale": 10.0
-    },
-    {
-      "question": "pojęcie „dedicated routing”. ",
-      "type": "long_open",
-      "correct_answer": "Pojęcie oznacza połączenia w architekturze FPGA, dedykowane dla pewnej funkcjonalności np. budowy sumatorów - sygnał carry musi być bardzo szybko przekazany do następnego bloku - realizuje się takie połączenie w sposób bezpośredni między blokami sumatora - nie ma tam żadnych kluczy.",
-      "scale": 10.0
-    },
-    {
-      "question": "pojęcie „clock skew” oraz podaj sposoby jego zmniejszania lub kompensacji. ",
-      "type": "long_open",
-      "correct_answer": "Clock skew występuje kiedy z jednego źródła sygnału zegarowego, sygnał dociera do różnych bloków/komponentów w różnym czasie (źródło). Kompensację tego zjawiska można uzyskać wykorzystując drzewo dystrybucji sygnału zegarowego wewnątrz chipu, które zajmuje się dystrybucją zegara o określonej fazie do przerzutników stosując odpowiednie opóźnienia. Wykorzystuje się także układ Clock Managera, który sprawia, że sygnał wejściowy jest zgodny z fazą sygnału dystrybuowanego przez drzewo opisane powyżej.",
-      "scale": 10.0
-    },
-    {
-      "question": "pojęcie Delay Locked Loop, narysuj schemat takiej pętli i podaj zastosowania. ",
-      "type": "long_open",
-      "correct_answer": "Jest to pętla, która dąży do tego, aby opóźnienie sygnału w bloku kwadratowym na rysunku poniżej było takie, aby różnica w fazie wchodzących sygnałów była równa 0ns. DLL Jest stosowana np. w układach FPGA w Device Clock Managerze, w celu zapewnienia, że sygnał zegarowy\nw sieci dystrybucji będzie miał dokładnie taką fazę jak sygnał zegarowy na pinie wejściowym.",
-      "scale": 10.0
-    },
-    {
-      "question": "sygnały generuje układ DCM w układzie Spartan3E. Jakie są wymagania odnośnie parametrów sygnału zegarowego. ",
-      "type": "long_open",
-      "correct_answer": "Sygnały przesunięte w fazie o odpowiednio 0, 90, 180, 270 stopni, ewentualnie pomnożone/podzielone przez 2 albo programowalną wartość: - CLK0, CLK90, CLK180, CLK270 \n- CLK2X, CLK2X180 \n- CLKFX, CLKFX180 \n- CLKDV \nInformacja czy nastąpiła synchronizacja w pętli DLL: \n- LOCKED \nGłówne wymagania odnośnie parametrów wyjściowego sygnału zegarowego względem wejściowego to: \n- równy współczynnik wypełnienia sygnału zegarowego (czas trwania '1' i '0' wynosi po 50% cyklu), \n- redukcja skosu zegara/synchronizacja faz sygnałów/(minimalizacja różnicy w fazie sygnałów), \n- dostęp (osobne sygnały) do przesunięcia zegara w fazie, \n- dostęp (osobne sygnały) do zsyntezowanego sygnału zegarowego o częstotliwości zgodnej z zaprogramowanymi wartościami dzielnika i mnożnika.",
-      "scale": 10.0
-    },
-    {
-      "question": "i scharakteryzuj tryby zapisu jednoportowych pamięci Block-RAM w układach Spartan3E. ",
-      "type": "long_open",
-      "correct_answer": "Trzy tryby zapisu - w każdym wartość zostaje zapisana do pamięci: \n    a. WRITE_FIRST - oprócz zapisu, w tym samym cyklu zegarowym, obecna wartość zostaje przekierowana na wyjście, \n    b. READ_FIRST - oprócz zapisu, poprzednia zawartość pamięci zostaje wystawiona na wyjście, \n    c. NO_CHANGE - oprócz zapisu, nic więcej.",
-      "scale": 10.0
-    },
-    {
-      "question": "możliwe zastosowania jednoportowych pamięci Block-RAM w układach Spartan3E.",
-      "type": "long_open",
-      "correct_answer": "Zastosowania: \n- Duże pamięci synchroniczne SRAM jednoportowe z możliwością inicjacji zawartości podczas konfiguracji, \n- Duże pamięci ROM, \n- Synchroniczne i asynchroniczne FIFO, \n- Pamięć typu LIFO (stos) do procesorów, \n- Szybka implementacja złożonych funkcji logicznych, \n- Rejestry przesuwne, \n- Złożone maszyny stanów, \n- Szybkie liczniki, \n- Bufory cyrkulacyjne, \n- Linie opóźniające (np. do FIR).",
-      "scale": 10.0
-    },
-    {
-      "question": "właściwości i zastosowania 2-portowych pamięci Block-RAM w układach Spartan3E. ",
-      "type": "long_open",
-      "correct_answer": "Właściwości: \n- możliwe jednoczesny(e) zapis(y)/odczyt(y) w tym samym czasie (cyklu zegara) - współbieżny wielodostęp \n- Z powodu jednoczesnego dostępu mogą wystąpić kolizje, - każdy z portów posiada osobny zegar - może więc pełnić rolę interfejsu do pamięci RAM z różnych domen zegarowych (układów taktowanych zegarami o różnych częstotliwościach). \nZastosowania: \n- Duże pamięci synchroniczne SRAM dwuportowe z możliwością inicjacji zawartości podczas konfiguracji, \n- Duże pamięci ROM, \n- Synchroniczne i asynchroniczne FIFO, \n- Pamięć typu LIFO (stos) do procesorów, \n- Szybka implementacja złożonych funkcji logicznych, \n- Rejestry przesuwne, \n- Złożone maszyny stanów, \n- Szybkie liczniki, \n- Bufory cyrkulacyjne, \n- Linie opóźniające (np. do FIR).",
-      "scale": 10.0
-    },
-    {
-      "question": "funkcje które może w komórce CLB układu Spartan3E spełniać blok LUT. ",
-      "type": "long_open",
-      "correct_answer": "Funkcje LUT w CLB: \n- układ logiczny z nawet 9 wejściami, \n- jednoportowy blok pamięci RAM adresowany 4 bitami \n- dynamiczny 16-bitowy rejestr przesuwny z szeregowym I/O, bez resetu - tylko z zegarem,\nmożna o tym wspomnieć, ale nie jest to odpowiedź na pytanie: - częściowo-dual (tylko odczyt) blok pamięci RAM adresowany 4 bitami w przypadku połączenia dwóch bloków LUT, \n- jednoportowy blok pamięci RAM adresowany 5 bitami w przypadku połączenia dwóch bloków LUT za pomocą F5MUX),",
-      "scale": 10.0
-    },
-    {
-      "question": "różnice w budowie układów PLA i PAL. ",
-      "type": "long_open",
-      "correct_answer": "W układach PLA (Programmable Logic Array) występują 2 matryce programowalne - matryca AND do tworzenia mintermów i matryca OR do ich sumowania. Z racji na programowalność obu matryc i wynikające z tego opóźnienia powstały układy PAL (Programmable Array Logic). W tych układach programowalna jest jedynie matryca AND, to ta do tworzenia mintermów, natomiast w matrycy OR połączenia są przypisane na stałe - pozwoliło to zmniejszyć opóźnienia.",
-      "scale": 10.0
-    },
-    {
-      "question": "i krótko scharakteryzuj poziomy abstrakcji stosowane w opisie sprzętu. ",
-      "type": "long_open",
-      "correct_answer": "Poziomy od największego poziomu abstrakcji: \na. System - behawioralnie opisywany w języku naturalnym - strukturalnie np. jednostka centralna, \nb. Układ scalony - behawioralnie zestaw algorytmów - strukturalnie np. mikroprocesor, \nc. Rejestry - behawioralnie przepływ danych - strukturalnie np. rejestry d. Bramki - behawioralnie równania logiczne - strukturalnie funktory logiczne: and, or, xor, \ne. Układ elektr. - behawioralnie równania różniczkowe - strukturalnie np. tranzystory, \nf. Layout, krzem - behawioralnie fizyka półprzewodników - strukturalnie geometria struktur",
-      "scale": 10.0
-    },
-    {
-      "question": "metody opisu układów cyfrowych. ",
-      "type": "long_open",
-      "correct_answer": "Metody opisu układów blokowych: \n- Schemat ideowy, \n- Schemat blokowy, \n- Diagram czasowy, \n- Graf maszyny stanów, \n- Tabela prawdy, \n- Równania logiczne.",
-      "scale": 10.0
-    },
-    {
-      "question": "to jest podzbiór syntezowalny języka VHDL, podaj przykład instrukcji niesyntezowalnej.",
-      "type": "long_open",
-      "correct_answer": "Język VHDL jest stosowany w 2 głównych celach: syntezy rozwiązań dla układów elektronicznych oraz symulacji tych układów. Część konstrukcji języka wykorzystywana jest wyłącznie w przypadku symulacji i nie istnieje \nmożliwość skompilowania ich do programu wykonywalnego na płytce. Takie konstrukcje nazywamy niesyntezowalnymi, a przykładem jest instrukcja “wait for”. Podzbiór syntezowalny jest więc zbiorem (określonym standardem IEEE) takich instrukcji, które mogą zostać skompilowane do programu wykonywalnego na fizycznym układzie (np. FPGA). \nźródło",
-      "scale": 10.0
-    },
-    {
-      "question": "to jest funkcja rezolucji. ",
-      "type": "long_open",
-      "correct_answer": "Funkcja rezolucji określa jaka powinna być wartość sygnału, do którego współbieżnie przypisujemy więcej niż jedną wartość np.: signal_1 <= signal_2; \nsignal_1 <= signal_3; \nFunkcja rezolucji pozwala na rozwiązanie niesyntezowalności takiego przypisania oraz na syntezę logiki trójstanowej wewnątrz układu.",
-      "scale": 10.0
-    },
-    {
-      "question": "sposoby unikania stanów zabronionych w maszynach stanów. W systemach „mission-critical” można włączyć odpowiednią opcję syntezera (jeżeli jest dostępna) generującą maszyny stanów zabezpieczone przed zatrzaśnięciem się w stanie niedozwolonym. ",
-      "type": "long_open",
-      "correct_answer": "W przypadku braku opcji w syntezerze: \n- Użyć maszyny stanów z bezpośrednim kodowaniem stanów i określić właściwe zachowanie się maszyny dla wszystkich, także nieużywanych stanów. \n- Dodać układ logiczny wykrywający stan niedozwolony. \nPonadto aby uniknąć problemów związanych z asynchronicznym wejściem należy przesłać sygnał asynchroniczny przez co najmniej jeden przerzutnik typu D.",
-      "scale": 10.0
-    },
-    {
-      "question": "to jest metastabilność przerzutników. ",
-      "type": "long_open",
-      "correct_answer": "Zjawisko to polega na pozostawaniu przerzutnika przez pewien czas w równowadze chwiejnej pomiędzy dwoma stanami stabilnymi.",
-      "scale": 10.0
-    },
-    {
-      "question": "i krótko scharakteryzuj trzy sposoby syntezy z wykorzystaniem bloków funkcjonalnych w układach FPGA. ",
-      "type": "long_open",
-      "correct_answer": "    a. Primitives - w syntezie automatycznie rozpoznawane są typowe bloki funkcjonalne i stosowane są znane przepisy na ich realizację\n    b. Inferred macros - w syntezie rozpoznawane są w kodzie VHDL odpowiednio opisane komponenty (makra) jako bloki funkcjonalne i wykorzystywane są gotowe schematy takich bloków dla układu. Rozpoznawanie wymaga jednak od twórcy kodu świadomości istnienia takich bloków i stworzenie kodu w VHDL zgodnie z ich konstrukcją. \n    c. Instantiated macros - Jawnie wykorzystujemy blok funkcjonalny określając rodzaj modułu, jego konfigurację, oraz połączenia z sygnałami.",
-      "scale": 10.0
-    },
-    {
-      "question": "właściwości zmiennych w procesach. ",
-      "type": "long_open",
-      "correct_answer": "- są widoczne tylko w obrębie procesu dla którego są zdefiniowane, - zachowują swoją wartość w czasie kiedy proces nie jest używany (kiedy sygnały z listy czułości nie zmieniają swojego stanu), \n- ich zmiana następuje natychmiast po napotkaniu przypisania zmiennej := w trakcie sekwencyjnego działania procesu, \n- do zmiennej można przypisać wartość początkową, która zostanie przypisana tylko raz (na początku syntezy).",
-      "scale": 10.0
-    },
-    {
-      "question": "właściwości zmiennych w funkcjach. ",
-      "type": "long_open",
-      "correct_answer": "- są widoczne tylko w obrębie funkcji dla którego są zdefiniowane, - ich zmiana następuje natychmiast po napotkaniu przypisania zmiennej := w trakcie sekwencyjnego działania procesu, \n- do zmiennej można przypisać wartość początkową, która zostanie przypisana przy każdym wywołaniu funkcji, \n- nie zachowują swojej wartości w czasie kiedy funkcja nie jest używana - przy wywołaniu funkcji ustawiane są wartości początkowe.",
-      "scale": 10.0
-    },
-    {
-      "question": "zasadnicze różnice pomiędzy zmiennymi a sygnałami.  ",
-      "type": "long_open",
-      "correct_answer": "- przypisanie wartości do zmiennych jest natychmiastowe i w rezultacie sekwencyjne, natomiast do sygnałów odbywa się synchronicznie (np. pod koniec procesu) i w rezultacie współbieżnie. \n- w procesach zmienne zachowują swoją wartość kiedy proces nie jest używany, \n- sygnały służą do obsługi wejścia i wyjścia układu, \n- sygnały skojarzone są bardziej z fizycznym sprzętem, natomiast zmienne z abstrakcyjnym przetwarzaniem danych.",
-      "scale": 10.0
-    },
-    {
-      "question": "sposoby parametryzacji modułów projektowych. ",
-      "type": "long_open",
-      "correct_answer": "a. niejawny - parametr podany jest do modułu nie wprost - np. używamy typu tablicowego unconstrained w którym parametrem będzie długość podanej na wejście tablicy \nb. jawny - parametry, przekazywane do modułu podobnie jak sygnały, są tylko wejściem do modułu i definiujemy je w osobnym bloku generic. Parametry mogą mieć typy takie jak sygnały, ale muszą mieć stałą wartość (np. domyślną).",
-      "scale": 10.0
-    },
-    {
-      "question": "to jest „unconstrained vector”, podaj zastosowania. ",
-      "type": "long_open",
-      "correct_answer": "Unconstrained vector jest typem tablicowym, parametr funkcji takiego typu może być dowolnej długości. Taki mechanizm umożliwia budowanie uniwersalnych funkcji operujących na tablicach różnych długości. W momencie syntezy długość będzie znana i możliwe będzie wykonanie funkcji dla tablicy o konkretnej długości.",
-      "scale": 10.0
-    },
-    {
-      "question": "to są cykle delta, podaj przykład. ",
-      "type": "long_open",
-      "correct_answer": "Cykle delta, są to dodatkowe logiczne cykle (w czasie jednego cyklu fizycznego), które służą do obliczeń pośrednich wartości sygnałów, w przypadku w którym zmieniamy wewnątrz procedury sygnał będący na liście czułości. \nZakładając, że zmianie ulegnie sygnał a, po wykryciu tej zmiany w zwykłym cyklu ulegnie zmianie sygnał x, co spowoduje wykonanie cyklu delta, w którym proces aktywuje się ponownie i przypiszemy sygnał x do sygnału y.",
-      "scale": 10.0
-    },
-    {
-      "question": "musi być liczba iteracji syntezowalnej pętli ?",
-      "type": "long_open",
-      "correct_answer": "Syntezowalna pętla musi mieć ograniczoną liczbę iteracji (znaną/stałą w momencie syntezy).",
-      "scale": 10.0
-    },
-    {
-      "question": "czego służy instrukcja „generate” ?",
-      "type": "long_open",
-      "correct_answer": "Instrukcja służy do automatycznego podłączenia komponentów. W opisie bardziej formalnym oznacza to, że służy do automatycznej generacji struktur regularnych, tworzonych na bazie struktury wzorcowej (fizyczny efekt to powielenie podukładów wzorcowych)",
-      "scale": 10.0
-    }
-  ]
+    "name": "Interaktywne Systemy Programowalnych",
+    "quiz_elements": [
+        {
+            "question": "Wymień trzy kategorie układów programowalnych (podział pod względem złożoności architektury) i scharakteryzuj krótko każdą z nich.",
+            "type": "long_open",
+            "correct_answer": "a. SPLD - Simple Programmable Logic Devices: \nNajprostsze i najstarsze układy programowalne. Ich głównym \nkomponentem jest matryca bramek odpowiedzialna za przetwarzanie sygnałów. W tej kategori układów zawierają się takie podkategorie jak: PROM, PLA, PAL, GAL. \nb. CPLD - Complex Programmable Logic Devices: \nSą bardziej złożoną wersją układów SPLD, oferują większą pojemność logiczną. Składają się z wielu bloków podobnych do układów SPLD połączonych magistralami w jedną strukturę. Końcówki I/O układu mają połączenie zarówno z blokami jak i z magistralą. \nc. FPGA - Field-Programmable Gate Array: \nUkłady oparte o koncepcję morza bramek (ang. sea of gates), są zbudowane z bloków z bramkami logicznymi przedzielonych \npołączeniami programowalnymi. Bloki z biegiem czasu stawały się coraz bardziej złożone co umożliwiło zmniejszenie opóźnień układów wynikających z dużej liczby połączeń między blokami. Z tego samego powodu udoskonalano także połączenia między komórkami (np. poprzez routing).",
+            "scale": 10.0
+        },
+        {
+            "question": "Jakiej kategorii układów programowalnych dotyczy podział na: coarse grade, medium grade i fine grade. Scharakteryzuj krótko cechy wyżej wymienionych rodzajów układów. ",
+            "type": "long_open",
+            "correct_answer": "Podział dotyczy architektur układów FPGA, a poszczególne kategorie przedstawiają się następująco: \na. fine grade (drobne uziarnienie) : \nBloki połączone ze sobą mają bardzo prostą budowę, składają się z prostego układu programowalnego (2-3 wejścia) i przerzutnika. Mimo elastyczności rozwiązania, nadal występują w układach o takiej architekturze duże opóźnienia. \nb. medium grade (średnie uziarnienie): \nBloki o bardziej złożonej budowie niż fine grade opisują układy o większej ziarnistości. Wykorzystuje się w nich multipleksery, czyli połączenia aktywne, co zmniejszyło opóźnienia. \nc. coarse grade (grube uziarnienie): \nBloki o największej złożoności, charakteryzujące się bardzo dużą liczbę wejść (np. 32). Budowa wewnętrzna bloku jest \nskomplikowana, za to opóźnienia występujące w układach je \nwykorzystujących zmalały.",
+            "scale": 10.0
+        },
+        {
+            "question": "Jaki rodzaj pamięci konfiguracji dominuje w układach CPLD, a jaki w FPGA. ",
+            "type": "long_open",
+            "correct_answer": "W układach CPLD dominują pamięci nieulotne z możliwością elektrycznego kasowania EEPROM (E2PROM) oraz FLASH. \nW układach FPGA dominuje pamięć ulotna wymagająca każdorazowego programowania po ponownym włączeniu zasilania - static RAM - SRAM.",
+            "scale": 10.0
+        },
+        {
+            "question": "Wymień rodzaje pamięci konfiguracji",
+            "type": "long_open",
+            "correct_answer": "Rodzaje pamięci konfiguracji: \na. PROM - pamięć programowalna z możliwością pojedynczego zaprogramowania przepaleniem połączeń lub maskowaniem.\n    - fuse (bezpiecznik/rozłączenie) - występują połączenia bramki ze wszystkimi sygnałami w układzie, te które nie są wykorzystane zostają przepalone i w efekcie pozostałe ścieżki decydują o pracy układu. \n    - anti-fuse (anty-bezpiecznik/zwarcie) - żaden sygnał nie jest połączony z bramką, połączenia z tymi sygnałami, które mają być wykorzystane zostają wygenerowane (zwarte) i one decydują o pracy układu. \nb. EPROM - pamięć programowalna z możliwością kasowania zapisanej konfiguracji poprzez wystawienie na działanie światła UV. \nc. EEPROM/FLASH - pamięć programowalna z możliwością elektrycznego (programowalnego) kasowania zawartości \nd. SRAM - w połączeniu z tranzystorem umożliwia utworzenie połączenia programowalnego.",
+            "scale": 10.0
+        },
+        {
+            "question": "W układzie Spartan3E w jednej komórce LUT można zrealizować pewne funkcje logiki. Podaj ile maksymalnie zmiennych wejściowych może mieć dowolna funkcja logiczna zrealizowana w jednej komórce LUT, ile maksymalnie zmiennych wejściowych może mieć dowolna funkcja logiczna zrealizowana za pomocą jednego Slice oraz ile maksymalnie wejść mogą mieć pewne funkcje logiczne wykonane w oparciu o jeden Slice. Dowolna funkcja logiczna oparta o jeden: ",
+            "type": "long_open",
+            "correct_answer": "- LUT - maksymalnie 4 zmienne wejściowe, \n- Slice - maksymalnie 5 zmiennych wejściowych. \nPewne funkcje logiczne oparte o jeden Slice - maksymalnie 9 zmiennych wejściowych.",
+            "scale": 10.0
+        },
+        {
+            "question": "Wymień parametry końcówki I/O układu Spartan3E które można konfigurować. ",
+            "type": "long_open",
+            "correct_answer": "Konfigurowalne parametry statyczne końcówek Spartan3E: \n- standard napięciowy TTL/CMOS (kilka różnych odmian) - określa poziomy napięć stanów wysokich i niskich dla komórek wejściowych jak i wyjściowych. Trzeba na to zwracać uwagę gdyż nie wszystkie standardy można łączyć ze sobą (np. wyjść TTL z wejściami niskonapięciowymi CMOS). Złe dobranie standardów może spowodować uszkodzenie układów albo problem z identyfikacji stanu logicznego (gdy np. poziom stanu jednego standardu trafia akurat w zakres napięć nieustalonych drugiego standardu). \n- programowalny max prąd wyjściowy \n- programowalny pull-up/pull-down określa do jakiego potencjału ma być dołączony pin wejściowy. \n- „clamping” - do pad'u mogą być dołączone diody stanowiące zabezpieczający ogranicznik napięcia (3.3V), stosowane do aplikacji PCI. Włączenie tych diod i połączenie układu do jakiegoś wyjścia TTL (+5V) może spowodować przepływ znacznego prądu przez diody i uszkodzić układ. Diody te są domyślnie wyłączone. \nTo w starym opracowaniu (poniżej) jest źle! (skonsultowane z Mironem) Parametry: \n- FF/Latch (przerzutnik/zatrzask), \n- SYNC/ASYNC (sygnał set-reset asynchroniczny albo synchroniczny), - SRHIGH/SRLOW (sygnał set-reset czuły na wysoki/niski sygnał), \n- INIT1/INIT0 (inicjalizacja przerzutnika po konfiguracji na ‘1’ albo ‘0’)",
+            "scale": 10.0
+        },
+        {
+            "question": "Wymień tryby konfiguracji układu Spartan3E. ",
+            "type": "long_open",
+            "correct_answer": "Tryby: \n- Master Serial, \n- SPI, \n- BPI, \n- Slave Parallel, \n- Slave serial, \n- JTAG",
+            "scale": 10.0
+        },
+        {
+            "question": "Opisz właściwości i zastosowanie bloku „weak-keeper” w układzie Spartan3E.",
+            "type": "long_open",
+            "correct_answer": "Właściwości i zastosowanie: \nKrócej* - weak-keeper utrzymuje stan magistrali na ostatnim stanie użytecznym. Stosuje się go w celu zapobiegania zjawisku fluktuacji napięcia. Zjawisko to jest bardzo niekorzystne z racji na ciągłą obserwację tego napięcia przez bufory wejściowe i kiedy występują pośrednie napięcia (na granicy fizycznej realizacji ‘0’ i ‘1’) zwiększa się przepływ prądu i rośnie pobór mocy. \n*Dłużej weak-keeper (bus-keeper latch) - jest rodzajem słabego zatrzasku, który działa jak inteligentny pull-up i pull-down jednocześnie, jeżeli ostatnio wystawiono ‘0’ to weak-keeper będzie się zachowywał jak pulldown, a jeżeli ‘1’ to pull up. Ma zastosowanie, kiedy z równym prawdopodobieństwem na magistralę wystawiamy oba sygnały.",
+            "scale": 10.0
+        },
+        {
+            "question": "Wyjaśnij pojęcie „local routing”. ",
+            "type": "long_open",
+            "correct_answer": "Pojęcie oznacza połączenia w architekturze FPGA, pomiędzy sąsiednimi komórkami, bez wykorzystania uniwersalnego układu łączącego. Sąsiednie (czasem także na skos) komórki widzą się jakby bezpośrednio. Jest to także\ntechnika połączeń wewnątrz komórki - z wykorzystaniem multiplekserów ( dzięki temu szybkie wewnętrzne połączenia)",
+            "scale": 10.0
+        },
+        {
+            "question": "pojęcie „general purpose routing”. ",
+            "type": "long_open",
+            "correct_answer": "Pojęcie oznacza uniwersalne połączenia w architekturze FPGA, umożliwiające sygnałowi dotarcie do każdej komórki układu. Można taki routing podzielić na kilka warstw: \n- o krótkim dystansie - od 2 do kilku bloków \n- o średnim dystansie - kilka - kilkanaście \n- na cały układ scalony - np. linia pionowa/pozioma przez cały układ",
+            "scale": 10.0
+        },
+        {
+            "question": "pojęcie „global routing”. ",
+            "type": "long_open",
+            "correct_answer": "Pojęcie oznacza połączenia w architekturze FPGA, dla sygnałów, które muszą być rozprowadzone po całym systemie m. in. sygnały zegara, resetu, trzeciego stanu logicznego I/O. Takie połączenie musi zapewnić odpowiednie własności sygnałów, na przykład dla zegara mały skos - do wszystkich bloków sygnał dociera w tym samym czasie.",
+            "scale": 10.0
+        },
+        {
+            "question": "pojęcie „dedicated routing”. ",
+            "type": "long_open",
+            "correct_answer": "Pojęcie oznacza połączenia w architekturze FPGA, dedykowane dla pewnej funkcjonalności np. budowy sumatorów - sygnał carry musi być bardzo szybko przekazany do następnego bloku - realizuje się takie połączenie w sposób bezpośredni między blokami sumatora - nie ma tam żadnych kluczy.",
+            "scale": 10.0
+        },
+        {
+            "question": "pojęcie „clock skew” oraz podaj sposoby jego zmniejszania lub kompensacji. ",
+            "type": "long_open",
+            "correct_answer": "Clock skew występuje kiedy z jednego źródła sygnału zegarowego, sygnał dociera do różnych bloków/komponentów w różnym czasie (źródło). Kompensację tego zjawiska można uzyskać wykorzystując drzewo dystrybucji sygnału zegarowego wewnątrz chipu, które zajmuje się dystrybucją zegara o określonej fazie do przerzutników stosując odpowiednie opóźnienia. Wykorzystuje się także układ Clock Managera, który sprawia, że sygnał wejściowy jest zgodny z fazą sygnału dystrybuowanego przez drzewo opisane powyżej.",
+            "scale": 10.0
+        },
+        {
+            "question": "pojęcie Delay Locked Loop, narysuj schemat takiej pętli i podaj zastosowania. ",
+            "type": "long_open",
+            "correct_answer": "Jest to pętla, która dąży do tego, aby opóźnienie sygnału w bloku kwadratowym na rysunku poniżej było takie, aby różnica w fazie wchodzących sygnałów była równa 0ns. DLL Jest stosowana np. w układach FPGA w Device Clock Managerze, w celu zapewnienia, że sygnał zegarowy\nw sieci dystrybucji będzie miał dokładnie taką fazę jak sygnał zegarowy na pinie wejściowym.",
+            "scale": 10.0
+        },
+        {
+            "question": "sygnały generuje układ DCM w układzie Spartan3E. Jakie są wymagania odnośnie parametrów sygnału zegarowego. ",
+            "type": "long_open",
+            "correct_answer": "Sygnały przesunięte w fazie o odpowiednio 0, 90, 180, 270 stopni, ewentualnie pomnożone/podzielone przez 2 albo programowalną wartość: - CLK0, CLK90, CLK180, CLK270 \n- CLK2X, CLK2X180 \n- CLKFX, CLKFX180 \n- CLKDV \nInformacja czy nastąpiła synchronizacja w pętli DLL: \n- LOCKED \nGłówne wymagania odnośnie parametrów wyjściowego sygnału zegarowego względem wejściowego to: \n- równy współczynnik wypełnienia sygnału zegarowego (czas trwania '1' i '0' wynosi po 50% cyklu), \n- redukcja skosu zegara/synchronizacja faz sygnałów/(minimalizacja różnicy w fazie sygnałów), \n- dostęp (osobne sygnały) do przesunięcia zegara w fazie, \n- dostęp (osobne sygnały) do zsyntezowanego sygnału zegarowego o częstotliwości zgodnej z zaprogramowanymi wartościami dzielnika i mnożnika.",
+            "scale": 10.0
+        },
+        {
+            "question": "i scharakteryzuj tryby zapisu jednoportowych pamięci Block-RAM w układach Spartan3E. ",
+            "type": "long_open",
+            "correct_answer": "Trzy tryby zapisu - w każdym wartość zostaje zapisana do pamięci: \n    a. WRITE_FIRST - oprócz zapisu, w tym samym cyklu zegarowym, obecna wartość zostaje przekierowana na wyjście, \n    b. READ_FIRST - oprócz zapisu, poprzednia zawartość pamięci zostaje wystawiona na wyjście, \n    c. NO_CHANGE - oprócz zapisu, nic więcej.",
+            "scale": 10.0
+        },
+        {
+            "question": "możliwe zastosowania jednoportowych pamięci Block-RAM w układach Spartan3E.",
+            "type": "long_open",
+            "correct_answer": "Zastosowania: \n- Duże pamięci synchroniczne SRAM jednoportowe z możliwością inicjacji zawartości podczas konfiguracji, \n- Duże pamięci ROM, \n- Synchroniczne i asynchroniczne FIFO, \n- Pamięć typu LIFO (stos) do procesorów, \n- Szybka implementacja złożonych funkcji logicznych, \n- Rejestry przesuwne, \n- Złożone maszyny stanów, \n- Szybkie liczniki, \n- Bufory cyrkulacyjne, \n- Linie opóźniające (np. do FIR).",
+            "scale": 10.0
+        },
+        {
+            "question": "właściwości i zastosowania 2-portowych pamięci Block-RAM w układach Spartan3E. ",
+            "type": "long_open",
+            "correct_answer": "Właściwości: \n- możliwe jednoczesny(e) zapis(y)/odczyt(y) w tym samym czasie (cyklu zegara) - współbieżny wielodostęp \n- Z powodu jednoczesnego dostępu mogą wystąpić kolizje, - każdy z portów posiada osobny zegar - może więc pełnić rolę interfejsu do pamięci RAM z różnych domen zegarowych (układów taktowanych zegarami o różnych częstotliwościach). \nZastosowania: \n- Duże pamięci synchroniczne SRAM dwuportowe z możliwością inicjacji zawartości podczas konfiguracji, \n- Duże pamięci ROM, \n- Synchroniczne i asynchroniczne FIFO, \n- Pamięć typu LIFO (stos) do procesorów, \n- Szybka implementacja złożonych funkcji logicznych, \n- Rejestry przesuwne, \n- Złożone maszyny stanów, \n- Szybkie liczniki, \n- Bufory cyrkulacyjne, \n- Linie opóźniające (np. do FIR).",
+            "scale": 10.0
+        },
+        {
+            "question": "funkcje które może w komórce CLB układu Spartan3E spełniać blok LUT. ",
+            "type": "long_open",
+            "correct_answer": "Funkcje LUT w CLB: \n- układ logiczny z nawet 9 wejściami, \n- jednoportowy blok pamięci RAM adresowany 4 bitami \n- dynamiczny 16-bitowy rejestr przesuwny z szeregowym I/O, bez resetu - tylko z zegarem,\nmożna o tym wspomnieć, ale nie jest to odpowiedź na pytanie: - częściowo-dual (tylko odczyt) blok pamięci RAM adresowany 4 bitami w przypadku połączenia dwóch bloków LUT, \n- jednoportowy blok pamięci RAM adresowany 5 bitami w przypadku połączenia dwóch bloków LUT za pomocą F5MUX),",
+            "scale": 10.0
+        },
+        {
+            "question": "różnice w budowie układów PLA i PAL. ",
+            "type": "long_open",
+            "correct_answer": "W układach PLA (Programmable Logic Array) występują 2 matryce programowalne - matryca AND do tworzenia mintermów i matryca OR do ich sumowania. Z racji na programowalność obu matryc i wynikające z tego opóźnienia powstały układy PAL (Programmable Array Logic). W tych układach programowalna jest jedynie matryca AND, to ta do tworzenia mintermów, natomiast w matrycy OR połączenia są przypisane na stałe - pozwoliło to zmniejszyć opóźnienia.",
+            "scale": 10.0
+        },
+        {
+            "question": "i krótko scharakteryzuj poziomy abstrakcji stosowane w opisie sprzętu. ",
+            "type": "long_open",
+            "correct_answer": "Poziomy od największego poziomu abstrakcji: \na. System - behawioralnie opisywany w języku naturalnym - strukturalnie np. jednostka centralna, \nb. Układ scalony - behawioralnie zestaw algorytmów - strukturalnie np. mikroprocesor, \nc. Rejestry - behawioralnie przepływ danych - strukturalnie np. rejestry d. Bramki - behawioralnie równania logiczne - strukturalnie funktory logiczne: and, or, xor, \ne. Układ elektr. - behawioralnie równania różniczkowe - strukturalnie np. tranzystory, \nf. Layout, krzem - behawioralnie fizyka półprzewodników - strukturalnie geometria struktur",
+            "scale": 10.0
+        },
+        {
+            "question": "metody opisu układów cyfrowych. ",
+            "type": "long_open",
+            "correct_answer": "Metody opisu układów blokowych: \n- Schemat ideowy, \n- Schemat blokowy, \n- Diagram czasowy, \n- Graf maszyny stanów, \n- Tabela prawdy, \n- Równania logiczne.",
+            "scale": 10.0
+        },
+        {
+            "question": "to jest podzbiór syntezowalny języka VHDL, podaj przykład instrukcji niesyntezowalnej.",
+            "type": "long_open",
+            "correct_answer": "Język VHDL jest stosowany w 2 głównych celach: syntezy rozwiązań dla układów elektronicznych oraz symulacji tych układów. Część konstrukcji języka wykorzystywana jest wyłącznie w przypadku symulacji i nie istnieje \nmożliwość skompilowania ich do programu wykonywalnego na płytce. Takie konstrukcje nazywamy niesyntezowalnymi, a przykładem jest instrukcja “wait for”. Podzbiór syntezowalny jest więc zbiorem (określonym standardem IEEE) takich instrukcji, które mogą zostać skompilowane do programu wykonywalnego na fizycznym układzie (np. FPGA). \nźródło",
+            "scale": 10.0
+        },
+        {
+            "question": "to jest funkcja rezolucji. ",
+            "type": "long_open",
+            "correct_answer": "Funkcja rezolucji określa jaka powinna być wartość sygnału, do którego współbieżnie przypisujemy więcej niż jedną wartość np.: signal_1 <= signal_2; \nsignal_1 <= signal_3; \nFunkcja rezolucji pozwala na rozwiązanie niesyntezowalności takiego przypisania oraz na syntezę logiki trójstanowej wewnątrz układu.",
+            "scale": 10.0
+        },
+        {
+            "question": "sposoby unikania stanów zabronionych w maszynach stanów. W systemach „mission-critical” można włączyć odpowiednią opcję syntezera (jeżeli jest dostępna) generującą maszyny stanów zabezpieczone przed zatrzaśnięciem się w stanie niedozwolonym. ",
+            "type": "long_open",
+            "correct_answer": "W przypadku braku opcji w syntezerze: \n- Użyć maszyny stanów z bezpośrednim kodowaniem stanów i określić właściwe zachowanie się maszyny dla wszystkich, także nieużywanych stanów. \n- Dodać układ logiczny wykrywający stan niedozwolony. \nPonadto aby uniknąć problemów związanych z asynchronicznym wejściem należy przesłać sygnał asynchroniczny przez co najmniej jeden przerzutnik typu D.",
+            "scale": 10.0
+        },
+        {
+            "question": "to jest metastabilność przerzutników. ",
+            "type": "long_open",
+            "correct_answer": "Zjawisko to polega na pozostawaniu przerzutnika przez pewien czas w równowadze chwiejnej pomiędzy dwoma stanami stabilnymi.",
+            "scale": 10.0
+        },
+        {
+            "question": "i krótko scharakteryzuj trzy sposoby syntezy z wykorzystaniem bloków funkcjonalnych w układach FPGA. ",
+            "type": "long_open",
+            "correct_answer": "    a. Primitives - w syntezie automatycznie rozpoznawane są typowe bloki funkcjonalne i stosowane są znane przepisy na ich realizację\n    b. Inferred macros - w syntezie rozpoznawane są w kodzie VHDL odpowiednio opisane komponenty (makra) jako bloki funkcjonalne i wykorzystywane są gotowe schematy takich bloków dla układu. Rozpoznawanie wymaga jednak od twórcy kodu świadomości istnienia takich bloków i stworzenie kodu w VHDL zgodnie z ich konstrukcją. \n    c. Instantiated macros - Jawnie wykorzystujemy blok funkcjonalny określając rodzaj modułu, jego konfigurację, oraz połączenia z sygnałami.",
+            "scale": 10.0
+        },
+        {
+            "question": "właściwości zmiennych w procesach. ",
+            "type": "long_open",
+            "correct_answer": "- są widoczne tylko w obrębie procesu dla którego są zdefiniowane, - zachowują swoją wartość w czasie kiedy proces nie jest używany (kiedy sygnały z listy czułości nie zmieniają swojego stanu), \n- ich zmiana następuje natychmiast po napotkaniu przypisania zmiennej := w trakcie sekwencyjnego działania procesu, \n- do zmiennej można przypisać wartość początkową, która zostanie przypisana tylko raz (na początku syntezy).",
+            "scale": 10.0
+        },
+        {
+            "question": "właściwości zmiennych w funkcjach. ",
+            "type": "long_open",
+            "correct_answer": "- są widoczne tylko w obrębie funkcji dla którego są zdefiniowane, - ich zmiana następuje natychmiast po napotkaniu przypisania zmiennej := w trakcie sekwencyjnego działania procesu, \n- do zmiennej można przypisać wartość początkową, która zostanie przypisana przy każdym wywołaniu funkcji, \n- nie zachowują swojej wartości w czasie kiedy funkcja nie jest używana - przy wywołaniu funkcji ustawiane są wartości początkowe.",
+            "scale": 10.0
+        },
+        {
+            "question": "zasadnicze różnice pomiędzy zmiennymi a sygnałami.  ",
+            "type": "long_open",
+            "correct_answer": "- przypisanie wartości do zmiennych jest natychmiastowe i w rezultacie sekwencyjne, natomiast do sygnałów odbywa się synchronicznie (np. pod koniec procesu) i w rezultacie współbieżnie. \n- w procesach zmienne zachowują swoją wartość kiedy proces nie jest używany, \n- sygnały służą do obsługi wejścia i wyjścia układu, \n- sygnały skojarzone są bardziej z fizycznym sprzętem, natomiast zmienne z abstrakcyjnym przetwarzaniem danych.",
+            "scale": 10.0
+        },
+        {
+            "question": "sposoby parametryzacji modułów projektowych. ",
+            "type": "long_open",
+            "correct_answer": "a. niejawny - parametr podany jest do modułu nie wprost - np. używamy typu tablicowego unconstrained w którym parametrem będzie długość podanej na wejście tablicy \nb. jawny - parametry, przekazywane do modułu podobnie jak sygnały, są tylko wejściem do modułu i definiujemy je w osobnym bloku generic. Parametry mogą mieć typy takie jak sygnały, ale muszą mieć stałą wartość (np. domyślną).",
+            "scale": 10.0
+        },
+        {
+            "question": "to jest „unconstrained vector”, podaj zastosowania. ",
+            "type": "long_open",
+            "correct_answer": "Unconstrained vector jest typem tablicowym, parametr funkcji takiego typu może być dowolnej długości. Taki mechanizm umożliwia budowanie uniwersalnych funkcji operujących na tablicach różnych długości. W momencie syntezy długość będzie znana i możliwe będzie wykonanie funkcji dla tablicy o konkretnej długości.",
+            "scale": 10.0
+        },
+        {
+            "question": "to są cykle delta, podaj przykład. ",
+            "type": "long_open",
+            "correct_answer": "Cykle delta, są to dodatkowe logiczne cykle (w czasie jednego cyklu fizycznego), które służą do obliczeń pośrednich wartości sygnałów, w przypadku w którym zmieniamy wewnątrz procedury sygnał będący na liście czułości. \nZakładając, że zmianie ulegnie sygnał a, po wykryciu tej zmiany w zwykłym cyklu ulegnie zmianie sygnał x, co spowoduje wykonanie cyklu delta, w którym proces aktywuje się ponownie i przypiszemy sygnał x do sygnału y.",
+            "scale": 10.0
+        },
+        {
+            "question": "musi być liczba iteracji syntezowalnej pętli ?",
+            "type": "long_open",
+            "correct_answer": "Syntezowalna pętla musi mieć ograniczoną liczbę iteracji (znaną/stałą w momencie syntezy).",
+            "scale": 10.0
+        },
+        {
+            "question": "czego służy instrukcja „generate” ?",
+            "type": "long_open",
+            "correct_answer": "Instrukcja służy do automatycznego podłączenia komponentów. W opisie bardziej formalnym oznacza to, że służy do automatycznej generacji struktur regularnych, tworzonych na bazie struktury wzorcowej (fizyczny efekt to powielenie podukładów wzorcowych)",
+            "scale": 10.0
+        }
+    ]
 }
