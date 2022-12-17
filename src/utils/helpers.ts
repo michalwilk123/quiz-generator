@@ -1,4 +1,4 @@
-import quiz_config from "../quiz_config";
+import quizConfig from "../quiz_config";
 
 const availableQuizes = import.meta.glob("../quizes/*.json");
 
@@ -34,7 +34,7 @@ export const getQuizDataFromFile = async (
   quizUrl: string,
   forceReload: boolean = false
 ): Promise<QuizContent> => {
-  const quizConf = quiz_config.find((conf) => conf.urlName === quizUrl);
+  const quizConf = quizConfig.find((conf: any) => conf.urlName === quizUrl);
 
   if (!quizConf?.filename) {
     throw Error("No pathname specified!");
@@ -43,6 +43,7 @@ export const getQuizDataFromFile = async (
   const quizContent: any = await availableQuizes[
     `../quizes/${quizConf.filename}`
   ]();
+  console.log(quizContent);
 
   if (!forceReload) {
     const savedQuiz = localStorage.getItem(quizContent["name"]);
