@@ -1,6 +1,6 @@
 # Programowanie python - politechnika gdanska
 
-Autorski bank ćwiczeniowy: 201 pytań, w tym 66 zagadnień z przekazanego materiału oraz 135 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
+Autorski bank ćwiczeniowy: 214 pytań, w tym 66 zagadnień z przekazanego materiału oraz 148 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
 
 ## Dwie konfiguracje
 
@@ -59,3 +59,7 @@ Metaklasy pozostają częścią Pythona 3; sam atrybut __metaclass__ wewnątrz k
 24 pytania wyboru na podstawie przekazanego materiału HTML obejmują graf zależności, providery, moduły i ich interfejsy, init/validate/plan/apply, state, backendy, blokady, sensitive, count/for_each, moved, import, drift i CLI workspaces. Każde zawiera objaśnienie oraz źródła HashiCorp. Pakiet jest działem istniejącej bazy i uczestniczy w losowaniu w obu presetach.
 
 Pytania rozróżniają klasyczne polecenie import od nowszych mechanizmów generowania konfiguracji, maskowanie sekretów od ich przechowywania oraz blokadę state od pliku wersji providerów. Nie wymagają uruchamiania infrastruktury.
+
+## Podstawy PostgreSQL
+
+13 dodatkowych pytań: cztery o WHERE/HAVING i agregację, pięć o B-tree, Hash oraz sequential scan, cztery o WITH RECURSIVE, warunek zakończenia i cykle. Zakres indeksów obejmuje podstawowe rozróżnienia bez katalogu zaawansowanych typów. Pytania należą do obecnego działu PostgreSQL i korzystają z obu presetów.

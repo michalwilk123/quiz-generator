@@ -3696,6 +3696,240 @@
       "section": "Terraform",
       "family": "python-160",
       "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Czym różnią się WHERE i HAVING w zapytaniu z GROUP BY?",
+      "type": "one_choice",
+      "answers": [
+        "WHERE filtruje wiersze przed grupowaniem, HAVING filtruje powstałe grupy.",
+        "HAVING filtruje wiersze przed grupowaniem, WHERE filtruje grupy.",
+        "Obie klauzule są zawsze wymienne.",
+        "HAVING służy wyłącznie do sortowania agregatów."
+      ],
+      "correct_answer": "WHERE filtruje wiersze przed grupowaniem, HAVING filtruje powstałe grupy.",
+      "explanation": "WHERE wybiera dane wejściowe agregacji. HAVING ocenia grupy i może sprawdzać np. COUNT(*) > 2. Jest to kolejność logiczna, nie opis fizycznego planu wykonania.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-table-expressions.html#QUERIES-GROUP"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-161",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Jaki wynik zwróci zapytanie?\n\n```sql\nWITH sales(team, amount) AS (\n  VALUES ('A', 10), ('A', 30), ('B', 25), ('B', 40)\n)\nSELECT team, SUM(amount)\nFROM sales\nWHERE amount >= 20\nGROUP BY team\nHAVING SUM(amount) > 50\nORDER BY team;\n```",
+      "type": "one_choice",
+      "answers": [
+        "Dwa wiersze: A, 40 oraz B, 65.",
+        "Jeden wiersz: B, 40.",
+        "Brak wierszy.",
+        "Jeden wiersz: B, 65."
+      ],
+      "correct_answer": "Jeden wiersz: B, 65.",
+      "explanation": "WHERE usuwa kwotę 10. Sumy wynoszą następnie A=30 i B=65; warunek HAVING przechodzi tylko B.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-table-expressions.html#QUERIES-GROUP"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-162",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Chcesz znaleźć klientów z co najmniej trzema zamówieniami. Co należy poprawić?\n\n```sql\nSELECT customer_id, COUNT(*)\nFROM orders\nWHERE COUNT(*) >= 3\nGROUP BY customer_id;\n```",
+      "type": "one_choice",
+      "answers": [
+        "Przenieść WHERE za GROUP BY, zachowując nazwę klauzuli.",
+        "Nic; agregat COUNT(*) można tutaj użyć w WHERE.",
+        "Przenieść COUNT(*) >= 3 do HAVING po GROUP BY.",
+        "Zamienić COUNT(*) na COUNT(customer_id), pozostawiając WHERE."
+      ],
+      "correct_answer": "Przenieść COUNT(*) >= 3 do HAVING po GROUP BY.",
+      "explanation": "Agregat tego poziomu zapytania nie jest dozwolony w WHERE. HAVING COUNT(*) >= 3 filtruje już policzone grupy klientów.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-table-expressions.html#QUERIES-GROUP"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-163",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Czy HAVING wymaga jawnego GROUP BY? Co zwróci ten kod?\n\n```sql\nSELECT COUNT(*)\nFROM (VALUES (1), (2), (3)) AS t(n)\nHAVING COUNT(*) > 2;\n```",
+      "type": "one_choice",
+      "answers": [
+        "Brak wierszy.",
+        "Jeden wiersz z wartością 3.",
+        "Błąd: HAVING zawsze wymaga GROUP BY.",
+        "Trzy wiersze z wartością 1."
+      ],
+      "correct_answer": "Jeden wiersz z wartością 3.",
+      "explanation": "Bez GROUP BY agregacja traktuje wszystkie wiersze jako jedną grupę. Jej liczność wynosi 3, więc HAVING przepuszcza wynik.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-table-expressions.html#QUERIES-GROUP"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-164",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Jaki typ indeksu powstanie domyślnie?\n\n```sql\nCREATE INDEX orders_price_idx ON orders (price);\n```",
+      "type": "one_choice",
+      "answers": [
+        "B-tree.",
+        "Hash.",
+        "Sequential index.",
+        "Typ jest losowany przy każdym zapytaniu."
+      ],
+      "correct_answer": "B-tree.",
+      "explanation": "CREATE INDEX bez USING tworzy B-tree. Hash to inny typ indeksu, wskazywany przez USING hash.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/indexes-types.html"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-165",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Kolumna price ma typ integer. Które porównanie możliwości zwykłych indeksów B-tree i Hash jest poprawne?",
+      "type": "one_choice",
+      "answers": [
+        "Hash obsługuje równość i zakresy; B-tree tylko równość.",
+        "Oba obsługują wyłącznie równość.",
+        "B-tree służy wyłącznie do tekstu, Hash wyłącznie do liczb.",
+        "B-tree obsługuje równość i zakresy; Hash obsługuje równość."
+      ],
+      "correct_answer": "B-tree obsługuje równość i zakresy; Hash obsługuje równość.",
+      "explanation": "B-tree może wspierać np. price = 10 oraz price > 10. Hash obsługuje porównania równości, nie wyszukiwanie zakresu.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/indexes-types.html"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-166",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. W planie widzisz Seq Scan on orders. Co oznacza Seq Scan?",
+      "type": "one_choice",
+      "answers": [
+        "Odczyt wyłącznie klucza głównego w kolejności rosnącej.",
+        "Uszkodzenie indeksu wymagające REINDEX.",
+        "Sekwencyjny odczyt tabeli, bez użycia indeksu do tego odczytu.",
+        "Użycie indeksu typu Sequential."
+      ],
+      "correct_answer": "Sekwencyjny odczyt tabeli, bez użycia indeksu do tego odczytu.",
+      "explanation": "Seq Scan jest sposobem odczytu tabeli, a nie rodzajem indeksu. Tabela może mieć indeksy, mimo że plan ich tutaj nie używa.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/using-explain.html"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-167",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Tabela ma 20 wierszy i poprawny indeks B-tree. Zapytanie zwraca 19 wierszy, a planner wybiera Seq Scan. Który wniosek jest uzasadniony?",
+      "type": "one_choice",
+      "answers": [
+        "Trzeba zastąpić B-tree indeksem Hash, aby wymusić jego użycie.",
+        "Seq Scan może być tańszy; istnienie indeksu nie wymusza jego użycia.",
+        "Indeks na pewno jest uszkodzony.",
+        "PostgreSQL nie korzysta z indeksów, gdy zapytanie ma WHERE."
+      ],
+      "correct_answer": "Seq Scan może być tańszy; istnienie indeksu nie wymusza jego użycia.",
+      "explanation": "Przy małej tabeli lub odczycie dużej części danych bezpośredni skan może kosztować mniej niż przechodzenie przez indeks. Wybór planu zależy od oszacowanych kosztów.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/using-explain.html"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-168",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Które polecenie tworzy indeks Hash na kolumnie code tabeli items?",
+      "type": "one_choice",
+      "answers": [
+        "CREATE INDEX items_code_idx ON items USING hash (code);",
+        "CREATE HASH items_code_idx ON items (code);",
+        "CREATE INDEX items_code_idx ON items (hash = code);",
+        "CREATE INDEX items_code_idx ON items USING sequential (code);"
+      ],
+      "correct_answer": "CREATE INDEX items_code_idx ON items USING hash (code);",
+      "explanation": "Typ indeksu podaje się po USING. Samo CREATE INDEX bez tego wskazania wybrałoby B-tree.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/indexes-types.html"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-169",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Do czego przydaje się WITH RECURSIVE przy tabeli kategorii z kolumnami id i parent_id?",
+      "type": "one_choice",
+      "answers": [
+        "Wyłącznie do ponawiania zapytania po deadlocku.",
+        "Do automatycznego tworzenia indeksów na parent_id.",
+        "Do uruchamiania zapytania raz na sekundę.",
+        "Do przechodzenia przez kolejne poziomy potomków lub przodków."
+      ],
+      "correct_answer": "Do przechodzenia przez kolejne poziomy potomków lub przodków.",
+      "explanation": "Rekurencyjne CTE łączy wiersze początkowe z krokiem odwołującym się do poprzednio uzyskanych wierszy. To pasuje do hierarchii o nieznanej z góry głębokości.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-with.html#QUERIES-WITH-RECURSIVE"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-170",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Jaką wartość zwróci zapytanie?\n\n```sql\nWITH RECURSIVE nums(n) AS (\n  VALUES (1)\n  UNION ALL\n  SELECT n + 1 FROM nums WHERE n < 4\n)\nSELECT SUM(n) FROM nums;\n```",
+      "type": "one_choice",
+      "answers": [
+        "15.",
+        "Zapytanie nie zakończy się.",
+        "10.",
+        "6."
+      ],
+      "correct_answer": "10.",
+      "explanation": "Powstają wartości 1, 2, 3 i 4. Warunek sprawdza n przed dodaniem jedynki, więc 4 także trafia do wyniku. Suma wynosi 10.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-with.html#QUERIES-WITH-RECURSIVE"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-171",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Dlaczego poniższe zapytanie kończy się, mimo że krok ponownie zwraca 1?\n\n```sql\nWITH RECURSIVE nums(n) AS (\n  VALUES (1)\n  UNION\n  SELECT n FROM nums\n)\nSELECT n FROM nums;\n```",
+      "type": "one_choice",
+      "answers": [
+        "Każde CTE automatycznie dopisuje LIMIT 1.",
+        "UNION odrzuca powtórzony wiersz; brak nowych wierszy kończy iterację.",
+        "WITH RECURSIVE zawsze wykonuje dokładnie dwa kroki.",
+        "PostgreSQL ignoruje krok rekurencyjny bez WHERE."
+      ],
+      "correct_answer": "UNION odrzuca powtórzony wiersz; brak nowych wierszy kończy iterację.",
+      "explanation": "Wynikiem jest jeden wiersz z 1. UNION eliminuje duplikaty także względem poprzednich wyników. UNION ALL nie zapewniłoby tutaj zakończenia.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-with.html#QUERIES-WITH-RECURSIVE"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-172",
+      "origin": "variant"
+    },
+    {
+      "question": "PostgreSQL 17. Przechodzisz graf zawierający cykl. CTE zwraca (id, depth), a depth rośnie w każdym kroku. Czy zamiana UNION ALL na UNION zawsze usuwa problem cykli?",
+      "type": "one_choice",
+      "answers": [
+        "Nie; różne depth oznaczają różne wiersze. Trzeba wykrywać odwiedzone węzły lub użyć CYCLE.",
+        "Tak; UNION porównuje wyłącznie pierwszą kolumnę.",
+        "Tak; RECURSIVE automatycznie zatrzymuje powrót do tego samego id.",
+        "Nie; UNION w ogóle nie usuwa duplikatów w CTE."
+      ],
+      "correct_answer": "Nie; różne depth oznaczają różne wiersze. Trzeba wykrywać odwiedzone węzły lub użyć CYCLE.",
+      "explanation": "UNION porównuje całe wiersze. (7, 1) i (7, 3) są różne, mimo tego samego węzła. Rosnąca głębokość nie jest zabezpieczeniem przed cyklem.",
+      "sources": [
+        "https://www.postgresql.org/docs/17/queries-with.html#QUERIES-WITH-CYCLE"
+      ],
+      "section": "PostgreSQL",
+      "family": "python-173",
+      "origin": "variant"
     }
   ]
 }
