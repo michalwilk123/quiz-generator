@@ -6,15 +6,15 @@ export default function App() {
   return (
     <div className="flex min-h-dvh flex-col">
       <a className="skip-link" href="#main">
-        Skip to content
+        Przejdź do treści
       </a>
       <header className="site-header">
         <div className="shell flex h-12 items-center justify-between">
           <Link className="brand" to="/">
-            Quiz Generator
+            Generator quizów
           </Link>
           <Link className="text-sm" to="/configure">
-            Configure
+            Konfiguracja
           </Link>
         </div>
       </header>

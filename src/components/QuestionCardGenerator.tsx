@@ -1,4 +1,5 @@
 import type { Attempt, Question } from "../core";
+import QuestionText from "./QuestionText";
 
 type Props = {
   question: Question;
@@ -31,10 +32,17 @@ export default function QuestionCardGenerator({
     (question.correct_answer ? [question.correct_answer] : []);
   return (
     <section className="question" aria-labelledby={`question-${index}`}>
-      <h2 id={`question-${index}`} className="question-title">
-        <span className="muted mr-2">{index + 1}.</span>
-        {question.question}
-      </h2>
+      <h2 className="muted mb-2 text-sm">Pytanie {index + 1}</h2>
+      <div id={`question-${index}`} className="question-title">
+        <QuestionText text={question.question} />
+      </div>
+      {choice && (
+        <p className="muted mt-3 text-sm">
+          {question.type === "multi_choice"
+            ? "Zaznacz wszystkie poprawne odpowiedzi."
+            : "Wybierz jedną odpowiedź."}
+        </p>
+      )}
       <div className="mt-4">
         {choice ? (
           <fieldset
@@ -73,7 +81,7 @@ export default function QuestionCardGenerator({
         ) : question.type === "long_open" ? (
           <textarea
             aria-labelledby={`question-${index}`}
-            placeholder="Your answer"
+            placeholder="Twoja odpowiedź"
             rows={5}
             disabled={locked}
             value={typeof answer === "string" ? answer : ""}
@@ -82,7 +90,7 @@ export default function QuestionCardGenerator({
         ) : (
           <input
             aria-labelledby={`question-${index}`}
-            placeholder="Your answer"
+            placeholder="Twoja odpowiedź"
             disabled={locked}
             value={typeof answer === "string" ? answer : ""}
             onChange={(event) => onAnswer(event.target.value)}
@@ -103,17 +111,40 @@ export default function QuestionCardGenerator({
             }
           >
             {grade.fraction === null
-              ? "Awaiting your assessment"
-              : `${grade.fraction === 1 ? "Correct" : grade.fraction > 0 ? "Partially correct" : "Incorrect"} · ${Number(grade.earned.toFixed(2))} / ${grade.possible}`}
+              ? "Czeka na Twoją ocenę"
+              : `${grade.fraction === 1 ? "Poprawna" : grade.fraction > 0 ? "Częściowo poprawna" : "Niepoprawna"} · ${Number(grade.earned.toFixed(2))} / ${grade.possible}`}
           </p>
           <p className="muted mt-3 text-sm">
-            {choice ? "Correct answer" : "Model answer"}
+            {choice ? "Poprawna odpowiedź" : "Wzorcowa odpowiedź"}
           </p>
-          <p>{model.join("\n")}</p>
+          <QuestionText text={model.join("\n")} />
+          {question.explanation && (
+            <div className="mt-4">
+              <QuestionText text={question.explanation} />
+            </div>
+          )}
+          {question.sources?.length ? (
+            <details className="mt-4 text-sm">
+              <summary>Dokumentacja</summary>
+              <ul className="mt-2 space-y-2">
+                {question.sources.map((source) => (
+                  <li key={source}>
+                    <a href={source} target="_blank" rel="noreferrer">
+                      {new URL(source).hostname} —{" "}
+                      {new URL(source).pathname
+                        .split("/")
+                        .filter(Boolean)
+                        .at(-1) ?? "źródło"}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : null}
           {manual && !choice && (
             <label className="field mt-4">
               <span id={`assessment-label-${index}`} className="text-sm">
-                Assess your answer
+                Oceń swoją odpowiedź
               </span>
               <select
                 aria-labelledby={`assessment-label-${index}`}
@@ -121,11 +152,11 @@ export default function QuestionCardGenerator({
                 onChange={(event) => onGrade(Number(event.target.value))}
               >
                 <option value="" disabled>
-                  Choose a grade
+                  Wybierz ocenę
                 </option>
-                <option value="0">Incorrect — 0 points</option>
-                <option value="0.5">Partially correct — half points</option>
-                <option value="1">Correct — full points</option>
+                <option value="0">Niepoprawna — 0 punktów</option>
+                <option value="0.5">Częściowo poprawna — połowa punktów</option>
+                <option value="1">Poprawna — pełne punkty</option>
               </select>
             </label>
           )}

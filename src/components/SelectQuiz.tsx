@@ -10,7 +10,7 @@ export default function SelectQuiz() {
   const [shareLink, setShareLink] = useState("");
   const navigate = useNavigate();
   useEffect(() => {
-    document.title = "Configure exam";
+    document.title = "Konfiguracja testu";
   }, []);
   function update(patch: Partial<ExamConfig>) {
     setConfig((previous) => ({ ...previous, ...patch }));
@@ -52,15 +52,14 @@ export default function SelectQuiz() {
   }
   return (
     <div className="shell page-space">
-      <h1>Configure your exam</h1>
-      <p className="muted mt-2">
-        Choose quizzes and how often their questions appear.
-      </p>
+      <h1>Skonfiguruj test</h1>
+      <p className="muted mt-2">Wybierz quizy i proporcje losowanych pytań.</p>
       <form onSubmit={start} className="mt-8 space-y-8">
         <fieldset>
-          <legend className="mb-3 font-semibold">Quiz mix</legend>
+          <legend className="mb-3 font-semibold">Wybór quizów</legend>
           <p className="muted mb-4 text-sm">
-            Higher weights draw more questions. The mix is approximate.
+            Większa waga oznacza częstsze losowanie pytań z danego quizu.
+            Proporcje są przybliżone.
           </p>
           <div className="space-y-4">
             {quizConfig.map((bank) => {
@@ -81,9 +80,9 @@ export default function SelectQuiz() {
                   </label>
                   {selected && (
                     <label className="field w-20 shrink-0 text-xs">
-                      <span>Weight</span>
+                      <span>Waga</span>
                       <input
-                        aria-label={`${bank.name} weight`}
+                        aria-label={`${bank.name} — waga`}
                         type="number"
                         min="1"
                         max="1000"
@@ -104,7 +103,7 @@ export default function SelectQuiz() {
         </fieldset>
         <div className="grid gap-6 sm:grid-cols-2">
           <label className="field">
-            <span>Number of questions</span>
+            <span>Liczba pytań</span>
             <input
               required
               type="number"
@@ -125,11 +124,11 @@ export default function SelectQuiz() {
                   update({ durationMinutes: event.target.checked ? 10 : null })
                 }
               />
-              Time limit
+              Limit czasu
             </label>
             {config.durationMinutes !== null ? (
               <label className="field mt-2">
-                <span className="text-sm">Minutes (maximum 30)</span>
+                <span className="text-sm">Minuty (maksymalnie 30)</span>
                 <input
                   required
                   type="number"
@@ -143,16 +142,16 @@ export default function SelectQuiz() {
               </label>
             ) : (
               <p className="muted text-sm">
-                No timer. Finish when you’re ready.
+                Bez timera. Zakończ, kiedy będziesz gotowy.
               </p>
             )}
           </div>
         </div>
         <details>
-          <summary className="py-3 font-semibold">More options</summary>
+          <summary className="py-3 font-semibold">Więcej opcji</summary>
           <div className="mt-4 space-y-6">
             <label className="field">
-              <span id="page-size-label">Questions per page</span>
+              <span id="page-size-label">Pytań na stronie</span>
               <select
                 aria-labelledby="page-size-label"
                 value={config.pageSize}
@@ -168,16 +167,16 @@ export default function SelectQuiz() {
                 {["auto", 1, 5, 10, 20, "all"].map((value) => (
                   <option key={value} value={value}>
                     {value === "auto"
-                      ? "Auto — fewer written questions per page"
+                      ? "Automatycznie — mniej pytań opisowych na stronie"
                       : value === "all"
-                        ? "All questions"
+                        ? "Wszystkie pytania"
                         : value}
                   </option>
                 ))}
               </select>
             </label>
             <label className="field">
-              <span id="written-grading-label">Written-answer grading</span>
+              <span id="written-grading-label">Ocena odpowiedzi pisemnych</span>
               <select
                 aria-labelledby="written-grading-label"
                 aria-describedby="written-grading-help"
@@ -189,18 +188,22 @@ export default function SelectQuiz() {
                   })
                 }
               >
-                <option value="automatic">Automatic text matching</option>
+                <option value="automatic">
+                  Automatyczne porównanie tekstu
+                </option>
                 <option value="manual">
-                  Self-assessment against the model answer
+                  Samoocena na podstawie wzorcowej odpowiedzi
                 </option>
               </select>
               <span id="written-grading-help" className="muted text-sm">
-                Text matching compares wording; it can misjudge a correct
-                paraphrase.
+                Porównanie tekstu ocenia podobieństwo słów. Poprawna odpowiedź
+                sformułowana inaczej może zostać oceniona błędnie.
               </span>
             </label>
             <label className="field">
-              <span id="choice-scoring-label">Multiple-choice scoring</span>
+              <span id="choice-scoring-label">
+                Ocena pytań wielokrotnego wyboru
+              </span>
               <select
                 aria-labelledby="choice-scoring-label"
                 value={config.choiceScoring}
@@ -211,13 +214,15 @@ export default function SelectQuiz() {
                   })
                 }
               >
-                <option value="strict">All correct selections required</option>
-                <option value="partial">Allow partial credit</option>
+                <option value="strict">
+                  Wymagany pełny zestaw poprawnych odpowiedzi
+                </option>
+                <option value="partial">Przyznawaj punkty częściowe</option>
               </select>
             </label>
             <label className="field">
               <span id="penalty-label">
-                Wrong-answer penalty (fraction of question points)
+                Kara za błędną odpowiedź (część punktów za pytanie)
               </span>
               <input
                 aria-labelledby="penalty-label"
@@ -232,8 +237,8 @@ export default function SelectQuiz() {
                 }
               />
               <span id="penalty-help" className="muted text-sm">
-                0 means no penalty. Applies to choice questions; unanswered
-                questions earn zero.
+                0 oznacza brak kary. Dotyczy pytań wyboru; brak odpowiedzi daje
+                zero punktów.
               </span>
             </label>
             <label className="check-label">
@@ -244,16 +249,16 @@ export default function SelectQuiz() {
                   update({ useQuestionWeights: event.target.checked })
                 }
               />
-              Use question point values from the quiz files
+              Uwzględniaj wagi punktowe zapisane w pytaniach
             </label>
             <fieldset>
-              <legend className="font-medium">Question types</legend>
+              <legend className="font-medium">Rodzaje pytań</legend>
               {(
                 [
-                  ["long_open", "Long written answers"],
-                  ["short_open", "Short written answers"],
-                  ["one_choice", "Single choice"],
-                  ["multi_choice", "Multiple choice"],
+                  ["long_open", "Długie odpowiedzi opisowe"],
+                  ["short_open", "Krótkie odpowiedzi pisemne"],
+                  ["one_choice", "Jednokrotny wybór"],
+                  ["multi_choice", "Wielokrotny wybór"],
                 ] as const
               ).map(([type, label]) => (
                 <label key={type} className="check-label">
@@ -283,16 +288,17 @@ export default function SelectQuiz() {
         )}
         <div className="flex flex-wrap gap-3">
           <button className="button" type="submit">
-            Start exam
+            Rozpocznij test
           </button>
           <button className="button secondary" type="button" onClick={share}>
-            Copy exam link
+            Kopiuj link do testu
           </button>
         </div>
         {shareLink && (
           <label className="field">
             <span className="text-sm" role="status">
-              Exam link — save it for a fresh draw with these settings.
+              Link do testu — zapisz go, aby losować kolejne zestawy z tymi
+              ustawieniami.
             </span>
             <input
               readOnly
@@ -303,7 +309,7 @@ export default function SelectQuiz() {
         )}
       </form>
       <p className="mt-8 text-sm">
-        <Link to="/">Back to prepared exams</Link>
+        <Link to="/">Wróć do gotowych testów</Link>
       </p>
     </div>
   );

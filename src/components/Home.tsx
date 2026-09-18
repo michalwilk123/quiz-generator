@@ -5,7 +5,7 @@ import { encodeConfig, restoreAttempt } from "../core";
 
 export default function Home() {
   useEffect(() => {
-    document.title = "Quiz Generator";
+    document.title = "Generator quizów";
   }, []);
   let saved = null;
   let storageWarning = "";
@@ -13,13 +13,13 @@ export default function Home() {
     saved = restoreAttempt();
   } catch {
     storageWarning =
-      "Saved progress could not be restored. You can start a fresh exam below.";
+      "Nie udało się odtworzyć postępu. Możesz rozpocząć nowy test poniżej.";
   }
   return (
     <div className="shell page-space">
-      <h1>Choose your exam</h1>
+      <h1>Wybierz test</h1>
       <p className="muted mt-2">
-        A short practice session. A fresh set of questions each time.
+        Wybierz krótką naukę lub sprawdź się pod presją czasu.
       </p>
       {storageWarning && (
         <p role="status" className="muted mt-6 text-sm">
@@ -29,7 +29,7 @@ export default function Home() {
       {saved && saved.status !== "submitted" && (
         <p className="mt-6">
           <Link to={`/exam?config=${encodeConfig(saved.config)}`}>
-            Continue your saved attempt
+            Kontynuuj zapisany test
           </Link>
         </p>
       )}

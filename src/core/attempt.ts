@@ -23,7 +23,7 @@ export interface Attempt {
 }
 export async function createAttempt(
   config: ExamConfig = defaultConfig(),
-  title = "Practice exam",
+  title = "Test ćwiczeniowy",
   now: number | undefined = undefined,
   random = Math.random,
 ): Promise<Attempt> {
@@ -175,8 +175,6 @@ export function restoreAttempt(
       throw new Error();
     return expireAttempt(a, now);
   } catch {
-    throw new Error(
-      "Saved progress could not be restored. Start a new attempt.",
-    );
+    throw new Error("Nie udało się odtworzyć postępu. Rozpocznij nowy test.");
   }
 }

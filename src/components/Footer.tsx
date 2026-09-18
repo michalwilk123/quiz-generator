@@ -3,12 +3,12 @@ export default function Footer() {
     <footer className="shell py-6 text-center text-xs text-slate-400">
       <p>
         <a href="https://github.com/michalwilk123/quiz-generator">
-          Source code
+          Kod źródłowy
         </a>
-        <span aria-hidden="true"> · </span>Made by{" "}
+        <span aria-hidden="true"> · </span>Autor:{" "}
         <a href="https://github.com/michalwilk123">Michał Wilk</a>
         <span aria-hidden="true"> · </span>
-        <a href="mailto:michalwilk139@gmail.com">Contact</a>
+        <a href="mailto:michalwilk139@gmail.com">Kontakt</a>
       </p>
       <p className="mt-1">React, TypeScript &amp; Tailwind CSS</p>
     </footer>

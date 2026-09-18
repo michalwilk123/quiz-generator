@@ -36,12 +36,12 @@ export default function Quiz() {
     setError("");
     setWarning("");
     let config: ExamConfig;
-    let title = "Practice exam";
+    let title = "Test ćwiczeniowy";
     try {
       const params = new URLSearchParams(location.search);
       if (id) {
         const preset = preparedExams.find((exam) => exam.id === id);
-        if (!preset) throw Error("This prepared exam could not be found.");
+        if (!preset) throw Error("Nie znaleziono tego testu.");
         config = preset.config;
         title = preset.title;
       } else if (quiz) {
@@ -50,17 +50,14 @@ export default function Quiz() {
         setWarning(legacy.warnings.join(" "));
       } else {
         const encoded = params.get("config");
-        if (!encoded)
-          throw Error("This exam link is missing its configuration.");
+        if (!encoded) throw Error("W linku do testu brakuje konfiguracji.");
         config = decodeConfig(encoded);
       }
       let saved: Attempt | null = null;
       try {
         saved = restoreAttempt();
       } catch {
-        setWarning(
-          "Saved progress could not be restored. Starting a fresh attempt.",
-        );
+        setWarning("Nie udało się odtworzyć postępu. Rozpoczynam nowy test.");
       }
       const fresh = Boolean(location.state?.fresh);
       if (
@@ -106,12 +103,12 @@ export default function Quiz() {
   }, [id, quiz, location.key, location.search, location.state]);
   useEffect(() => {
     if (!attempt) return;
-    document.title = `${attempt.title} · Quiz Generator`;
+    document.title = `${attempt.title} · Generator quizów`;
     try {
       saveAttempt(attempt);
     } catch {
       setWarning(
-        "Progress could not be saved on this device. Keep this page open until you finish.",
+        "Nie można zapisać postępu na tym urządzeniu. Pozostaw tę stronę otwartą do końca testu.",
       );
     }
   }, [attempt]);
@@ -173,21 +170,21 @@ export default function Quiz() {
   if (error)
     return (
       <div className="shell page-space">
-        <h1>Unable to open exam</h1>
+        <h1>Nie można otworzyć testu</h1>
         <p role="alert" className="mt-4">
           {error}
         </p>
         <p className="mt-6">
-          <Link to="/configure">Adjust the configuration</Link>
+          <Link to="/configure">Zmień konfigurację</Link>
           <span className="mx-3">·</span>
-          <Link to="/">Back to exams</Link>
+          <Link to="/">Wróć do testów</Link>
         </p>
       </div>
     );
   if (!attempt || !score)
     return (
       <div className="shell page-space" role="status">
-        Loading questions…
+        Wczytywanie pytań…
       </div>
     );
   const revealed = attempt.status === "submitted";
@@ -202,7 +199,9 @@ export default function Quiz() {
           0,
           Math.ceil(
             (attempt.deadline -
-              (revealed ? (attempt.submittedAt ?? now) : now)) /
+              (revealed
+                ? (attempt.submittedAt ?? now)
+                : Math.max(attempt.startedAt, now))) /
               1000,
           ),
         );
@@ -217,30 +216,30 @@ export default function Quiz() {
           <div className="min-w-0">
             <p className="text-sm">
               {revealed
-                ? "Review answers"
-                : `${answered} / ${attempt.questions.length} answered`}
+                ? "Przegląd odpowiedzi"
+                : `Odpowiedzi: ${answered} / ${attempt.questions.length}`}
             </p>
             <p className="muted text-xs">
-              Page {page + 1} of {attempt.pages.length}
+              Strona {page + 1} z {attempt.pages.length}
             </p>
           </div>
           {seconds !== null && (
             <span
               className={`timer ${seconds < 60 && !revealed ? "urgent" : ""}`}
               role="timer"
-              aria-label={`${Math.floor(seconds / 60)} minutes ${seconds % 60} seconds remaining`}
+              aria-label={`Pozostało ${Math.floor(seconds / 60)} min ${seconds % 60} s`}
             >
               {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
             </span>
           )}
           {!revealed && (
             <button className="button text-sm" onClick={finish}>
-              {expired ? "View results" : "Finish exam"}
+              {expired ? "Zobacz wyniki" : "Zakończ test"}
             </button>
           )}
           {revealed && (
             <button className="button text-sm" onClick={retry}>
-              Try again
+              Spróbuj ponownie
             </button>
           )}
         </div>
@@ -254,30 +253,31 @@ export default function Quiz() {
         )}
         {expired && !revealed && (
           <p role="status" className="mt-5 text-amber-200">
-            Time is up. Your answers are locked. Open results when you’re ready.
+            Czas minął. Odpowiedzi są zablokowane. Możesz teraz przejść do
+            wyników.
           </p>
         )}
         {revealed && (
-          <section className="result-enter mt-6" aria-label="Exam results">
+          <section className="result-enter mt-6" aria-label="Wyniki testu">
             <h2 className="text-2xl">
               {score.pending
-                ? `${Number(score.earned.toFixed(2))} points so far`
-                : `${Number(score.earned.toFixed(2))} / ${score.possible} points · ${Math.round(score.percentage ?? 0)}%`}
+                ? `Zdobyte punkty: ${Number(score.earned.toFixed(2))}`
+                : `${Number(score.earned.toFixed(2))} / ${score.possible} pkt · ${Math.round(score.percentage ?? 0)}%`}
             </h2>
             <p className="muted mt-2">
               {score.pending
-                ? `${score.pending} written ${score.pending === 1 ? "answer needs" : "answers need"} your assessment below.`
+                ? `Odpowiedzi do samodzielnej oceny: ${score.pending}. Oceń je poniżej.`
                 : score.percentage === 100
-                  ? "Every question correct. Well done!"
-                  : "Review your answers below, then try a fresh set of questions."}
+                  ? "Wszystkie odpowiedzi poprawne. Brawo!"
+                  : "Sprawdź odpowiedzi poniżej, a potem spróbuj kolejnego zestawu."}
             </p>
             {attempt.config.writtenGrading === "automatic" &&
               attempt.questions.some((question) =>
                 question.type.endsWith("open"),
               ) && (
                 <p className="muted mt-2 text-sm">
-                  Written answers are scored by text similarity, which can
-                  misjudge a correct paraphrase.
+                  Odpowiedzi pisemne oceniono przez porównanie tekstu. Poprawna
+                  odpowiedź sformułowana inaczej może zostać oceniona błędnie.
                 </p>
               )}
           </section>
@@ -310,7 +310,7 @@ export default function Quiz() {
           ))}
         </div>
         <nav
-          aria-label="Question pages"
+          aria-label="Strony pytań"
           className="mt-10 flex items-center justify-between gap-3"
         >
           {attempt.pages.length > 1 ? (
@@ -320,7 +320,7 @@ export default function Quiz() {
                 disabled={page === 0}
                 onClick={() => move(page - 1)}
               >
-                Previous
+                Poprzednia
               </button>
               <span className="muted text-sm">
                 {page + 1} / {attempt.pages.length}
@@ -330,19 +330,19 @@ export default function Quiz() {
                 disabled={page >= attempt.pages.length - 1}
                 onClick={() => move(page + 1)}
               >
-                Next
+                Następna
               </button>
             </>
           ) : null}
         </nav>
         {!revealed && (
           <button className="button mt-6" onClick={finish}>
-            {expired ? "View results" : "Finish exam"}
+            {expired ? "Zobacz wyniki" : "Zakończ test"}
           </button>
         )}
         {revealed && (
           <p className="mt-8">
-            <Link to="/">Back to exams</Link>
+            <Link to="/">Wróć do testów</Link>
           </p>
         )}
       </div>

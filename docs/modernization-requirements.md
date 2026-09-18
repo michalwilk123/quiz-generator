@@ -3,7 +3,7 @@
 ## Agreed requirements
 
 - Improve the existing React application incrementally; preserve repository-managed question files and static hosting.
-- Mobile is the primary device; interface language is English.
+- Mobile is the primary device; interface language is Polish (updated with the Python bank).
 - Preserve navy background, muted light text, teal accents, and straightforward question presentation. Migrate Chakra styling to Tailwind and accessible native controls. Keep a smaller credits footer.
 - Minimal functional UI. No decorative pills, dashboards, or pass thresholds.
 - Home lists prepared exams with titles, descriptions, and Start actions. Prepared configurations are defined in a TypeScript file. The full configuration editor is accessed separately.

@@ -34,7 +34,7 @@ export function defaultConfig(subjectId = "isp"): ExamConfig {
 export function validateConfig(value: unknown): ExamConfig {
   const c = value as ExamConfig;
   if (!c || c.version !== 1)
-    throw new Error("This exam configuration version is not supported.");
+    throw new Error("Ta wersja konfiguracji testu nie jest obsługiwana.");
   if (
     !Array.isArray(c.subjects) ||
     !c.subjects.length ||
@@ -48,29 +48,29 @@ export function validateConfig(value: unknown): ExamConfig {
     ) ||
     new Set(c.subjects.map((s) => s.id)).size !== c.subjects.length
   )
-    throw new Error("Choose at least one quiz with a positive weight.");
+    throw new Error("Wybierz przynajmniej jeden quiz z dodatnią wagą.");
   if (
     c.questionCount !== "all" &&
     (!Number.isInteger(c.questionCount) ||
       c.questionCount < 1 ||
       c.questionCount > 10000)
   )
-    throw new Error("Choose between 1 and 10,000 questions.");
+    throw new Error("Wybierz od 1 do 10 000 pytań.");
   if (
     c.durationMinutes !== null &&
     (!Number.isFinite(c.durationMinutes) ||
       c.durationMinutes < 1 ||
       c.durationMinutes > 30)
   )
-    throw new Error("The timer must be between 1 and 30 minutes.");
+    throw new Error("Limit czasu musi wynosić od 1 do 30 minut.");
   if (!["auto", "all", 1, 5, 10, 20].includes(c.pageSize))
-    throw new Error("Invalid questions per page.");
+    throw new Error("Nieprawidłowa liczba pytań na stronie.");
   if (
     !Array.isArray(c.questionTypes) ||
     !c.questionTypes.length ||
     c.questionTypes.some((t) => !QUESTION_TYPES.includes(t))
   )
-    throw new Error("Choose at least one supported question type.");
+    throw new Error("Wybierz przynajmniej jeden rodzaj pytań.");
   if (
     !["strict", "partial"].includes(c.choiceScoring) ||
     !["automatic", "manual"].includes(c.writtenGrading) ||
@@ -79,7 +79,7 @@ export function validateConfig(value: unknown): ExamConfig {
     c.wrongAnswerPenalty < 0 ||
     c.wrongAnswerPenalty > 1
   )
-    throw new Error("Invalid grading settings.");
+    throw new Error("Nieprawidłowe ustawienia oceniania.");
   return structuredClone(c);
 }
 // Short keys keep a single shareable value compact; v1 never stores bank indexes or question counts from the files.
@@ -134,7 +134,7 @@ export function decodeConfig(encoded: string): ExamConfig {
     });
   } catch {
     throw new Error(
-      "This configuration link is invalid or uses an unsupported version.",
+      "Link konfiguracji jest nieprawidłowy lub używa nieobsługiwanej wersji.",
     );
   }
 }
@@ -144,14 +144,14 @@ export function decodeLegacyConfig(
 ): { config: ExamConfig; warnings: string[] } {
   const config = defaultConfig(subjectId);
   const warnings = [
-    "This older link now uses fresh random questions and automatically saves progress.",
+    "Ten starszy link losuje teraz nowe pytania i automatycznie zapisuje postęp.",
   ];
   const options = params.getAll("conf");
   if (options.some((v) => !/^[0-7]$/.test(v)))
-    throw new Error("This older link contains unsupported options.");
+    throw new Error("Ten starszy link zawiera nieobsługiwane opcje.");
   const types = params.getAll("qtype");
   if (types.some((v) => !/^[0-3]$/.test(v)))
-    throw new Error("This older link contains unsupported question types.");
+    throw new Error("Ten starszy link zawiera nieobsługiwane rodzaje pytań.");
   if (types.length)
     config.questionTypes = types.map((v) => QUESTION_TYPES[Number(v)]);
   const amount = params.get("amount");
@@ -161,10 +161,10 @@ export function decodeLegacyConfig(
   config.pageSize = "all";
   if (options.includes("5"))
     warnings.push(
-      "The old elapsed-time display has been replaced by an optional countdown. This imported exam is untimed.",
+      "Dawny licznik upływu czasu zastąpiono opcjonalnym odliczaniem. Ten importowany test nie ma limitu czasu.",
     );
   warnings.push(
-    "Written answers now use normalized text matching; long answers can receive similarity-based partial credit.",
+    "Odpowiedzi pisemne są teraz porównywane po normalizacji tekstu; długie odpowiedzi mogą otrzymać punkty częściowe za podobieństwo.",
   );
   return { config: validateConfig(config), warnings };
 }

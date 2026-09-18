@@ -28,6 +28,10 @@ Edit the existing JSON banks in `src/quizes/` and register banks in `src/quiz_co
 
 Prepared exams live in `src/prepared_exams.ts`. The initial ISP and ZSBD presets each draw five questions with no timer. Their links follow the latest configuration in that file. The configuration page can mix existing banks using relative weights and generates a single versioned, URL-safe configuration value. Custom links preserve settings and draw fresh questions; they do not encode a fixed question selection. Keep referenced bank IDs available for old links to keep working.
 
+## Python practice bank
+
+The Polish **Programowanie python - politechnika gdanska** bank adds 201 explained questions and two presets: six untimed questions for learning, or 30 questions in 20 minutes for verification. The interface is Polish. Existing ISP/ZSBD presets and question banks remain available. See [bank notes](docs/python-bank.md) for content, sources, open design tasks, and the optional diversity metadata.
+
 ## Attempts
 
 Questions are drawn without repetition within an attempt and shuffled. Retrying draws again; questions may overlap with a previous attempt. Progress is saved in the current browser. Refreshing restores the attempt, including its original deadline. A new device or browser starts a new attempt.

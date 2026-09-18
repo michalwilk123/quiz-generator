@@ -87,7 +87,7 @@ describe("configuration links", () => {
       useQuestionWeights: true,
       durationMinutes: null,
     });
-    expect(warnings.some((w) => w.includes("elapsed-time"))).toBe(true);
+    expect(warnings.some((w) => w.includes("licznik upływu czasu"))).toBe(true);
   });
 });
 describe("banks, sampling and pagination", () => {
@@ -97,7 +97,7 @@ describe("banks, sampling and pagination", () => {
       expect(b.quiz_elements.length).toBeGreaterThan(0);
       expect(Object.isFrozen(b.quiz_elements[0])).toBe(true);
     }
-    await expect(loadBank("missing")).rejects.toThrow("no longer available");
+    await expect(loadBank("missing")).rejects.toThrow("nie jest dostępny");
   });
   it("reallocates exhausted weights, samples uniquely, and preserves sources", () => {
     const banks = [bank("a", 1), bank("b", 3)];
@@ -115,7 +115,7 @@ describe("banks, sampling and pagination", () => {
     expect(JSON.stringify(banks)).toBe(before);
     expect(() =>
       sampleQuestions({ ...config, questionCount: 5 }, banks),
-    ).toThrow("Only 4");
+    ).toThrow("Dostępne pytania pasujące do ustawień: 4");
   });
   it("respects filters and uses less space for open questions in auto mode", () => {
     const qs = [...bank("long", 5).quiz_elements];
@@ -128,7 +128,7 @@ describe("banks, sampling and pagination", () => {
       sampleQuestions({ ...defaultConfig(), questionTypes: ["one_choice"] }, [
         bank("a", 5),
       ]),
-    ).toThrow("Only 0");
+    ).toThrow("Dostępne pytania pasujące do ustawień: 0");
   });
 });
 describe("attempt deadline, restore and frozen answers", () => {
@@ -170,7 +170,7 @@ describe("attempt deadline, restore and frozen answers", () => {
     saveAttempt(assessed, store);
     expect(restoreAttempt(store)).toEqual(assessed);
     store.setItem("", JSON.stringify({ ...assessed, answers: [] }));
-    expect(() => restoreAttempt(store)).toThrow("could not be restored");
+    expect(() => restoreAttempt(store)).toThrow("Nie udało się odtworzyć");
   });
 });
 describe("grading", () => {
