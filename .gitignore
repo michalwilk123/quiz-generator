@@ -1,9 +1,6 @@
-
 /node_modules
+/dist
 /.yarn
-.yarnrc.yml
-
-# /src/quizes
-# /src/quiz_config.ts
-dist
-/assets
+*.tsbuildinfo
+/playwright-report
+/test-results

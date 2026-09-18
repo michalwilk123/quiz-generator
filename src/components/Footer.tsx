@@ -1,53 +1,16 @@
-import { Flex, Link, Stack, Text } from "@chakra-ui/react";
-import React from "react";
-
-const Footer = () => {
+export default function Footer() {
   return (
-    <Flex
-      mt="20px"
-      py={{ base: "10px", md: "13px" }}
-      width="100%"
-      height="150px"
-      bgColor="gray.900"
-      mb="0px"
-      color="whiteAlpha.800"
-    >
-      <Stack margin="auto" textAlign="center">
-        <Text>
-          <Link
-            href="https://github.com/michalwilk123/quiz-generator"
-            color="teal"
-          >
-            Source code
-          </Link>
-        </Text>
-        <Text>
-          Made with{" "}
-          <Link
-            textDecoration="underline"
-            href="https://www.typescriptlang.org/"
-          >
-            TypeScript
-          </Link>
-          ,{" "}
-          <Link textDecoration="underline" href="https://chakra-ui.com/">
-            Chakra UI
-          </Link>{" "}
-          and{" "}
-          <Link textDecoration="underline" href="https://reactjs.org/">
-            React
-          </Link>{" "}
-          by{" "}
-          <Link href="https://github.com/michalwilk123" color="teal">
-            Michał Wilk
-          </Link>
-        </Text>
-        <Link href="mailto:michalwilk139@gmail.com" color="teal">
-          Contact
-        </Link>
-      </Stack>
-    </Flex>
+    <footer className="shell py-6 text-center text-xs text-slate-400">
+      <p>
+        <a href="https://github.com/michalwilk123/quiz-generator">
+          Source code
+        </a>
+        <span aria-hidden="true"> · </span>Made by{" "}
+        <a href="https://github.com/michalwilk123">Michał Wilk</a>
+        <span aria-hidden="true"> · </span>
+        <a href="mailto:michalwilk139@gmail.com">Contact</a>
+      </p>
+      <p className="mt-1">React, TypeScript &amp; Tailwind CSS</p>
+    </footer>
   );
-};
-
-export default Footer;
+}

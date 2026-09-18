@@ -1,8 +1,9 @@
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  test: { include: ["src/**/*.test.ts"] },
   base: "/quiz-generator/",
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
 });

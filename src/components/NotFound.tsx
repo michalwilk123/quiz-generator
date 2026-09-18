@@ -1,16 +1,9 @@
-import { Center, Heading } from "@chakra-ui/react";
-import React from "react";
-
-const NotFound = () => {
-  document.title = "404 - not found";
-
+import { Link } from "react-router-dom";
+export default function NotFound() {
   return (
-    <Center width="100%" mt="20px">
-      <Heading color="whiteAlpha.800" size="3xl">
-        404 Page not Found
-      </Heading>
-    </Center>
+    <div className="shell py-12">
+      <h1>Page not found</h1>
+      <Link to="/">Choose an exam</Link>
+    </div>
   );
-};
-
-export default NotFound;
+}

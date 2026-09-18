@@ -1,29 +1,26 @@
-import { ChakraProvider, Heading } from "@chakra-ui/react";
-import React, { Suspense } from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter, Route, Routes } from "react-router-dom";
+import App from "./App";
+import Quiz from "./components/Quiz";
+import SelectQuiz from "./components/SelectQuiz";
+import Home from "./components/Home";
+import NotFound from "./components/NotFound";
 import "./index.css";
 
-const Quiz = React.lazy(() => import("./components/Quiz"));
-const SelectQuiz = React.lazy(() => import("./components/SelectQuiz"));
-const NotFound = React.lazy(() => import("./components/NotFound"));
-const App = React.lazy(() => import("./App"));
-
-const container: any = document.getElementById("root");
-const root = createRoot(container);
-
-root.render(
-  <ChakraProvider>
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
     <HashRouter>
-      <Suspense fallback={<Heading size="xl">Loading...</Heading>}>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<SelectQuiz />} />
-            <Route path="/quizes/:quiz" element={<Quiz />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<Home />} />
+          <Route path="configure" element={<SelectQuiz />} />
+          <Route path="exam/:id" element={<Quiz />} />
+          <Route path="exam" element={<Quiz />} />
+          <Route path="quizes/:quiz" element={<Quiz />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
     </HashRouter>
-  </ChakraProvider>
+  </StrictMode>,
 );

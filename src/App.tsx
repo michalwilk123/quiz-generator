@@ -1,30 +1,27 @@
-import { Box, Flex, Heading, HStack, Spacer } from "@chakra-ui/react";
-import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import Footer from "./components/Footer";
 import "./App.css";
 
-const Footer = React.lazy(() => import("./components/Footer"));
-
-const App = () => {
+export default function App() {
   return (
-    <Flex direction="column" minH="100vh">
-      <HStack width="100%" mb="20px" py="20px" px="40px" bgColor="gray.900">
-        <Box alignItems="center">
-          <Link to="/">
-            <Heading size="xl" textColor="whiteAlpha.800">
-              Quiz Generator
-            </Heading>
+    <div className="flex min-h-dvh flex-col">
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <header className="site-header">
+        <div className="shell flex h-12 items-center justify-between">
+          <Link className="brand" to="/">
+            Quiz Generator
           </Link>
-        </Box>
-        <Spacer />
-      </HStack>
-      <Flex width="100%" height="100%">
+          <Link className="text-sm" to="/configure">
+            Configure
+          </Link>
+        </div>
+      </header>
+      <main id="main" className="flex-1">
         <Outlet />
-      </Flex>
-      <Spacer />
+      </main>
       <Footer />
-    </Flex>
+    </div>
   );
-};
-
-export default App;
+}
