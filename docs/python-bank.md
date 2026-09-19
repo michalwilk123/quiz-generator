@@ -1,6 +1,6 @@
 # Programowanie python - politechnika gdanska
 
-Autorski bank ćwiczeniowy: 214 pytań, w tym 66 zagadnień z przekazanego materiału oraz 148 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
+Autorski bank ćwiczeniowy: 239 pytań, w tym 66 zagadnień z przekazanego materiału oraz 173 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
 
 ## Dwie konfiguracje
 
@@ -63,3 +63,16 @@ Pytania rozróżniają klasyczne polecenie import od nowszych mechanizmów gener
 ## Podstawy PostgreSQL
 
 13 dodatkowych pytań: cztery o WHERE/HAVING i agregację, pięć o B-tree, Hash oraz sequential scan, cztery o WITH RECURSIVE, warunek zakończenia i cykle. Zakres indeksów obejmuje podstawowe rozróżnienia bez katalogu zaawansowanych typów. Pytania należą do obecnego działu PostgreSQL i korzystają z obu presetów.
+
+## Tematy z rozmów rekrutacyjnych
+
+25 pytań na podstawie przeglądu pytań z rozmów na stanowisko Python backend developer w źródłach polskich, angielskich, rosyjskich, ukraińskich, niemieckich, francuskich, hiszpańskich i portugalskich. Wybrano tematy powtarzające się w kilku językach, których baza wcześniej nie obejmowała:
+
+- 4 pytania o `is` i `==`: cache małych liczb, `sys.intern`, przeciążone `__eq__` i ostrzeżenie SyntaxWarning dla `is` z literałem.
+- 4 pytania o deskryptory danych i niedanych: wzorzec cached_property, wiązanie w `staticmethod` i `classmethod`, deskryptor zapisany w instancji.
+- 4 pytania o `__slots__`: brak `__dict__`, podklasa bez slotów, konflikt ze zmienną klasy, `weakref` i `cached_property`.
+- 4 pytania o pamięć: zliczanie referencji, cykliczny GC i PEP 442, `WeakValueDictionary`, typy obsługujące słabe referencje.
+- 4 pytania o `itertools.groupby`, `functools.singledispatch` i `functools.partial`.
+- 5 pytań o atomowość mimo GIL: `counter += 1` w wątkach, które operacje wymagają blokady, poprawna naprawa, wyścig w asyncio przy `await` i build free-threaded.
+
+22 przykłady z kodem wykonano na CPython 3.12.3. Pytania o wątki nie podają konkretnego wyniku niedeterministycznego programu, tylko to, co interpreter gwarantuje. Pytanie o build free-threaded wprost wskazuje Pythona 3.13 lub 3.14.

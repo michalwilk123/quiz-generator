@@ -3930,6 +3930,484 @@
       "section": "PostgreSQL",
       "family": "python-173",
       "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Co wypisze program?\n```python\na = int(\"256\")\nb = int(\"256\")\nx = int(\"257\")\ny = int(\"257\")\nprint(a is b, x is y, x == y)\n```",
+      "type": "one_choice",
+      "answers": [
+        "True True True",
+        "True False True",
+        "False False True",
+        "True False False"
+      ],
+      "correct_answer": "True False True",
+      "explanation": "CPython trzyma gotowe obiekty małych liczb całkowitych od -5 do 256, więc obie nazwy wskazują ten sam obiekt 256. int(\"257\") tworzy w czasie działania dwa osobne obiekty o równej wartości. is porównuje tożsamość, == wartość. Cache małych liczb to szczegół implementacji, nie gwarancja języka.",
+      "sources": [
+        "https://docs.python.org/3.12/c-api/long.html#c.PyLong_FromLong",
+        "https://docs.python.org/3.12/reference/expressions.html#is-not"
+      ],
+      "section": "Python",
+      "family": "python-174",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nclass Anything:\n    def __eq__(self, other):\n        return True\n\na = Anything()\nprint(a == None, a is None)\n```",
+      "type": "one_choice",
+      "answers": [
+        "True True",
+        "False False",
+        "True False",
+        "False True"
+      ],
+      "correct_answer": "True False",
+      "explanation": "== wywołuje __eq__ lewego operandu, a ta klasa zawsze zwraca True. is sprawdza tożsamość i nie da się go przeciążyć. Dlatego PEP 8 zaleca x is None: wynik nie zależy od __eq__ badanego obiektu.",
+      "sources": [
+        "https://docs.python.org/3.12/reference/datamodel.html#object.__eq__",
+        "https://peps.python.org/pep-0008/#programming-recommendations"
+      ],
+      "section": "Python",
+      "family": "python-175",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Które stwierdzenia o poniższych napisach są prawdziwe?\n```python\nimport sys\ns1 = \"hello\"\ns3 = \"\".join([\"hel\", \"lo\"])\nprint(s1 == s3, s1 is s3, sys.intern(s1) is sys.intern(s3))\n```",
+      "type": "multi_choice",
+      "answers": [
+        "s1 == s3 jest True.",
+        "Język gwarantuje, że s1 is s3 jest True, bo oba napisy mają tę samą treść.",
+        "sys.intern(s1) is sys.intern(s3) jest True.",
+        "is jest bezpiecznym sposobem porównywania treści napisów, bo CPython internuje każdy napis."
+      ],
+      "correct_answers": [
+        "s1 == s3 jest True.",
+        "sys.intern(s1) is sys.intern(s3) jest True."
+      ],
+      "explanation": "s3 powstaje w czasie działania, więc zwykle jest osobnym obiektem; w CPythonie 3.12 s1 is s3 daje tu False. sys.intern zwraca jeden wspólny obiekt dla równych napisów. Automatyczne internowanie obejmuje tylko część napisów i jest szczegółem implementacji, więc treść porównuje się przez ==.",
+      "sources": [
+        "https://docs.python.org/3.12/library/sys.html#sys.intern",
+        "https://docs.python.org/3.12/reference/expressions.html#is-not"
+      ],
+      "section": "Python",
+      "family": "python-176",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co zrobi interpreter podczas kompilacji i wykonania tego pliku?\n```python\ndef check(n):\n    return n is 1000\n\nprint(check(int(\"1000\")))\n```",
+      "type": "one_choice",
+      "answers": [
+        "Zgłosi SyntaxError i nie uruchomi programu.",
+        "Wyświetli SyntaxWarning dotyczące is z literałem, a następnie uruchomi program.",
+        "Uruchomi program bez żadnego komunikatu, bo is i == dla int działają tak samo.",
+        "Zgłosi TypeError, bo is nie przyjmuje literałów."
+      ],
+      "correct_answer": "Wyświetli SyntaxWarning dotyczące is z literałem, a następnie uruchomi program.",
+      "explanation": "Od Pythona 3.8 kompilator ostrzega przed is z literałem, np. \"is\" with 'int' literal. Did you mean \"==\"?. To tylko ostrzeżenie, więc kod działa, ale wynik porównania zależy od tożsamości obiektów, a nie od wartości.",
+      "sources": [
+        "https://docs.python.org/3.12/whatsnew/3.8.html#changes-in-python-behavior",
+        "https://docs.python.org/3.12/library/exceptions.html#SyntaxWarning"
+      ],
+      "section": "Python",
+      "family": "python-177",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nclass Lazy:\n    def __init__(self, func):\n        self.func = func\n    def __set_name__(self, owner, name):\n        self.name = name\n    def __get__(self, obj, owner=None):\n        if obj is None:\n            return self\n        print(\"compute\")\n        value = self.func(obj)\n        obj.__dict__[self.name] = value\n        return value\n\nclass C:\n    @Lazy\n    def x(self):\n        return 42\n\nc = C()\nprint(c.x)\nprint(c.x)\n```",
+      "type": "one_choice",
+      "answers": [
+        "compute, 42, compute, 42",
+        "compute, 42, 42",
+        "42, 42",
+        "RecursionError"
+      ],
+      "correct_answer": "compute, 42, 42",
+      "explanation": "Lazy definiuje tylko __get__, więc jest deskryptorem niedanych. Pierwszy odczyt wykonuje obliczenie i zapisuje wynik w __dict__ instancji. Przy drugim odczycie wpis instancji ma pierwszeństwo przed deskryptorem niedanych, więc __get__ nie jest wywoływane. Na tym mechanizmie opiera się functools.cached_property.",
+      "sources": [
+        "https://docs.python.org/3.12/howto/descriptor.html#descriptor-protocol",
+        "https://docs.python.org/3.12/library/functools.html#functools.cached_property"
+      ],
+      "section": "Python",
+      "family": "python-178",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Deskryptor Lazy ma tu także metodę __set__. Co wypisze program?\n```python\nclass Lazy:\n    def __init__(self, func):\n        self.func = func\n    def __set_name__(self, owner, name):\n        self.name = name\n    def __get__(self, obj, owner=None):\n        if obj is None:\n            return self\n        print(\"compute\")\n        value = self.func(obj)\n        obj.__dict__[self.name] = value\n        return value\n    def __set__(self, obj, value):\n        obj.__dict__[self.name] = value\n\nclass C:\n    @Lazy\n    def x(self):\n        return 42\n\nc = C()\nprint(c.x)\nprint(c.x)\n```",
+      "type": "one_choice",
+      "answers": [
+        "compute, 42, 42",
+        "compute, 42, compute, 42",
+        "42, 42",
+        "AttributeError przy drugim odczycie"
+      ],
+      "correct_answer": "compute, 42, compute, 42",
+      "explanation": "Metoda __set__ sprawia, że Lazy staje się deskryptorem danych. Deskryptor danych wygrywa z wpisem w __dict__ instancji, więc każdy odczyt znowu wywołuje __get__. Zapis do __dict__ istnieje, ale nie skraca wyszukiwania.",
+      "sources": [
+        "https://docs.python.org/3.12/howto/descriptor.html#overview-of-descriptor-invocation",
+        "https://docs.python.org/3.12/reference/datamodel.html#invoking-descriptors"
+      ],
+      "section": "Python",
+      "family": "python-179",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nclass A:\n    @staticmethod\n    def s(*args):\n        return len(args)\n    @classmethod\n    def c(cls, *args):\n        return cls.__name__, len(args)\n\nclass B(A):\n    pass\n\nprint(B().s(1), B().c(1), B.c())\n```",
+      "type": "one_choice",
+      "answers": [
+        "2 ('A', 1) ('A', 0)",
+        "1 ('B', 1) ('B', 0)",
+        "2 ('B', 1) ('B', 0)",
+        "TypeError przy B.c()"
+      ],
+      "correct_answer": "1 ('B', 1) ('B', 0)",
+      "explanation": "staticmethod i classmethod to deskryptory. staticmethod zwraca funkcję bez wiązania, więc instancja nie trafia do args. classmethod wiąże klasę, przez którą nastąpił odczyt: przy B() i B jest to B, nie klasa definiująca A.",
+      "sources": [
+        "https://docs.python.org/3.12/howto/descriptor.html#static-methods",
+        "https://docs.python.org/3.12/howto/descriptor.html#class-methods"
+      ],
+      "section": "Python",
+      "family": "python-180",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nclass Ten:\n    def __get__(self, obj, owner=None):\n        return 10\n\nclass C:\n    a = Ten()\n\nc = C()\nc.b = Ten()\nprint(c.a, type(c.b).__name__)\n```",
+      "type": "one_choice",
+      "answers": [
+        "10 10",
+        "10 Ten",
+        "Ten Ten",
+        "AttributeError"
+      ],
+      "correct_answer": "10 Ten",
+      "explanation": "Protokół deskryptorów działa dla obiektów znalezionych w typie, czyli w klasie lub jej bazach. Obiekt Ten zapisany w słowniku instancji jest zwykłą wartością i odczyt zwraca go bez wywołania __get__.",
+      "sources": [
+        "https://docs.python.org/3.12/howto/descriptor.html#descriptor-protocol",
+        "https://docs.python.org/3.12/reference/datamodel.html#implementing-descriptors"
+      ],
+      "section": "Python",
+      "family": "python-181",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co nastąpi przy ostatniej instrukcji?\n```python\nclass P:\n    __slots__ = (\"x\", \"y\")\n    def __init__(self):\n        self.x = 1\n        self.y = 2\n\np = P()\np.z = 3\n```",
+      "type": "one_choice",
+      "answers": [
+        "Atrybut z zostanie dodany do __dict__ instancji.",
+        "AttributeError, bo instancja nie ma __dict__ i nie ma slotu z.",
+        "Atrybut z zostanie dodany do klasy P.",
+        "Instrukcja się wykona, ale z zniknie przy następnym odczycie."
+      ],
+      "correct_answer": "AttributeError, bo instancja nie ma __dict__ i nie ma slotu z.",
+      "explanation": "__slots__ rezerwuje miejsca tylko dla wymienionych nazw i domyślnie nie tworzy __dict__ instancji. Przypisanie nowej nazwy nie ma więc dokąd trafić. To źródło oszczędności pamięci i jednocześnie ograniczenie.",
+      "sources": [
+        "https://docs.python.org/3.12/reference/datamodel.html#slots"
+      ],
+      "section": "Python",
+      "family": "python-182",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nclass Base:\n    __slots__ = (\"x\",)\n\nclass Child(Base):\n    pass\n\nc = Child()\nc.z = 1\nprint(c.z, hasattr(c, \"__dict__\"))\n```",
+      "type": "one_choice",
+      "answers": [
+        "AttributeError przy c.z = 1",
+        "1 True",
+        "1 False",
+        "TypeError przy definicji Child"
+      ],
+      "correct_answer": "1 True",
+      "explanation": "Podklasa bez własnego __slots__ dostaje zwykły __dict__. Sloty z Base nadal działają dla x, ale oszczędność pamięci i blokada nowych atrybutów znikają. Każda klasa w hierarchii musi deklarować __slots__, żeby instancje nie miały __dict__.",
+      "sources": [
+        "https://docs.python.org/3.12/reference/datamodel.html#notes-on-using-slots"
+      ],
+      "section": "Python",
+      "family": "python-183",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co stanie się podczas wykonania definicji klasy? Nie tworzono jeszcze instancji.\n```python\nclass C:\n    __slots__ = (\"x\",)\n    x = 0\n```",
+      "type": "one_choice",
+      "answers": [
+        "Nic; x ma wartość domyślną 0 dla każdej instancji.",
+        "ValueError: nazwa x z __slots__ koliduje ze zmienną klasy.",
+        "Błąd dopiero przy pierwszym odczycie obj.x.",
+        "Zmienna klasy zostaje po cichu zastąpiona deskryptorem slotu."
+      ],
+      "correct_answer": "ValueError: nazwa x z __slots__ koliduje ze zmienną klasy.",
+      "explanation": "Każdy slot jest deskryptorem zapisanym w klasie pod tą samą nazwą. Zmienna klasy x zajęłaby to samo miejsce, więc tworzenie klasy kończy się ValueError. Wartość domyślną ustawia się w __init__.",
+      "sources": [
+        "https://docs.python.org/3.12/reference/datamodel.html#notes-on-using-slots"
+      ],
+      "section": "Python",
+      "family": "python-184",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Klasa ma __slots__ = (\"x\",), bez __weakref__ i bez __dict__. Które stwierdzenia są prawdziwe?\n```python\nimport weakref, functools\nclass C:\n    __slots__ = (\"x\",)\n    @functools.cached_property\n    def y(self):\n        return 1\nc = C()\nc.x = 1\nc.x = 5\nfor f in (lambda: weakref.ref(c), lambda: c.y):\n    try:\n        f()\n        print(\"ok\")\n    except TypeError:\n        print(\"TypeError\")\n```",
+      "type": "multi_choice",
+      "answers": [
+        "weakref.ref(obj) zgłosi TypeError.",
+        "Instancje zwykle zajmują mniej pamięci, bo nie mają osobnego słownika.",
+        "Wartości w slotach są niemutowalne; obj.x = 5 po utworzeniu zgłosi błąd.",
+        "functools.cached_property działa na takiej klasie bez zmian."
+      ],
+      "correct_answers": [
+        "weakref.ref(obj) zgłosi TypeError.",
+        "Instancje zwykle zajmują mniej pamięci, bo nie mają osobnego słownika."
+      ],
+      "explanation": "Bez __weakref__ w __slots__ instancja nie ma miejsca na słabe referencje. Brak __dict__ daje oszczędność pamięci, ale sloty nie zamrażają wartości: obj.x można zmieniać. cached_property zapisuje wynik w __dict__ instancji, więc bez niego zgłasza TypeError.",
+      "sources": [
+        "https://docs.python.org/3.12/reference/datamodel.html#slots",
+        "https://docs.python.org/3.12/library/functools.html#functools.cached_property"
+      ],
+      "section": "Python",
+      "family": "python-185",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Co wypisze program?\n```python\nclass R:\n    def __del__(self):\n        print(\"del\")\n\ndef f():\n    r = R()\n    print(\"a\")\n\nf()\nprint(\"b\")\n```",
+      "type": "one_choice",
+      "answers": [
+        "a, b, del",
+        "a, del, b",
+        "del, a, b",
+        "a, b; del nie wypisze się nigdy"
+      ],
+      "correct_answer": "a, del, b",
+      "explanation": "Podstawowym mechanizmem CPythona jest zliczanie referencji. Po wyjściu z f znika ostatnia referencja do obiektu, więc __del__ wykonuje się od razu, przed print(\"b\"). Specyfikacja języka tego nie gwarantuje; np. PyPy może zwolnić obiekt później, dlatego zasoby zamyka się przez with.",
+      "sources": [
+        "https://docs.python.org/3.12/reference/datamodel.html#object.__del__",
+        "https://docs.python.org/3.12/glossary.html#term-reference-count"
+      ],
+      "section": "Python",
+      "family": "python-186",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Co wypisze program?\n```python\nimport gc\nclass Node:\n    def __del__(self):\n        print(\"del\")\n\ngc.disable()\na = Node()\nb = Node()\na.other = b\nb.other = a\ndel a, b\nprint(\"after del\")\nprint(gc.collect() > 0)\nprint(\"end\")\n```",
+      "type": "one_choice",
+      "answers": [
+        "del, del, after del, True, end",
+        "after del, del, del, True, end",
+        "after del, True, end; __del__ nie wykona się dla cyklu",
+        "after del, end, del, del"
+      ],
+      "correct_answer": "after del, del, del, True, end",
+      "explanation": "Obiekty tworzą cykl, więc po del ich liczniki referencji nie spadają do zera. Przy wyłączonym automatycznym GC nic się nie dzieje aż do gc.collect(). Cykliczny GC wykrywa cykl, wywołuje __del__ i zwraca liczbę nieosiągalnych obiektów. Od Pythona 3.4 (PEP 442) cykle z __del__ też są sprzątane.",
+      "sources": [
+        "https://docs.python.org/3.12/library/gc.html#gc.collect",
+        "https://peps.python.org/pep-0442/"
+      ],
+      "section": "Python",
+      "family": "python-187",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Co wypisze program?\n```python\nimport weakref\nclass User:\n    pass\n\ncache = weakref.WeakValueDictionary()\nu = User()\ncache[1] = u\nprint(len(cache))\ndel u\nprint(len(cache))\n```",
+      "type": "one_choice",
+      "answers": [
+        "1 1",
+        "1 0",
+        "0 0",
+        "TypeError przy cache[1] = u"
+      ],
+      "correct_answer": "1 0",
+      "explanation": "WeakValueDictionary trzyma wartości przez słabe referencje, które nie zwiększają licznika. Po del u nie ma już silnej referencji, obiekt zostaje zwolniony i wpis znika ze słownika. Tak buduje się cache, który sam nie przedłuża życia obiektów.",
+      "sources": [
+        "https://docs.python.org/3.12/library/weakref.html#weakref.WeakValueDictionary"
+      ],
+      "section": "Python",
+      "family": "python-188",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Do których obiektów można bezpośrednio utworzyć weakref.ref(...)?\n```python\nimport weakref\nclass User:\n    pass\ndef f():\n    pass\nfor o in (User(), [], 5, f):\n    try:\n        weakref.ref(o)\n        print(\"ok\")\n    except TypeError:\n        print(\"TypeError\")\n```",
+      "type": "multi_choice",
+      "answers": [
+        "Instancja zwykłej klasy class User: pass",
+        "Lista []",
+        "Liczba całkowita 5",
+        "Funkcja zdefiniowana przez def"
+      ],
+      "correct_answers": [
+        "Instancja zwykłej klasy class User: pass",
+        "Funkcja zdefiniowana przez def"
+      ],
+      "explanation": "Słabe referencje obsługują m.in. instancje klas użytkownika i funkcje. Wbudowane list i dict nie obsługują ich bezpośrednio, choć można je obejść podklasą. int i tuple nie obsługują ich nawet w podklasach.",
+      "sources": [
+        "https://docs.python.org/3.12/library/weakref.html"
+      ],
+      "section": "Python",
+      "family": "python-189",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nfrom itertools import groupby\ndata = [\"a\", \"b\", \"a\", \"a\"]\nprint([(k, len(list(g))) for k, g in groupby(data)])\n```",
+      "type": "one_choice",
+      "answers": [
+        "[('a', 3), ('b', 1)]",
+        "[('a', 1), ('b', 1), ('a', 2)]",
+        "[('a', 2), ('b', 1), ('a', 1)]",
+        "[('b', 1), ('a', 3)]"
+      ],
+      "correct_answer": "[('a', 1), ('b', 1), ('a', 2)]",
+      "explanation": "groupby łączy tylko kolejne elementy o tym samym kluczu. Nie sortuje danych, więc a pojawia się jako dwie grupy. Żeby dostać jedną grupę na klucz, najpierw posortuj dane po tym samym kluczu albo użyj Counter lub defaultdict.",
+      "sources": [
+        "https://docs.python.org/3.12/library/itertools.html#itertools.groupby"
+      ],
+      "section": "Python",
+      "family": "python-190",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nfrom itertools import groupby\ngroups = [(k, g) for k, g in groupby(\"aabb\")]\nprint([(k, list(g)) for k, g in groups])\n```",
+      "type": "one_choice",
+      "answers": [
+        "[('a', ['a', 'a']), ('b', ['b', 'b'])]",
+        "[('a', []), ('b', [])]",
+        "[('a', ['a', 'a']), ('b', [])]",
+        "TypeError, bo grupy nie są listami"
+      ],
+      "correct_answer": "[('a', []), ('b', [])]",
+      "explanation": "Grupa zwracana przez groupby dzieli iterator źródłowy z obiektem groupby. Przejście do następnej grupy unieważnia poprzednią. List comprehension najpierw przeszło przez wszystkie grupy, więc każda jest już pusta. Grupę trzeba od razu zamienić na listę.",
+      "sources": [
+        "https://docs.python.org/3.12/library/itertools.html#itertools.groupby"
+      ],
+      "section": "Python",
+      "family": "python-191",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze program?\n```python\nfrom functools import singledispatch\n\n@singledispatch\ndef fmt(x):\n    return \"obj\"\n\n@fmt.register\ndef _(x: int):\n    return \"int\"\n\nprint(fmt(True), fmt(1.5), fmt(\"s\"))\n```",
+      "type": "one_choice",
+      "answers": [
+        "obj int obj",
+        "int obj obj",
+        "int int obj",
+        "TypeError, bo bool nie ma rejestracji"
+      ],
+      "correct_answer": "int obj obj",
+      "explanation": "singledispatch wybiera implementację po typie pierwszego argumentu, uwzględniając MRO. bool dziedziczy po int, więc True trafia do wersji dla int. float i str nie mają rejestracji i używają funkcji bazowej.",
+      "sources": [
+        "https://docs.python.org/3.12/library/functools.html#functools.singledispatch"
+      ],
+      "section": "Python",
+      "family": "python-192",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.12. Co wypisze pierwsza instrukcja print i co stanie się przy drugiej?\n```python\nfrom functools import partial\n\ndef f(a, b, c=0):\n    return (a, b, c)\n\ng = partial(f, 1, c=5)\nprint(g(2, c=9))\ng(2, 3)\n```",
+      "type": "one_choice",
+      "answers": [
+        "(1, 2, 5); druga wypisze (1, 2, 3)",
+        "(1, 2, 9); druga zgłosi TypeError",
+        "(1, 2, 5); druga zgłosi TypeError",
+        "TypeError już przy pierwszej, bo c jest zamrożone"
+      ],
+      "correct_answer": "(1, 2, 9); druga zgłosi TypeError",
+      "explanation": "Argumenty nazwane zapisane w partial można nadpisać przy wywołaniu, więc c=9 wygrywa. Druga instrukcja wywołuje f(1, 2, 3, c=5): pozycyjne 3 trafia do c i jednocześnie jest c=5, co daje TypeError o wielu wartościach dla c.",
+      "sources": [
+        "https://docs.python.org/3.12/library/functools.html#functools.partial"
+      ],
+      "section": "Python",
+      "family": "python-193",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12 z GIL. Cztery wątki wykonują ten kod współbieżnie, a główny wątek czeka na nie przez join(). Co gwarantuje interpreter?\n```python\nimport threading\ncounter = 0\n\ndef work():\n    global counter\n    for _ in range(100_000):\n        counter += 1\n\nthreads = [threading.Thread(target=work) for _ in range(4)]\nfor t in threads: t.start()\nfor t in threads: t.join()\n```",
+      "type": "one_choice",
+      "answers": [
+        "counter zawsze wyniesie 400000, bo GIL pozwala wykonywać kod Pythona tylko jednemu wątkowi naraz.",
+        "counter wyniesie najwyżej 400000 i może wynieść mniej; wynik 400000 w jednym teście nie dowodzi poprawności.",
+        "counter może przekroczyć 400000, bo wątki zapisują wartości jednocześnie.",
+        "Kod zgłosi RuntimeError, bo global nie działa w wątkach."
+      ],
+      "correct_answer": "counter wyniesie najwyżej 400000 i może wynieść mniej; wynik 400000 w jednym teście nie dowodzi poprawności.",
+      "explanation": "counter += 1 to kilka instrukcji bajtkodu: odczyt, dodawanie i zapis. GIL może zostać przekazany innemu wątkowi między nimi. Wtedy dwa wątki odczytują tę samą wartość i jeden przyrost ginie. W nowszych wersjach CPythona utrata występuje rzadziej, ale język jej nie wyklucza. Potrzebna jest blokada.",
+      "sources": [
+        "https://docs.python.org/3.12/faq/library.html#what-kinds-of-global-value-mutation-are-thread-safe",
+        "https://docs.python.org/3.12/library/dis.html"
+      ],
+      "section": "Współbieżność",
+      "family": "python-194",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12 z GIL. Wiele wątków współdzieli listę items i słownik d z kluczami str oraz wartościami int. Które operacje wymagają jawnej blokady, żeby nie tracić aktualizacji?",
+      "type": "multi_choice",
+      "answers": [
+        "items.append(x)",
+        "d[key] = d.get(key, 0) + 1",
+        "if key not in d: d[key] = compute()",
+        "d[key] = value"
+      ],
+      "correct_answers": [
+        "d[key] = d.get(key, 0) + 1",
+        "if key not in d: d[key] = compute()"
+      ],
+      "explanation": "Według FAQ CPythona pojedyncze wywołania, takie jak L.append(x) czy D[x] = y na wbudowanych typach, są atomowe. Odczyt, obliczenie i zapis to już kilka kroków, a sprawdzenie i działanie (check-then-act) może przeplatać się z innym wątkiem. Blokada chroni całą sekwencję, a nie pojedyncze wywołanie.",
+      "sources": [
+        "https://docs.python.org/3.12/faq/library.html#what-kinds-of-global-value-mutation-are-thread-safe"
+      ],
+      "section": "Współbieżność",
+      "family": "python-195",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12. Który sposób naprawia licznik z wątków tak, by wynik był gwarantowany?",
+      "type": "one_choice",
+      "answers": [
+        "Zamiana counter += 1 na counter = counter + 1.",
+        "Objęcie counter += 1 blokadą with lock:, gdzie lock = threading.Lock() jest wspólny dla wątków.",
+        "Zwiększenie sys.setswitchinterval(), żeby wątki przełączały się rzadziej.",
+        "Użycie asyncio.Lock() w funkcji wątku."
+      ],
+      "correct_answer": "Objęcie counter += 1 blokadą with lock:, gdzie lock = threading.Lock() jest wspólny dla wątków.",
+      "explanation": "Oba zapisy przyrostu mają ten sam wyścig. Dłuższy interwał przełączania zmniejsza tylko prawdopodobieństwo błędu. asyncio.Lock nie jest bezpieczny między wątkami i służy do korutyn jednej pętli. threading.Lock obejmuje odczyt, dodanie i zapis jako jedną sekcję krytyczną.",
+      "sources": [
+        "https://docs.python.org/3.12/library/threading.html#lock-objects",
+        "https://docs.python.org/3.12/library/asyncio-sync.html#asyncio.Lock",
+        "https://docs.python.org/3.12/library/sys.html#sys.setswitchinterval"
+      ],
+      "section": "Współbieżność",
+      "family": "python-196",
+      "origin": "variant"
+    },
+    {
+      "question": "CPython 3.12, standardowa pętla asyncio, jeden wątek. Co wypisze program?\n```python\nimport asyncio\n\nclass Account:\n    def __init__(self):\n        self.balance = 0\n    async def deposit(self, amount):\n        value = self.balance\n        await asyncio.sleep(0)\n        self.balance = value + amount\n\nasync def main():\n    acc = Account()\n    await asyncio.gather(acc.deposit(10), acc.deposit(10))\n    print(acc.balance)\n\nasyncio.run(main())\n```",
+      "type": "one_choice",
+      "answers": [
+        "20, bo asyncio działa w jednym wątku i nie ma wyścigów.",
+        "10, bo obie korutyny odczytały 0 przed zapisem.",
+        "Wynik jest losowy: 10 albo 20.",
+        "RuntimeError, bo dwa zadania zmieniają ten sam obiekt."
+      ],
+      "correct_answer": "10, bo obie korutyny odczytały 0 przed zapisem.",
+      "explanation": "Jeden wątek nie chroni przed wyścigiem, jeśli między odczytem a zapisem jest await. Pierwsza korutyna odczytuje 0 i oddaje sterowanie, druga też odczytuje 0. Obie zapisują 10. Kolejność w tej pętli jest deterministyczna, więc wynik to zawsze 10. Rozwiązaniem jest asyncio.Lock albo aktualizacja bez await w środku.",
+      "sources": [
+        "https://docs.python.org/3.12/library/asyncio-sync.html#asyncio.Lock",
+        "https://docs.python.org/3.12/library/asyncio-task.html#asyncio.gather"
+      ],
+      "section": "Współbieżność",
+      "family": "python-197",
+      "origin": "variant"
+    },
+    {
+      "question": "Python 3.13 lub 3.14 w buildzie free-threaded (python3.13t/python3.14t), GIL wyłączony. Czy counter += 1 z kilku wątków staje się bezpieczny? Wybierz najlepszą odpowiedź.",
+      "type": "one_choice",
+      "answers": [
+        "Tak, build free-threaded dodaje blokady do każdego obiektu, więc przyrost staje się atomowy.",
+        "Nie. Wewnętrzne blokady chronią spójność struktur takich jak list i dict, ale sekwencja odczyt-dodaj-zapis nadal wymaga własnej synchronizacji, a wyścigi mogą być częstsze.",
+        "Tak, ale tylko dla zmiennych globalnych.",
+        "Nie, bo w tym buildzie wątki nie mogą współdzielić zmiennych."
+      ],
+      "correct_answer": "Nie. Wewnętrzne blokady chronią spójność struktur takich jak list i dict, ale sekwencja odczyt-dodaj-zapis nadal wymaga własnej synchronizacji, a wyścigi mogą być częstsze.",
+      "explanation": "Brak GIL pozwala wątkom naprawdę działać równolegle na wielu rdzeniach. Wbudowane typy używają wewnętrznych blokad, żeby interpreter nie uszkodził ich stanu. Nie czyni to atomową sekwencji kilku operacji, która nie była atomowa także z GIL. Poprawność nadal wymaga threading.Lock lub innej synchronizacji.",
+      "sources": [
+        "https://docs.python.org/3.13/howto/free-threading-python.html",
+        "https://peps.python.org/pep-0703/"
+      ],
+      "section": "Współbieżność",
+      "family": "python-198",
+      "origin": "variant"
     }
   ]
 }
