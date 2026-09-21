@@ -247,3 +247,38 @@ describe("grading", () => {
     ).toBe(graded.questions.reduce((n, q) => n + (q.scale ?? 1), 0));
   });
 });
+
+describe("explicit unknown answers", () => {
+  it("keeps old links compatible and preserves the opt-in setting", () => {
+    const old = defaultConfig("python");
+    expect(decodeConfig(encodeConfig(old))).toEqual(old);
+    const learning = { ...old, allowUnknownAnswer: true };
+    expect(decodeConfig(encodeConfig(learning))).toEqual(learning);
+    expect(() => validateConfig({ ...old, allowUnknownAnswer: "yes" })).toThrow();
+  });
+
+  it("records, restores and freezes unknown answers for every question type", async () => {
+    const config = { ...defaultConfig("python"), allowUnknownAnswer: true };
+    const initial = await createAttempt(config);
+    const questions: Question[] = [
+      { question: "Single", type: "one_choice", answers: ["yes", "no"], correct_answer: "yes" },
+      { question: "Multiple", type: "multi_choice", answers: ["yes", "no"], correct_answers: ["yes"] },
+      question("Short", "short_open"),
+      question("Long", "long_open"),
+    ];
+    const attempt = { ...initial, questions, answers: ["yes", ["yes"], "text", "text"], manualGrades: [null, null, null, null], pages: [[0, 1, 2, 3]] };
+    for (let i = 0; i < questions.length; i++) {
+      const updated = updateAnswer(attempt, i, null);
+      expect(updated.answers[i]).toBeNull();
+      expect(gradeQuestion(questions[i], null, { ...config, writtenGrading: "manual", wrongAnswerPenalty: 1 }, 1)).toBe(0);
+      const storage = { setItem: (_key: string, value: string) => { serialized = value; }, getItem: () => serialized };
+      let serialized = "";
+      saveAttempt(updated, storage);
+      expect(restoreAttempt(storage)?.answers[i]).toBeNull();
+      expect(updateAnswer(submitAttempt(updated), i, "yes").answers[i]).toBeNull();
+      expect(updateAnswer({ ...attempt, config: defaultConfig("python") }, i, null).answers[i]).toEqual(attempt.answers[i]);
+      const replacement = i === 1 ? ["yes"] : "yes";
+      expect(updateAnswer(updated, i, replacement).answers[i]).toEqual(replacement);
+    }
+  });
+});

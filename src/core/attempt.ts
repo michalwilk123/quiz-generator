@@ -6,7 +6,8 @@ import {
   validateQuestion,
   type Question,
 } from "./banks";
-export type Answer = string | string[];
+// null records an explicit “Nie wiem”; empty strings/arrays remain unanswered.
+export type Answer = string | string[] | null;
 export interface Attempt {
   version: 1;
   id: string;
@@ -56,7 +57,8 @@ export function expireAttempt(attempt: Attempt, now = Date.now()): Attempt {
     ? { ...attempt, status: "expired" }
     : attempt;
 }
-function validAnswer(question: Question, answer: unknown): answer is Answer {
+function validAnswer(question: Question, answer: unknown, allowUnknown = false): answer is Answer {
+  if (answer === null) return allowUnknown;
   if (question.type === "multi_choice")
     return (
       Array.isArray(answer) &&
@@ -81,7 +83,7 @@ export function updateAnswer(
   const current = expireAttempt(attempt, now);
   if (current.status !== "active") return current;
   const question = current.questions[index];
-  if (!question || !validAnswer(question, answer)) return current;
+  if (!question || !validAnswer(question, answer, current.config.allowUnknownAnswer)) return current;
   const answers = current.answers.slice();
   answers[index] = Array.isArray(answer) ? [...answer] : answer;
   return { ...current, answers };
@@ -102,6 +104,7 @@ export function setManualGrade(
     attempt.config.writtenGrading !== "manual" ||
     !q ||
     !q.type.endsWith("_open") ||
+    attempt.answers[index] === null ||
     !Number.isFinite(fraction) ||
     fraction < 0 ||
     fraction > 1
@@ -147,7 +150,7 @@ export function restoreAttempt(
       throw new Error();
     a.questions.forEach((q, i) => {
       validateQuestion(q);
-      if (!validAnswer(q, a.answers[i])) throw new Error();
+      if (!validAnswer(q, a.answers[i], a.config.allowUnknownAnswer)) throw new Error();
     });
     if (
       a.manualGrades.some(

@@ -4408,6 +4408,461 @@
       "section": "Współbieżność",
       "family": "python-198",
       "origin": "variant"
+    },
+    {
+      "question": "React: czym jest Virtual DOM?",
+      "type": "one_choice",
+      "answers": [
+        "Opis interfejsu w pamięci, na podstawie którego React ustala potrzebne zmiany w DOM.",
+        "Ukryta kopia strony w osobnym iframe.",
+        "API przeglądarki zastępujące DOM.",
+        "Mechanizm gwarantujący większą szybkość niż każda ręczna aktualizacja DOM."
+      ],
+      "correct_answer": "Opis interfejsu w pamięci, na podstawie którego React ustala potrzebne zmiany w DOM.",
+      "explanation": "Virtual DOM to umowna nazwa reprezentacji UI w pamięci. React wylicza nowy wynik renderowania i uzgadnia go z poprzednim; commit wprowadza potrzebne zmiany w prawdziwym DOM. Sam render nie musi zmienić DOM.",
+      "sources": [
+        "https://react.dev/learn/render-and-commit"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-199",
+      "origin": "variant"
+    },
+    {
+      "question": "React: czym różnią się props i state?",
+      "type": "one_choice",
+      "answers": [
+        "Props można mutować, a state nigdy nie można zmieniać.",
+        "State jest zawsze wspólny dla wszystkich instancji komponentu.",
+        "Zmiana zwykłej zmiennej lokalnej działa tak samo jak setter state.",
+        "Props to wejście od rodzica, a state to pamięć komponentu aktualizowana setterem."
+      ],
+      "correct_answer": "Props to wejście od rodzica, a state to pamięć komponentu aktualizowana setterem.",
+      "explanation": "Komponent traktuje props jako dane tylko do odczytu. State zachowuje się między renderami danej instancji. Nową wartość zgłaszamy setterem, bez mutowania obiektów poprzedniego stanu.",
+      "sources": [
+        "https://react.dev/learn/passing-props-to-a-component"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-200",
+      "origin": "variant"
+    },
+    {
+      "question": "React: do czego służy key w elementach listy?",
+      "type": "one_choice",
+      "answers": [
+        "Musi być unikalny globalnie w całej aplikacji.",
+        "Służy wyłącznie do sortowania elementów alfabetycznie.",
+        "Pomaga rozpoznać ten sam element wśród rodzeństwa przy dodawaniu, usuwaniu i zmianie kolejności.",
+        "Jest automatycznie przekazywany jako props.key."
+      ],
+      "correct_answer": "Pomaga rozpoznać ten sam element wśród rodzeństwa przy dodawaniu, usuwaniu i zmianie kolejności.",
+      "explanation": "Używaj stabilnego ID danych, unikalnego wśród rodzeństwa. key jest wskazówką dla Reacta, a nie zwykłym propem. Jeśli dziecko potrzebuje ID, przekaż je osobno, np. <Row key={item.id} id={item.id} />.",
+      "sources": [
+        "https://react.dev/learn/rendering-lists"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-201",
+      "origin": "variant"
+    },
+    {
+      "question": "Który zestaw poprawnie opisuje podstawowe hooki Reacta?",
+      "type": "one_choice",
+      "answers": [
+        "useState: DOM; useEffect: routing; useRef: walidacja; useContext: CSS.",
+        "useMemo: wysyłanie HTTP; useCallback: uruchomienie funkcji; useReducer: zmiana props.",
+        "useRef: automatyczny render; useContext: globalna baza danych; useEffect: wyłącznie serwer.",
+        "useState: stan; useEffect: synchronizacja z otoczeniem; useRef: trwała referencja; useContext: odczyt kontekstu."
+      ],
+      "correct_answer": "useState: stan; useEffect: synchronizacja z otoczeniem; useRef: trwała referencja; useContext: odczyt kontekstu.",
+      "explanation": "Hooki udostępniają funkcje Reacta komponentom funkcyjnym i własnym hookom. Dalsze przykłady: useReducer organizuje aktualizacje stanu, useMemo zapamiętuje wynik obliczenia, useCallback referencję funkcji, a useId generuje identyfikatory do powiązań dostępności.",
+      "sources": [
+        "https://react.dev/reference/react/hooks"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-204",
+      "origin": "variant"
+    },
+    {
+      "question": "Gdzie poprawnie wywołać useState lub useEffect?",
+      "type": "one_choice",
+      "answers": [
+        "W pętli o długości zależnej od props.",
+        "W warunku if, jeśli aktualnie potrzebujemy stanu.",
+        "Na najwyższym poziomie komponentu funkcyjnego albo własnego hooka, przed warunkowymi return.",
+        "W handlerze onClick, gdy użytkownik kliknie."
+      ],
+      "correct_answer": "Na najwyższym poziomie komponentu funkcyjnego albo własnego hooka, przed warunkowymi return.",
+      "explanation": "React potrzebuje stabilnej kolejności tych hooków. Warunek umieść wewnątrz efektu albo wydziel komponent. Reguła dotyczy tu useState/useEffect; API use ma odrębne zasady.",
+      "sources": [
+        "https://react.dev/reference/rules/rules-of-hooks"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-205",
+      "origin": "variant"
+    },
+    {
+      "question": "W handlerze count wynosi 0. Co wypisze console.log?\n```js\nsetCount(count + 1);\nconsole.log(count);\n```",
+      "type": "one_choice",
+      "answers": [
+        "Wynik zależy wyłącznie od szybkości procesora.",
+        "0",
+        "1",
+        "undefined"
+      ],
+      "correct_answer": "0",
+      "explanation": "Handler widzi snapshot stanu ze swojego renderu. Setter kolejkuje aktualizację, ale nie podmienia lokalnej zmiennej count w już wykonywanej funkcji.",
+      "sources": [
+        "https://react.dev/learn/state-as-a-snapshot"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-206",
+      "origin": "variant"
+    },
+    {
+      "question": "count wynosi 0. Jaki stan otrzymamy po obsłużeniu kolejki?\n```js\nsetCount(c => c + 1);\nsetCount(c => c + 1);\nsetCount(c => c + 1);\n```",
+      "type": "one_choice",
+      "answers": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "correct_answer": "3",
+      "explanation": "Funkcje aktualizujące otrzymują wynik poprzedniej aktualizacji: 0 → 1 → 2 → 3. Powinny być czyste; używaj ich, gdy nowy stan zależy od poprzedniego.",
+      "sources": [
+        "https://react.dev/learn/queueing-a-series-of-state-updates"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-208",
+      "origin": "variant"
+    },
+    {
+      "question": "Kiedy useEffect jest właściwym narzędziem?",
+      "type": "one_choice",
+      "answers": [
+        "Do wywołania useState dopiero po zamontowaniu.",
+        "Gdy trzeba połączyć komponent z zewnętrznym systemem, np. subskrypcją WebSocket.",
+        "Gdy można obliczyć fullName bezpośrednio z firstName i lastName podczas renderu.",
+        "Do każdego obliczenia wartości wyświetlanej w JSX."
+      ],
+      "correct_answer": "Gdy trzeba połączyć komponent z zewnętrznym systemem, np. subskrypcją WebSocket.",
+      "explanation": "Efekt synchronizuje komponent z otoczeniem. Dane wyliczalne z bieżącego stanu i props zwykle obliczamy podczas renderu, bez dodatkowego state i efektu.",
+      "sources": [
+        "https://react.dev/learn/you-might-not-need-an-effect"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-210",
+      "origin": "variant"
+    },
+    {
+      "question": "useEffect tworzy subskrypcję i zwraca cleanup. Kiedy React sprząta?",
+      "type": "one_choice",
+      "answers": [
+        "Wyłącznie podczas zamykania przeglądarki.",
+        "Przed każdym renderem dowolnego komponentu.",
+        "Dopiero po ręcznym wywołaniu zwróconej funkcji przez rodzica.",
+        "Przed kolejnym setupem po zmianie zależności oraz przy odmontowaniu."
+      ],
+      "correct_answer": "Przed kolejnym setupem po zmianie zależności oraz przy odmontowaniu.",
+      "explanation": "Cleanup powinien odwracać setup: usuwać listener, zamykać połączenie lub czyścić timer. W developerskim StrictMode może wystąpić też dodatkowy cykl setup–cleanup–setup.",
+      "sources": [
+        "https://react.dev/reference/react/useEffect"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-212",
+      "origin": "variant"
+    },
+    {
+      "question": "Co stanie się po ref.current += 1, gdy ref pochodzi z useRef(0)?",
+      "type": "one_choice",
+      "answers": [
+        "Referencja zachowa nową wartość, ale sama mutacja nie wywoła renderu.",
+        "React automatycznie wyrenderuje komponent jak po setState.",
+        "Wartość zniknie przy każdym renderze.",
+        "Każda instancja komponentu otrzyma ten sam wspólny ref."
+      ],
+      "correct_answer": "Referencja zachowa nową wartość, ale sama mutacja nie wywoła renderu.",
+      "explanation": "useRef nadaje się np. do przechowania uchwytu timera lub węzła DOM. Jeśli zmiana wartości ma aktualizować widok, zwykle potrzebny jest state.",
+      "sources": [
+        "https://react.dev/reference/react/useRef"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-215",
+      "origin": "variant"
+    },
+    {
+      "question": "Czym różnią się useMemo i useCallback?",
+      "type": "one_choice",
+      "answers": [
+        "Oba zawsze uruchamiają przekazaną funkcję przy kliknięciu.",
+        "useCallback zapamiętuje wynik requestu HTTP, a useMemo wykonuje cleanup.",
+        "Oba gwarantują poprawność programu nawet przy brakujących zależnościach.",
+        "useMemo zapamiętuje wynik obliczenia, a useCallback referencję funkcji, zależnie od dependencies."
+      ],
+      "correct_answer": "useMemo zapamiętuje wynik obliczenia, a useCallback referencję funkcji, zależnie od dependencies.",
+      "explanation": "To narzędzia optymalizacji. Nie zastępują prawidłowych zależności i nie powinny być konieczne do poprawności logiki. useCallback sam nie wywołuje przekazanej funkcji.",
+      "sources": [
+        "https://react.dev/reference/react/hooks"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-216",
+      "origin": "variant"
+    },
+    {
+      "question": "Co robi useContext(ThemeContext)?",
+      "type": "one_choice",
+      "answers": [
+        "Gwarantuje brak renderów wszystkich konsumentów przy zmianie value.",
+        "Odczytuje wartość najbliższego odpowiedniego providera powyżej komponentu i subskrybuje jej zmiany.",
+        "Odczytuje zawsze najdalszego providera.",
+        "Automatycznie zapisuje theme w localStorage."
+      ],
+      "correct_answer": "Odczytuje wartość najbliższego odpowiedniego providera powyżej komponentu i subskrybuje jej zmiany.",
+      "explanation": "Context ogranicza przekazywanie danych przez pośrednie komponenty. Gdy wartość providera zmieni się według Object.is, konsumenci dostają aktualizację. Context sam nie jest trwałą bazą ani kompletnym systemem zarządzania stanem.",
+      "sources": [
+        "https://react.dev/reference/react/useContext"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-218",
+      "origin": "variant"
+    },
+    {
+      "question": "Który zapis reprezentuje kontrolowane pole tekstowe, gdy name jest stringiem ze state?",
+      "type": "one_choice",
+      "answers": [
+        "<input defaultValue={name} />",
+        "<input value={name} /> zawsze pozwala edytować tekst bez handlera.",
+        "<input onClick={() => name = \"Ala\"} />",
+        "<input value={name} onChange={e => setName(e.target.value)} />"
+      ],
+      "correct_answer": "<input value={name} onChange={e => setName(e.target.value)} />",
+      "explanation": "W kontrolowanym polu wartość pochodzi ze state i jest aktualizowana w onChange. defaultValue ustawia początek dla pola niekontrolowanego, którego bieżącą wartością zarządza DOM.",
+      "sources": [
+        "https://react.dev/reference/react-dom/components/input"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-220",
+      "origin": "variant"
+    },
+    {
+      "question": "Przeglądarka, zwykły skrypt. Jaka będzie kolejność logów?\n```js\nconsole.log(\"A\");\nsetTimeout(() => console.log(\"B\"), 0);\nPromise.resolve().then(() => console.log(\"C\"));\nconsole.log(\"D\");\n```",
+      "type": "one_choice",
+      "answers": [
+        "A, D, C, B",
+        "A, B, C, D",
+        "A, C, D, B",
+        "A, D, B, C"
+      ],
+      "correct_answer": "A, D, C, B",
+      "explanation": "Kod synchroniczny kończy bieżące zadanie: A, D. Następnie wykonywane są mikrozadania, w tym reakcja Promise: C. Callback timera jest osobnym zadaniem: B. Event loop należy do środowiska JavaScript, nie do Reacta.",
+      "sources": [
+        "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-223",
+      "origin": "variant"
+    },
+    {
+      "question": "Dwa sąsiednie komponenty mają pokazywać ten sam wybrany produkt. Jak zorganizować stan?",
+      "type": "one_choice",
+      "answers": [
+        "Odczytywać prywatny state rodzeństwa przez DOM.",
+        "Użyć identycznego key, by połączyć ich useState.",
+        "Przenieść stan do najbliższego wspólnego rodzica i przekazać wartość oraz callback przez props.",
+        "Zduplikować state w obu komponentach i synchronizować go w renderze."
+      ],
+      "correct_answer": "Przenieść stan do najbliższego wspólnego rodzica i przekazać wartość oraz callback przez props.",
+      "explanation": "Jedno źródło prawdy ogranicza rozjazdy danych. Rodzic przekazuje dane w dół, a dziecko zgłasza zamiar zmiany przez callback.",
+      "sources": [
+        "https://react.dev/learn/sharing-state-between-components"
+      ],
+      "section": "React i JavaScript",
+      "family": "python-226",
+      "origin": "variant"
+    },
+    {
+      "question": "AWS: który zestaw poprawnie przypisuje typowe usługi do zastosowań?",
+      "type": "one_choice",
+      "answers": [
+        "EC2 — maszyny wirtualne; Lambda — uruchamianie funkcji; S3 — obiekty; RDS — relacyjne bazy danych.",
+        "EC2 — DNS; Lambda — archiwum; S3 — relacyjna baza; RDS — kontenery.",
+        "EC2 — konta użytkowników; Lambda — billing; S3 — Kubernetes; RDS — CDN.",
+        "EC2 — kolejka; Lambda — dysk blokowy; S3 — procesor; RDS — polityki IAM."
+      ],
+      "correct_answer": "EC2 — maszyny wirtualne; Lambda — uruchamianie funkcji; S3 — obiekty; RDS — relacyjne bazy danych.",
+      "explanation": "EC2 daje kontrolę nad instancją i jej systemem. Lambda uruchamia kod bez zarządzania serwerami przez użytkownika. S3 przechowuje obiekty, a RDS zarządza relacyjnymi bazami, np. PostgreSQL. Inne nazwy do rozpoznania: VPC — sieć, SQS — kolejka, CloudFront — CDN, Route 53 — DNS.",
+      "sources": [
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/amazon-web-services-cloud-platform.html",
+        "https://docs.aws.amazon.com/whitepapers/latest/aws-overview/database.html"
+      ],
+      "section": "AWS",
+      "family": "python-229",
+      "origin": "variant"
+    },
+    {
+      "question": "AWS: jak nazywa się główny panel w przeglądarce i terminal dostępny z tego panelu?",
+      "type": "one_choice",
+      "answers": [
+        "Amazon CloudWatch i Amazon RDS.",
+        "AWS CloudTrail i Amazon Glacier.",
+        "IAM Policy Simulator i Amazon Route 53.",
+        "AWS Management Console i AWS CloudShell."
+      ],
+      "correct_answer": "AWS Management Console i AWS CloudShell.",
+      "explanation": "Strona startowa panelu to AWS Console Home; z niej przechodzisz do konsol usług, np. S3 i IAM. CloudShell daje terminal z AWS CLI. Poza panelem można używać lokalnego AWS CLI, SDK (np. boto3) oraz infrastruktury jako kodu, np. CloudFormation lub Terraform. Wszystkie te drogi podlegają uprawnieniom.",
+      "sources": [
+        "https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/what-is.html",
+        "https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html"
+      ],
+      "section": "AWS",
+      "family": "python-230",
+      "origin": "variant"
+    },
+    {
+      "question": "AWS: chcesz dashboard CPU i alarmy, a osobno historię tego, kto wykonał operację API. Jakie usługi rozróżnić?",
+      "type": "one_choice",
+      "answers": [
+        "Cost Explorer do CPU; S3 Glacier do audytu w czasie rzeczywistym.",
+        "IAM Identity Center do CPU; CloudShell do automatycznego audytu wszystkich zdarzeń.",
+        "CloudWatch do monitoringu i alarmów; CloudTrail do audytu aktywności API.",
+        "CloudTrail do metryk CPU; CloudWatch wyłącznie do uprawnień IAM."
+      ],
+      "correct_answer": "CloudWatch do monitoringu i alarmów; CloudTrail do audytu aktywności API.",
+      "explanation": "CloudWatch udostępnia metryki, logi, alarmy i dashboardy. CloudTrail rejestruje aktywność konta i wywołania API w obsługiwanym zakresie. Nie zakładaj, że domyślna historia zawiera każdą operację na danych: np. zdarzenia obiektowe S3 wymagają odpowiedniej konfiguracji rejestrowania.",
+      "sources": [
+        "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html",
+        "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html"
+      ],
+      "section": "AWS",
+      "family": "python-231",
+      "origin": "variant"
+    },
+    {
+      "question": "AWS: gdzie analizować koszty według usług i ustawić powiadomienie o przekroczeniu budżetu?",
+      "type": "one_choice",
+      "answers": [
+        "Route 53 do faktur i EC2 Security Groups do limitów wydatków.",
+        "AWS Cost Explorer do analizy oraz AWS Budgets do budżetów i alertów.",
+        "IAM do wykresów kosztów i S3 Lifecycle do budżetu całego konta.",
+        "CloudShell automatycznie zatrzymuje konto po przekroczeniu kwoty."
+      ],
+      "correct_answer": "AWS Cost Explorer do analizy oraz AWS Budgets do budżetów i alertów.",
+      "explanation": "Narzędzia te znajdziesz w obszarze Billing and Cost Management. Alert budżetu sam w sobie nie jest twardą blokadą wszystkich wydatków. Automatyczne działania wymagają osobnej konfiguracji i mają określony zakres.",
+      "sources": [
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html",
+        "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html"
+      ],
+      "section": "AWS",
+      "family": "python-232",
+      "origin": "variant"
+    },
+    {
+      "question": "IAM: jaka jest podstawowa różnica między user a role?",
+      "type": "one_choice",
+      "answers": [
+        "User jest tożsamością konta mogącą mieć trwałe dane logowania; role przyjmuje uprawniony podmiot, uzyskując tymczasowe poświadczenia.",
+        "Role to grupa userów i zawsze ma własne hasło.",
+        "User jest tymczasowy, a role wymaga stałego access key w kodzie.",
+        "Role może przyjąć wyłącznie człowiek, nigdy usługa AWS."
+      ],
+      "correct_answer": "User jest tożsamością konta mogącą mieć trwałe dane logowania; role przyjmuje uprawniony podmiot, uzyskując tymczasowe poświadczenia.",
+      "explanation": "IAM user może mieć hasło do konsoli lub access keys; nie musi mieć obu. Rola nie ma takich stałych danych logowania: człowiek, aplikacja lub usługa może ją przyjąć, jeśli konfiguracja na to pozwala. Np. aplikacji na EC2 przypisujemy rolę zamiast wpisywać klucz użytkownika w kod.",
+      "sources": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html"
+      ],
+      "section": "AWS",
+      "family": "python-233",
+      "origin": "variant"
+    },
+    {
+      "question": "IAM: co określa trust policy roli, a co jej permissions policy?",
+      "type": "one_choice",
+      "answers": [
+        "Trust policy ustala hasło roli; permissions policy wybiera region konsoli.",
+        "Obie polityki wyłącznie dodają użytkowników do grupy.",
+        "Trust policy automatycznie przyznaje pełny dostęp do wszystkich zasobów S3.",
+        "Trust policy określa, kto może przyjąć rolę; permissions policy — co wolno robić po jej przyjęciu."
+      ],
+      "correct_answer": "Trust policy określa, kto może przyjąć rolę; permissions policy — co wolno robić po jej przyjęciu.",
+      "explanation": "Możliwość przyjęcia roli i uprawnienia do zasobów to dwa odrębne zagadnienia. Dostęp podlega także innym obowiązującym politykom i ograniczeniom; jawny Deny przeważa nad Allow. Stosuj najmniejszy zakres uprawnień potrzebny do zadania.",
+      "sources": [
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html",
+        "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html"
+      ],
+      "section": "AWS",
+      "family": "python-234",
+      "origin": "variant"
+    },
+    {
+      "question": "AWS: firma chce jedno logowanie pracowników do kilku kont AWS. Jaką usługę warto rozpoznać?",
+      "type": "one_choice",
+      "answers": [
+        "Amazon CloudFront jako baza użytkowników IAM.",
+        "AWS Cost Explorer jako serwer haseł.",
+        "AWS IAM Identity Center, dawniej AWS Single Sign-On (AWS SSO).",
+        "Amazon S3 Glacier Instant Retrieval."
+      ],
+      "correct_answer": "AWS IAM Identity Center, dawniej AWS Single Sign-On (AWS SSO).",
+      "explanation": "Identity Center centralizuje dostęp pracowników i grup do kont oraz aplikacji. Permission sets określają zakres dostępu do kont, a AWS access portal pozwala wybrać przydzielone konto i rolę. To nie to samo co tworzenie osobnego IAM user dla każdego pracownika w każdym koncie.",
+      "sources": [
+        "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html"
+      ],
+      "section": "AWS",
+      "family": "python-235",
+      "origin": "variant"
+    },
+    {
+      "question": "S3: jak automatycznie przenosić starsze obiekty do klasy archiwalnej i usuwać je po okresie retencji?",
+      "type": "one_choice",
+      "answers": [
+        "Przez samo dodanie prefiksu glacier/ do nazwy obiektu.",
+        "Przez reguły S3 Lifecycle z odpowiednimi transition i expiration.",
+        "Przez trust policy roli, która automatycznie zmienia wiek plików.",
+        "Przez wyłączenie bucketu jak instancji EC2."
+      ],
+      "correct_answer": "Przez reguły S3 Lifecycle z odpowiednimi transition i expiration.",
+      "explanation": "S3 przechowuje obiekty identyfikowane kluczem w bucketach. Regułę Lifecycle można ograniczyć np. prefiksem lub tagami. Transition zmienia klasę, expiration usuwa dane zgodnie z regułą. Przy versioningu starsze wersje wymagają uwzględnienia osobnych akcji; skasowanie bieżącej wersji nie zawsze usuwa wszystkie dane.",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html"
+      ],
+      "section": "AWS",
+      "family": "python-236",
+      "origin": "variant"
+    },
+    {
+      "question": "Czym różni się Amazon S3 od S3 Glacier w kontekście klas przechowywania obiektów?",
+      "type": "one_choice",
+      "answers": [
+        "S3 to usługa obiektowa, a S3 Glacier Instant Retrieval, Flexible Retrieval i Deep Archive to jej klasy do archiwizacji.",
+        "S3 to dysk blokowy, a Glacier to relacyjna baza danych.",
+        "Każda klasa Glacier zapewnia natychmiastowy odczyt bez odtwarzania.",
+        "Glacier jest tylko inną nazwą S3 Standard bez różnic w dostępie."
+      ],
+      "correct_answer": "S3 to usługa obiektowa, a S3 Glacier Instant Retrieval, Flexible Retrieval i Deep Archive to jej klasy do archiwizacji.",
+      "explanation": "S3 Standard służy m.in. do często używanych danych. Glacier Instant Retrieval ma dostęp w milisekundach; Flexible Retrieval i Deep Archive wymagają odtworzenia przed odczytem. Przy wyborze liczą się koszt przechowywania, pobierania, minimalny okres naliczania opłat i tolerowane oczekiwanie. Istnieje też starsza usługa Glacier oparta o vaults — tutaj pytamy o klasy S3.",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+      ],
+      "section": "AWS",
+      "family": "python-237",
+      "origin": "variant"
+    },
+    {
+      "question": "S3: obiekt ma klasę Glacier Deep Archive. Czy zwykły GET od razu pobierze jego treść?",
+      "type": "one_choice",
+      "answers": [
+        "Tak, Deep Archive działa identycznie jak Instant Retrieval.",
+        "Nie, obiektu nie można już nigdy odzyskać.",
+        "Tak, samo wylistowanie bucketu odtwarza wszystkie obiekty.",
+        "Nie; najpierw zleca się restore, czeka na zakończenie i pobiera tymczasowo dostępną kopię."
+      ],
+      "correct_answer": "Nie; najpierw zleca się restore, czeka na zakończenie i pobiera tymczasowo dostępną kopię.",
+      "explanation": "Dla Deep Archive odtwarzanie trwa godziny; dokumentacja podaje typowo do 12 godzin dla Standard i do 48 godzin dla Bulk. Przy restore określasz okres dostępności kopii. Oryginał zachowuje klasę archiwalną — restore sam w sobie nie zmienia go trwale na S3 Standard.",
+      "sources": [
+        "https://docs.aws.amazon.com/AmazonS3/latest/userguide/restoring-objects.html"
+      ],
+      "section": "AWS",
+      "family": "python-238",
+      "origin": "variant"
     }
   ]
 }

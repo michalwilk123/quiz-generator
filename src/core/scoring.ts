@@ -39,6 +39,7 @@ export function gradeQuestion(
   config: ExamConfig,
   manualGrade: number | null = null,
 ): number | null {
+  if (answer === null) return 0;
   if (question.type.endsWith("_open")) {
     if (config.writtenGrading === "manual") return manualGrade;
     const actual = normalizeText(typeof answer === "string" ? answer : ""),

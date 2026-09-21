@@ -206,8 +206,10 @@ export default function Quiz() {
           ),
         );
   const answered = attempt.answers.filter((answer) =>
-    Array.isArray(answer) ? answer.length > 0 : answer.trim().length > 0,
+    answer === null || (Array.isArray(answer) ? answer.length > 0 : answer.trim().length > 0),
   ).length;
+  const paginated = attempt.pages.length > 1;
+  const lastPage = page >= attempt.pages.length - 1;
   const indices = attempt.pages[Math.min(page, attempt.pages.length - 1)] ?? [];
   return (
     <>
@@ -232,7 +234,7 @@ export default function Quiz() {
               {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
             </span>
           )}
-          {!revealed && (
+          {!revealed && (!paginated || expired) && (
             <button className="button text-sm" onClick={finish}>
               {expired ? "Zobacz wyniki" : "Zakończ test"}
             </button>
@@ -271,6 +273,11 @@ export default function Quiz() {
                   ? "Wszystkie odpowiedzi poprawne. Brawo!"
                   : "Sprawdź odpowiedzi poniżej, a potem spróbuj kolejnego zestawu."}
             </p>
+            {attempt.config.allowUnknownAnswer && (
+              <p className="muted mt-2">
+                Nie wiem: {attempt.answers.filter((answer) => answer === null).length} / {attempt.questions.length}
+              </p>
+            )}
             {attempt.config.writtenGrading === "automatic" &&
               attempt.questions.some((question) =>
                 question.type.endsWith("open"),
@@ -289,6 +296,7 @@ export default function Quiz() {
               question={attempt.questions[index]}
               index={index}
               answer={attempt.answers[index]}
+              allowUnknown={!!attempt.config.allowUnknownAnswer}
               locked={locked}
               revealed={revealed}
               grade={score.questions[index]}
@@ -325,17 +333,24 @@ export default function Quiz() {
               <span className="muted text-sm">
                 {page + 1} / {attempt.pages.length}
               </span>
-              <button
-                className="button secondary"
-                disabled={page >= attempt.pages.length - 1}
-                onClick={() => move(page + 1)}
-              >
-                Następna
-              </button>
+              {lastPage ? (
+                !revealed && (
+                  <button className="button" onClick={finish}>
+                    {expired ? "Zobacz wyniki" : "Zakończ test"}
+                  </button>
+                )
+              ) : (
+                <button
+                  className="button secondary"
+                  onClick={() => move(page + 1)}
+                >
+                  Następna
+                </button>
+              )}
             </>
           ) : null}
         </nav>
-        {!revealed && (
+        {!revealed && !paginated && (
           <button className="button mt-6" onClick={finish}>
             {expired ? "Zobacz wyniki" : "Zakończ test"}
           </button>

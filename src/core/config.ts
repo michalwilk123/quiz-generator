@@ -16,6 +16,7 @@ export interface ExamConfig {
   wrongAnswerPenalty: number;
   writtenGrading: "automatic" | "manual";
   useQuestionWeights: boolean;
+  allowUnknownAnswer?: boolean;
 }
 export function defaultConfig(subjectId = "isp"): ExamConfig {
   return {
@@ -75,6 +76,7 @@ export function validateConfig(value: unknown): ExamConfig {
     !["strict", "partial"].includes(c.choiceScoring) ||
     !["automatic", "manual"].includes(c.writtenGrading) ||
     typeof c.useQuestionWeights !== "boolean" ||
+    (c.allowUnknownAnswer !== undefined && typeof c.allowUnknownAnswer !== "boolean") ||
     !Number.isFinite(c.wrongAnswerPenalty) ||
     c.wrongAnswerPenalty < 0 ||
     c.wrongAnswerPenalty > 1
@@ -97,6 +99,7 @@ export function encodeConfig(config: ExamConfig): string {
     c.writtenGrading === "manual" ? 1 : 0,
     c.useQuestionWeights ? 1 : 0,
   ];
+  if (c.allowUnknownAnswer) compact.push(1);
   const bytes = new TextEncoder().encode(JSON.stringify(compact));
   return btoa(Array.from(bytes, (b) => String.fromCharCode(b)).join(""))
     .replace(/\+/g, "-")
@@ -114,13 +117,15 @@ export function decodeConfig(encoded: string): ExamConfig {
     );
     if (
       !Array.isArray(x) ||
-      x.length !== 10 ||
+      ![10, 11].includes(x.length) ||
+      (x.length === 11 && ![0, 1].includes(x[10])) ||
       ![0, 1].includes(x[6]) ||
       ![0, 1].includes(x[8]) ||
       ![0, 1].includes(x[9])
     )
       throw new Error();
     return validateConfig({
+      ...(x[10] ? { allowUnknownAnswer: true } : {}),
       version: x[0],
       subjects: x[1].map(([id, weight]: [string, number]) => ({ id, weight })),
       questionCount: x[2],

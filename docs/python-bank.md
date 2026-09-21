@@ -1,10 +1,10 @@
 # Programowanie python - politechnika gdanska
 
-Autorski bank ćwiczeniowy: 239 pytań, w tym 66 zagadnień z przekazanego materiału oraz 173 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
+Autorski bank ćwiczeniowy: 264 pytania, w tym 66 zagadnień z przekazanego materiału oraz 198 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
 
 ## Dwie konfiguracje
 
-- **Nauka:** 6 pytań bez timera, jedno pytanie na stronie. Każde z innego działu. Po zakończeniu dostępne są odpowiedzi, objaśnienia i dokumentacja.
+- **Nauka:** 6 pytań bez timera, jedno pytanie na stronie. Każde z innego działu. Opcja „Nie wiem” zastępuje odpowiedź, daje zero punktów i jest osobno oznaczona w wynikach. W trybie weryfikacji jest wyłączona. Po zakończeniu dostępne są odpowiedzi, objaśnienia i dokumentacja.
 - **Weryfikacja:** 30 pytań w 20 minut, po 5 na stronie. Niepełny zestaw odpowiedzi w pytaniu wielokrotnego wyboru daje zero punktów. Brak punktów ujemnych. Po upływie czasu odpowiedzi są blokowane; wyniki otwiera użytkownik.
 
 Oba presety zawierają pytania wyboru i krótkie odpowiedzi. Sześć obszernych zadań projektowych pozostaje w bazie. Aby je ćwiczyć, w konfiguracji wybierz ten quiz, rodzaj „Długie odpowiedzi opisowe” oraz samoocenę na podstawie odpowiedzi wzorcowej. Podobieństwo tekstu nie jest wiarygodną oceną projektu systemu.
@@ -76,3 +76,14 @@ Pytania rozróżniają klasyczne polecenie import od nowszych mechanizmów gener
 - 5 pytań o atomowość mimo GIL: `counter += 1` w wątkach, które operacje wymagają blokady, poprawna naprawa, wyścig w asyncio przy `await` i build free-threaded.
 
 22 przykłady z kodem wykonano na CPython 3.12.3. Pytania o wątki nie podają konkretnego wyniku niedeterministycznego programu, tylko to, co interpreter gwarantuje. Pytanie o build free-threaded wprost wskazuje Pythona 3.13 lub 3.14.
+
+## React, JavaScript i AWS
+
+Zwięzły pakiet 25 pytań jednokrotnego wyboru: 15 o React i JavaScript oraz 10 o AWS. Bank wcześniej nie obejmował Reacta ani osobnego działu AWS.
+
+- React: Virtual DOM, props/state, key, hooki i ich reguły, snapshot i aktualizatory stanu, efekty i cleanup, ref, memoizacja, Context, formularze, event loop i współdzielenie stanu.
+- AWS: typowe usługi, Management Console, Console Home, CloudShell, CLI/SDK/IaC, CloudWatch kontra CloudTrail, Cost Explorer i Budgets, IAM users/roles i polityki, Identity Center, S3 Lifecycle oraz klasy Glacier i restore.
+
+Research z 21.09.2026: oficjalna dokumentacja [React](https://react.dev/learn), [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide/In_depth) i [AWS](https://docs.aws.amazon.com/). Dokładne źródła przy każdym pytaniu. Przykłady Reacta zakładają komponenty funkcyjne React 19 i JavaScript w przeglądarce. Pytania są autorskie, dostępne w obu dotychczasowych presetach. Ten sam pakiet dodano do `job-seek-dashboard/public/materialy/python-egzamin.html` wraz z odnośnikami w spisie treści.
+
+Dobór tematów porównano z autorskimi zestawami [GreatFrontEnd](https://github.com/greatfrontend/top-reactjs-interview-questions), [Sudheer J](https://github.com/sudheerj/reactjs-interview-questions), [DevInterview AWS](https://github.com/Devinterview-io/aws-interview-questions) i [Cloud Engineer Interview Questions](https://github.com/sv222/cloud-engineer-interview-questions). Priorytet otrzymały powtarzające się podstawy i tematy wskazane przez użytkownika. To przegląd jakościowy, nie ranking z pomiaru częstości rzeczywistych rozmów. Zestawy rekrutacyjne służą do doboru tematów; źródłem odpowiedzi technicznych jest dokumentacja producentów.

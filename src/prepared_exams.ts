@@ -15,6 +15,7 @@ export const preparedExams: PreparedExam[] = [
     config: {
       ...defaultConfig("python"),
       questionCount: 6,
+      allowUnknownAnswer: true,
       questionTypes: ["one_choice", "multi_choice", "short_open"],
       pageSize: 1,
     },

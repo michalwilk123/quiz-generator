@@ -189,6 +189,7 @@ test("verification preset starts thirty questions with a twenty-minute deadline"
   await page.clock.install();
   await page.goto("./#/exam/python-weryfikacja");
   await expect(page.getByRole("timer")).toHaveText("20:00");
+  await expect(page.getByRole("checkbox", { name: "Nie wiem", exact: true })).toHaveCount(0);
   await expect(
     page.getByText("Odpowiedzi: 0 / 30", { exact: true }),
   ).toBeVisible();
@@ -199,4 +200,33 @@ test("verification preset starts thirty questions with a twenty-minute deadline"
   await expect(
     page.getByRole("button", { name: "Zobacz wyniki", exact: true }).first(),
   ).toBeVisible();
+});
+
+test("learning records unknown answers without guessing", async ({ page }) => {
+  await page.addInitScript(() => { Math.random = () => 0; });
+  await page.goto("./#/exam/python-nauka");
+  const unknown = page.getByRole("checkbox", { name: "Nie wiem", exact: true });
+  await unknown.check();
+  await expect(page.getByText("Odpowiedzi: 1 / 6", { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(unknown).toBeChecked();
+  const radio = page.getByRole("radio").first();
+  await radio.check();
+  await expect(unknown).not.toBeChecked();
+  await unknown.check();
+  await expect(radio).not.toBeChecked();
+  for (let i = 0; i < 5; i++) {
+    await expect(page.getByRole("button", { name: "Zakończ test", exact: true })).toHaveCount(0);
+    await page.getByRole("button", { name: "Następna", exact: true }).click();
+  }
+  await expect(page.getByRole("button", { name: "Następna", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Zakończ test", exact: true })).toHaveCount(1);
+  await page.getByRole("button", { name: "Poprzednia", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Zakończ test", exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Następna", exact: true }).click();
+  await page.getByRole("button", { name: "Zakończ test", exact: true }).first().click();
+  await expect(unknown).toBeDisabled();
+  await expect(page.locator(".feedback")).toContainText("Nie wiem · 0 / 1");
+  await expect(page.getByText("Nie wiem: 1 / 6", { exact: true })).toBeVisible();
+
 });

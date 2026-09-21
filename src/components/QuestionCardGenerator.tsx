@@ -1,15 +1,16 @@
-import type { Attempt, Question } from "../core";
+import type { Answer, Attempt, Question } from "../core";
 import QuestionText from "./QuestionText";
 
 type Props = {
   question: Question;
   index: number;
-  answer: string | string[];
+  answer: Answer;
+  allowUnknown: boolean;
   locked: boolean;
   revealed: boolean;
   grade: { earned: number; possible: number; fraction: number | null };
   manual: boolean;
-  onAnswer: (answer: string | string[]) => void;
+  onAnswer: (answer: Answer) => void;
   onGrade: (fraction: number) => void;
   manualGrade: Attempt["manualGrades"][number];
 };
@@ -17,6 +18,7 @@ export default function QuestionCardGenerator({
   question,
   index,
   answer,
+  allowUnknown,
   locked,
   revealed,
   grade,
@@ -97,6 +99,19 @@ export default function QuestionCardGenerator({
           />
         )}
       </div>
+      {allowUnknown && (
+        <label className="choice mt-3">
+          <input
+            type="checkbox"
+            checked={answer === null}
+            disabled={locked}
+            onChange={(event) => onAnswer(
+              event.target.checked ? null : question.type === "multi_choice" ? [] : "",
+            )}
+          />
+          <span>Nie wiem</span>
+        </label>
+      )}
       {revealed && (
         <div className="feedback mt-5 result-enter">
           <p
@@ -110,7 +125,9 @@ export default function QuestionCardGenerator({
                     : "text-red-300"
             }
           >
-            {grade.fraction === null
+            {answer === null
+              ? `Nie wiem · 0 / ${grade.possible}`
+              : grade.fraction === null
               ? "Czeka na Twoją ocenę"
               : `${grade.fraction === 1 ? "Poprawna" : grade.fraction > 0 ? "Częściowo poprawna" : "Niepoprawna"} · ${Number(grade.earned.toFixed(2))} / ${grade.possible}`}
           </p>
@@ -141,7 +158,7 @@ export default function QuestionCardGenerator({
               </ul>
             </details>
           ) : null}
-          {manual && !choice && (
+          {manual && !choice && answer !== null && (
             <label className="field mt-4">
               <span id={`assessment-label-${index}`} className="text-sm">
                 Oceń swoją odpowiedź

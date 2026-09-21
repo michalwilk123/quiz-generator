@@ -30,7 +30,7 @@ Prepared exams live in `src/prepared_exams.ts`. The initial ISP and ZSBD presets
 
 ## Python practice bank
 
-The Polish **Programowanie python - politechnika gdanska** bank adds 214 explained questions and two presets: six untimed questions for learning, or 30 questions in 20 minutes for verification. The interface is Polish. Existing ISP/ZSBD presets and question banks remain available. See [bank notes](docs/python-bank.md) for content, sources, open design tasks, and the optional diversity metadata.
+The Polish **Programowanie python - politechnika gdanska** bank contains 264 explained questions, including React, browser JavaScript, and AWS and two presets: six untimed questions for learning, or 30 questions in 20 minutes for verification. The interface is Polish. Existing ISP/ZSBD presets and question banks remain available. See [bank notes](docs/python-bank.md) for content, sources, open design tasks, and the optional diversity metadata.
 
 ## Attempts
 
