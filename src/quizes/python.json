@@ -969,23 +969,22 @@
       "correct_answer": "Atomowo porównać token właściciela i usunąć klucz tylko przy zgodności."
     },
     {
-      "question": "Czytelnik pobrał starą wartość z bazy. Pisarz zatwierdził nową wartość i usunął cache. Następnie czytelnik zapisał swoją starą wartość do cache. Co z tego wynika?",
+      "question": "Sklep zapisuje ceny w bazie danych, a ich kopie w Redisie (cache), żeby szybciej je odczytywać. Dwa żądania wykonują się równocześnie:\n\n1. Żądanie A pobiera z bazy cenę 100 zł, ale jeszcze nie zapisuje jej w cache.\n2. Żądanie B zmienia cenę w bazie na 120 zł i usuwa dotychczasową kopię z cache.\n3. Żądanie A zapisuje w cache pobraną wcześniej cenę 100 zł.\n\nJaką cenę otrzyma następne żądanie, jeśli odczyta ją tylko z cache, zanim wpis wygaśnie lub zostanie zmieniony?",
       "type": "one_choice",
       "answers": [
-        "Wydłużenie TTL samo zapewni spójność cache z aktualną bazą.",
-        "Cache może znów zawierać stare dane mimo kolejności commit, potem delete.",
-        "DELETE cache automatycznie unieważnia już rozpoczęte odczyty bazy.",
-        "Commit pisarza uniemożliwia zapis starej wartości w niezależnym cache.",
-        "Każdy odczyt cache sprawdzi wersję w bazie bez dodatkowego kodu."
+        "120 zł — zmiana w bazie automatycznie poprawia każdą kopię w cache.",
+        "100 zł — żądanie A ponownie zapisało w cache nieaktualną cenę.",
+        "Żadnej — po usunięciu wpisu nie można już zapisać tego samego klucza w cache.",
+        "120 zł — Redis przy każdym odczycie sam sprawdza cenę w bazie sklepu."
       ],
-      "explanation": "To wyścig przy uzupełnianiu cache. TTL ogranicza czas problemu, nie zapewnia ścisłej aktualności. Potrzebny jest uzasadniony protokół wersjonowania/synchronizacji albo pominięcie cache.",
+      "explanation": "W bazie jest już 120 zł, ale w cache ostatnio zapisano 100 zł. Żądanie A nadal miało starą cenę w pamięci i zapisało ją po usunięciu wpisu przez B. Samo usunięcie cache po zmianie bazy nie zapobiega takiej sytuacji. TTL (czas ważności wpisu) może ograniczyć czas przechowywania starej ceny, ale nie poprawia jej od razu.",
       "sources": [
         "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
       ],
       "section": "RabbitMQ i Redis",
       "family": "python-38",
       "origin": "report",
-      "correct_answer": "Cache może znów zawierać stare dane mimo kolejności commit, potem delete."
+      "correct_answer": "100 zł — żądanie A ponownie zapisało w cache nieaktualną cenę."
     },
     {
       "question": "Jakie hosty mają kolejno poniższe URL-e?\n```text\nhttps://gov.pl.example.org/\nhttps://gov.pl@example.org/\nhttps://example.org/?next=https://gov.pl/\n```",
