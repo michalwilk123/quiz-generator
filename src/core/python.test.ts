@@ -97,3 +97,45 @@ describe("polski bank pytań Python", () => {
     expect(JSON.stringify(bank)).toBe(before);
   });
 });
+
+describe("Python 2 — zakres zaproszenia", () => {
+  it("preserves matching questions and adds explained questions without unrelated subjects", async () => {
+    const original = await loadBank("python");
+    const bank = await loadBank("python2");
+    const matching = original.quiz_elements.filter(
+      (q) => !["Terraform", "React i JavaScript", "AWS"].includes(q.section!),
+    );
+    expect(matching).toHaveLength(215);
+    expect(bank.quiz_elements).toHaveLength(288);
+    for (const question of matching) {
+      const copy = bank.quiz_elements.find((q) => q.question === question.question)!;
+      expect({ ...copy, section: question.section }).toEqual(question);
+    }
+    expect(bank.quiz_elements.filter((q) => q.family?.startsWith("python2-"))).toHaveLength(73);
+    for (const question of bank.quiz_elements) {
+      expect(question.explanation?.length).toBeGreaterThan(20);
+      expect(question.sources?.length).toBeGreaterThan(0);
+      expect(question.section).not.toMatch(/Terraform|React|AWS/);
+    }
+  });
+
+  it("copies both preset settings and draws a difficult, Python-focused exam", async () => {
+    const bank = await loadBank("python2");
+    for (const id of ["python-nauka", "python-weryfikacja"]) {
+      const original = preparedExams.find((p) => p.id === id)!;
+      const copy = preparedExams.find((p) => p.id === `${id}2`)!;
+      expect({ ...copy.config, subjects: original.config.subjects }).toEqual(original.config);
+      expect(copy.config.subjects).toEqual([{ id: "python2", weight: 1 }]);
+      expect(copy.title).toContain("2");
+      for (let seed = 1; seed <= 10; seed++) {
+        const questions = sampleQuestions(copy.config, [bank], seededRandom(seed));
+        expect(questions).toHaveLength(original.config.questionCount as number);
+        expect(new Set(questions.map((q) => q.family)).size).toBe(questions.length);
+        if (id === "python-weryfikacja") {
+          expect(questions.filter((q) => q.section?.startsWith("Python —")).length).toBeGreaterThanOrEqual(12);
+          expect(new Set(questions.map((q) => q.section))).toEqual(new Set(bank.quiz_elements.map((q) => q.section)));
+        }
+      }
+    }
+  });
+});

@@ -8,6 +8,32 @@ export interface PreparedExam {
 // IDs are public links: keep them stable when updating these configurations.
 export const preparedExams: PreparedExam[] = [
   {
+    id: "python-nauka2",
+    title: "Programowanie python - politechnika gdanska 2 — Nauka 2",
+    description:
+      "Zakres z zaproszenia: Python i backend. 6 pytań bez timera, z objaśnieniami po zakończeniu.",
+    config: {
+      ...defaultConfig("python2"),
+      questionCount: 6,
+      allowUnknownAnswer: true,
+      questionTypes: ["one_choice", "multi_choice", "short_open"],
+      pageSize: 1,
+    },
+  },
+  {
+    id: "python-weryfikacja2",
+    title: "Programowanie python - politechnika gdanska 2 — Weryfikacja 2",
+    description:
+      "Trudne pytania z kodem i scenariusze backendowe. 30 pytań w 20 minut, pełny zestaw odpowiedzi albo zero punktów.",
+    config: {
+      ...defaultConfig("python2"),
+      questionCount: 30,
+      durationMinutes: 20,
+      questionTypes: ["one_choice", "multi_choice", "short_open"],
+      pageSize: 5,
+    },
+  },
+  {
     id: "python-nauka",
     title: "Programowanie python - politechnika gdanska — Nauka",
     description:

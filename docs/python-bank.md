@@ -1,5 +1,17 @@
 # Programowanie python - politechnika gdanska
 
+## Wersja 2 — zakres zaproszenia (30.09.2026)
+
+Osobny bank `src/quizes/python2.json`, ID `python2`, nazwa z dopiskiem **2**. Presety `python-nauka2` i `python-weryfikacja2` zachowują ustawienia pierwszej wersji: 6 pytań bez timera oraz 30 pytań / 20 minut. Stary bank, presety i publiczne linki pozostają dostępne.
+
+Zachowano treść, odpowiedzi, objaśnienia, rodziny i źródła 215 pasujących pytań. Pominięto 24 pytania Terraform, 15 React/JavaScript i 10 AWS. Dodano 73 autorskie pytania: wzorce i DI, Clean Architecture, porty i adaptery, DDD, Flask, Falcon, FastAPI, DRF, Django Admin, Wagtail, SQL/NoSQL, testy, bezpieczeństwo, operacje i współpraca. Baza ma 288 pytań. Dokładniejsze działy Pythona i współbieżności pozwalają istniejącemu algorytmowi równoważenia poświęcić im około połowy losowanego testu; nie zmieniono algorytmu ani pierwszej wersji.
+
+Po doprecyzowaniu trudnego poziomu dodano m.in. pułapki `tuple +=`, metody odbite podklas, `__set_name__`, `yield from`, PEP 479, sprzątanie nazw wyjątków, zużywanie iteratorów przez `zip(strict=True)`, kolejność dekoratorów, tłumienie wyjątku w context managerze, `TaskGroup`, `shield`, `runtime_checkable`, retry transakcji i duplikaty outbox. Wszystkie 20 nowych wykonywalnych przykładów uruchomiono na CPythonie 3.12.3; dwa celowo kończą się wskazanym wyjątkiem.
+
+Research: dokumentacja [Pythona](https://docs.python.org/3.12/), [Django Admin](https://docs.djangoproject.com/en/5.2/ref/contrib/admin/), [Flaska](https://flask.palletsprojects.com/en/stable/), [Falcona](https://falcon.readthedocs.io/en/stable/user/tutorial.html), [FastAPI](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/), [Wagtail 8.0](https://docs.wagtail.org/en/8.0/), [pytest](https://docs.pytest.org/en/stable/how-to/fixtures.html), [OWASP API](https://owasp.org/API-Security/editions/2023/en/0x11-t10/) oraz materiały autorów [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [heksagonu](https://alistair.cockburn.us/hexagonal-architecture) i [Cosmic Python](https://www.cosmicpython.com/book/). Szczegółowe źródła są przy każdym pytaniu. To dobór według zakresu zaproszenia, nie deklaracja znajomości pytań egzaminacyjnych.
+
+Druga ściąga: `job-seek-dashboard/public/materialy/python-egzamin2.html` oraz odpowiadająca jej kopia źródła `.txt`. Zawiera zachowane rozdziały pasujące do zakresu, nowe omówienia, mapę wszystkich 15 tematów i komplet tych samych 288 pytań z odpowiedziami, wyszukiwaniem i drukiem.
+
 Autorski bank ćwiczeniowy: 264 pytania, w tym 66 zagadnień z przekazanego materiału oraz 198 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
 
 ## Dwie konfiguracje

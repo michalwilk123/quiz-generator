@@ -32,6 +32,8 @@ Prepared exams live in `src/prepared_exams.ts`. The initial ISP and ZSBD presets
 
 The Polish **Programowanie python - politechnika gdanska** bank contains 264 explained questions, including React, browser JavaScript, and AWS and two presets: six untimed questions for learning, or 30 questions in 20 minutes for verification. The interface is Polish. Existing ISP/ZSBD presets and question banks remain available. See [bank notes](docs/python-bank.md) for content, sources, open design tasks, and the optional diversity metadata.
 
+The separate **Programowanie python - politechnika gdanska 2** bank matches the invitation's Python/backend scope: 215 matching questions retained and 73 added (288 total). It has **Nauka 2** and **Weryfikacja 2** presets with the same settings as their originals. Detailed Python sections keep roughly half the sampled questions on Python and concurrency, while the remaining sections cover the broader invitation. The original bank and links remain available. The matching second report lives in `job-seek-dashboard/public/materialy/python-egzamin2.html`.
+
 ## Attempts
 
 Questions are drawn without repetition within an attempt and shuffled. Retrying draws again; questions may overlap with a previous attempt. Progress is saved in the current browser. Refreshing restores the attempt, including its original deadline. A new device or browser starts a new attempt.

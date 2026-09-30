@@ -5,6 +5,11 @@ export interface QuizDefinition {
 }
 const quizConfig: QuizDefinition[] = [
   {
+    filename: "python2.json",
+    name: "Programowanie python - politechnika gdanska 2",
+    urlName: "python2",
+  },
+  {
     filename: "python.json",
     name: "Programowanie python - politechnika gdanska",
     urlName: "python",
