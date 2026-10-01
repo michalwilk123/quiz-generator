@@ -12,6 +12,7 @@ export interface Question {
   section?: string;
   family?: string;
   origin?: "report" | "variant";
+  difficulty?: "easy" | "medium" | "hard";
 }
 export interface QuestionBank {
   name: string;
@@ -26,6 +27,8 @@ export function validateQuestion(value: unknown): Question {
       (value) =>
         value !== undefined && (typeof value !== "string" || !value.trim()),
     ) ||
+    (q?.difficulty !== undefined &&
+      !["easy", "medium", "hard"].includes(q.difficulty)) ||
     (q?.sources !== undefined &&
       (!Array.isArray(q.sources) ||
         q.sources.some((url) => {

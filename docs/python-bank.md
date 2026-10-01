@@ -1,16 +1,24 @@
 # Programowanie python - politechnika gdanska
 
-## Wersja 2 — zakres zaproszenia (30.09.2026)
+## Wersja 2 — fundamenty pod zakres zaproszenia (01.10.2026)
 
-Osobny bank `src/quizes/python2.json`, ID `python2`, nazwa z dopiskiem **2**. Presety `python-nauka2` i `python-weryfikacja2` zachowują ustawienia pierwszej wersji: 6 pytań bez timera oraz 30 pytań / 20 minut. Stary bank, presety i publiczne linki pozostają dostępne.
+Bank `src/quizes/python2.json`, ID `python2`, ma **288 pytań**, tyle samo co przed przeglądem. Przewaga zagadek o szczegółach interpretera została zastąpiona podstawami języka, praktycznymi przykładami oraz scenariuszami backendowymi. Wersja 1 pozostaje osobnym bankiem.
 
-Zachowano treść, odpowiedzi, objaśnienia, rodziny i źródła 215 pasujących pytań. Pominięto 24 pytania Terraform, 15 React/JavaScript i 10 AWS. Dodano 73 autorskie pytania: wzorce i DI, Clean Architecture, porty i adaptery, DDD, Flask, Falcon, FastAPI, DRF, Django Admin, Wagtail, SQL/NoSQL, testy, bezpieczeństwo, operacje i współpraca. Baza ma 288 pytań. Dokładniejsze działy Pythona i współbieżności pozwalają istniejącemu algorytmowi równoważenia poświęcić im około połowy losowanego testu; nie zmieniono algorytmu ani pierwszej wersji.
+- 144 pytania o Pythonie: dane i referencje, funkcje, OOP, dekoratory, iteracja, zasoby, typowanie, wydajność i współbieżność.
+- 72 pytania o webie, architekturze, testowaniu i współpracy.
+- 72 pytania o danych, infrastrukturze, bezpieczeństwie i pozostałych narzędziach z zaproszenia.
+- Poziomy zapisane w `difficulty`: 96 `easy`, 144 `medium`, 48 `hard`. Są oceną redakcyjną; trudne pytania sprawdzają połączenie mechanizmów i decyzje projektowe. Rozkład dotyczy całego banku, a nie sztywnej liczby na każdy losowany test.
+- Sześć długich zadań projektowych służy samoocenie. Presety `python-nauka2` (6 pytań bez timera) i `python-weryfikacja2` (30 pytań / 20 minut) zachowują swoje ustawienia.
 
-Po doprecyzowaniu trudnego poziomu dodano m.in. pułapki `tuple +=`, metody odbite podklas, `__set_name__`, `yield from`, PEP 479, sprzątanie nazw wyjątków, zużywanie iteratorów przez `zip(strict=True)`, kolejność dekoratorów, tłumienie wyjątku w context managerze, `TaskGroup`, `shield`, `runtime_checkable`, retry transakcji i duplikaty outbox. Wszystkie 20 nowych wykonywalnych przykładów uruchomiono na CPythonie 3.12.3; dwa celowo kończą się wskazanym wyjątkiem.
+Losowanie nadal równoważy działy i preferuje różne rodziny. Dziewięć działów Pythona zapewnia mu około połowy pytań w sesji weryfikacyjnej. Źródła, objaśnienia i jednoznaczny klucz odpowiedzi znajdują się przy każdym pytaniu. Metadane trudności nie wprowadzają dodatkowego filtra ani gwarancji proporcji poziomów w pojedynczym losowaniu.
 
-Research: dokumentacja [Pythona](https://docs.python.org/3.12/), [Django Admin](https://docs.djangoproject.com/en/5.2/ref/contrib/admin/), [Flaska](https://flask.palletsprojects.com/en/stable/), [Falcona](https://falcon.readthedocs.io/en/stable/user/tutorial.html), [FastAPI](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/), [Wagtail 8.0](https://docs.wagtail.org/en/8.0/), [pytest](https://docs.pytest.org/en/stable/how-to/fixtures.html), [OWASP API](https://owasp.org/API-Security/editions/2023/en/0x11-t10/) oraz materiały autorów [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html), [heksagonu](https://alistair.cockburn.us/hexagonal-architecture) i [Cosmic Python](https://www.cosmicpython.com/book/). Szczegółowe źródła są przy każdym pytaniu. To dobór według zakresu zaproszenia, nie deklaracja znajomości pytań egzaminacyjnych.
+Ściąga 2 w `job-seek-dashboard/public/materialy/python-egzamin2.html` zawiera ten sam komplet pytań, odpowiedzi i poziomów, z wyszukiwaniem oraz drukiem. Odpowiadający plik `.txt` jest identyczną kopią źródła HTML. Rozdziały Python, asyncio, SQL i bezpieczeństwo zostały przepisane wokół fundamentów. Rozdział „trudnych pułapek” zastąpiono zadaniami praktycznymi; pozostałe przydatne omówienia zachowano i uzupełniono wprowadzeniami.
 
-Druga ściąga: `job-seek-dashboard/public/materialy/python-egzamin2.html` oraz odpowiadająca jej kopia źródła `.txt`. Zawiera zachowane rozdziały pasujące do zakresu, nowe omówienia, mapę wszystkich 15 tematów i komplet tych samych 288 pytań z odpowiedziami, wyszukiwaniem i drukiem.
+Ponowna synchronizacja pytań i indeksu źródeł: `python3 scripts/sync-python2-sheet.py [ścieżka-do-job-seek-dashboard]`. Skrypt zachowuje pozostałą treść ściągi. Uzasadnienie doboru i raporty trzech niezależnych przeglądów: [python2-research.md](python2-research.md).
+
+Dobór to jakościowa ocena priorytetów wynikających z zaproszenia i oficjalnych tutoriali. Sylabusy PCAP/PCPP służą wyłącznie jako pomocnicza kontrola pokrycia Pythona. Nie posiadamy statystyk ani archiwalnych pytań z tego egzaminu, więc nie przypisujemy pytaniom liczbowych prawdopodobieństw wystąpienia.
+
+## Wersja 1 — wcześniejsza baza
 
 Autorski bank ćwiczeniowy: 264 pytania, w tym 66 zagadnień z przekazanego materiału oraz 198 dodatkowych pytań i wariantów. Pytania i objaśnienia są po polsku. Fragmenty kodu zachowują składnię odpowiedniego języka.
 

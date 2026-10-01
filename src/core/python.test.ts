@@ -99,27 +99,26 @@ describe("polski bank pytań Python", () => {
 });
 
 describe("Python 2 — zakres zaproszenia", () => {
-  it("preserves matching questions and adds explained questions without unrelated subjects", async () => {
-    const original = await loadBank("python");
+  it("covers the invitation with explained fundamentals at three difficulty levels", async () => {
     const bank = await loadBank("python2");
-    const matching = original.quiz_elements.filter(
-      (q) => !["Terraform", "React i JavaScript", "AWS"].includes(q.section!),
-    );
-    expect(matching).toHaveLength(215);
     expect(bank.quiz_elements).toHaveLength(288);
-    for (const question of matching) {
-      const copy = bank.quiz_elements.find((q) => q.question === question.question)!;
-      expect({ ...copy, section: question.section }).toEqual(question);
+    expect(bank.quiz_elements.filter((q) => q.section?.startsWith("Python —"))).toHaveLength(144);
+    expect(bank.quiz_elements.filter((q) => q.type === "long_open")).toHaveLength(6);
+    expect(new Set(bank.quiz_elements.map((q) => q.question)).size).toBe(288);
+    expect(new Set(bank.quiz_elements.map((q) => q.family)).size).toBe(288);
+    for (const [level, count] of [["easy", 96], ["medium", 144], ["hard", 48]] as const) {
+      expect(bank.quiz_elements.filter((q) => q.difficulty === level)).toHaveLength(count);
     }
-    expect(bank.quiz_elements.filter((q) => q.family?.startsWith("python2-"))).toHaveLength(73);
     for (const question of bank.quiz_elements) {
       expect(question.explanation?.length).toBeGreaterThan(20);
       expect(question.sources?.length).toBeGreaterThan(0);
+      expect(question.section).toBeTruthy();
       expect(question.section).not.toMatch(/Terraform|React|AWS/);
+      expect((question.question.match(/```/g) ?? []).length % 2).toBe(0);
     }
   });
 
-  it("copies both preset settings and draws a difficult, Python-focused exam", async () => {
+  it("copies both preset settings and draws a varied, Python-focused exam", async () => {
     const bank = await loadBank("python2");
     for (const id of ["python-nauka", "python-weryfikacja"]) {
       const original = preparedExams.find((p) => p.id === id)!;
@@ -133,7 +132,9 @@ describe("Python 2 — zakres zaproszenia", () => {
         expect(new Set(questions.map((q) => q.family)).size).toBe(questions.length);
         if (id === "python-weryfikacja") {
           expect(questions.filter((q) => q.section?.startsWith("Python —")).length).toBeGreaterThanOrEqual(12);
-          expect(new Set(questions.map((q) => q.section))).toEqual(new Set(bank.quiz_elements.map((q) => q.section)));
+          expect(new Set(questions.map((q) => q.section))).toEqual(
+            new Set(bank.quiz_elements.filter((q) => copy.config.questionTypes.includes(q.type)).map((q) => q.section)),
+          );
         }
       }
     }
