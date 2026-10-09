@@ -1582,22 +1582,22 @@
       "correct_answer": "Żadnego automatycznego ograniczenia do publicznych i opublikowanych stron konkretnego typu."
     },
     {
-      "question": "Dashboard Metabase filtruje tenant_id. Użytkownik może jednak wykonywać dowolny SQL na wszystkich tabelach klientów tym samym połączeniem. Czy filtr zapewnia izolację klientów?",
+      "question": "W bazie danych są zamówienia wielu firm. Kolumna tenant_id określa, do której firmy należy zamówienie. Panel raportów w Metabase pokazuje tylko zamówienia firmy użytkownika, używając filtra WHERE tenant_id = 123. Użytkownik może też samodzielnie pisać zapytania SQL, a jego połączenie z bazą ma dostęp do zamówień wszystkich firm. Czy sam filtr w panelu wystarczy, aby uniemożliwić mu odczyt zamówień innych firm?",
       "type": "one_choice",
       "answers": [
-        "Tak, filtr dashboardu jest automatyczną polityką wszystkich zapytań SQL.",
-        "Tak, o ile tenant_id jest indeksem.",
-        "Tak, jeśli dashboard nie pokazuje edytora filtra.",
-        "Nie, użytkownik może ominąć filtr własnym SQL."
+        "Tak, filtr w panelu automatycznie obowiązuje także w zapytaniach SQL pisanych przez użytkownika.",
+        "Tak, jeśli w bazie utworzono indeks na kolumnie tenant_id.",
+        "Tak, jeśli użytkownik nie może zmienić filtra w panelu.",
+        "Nie, użytkownik może napisać zapytanie SQL bez filtra i odczytać zamówienia innych firm."
       ],
-      "explanation": "Warunek prezentacji nie jest granicą uprawnień. Trzeba ograniczyć rzeczywisty dostęp do danych, np. uprawnieniami lub odpowiednio skonfigurowaną izolacją w bazie. Sposób ochrony musi uwzględniać uprawnienia do dowolnego SQL.",
+      "explanation": "Filtr WHERE tenant_id = 123 ogranicza wyniki konkretnego zapytania w panelu. Użytkownik może jednak wykonać SELECT * FROM zamowienia bez tego filtra. Ponieważ jego połączenie ma dostęp do zamówień wszystkich firm, zobaczy także cudze dane. Ochrona wymaga ograniczenia dostępu do danych, np. uprawnieniami w bazie. Ukrycie filtra ani indeks na tenant_id nie ograniczają tego dostępu.",
       "sources": [
         "https://www.metabase.com/docs/latest/permissions/data"
       ],
       "section": "Technologie dodatkowe",
       "family": "python-56",
       "origin": "report",
-      "correct_answer": "Nie, użytkownik może ominąć filtr własnym SQL."
+      "correct_answer": "Nie, użytkownik może napisać zapytanie SQL bez filtra i odczytać zamówienia innych firm."
     },
     {
       "question": "W Turtle prefiks ex: jest poprawnie zdefiniowany. Czym różnią się obiekty ex:jan i \"Jan\" w RDF?\n\n```turtle\nex:anna ex:knows ex:jan .\nex:anna ex:name \"Jan\" .\n```",
