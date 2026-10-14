@@ -37,7 +37,7 @@ export default function Quiz() {
   );
   const t = (pl: string, en: string) => english ? en : pl;
   useEffect(() => {
-    const route = location.key;
+    const route = `${location.key}:${location.pathname}:${location.search}`;
     const routeHash = window.location.hash;
     if (initialized.current === route) return;
     initialized.current = route;
@@ -111,7 +111,7 @@ export default function Quiz() {
     } catch (e) {
       setError((e as Error).message);
     }
-  }, [id, quiz, location.key, location.search, location.state]);
+  }, [id, quiz, location.key, location.pathname, location.search, location.state]);
   useEffect(() => {
     if (!attempt) return;
     document.title = `${attempt.title} · Generator quizów`;

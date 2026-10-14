@@ -325,3 +325,16 @@ test("Fullstack shows interview provenance separately from technical documentati
   }
   expect(found).toBe(true);
 });
+
+test("direct hash navigation between presets initializes the requested exam", async ({ page }) => {
+  await page.clock.install();
+  await page.goto("./#/exam/aws-clf-c02-study");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("AWS Certified Cloud Practitioner — Study");
+  await page.goto("./#/exam/aws-clf-c02-demo");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("AWS Certified Cloud Practitioner — Exam Demo");
+  await expect(page.getByText("Answered: 0 / 50", { exact: true })).toBeVisible();
+  await expect(page.getByRole("timer")).toHaveText("90:00");
+  await page.goto("./#/exam/python-pg-fullstack");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("Python PG — Fullstack");
+  await expect(page.getByText("Odpowiedzi: 0 / 40", { exact: true })).toBeVisible();
+});
