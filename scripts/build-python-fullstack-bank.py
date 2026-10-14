@@ -120,7 +120,27 @@ interview("TypeScript. Co oznacza wnioskowanie typu (type inference)?",
     "Kompilator może wywnioskować typ z inicjalizacji lub użycia. Brak jawnej adnotacji nie oznacza wyłączenia kontroli typów.", TS_DOCS + "typescript-in-5-minutes.html",
     [TS_DEV + "#8-what-does-type-inference-mean-in-the-context-of-typescript", TS_LIST])
 
-bank = {"name": "Programowanie Python PG — Fullstack", "section_weights": weights, "quiz_elements": questions}
+# Curated senior scenarios replace the selected families only in this bank.
+# Keep the original Python/Python 2 banks and stable family identities intact.
+curation = json.loads((ROOT / "scripts/python-fullstack-senior.json").read_text())
+selected = curation["selected_families"]
+overrides = curation["overrides"]
+by_family = {q["family"]: q for q in questions}
+assert len(selected) == len(set(selected)), "Duplicate curated families"
+assert set(overrides) == set(selected), "Every selected family needs a reviewed scenario"
+assert set(selected) <= set(by_family), "Unknown curated family"
+questions = []
+for family in selected:
+    q = by_family[family]
+    # Remove answer fields left over from the original question type.
+    for field in ("correct_answer", "correct_answers"):
+        q.pop(field, None)
+    q.update(overrides[family])
+    assert q["correct_answer"] in q["answers"]
+    assert len(q["answers"]) == len(set(q["answers"])) == 4
+    questions.append(q)
+
+bank = {"name": "Programowanie Python PG — Fullstack (Senior)", "section_weights": weights, "quiz_elements": questions}
 assert len({q['question'] for q in questions}) == len(questions)
 assert len({q['family'] for q in questions}) == len(questions)
 (ROOT / "src/quizes/python-fullstack.json").write_text(json.dumps(bank, ensure_ascii=False, indent=2) + "\n")

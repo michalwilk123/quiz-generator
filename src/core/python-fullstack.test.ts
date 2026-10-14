@@ -17,18 +17,18 @@ function seededRandom(seed: number) {
 describe("Python PG fullstack curriculum", () => {
   it("includes explained React/TypeScript, architecture and Python frameworks", async () => {
     const bank = await loadBank("python-fullstack");
-    expect(bank.quiz_elements).toHaveLength(305);
-    expect(new Set(bank.quiz_elements.map((q) => q.question)).size).toBe(305);
+    expect(bank.quiz_elements).toHaveLength(94);
+    expect(new Set(bank.quiz_elements.map((q) => q.question)).size).toBe(94);
     for (const q of bank.quiz_elements) {
       expect(q.explanation!.length).toBeGreaterThan(20);
       expect(q.sources!.length).toBeGreaterThan(0);
       expect(Object.keys(expected)).toContain(q.section);
     }
     const frontend = bank.quiz_elements.filter((q) => q.section === "React i TypeScript");
-    expect(frontend).toHaveLength(23);
+    expect(frontend).toHaveLength(15);
     expect(frontend.every((q) => q.interview_sources?.length)).toBe(true);
     const sourced = frontend.filter((q) => q.family?.startsWith("python-fullstack-interview-ts-"));
-    expect(sourced).toHaveLength(8);
+    expect(sourced).toHaveLength(6);
     expect(sourced.every((q) => q.interview_sources!.length >= 2)).toBe(true);
     expect(Object.isFrozen(sourced[0].interview_sources)).toBe(true);
     expect(() => validateQuestion({ ...sourced[0], interview_sources: ["javascript:alert(1)"] })).toThrow();

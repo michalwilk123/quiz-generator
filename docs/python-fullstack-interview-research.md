@@ -1,5 +1,22 @@
 # Python PG — research pytań rekrutacyjnych
 
+## Korekta poziomu senior — 2026-10-14
+
+Aktualna pula ma 94 scenariusze w zachowanych rodzinach: 25 Python, 20 architektura, 14 frameworki/biblioteki Python, 15 frontend i 20 technologie dodatkowe. Usunięto 211 pozostałych pytań z losowania Fullstack. Wybrane pytania otrzymały sytuacyjny kontekst, wymagania i wiarygodniejsze błędne rozwiązania; nie dopisano nowych rodzin. Oryginalne banki Python pozostają bez zmian.
+
+Dodatkowo przejrzano publiczne materiały pod kątem tematów dla seniora:
+
+- [Python Senior/Lead](https://github.com/chernysh/python-interview-questions): hashowanie i mutowalność, kopiowanie, generatory, dekoratory, konteksty, GIL oraz wątki/procesy. To potwierdzenie tematu; historyczne odpowiedzi z zestawu nie są automatycznie przyjmowane jako poprawne dla Python 3.12.
+- [InterviewsVector Python](https://www.interviewsvector.com/python): anulowanie i timeouty, TaskGroup, ograniczenie równoległości, backpressure i synchronizacja asyncio. Odnośnik przypisano do sześciu odpowiednich scenariuszy.
+- [HackerX Django](https://hackerx.org/interview-questions/django/): optymalizacja ORM i zagnieżdżone atomic/savepoint. Odnośnik dodano do dwóch scenariuszy transakcyjnych; odpowiedzi sprawdzono w dokumentacji Django 5.2.
+- [DDD Interview Practice](https://techinterviewprep.netlify.app/domain-driven-design-interview-questions/): granica agregatu, ochrona niezmienników i zdarzenia domenowe. Przykłady źródła są w C#, a scenariusze quizu dotyczą decyzji niezależnych od języka.
+- [GreatFrontEnd — experienced React](https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers): tożsamość list, hooki, closure, efekty, Context i optymalizacja renderowania. Zachowane rodziny React rozwinięto o konkretne błędy implementacji.
+- [GreatFrontEnd — senior TypeScript](https://www.greatfrontend.com/blog/typescript-interview-questions-for-senior-frontend-developers): generic pick, wzajemnie wykluczające się props, wyczerpująca obsługa stanów, bezpieczny typ patch oraz typ wyniku async. Pięć odpowiadających rodzin ma ten odnośnik; unknown pozostaje powiązany z wcześniejszymi zestawami.
+
+Konkretne sytuacje, odpowiedzi błędne i wyjaśnienia są redakcją quizową. Link nie oznacza, że dokładnie ten scenariusz padł na rozmowie, ani że jest statystycznym „pewniakiem”. Pozostałe scenariusze zachowują status rozwinięć wcześniejszych pytań z dokumentacją; nie przypisujemy im fikcyjnego pochodzenia z interview.
+
+## Historia przeglądu — 2026-10-13
+
 Data przeglądu: 2026-10-13. Korekta po uwadze użytkownika: wcześniejsze 24 nowe pytania były autorskimi ćwiczeniami z dokumentacji, bez ustalonego pochodzenia rekrutacyjnego. Cały ten pakiet usunięto z generatora i banku Fullstack. Zachowano 297 wcześniejszych pytań. Lukę TypeScriptu uzupełnia 8 adaptacji pytań znalezionych w publicznych zestawach, każda z co najmniej dwoma odnośnikami do materiałów rekrutacyjnych.
 
 ## Co oznaczają źródła

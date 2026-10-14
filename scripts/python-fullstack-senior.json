@@ -1,0 +1,1741 @@
+{
+  "selected_families": [
+    "python2-core-016",
+    "python2-core-024",
+    "python2-core-026",
+    "python2-core-027",
+    "python2-core-028",
+    "python2-core-030",
+    "python2-core-031",
+    "python2-core-048",
+    "python2-core-063",
+    "python2-core-078",
+    "python2-core-079",
+    "python2-core-088",
+    "python2-core-089",
+    "python2-core-090",
+    "python2-core-094",
+    "python2-core-096",
+    "python2-core-110",
+    "python2-core-111",
+    "python2-core-112",
+    "python2-core-126",
+    "python2-core-127",
+    "python2-core-128",
+    "python2-core-142",
+    "python2-core-143",
+    "python2-core-144",
+    "python2-web-037",
+    "python2-web-038",
+    "python2-web-041",
+    "python2-web-044",
+    "python2-web-045",
+    "python2-web-046",
+    "python2-web-047",
+    "python2-web-048",
+    "python2-web-049",
+    "python2-web-050",
+    "python2-arch-005",
+    "python2-arch-008",
+    "python2-arch-009",
+    "python2-arch-012",
+    "python2-arch-013",
+    "python2-arch-015",
+    "python2-arch-016",
+    "python2-arch-017",
+    "python2-arch-021",
+    "python2-arch-023",
+    "python2-web-013",
+    "python2-web-014",
+    "python2-web-016",
+    "python2-web-018",
+    "python2-web-019",
+    "python2-web-023",
+    "python2-web-027",
+    "python2-web-028",
+    "python2-web-029",
+    "python2-web-030",
+    "python2-web-058",
+    "python2-web-063",
+    "python2-web-009",
+    "python2-cms-019",
+    "python2-web-064",
+    "python2-ops-004",
+    "python2-ops-012",
+    "python2-ops-014",
+    "python2-ops-016",
+    "python2-ops-017",
+    "python2-ops-018",
+    "python2-ops-021",
+    "python2-ops-028",
+    "python2-ops-029",
+    "python2-ops-030",
+    "python2-ops-033",
+    "python2-ops-034",
+    "python2-ops-039",
+    "python2-ops-044",
+    "python2-ops-045",
+    "python2-ops-053",
+    "python2-ops-058",
+    "python2-ops-063",
+    "python2-ops-069",
+    "python-201",
+    "python-205",
+    "python-206",
+    "python-208",
+    "python-210",
+    "python-212",
+    "python-216",
+    "python-218",
+    "python-223",
+    "python-fullstack-interview-ts-03",
+    "python-fullstack-interview-ts-04",
+    "python-fullstack-interview-ts-05",
+    "python-fullstack-interview-ts-06",
+    "python-fullstack-interview-ts-07",
+    "python-fullstack-interview-ts-08"
+  ],
+  "overrides": {
+    "python2-core-016": {
+      "question": "Cache używa kluczy CustomerKey, których __eq__ i __hash__ zależą od code. Po zmianie key.code wpis nadal zajmuje pamięć, lecz odczyt po kluczu zawodzi. Jak usunąć przyczynę?",
+      "type": "one_choice",
+      "answers": [
+        "Użyć niemutowalnej wartości code jako klucza albo uniemożliwić zmianę pól uczestniczących w równości i hashowaniu.",
+        "Zwracać id(self) z __hash__, zachować porównanie po code, a zmianę code obsługiwać przez usunięcie i ponowne wstawienie tego samego obiektu w cache.",
+        "Przeliczać hash przy każdym odczycie, zachowując możliwość zmiany code.",
+        "Opakować słownik w MappingProxyType, pozostawiając mutowalne obiekty kluczy."
+      ],
+      "correct_answer": "Użyć niemutowalnej wartości code jako klucza albo uniemożliwić zmianę pól uczestniczących w równości i hashowaniu.",
+      "explanation": "Hash klucza musi być stabilny przez jego obecność w słowniku; równe klucze muszą mieć ten sam hash. Proxy blokuje zapis do mapy, lecz nie zamraża jej kluczy.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-024": {
+      "question": "Endpoint async wykonuje 200 ms blokującego I/O klientem bez async API. Przy wzroście ruchu opóźniają się także niezależne requesty. Która zmiana usuwa blokowanie event loop bez uruchamiania osobnego procesu na request?",
+      "type": "one_choice",
+      "answers": [
+        "Otoczyć synchroniczne wywołanie asyncio.timeout, dobrać jego limit do deadline requestu i anulować zadanie po przekroczeniu budżetu, pozostawiając klienta w wątku event loop.",
+        "Użyć gather dla korutyn, z których każda bezpośrednio wywołuje tego klienta.",
+        "Otoczyć synchroniczne wywołanie asyncio.timeout, pozostawiając je w event loop.",
+        "Przenieść wywołanie do ograniczonej puli wątków i dobrać limit równoległości oraz timeouty klienta."
+      ],
+      "correct_answer": "Przenieść wywołanie do ograniczonej puli wątków i dobrać limit równoległości oraz timeouty klienta.",
+      "explanation": "Samo async def nie zmienia blokującej biblioteki w nieblokującą. Timeout asyncio wymaga, by pętla mogła odzyskać sterowanie; anulowanie await na pracę wątku nie zatrzymuje automatycznie trwającego I/O.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/asyncio-task.html"
+      ],
+      "interview_sources": [
+        "https://www.interviewsvector.com/python"
+      ]
+    },
+    "python2-core-026": {
+      "question": "Importer ma 1000 niezależnych żądań i limit 10 równocześnie trwających operacji do API, współdzielony przez wszystkie zadania importera. Która implementacja rzeczywiście utrzymuje ten limit?",
+      "type": "one_choice",
+      "answers": [
+        "Wspólnym Semaphore(10) chronić tworzenie create_task, natychmiast zwalniać pozwolenie i gromadzić taski do końcowego gather, aby nie blokować planowania pozostałych żądań.",
+        "Wszystkie zadania startują naraz, a wyniki są odczytywane partiami po 10.",
+        "Jeden Semaphore(10) utworzony dla importera; każde zadanie trzyma go od początku do końca await wywołania API.",
+        "Każde zadanie tworzy własny Semaphore(10) przed await wywołania API."
+      ],
+      "correct_answer": "Jeden Semaphore(10) utworzony dla importera; każde zadanie trzyma go od początku do końca await wywołania API.",
+      "explanation": "Limit musi obejmować faktyczną operację i być wspólny dla konkurujących zadań. Limit równoległości nie jest tym samym co limit żądań na sekundę.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://www.interviewsvector.com/python"
+      ]
+    },
+    "python2-core-027": {
+      "question": "Worker w TaskGroup łapie CancelledError, aby zwolnić zasób, po czym kontynuuje pętlę odbierania zleceń. Dlaczego shutdown może utknąć i jaka poprawka zachowuje kontrakt anulowania?",
+      "type": "one_choice",
+      "answers": [
+        "Po cleanup zamienić CancelledError na normalny wynik workera i w finally ponownie uruchomić pętlę odbioru zleceń, aby nie utracić wiadomości podczas zamykania grupy.",
+        "Worker tłumi anulowanie; powinien posprzątać i ponownie zgłosić CancelledError, a zasób zwalniać także w finally.",
+        "TaskGroup wymaga zamiany CancelledError na zwykły Exception, aby grupa mogła wyjść.",
+        "Po cleanup należy zwrócić normalny wynik i wznowić workera z finally."
+      ],
+      "correct_answer": "Worker tłumi anulowanie; powinien posprzątać i ponownie zgłosić CancelledError, a zasób zwalniać także w finally.",
+      "explanation": "Structured concurrency korzysta z anulowania do kończenia zadań. Jego połknięcie może uniemożliwić wyjście grupy; shield całej nieskończonej pętli nie zapewnia takiego shutdownu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/asyncio-task.html"
+      ],
+      "interview_sources": [
+        "https://www.interviewsvector.com/python"
+      ]
+    },
+    "python2-core-028": {
+      "question": "Python 3.12: w TaskGroup działają dwa zadania. Pierwsze zgłasza ValueError, drugie nadal czeka na I/O. Nie ma własnej obsługi błędów. Co gwarantuje wyjście z async with?",
+      "type": "one_choice",
+      "answers": [
+        "Grupa anuluje pozostałe zadania, czeka na ich zakończenie i zgłasza grupę wyjątków zawierającą błąd.",
+        "Grupa natychmiast zgłosi pierwszy ValueError bez oczekiwania na pozostałe zadania, a zadanie czekające na I/O zachowa możliwość zakończenia i zwolnienia zasobów już poza kontekstem.",
+        "Grupa czeka, aż drugie zadanie samo zakończy I/O, bez próby jego anulowania.",
+        "Grupa traktuje błąd jako wynik pierwszego zadania i wychodzi normalnie po zakończeniu drugiego."
+      ],
+      "correct_answer": "Grupa anuluje pozostałe zadania, czeka na ich zakończenie i zgłasza grupę wyjątków zawierającą błąd.",
+      "explanation": "TaskGroup łączy czas życia zadań. Pierwszy błąd inny niż anulowanie uruchamia anulowanie rodzeństwa i oczekiwanie na cleanup; błędy są następnie grupowane.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/asyncio-task.html"
+      ],
+      "interview_sources": [
+        "https://www.interviewsvector.com/python"
+      ]
+    },
+    "python2-core-030": {
+      "question": "Pipeline ma Queue(maxsize=100), ale producent dla każdego rekordu robi create_task(queue.put(record)) bez czekania. Pamięć nadal rośnie. Która zmiana przywraca backpressure?",
+      "type": "one_choice",
+      "answers": [
+        "Zmniejszyć maxsize do 1 i przechowywać uchwyty tasków w zbiorze z callbackiem usuwającym zakończone zadania; producent nadal tworzy task dla każdego rekordu bez oczekiwania na miejsce.",
+        "Przenosić referencje do utworzonych tasków z listy do zbioru.",
+        "Dodać await sleep(0) po każdym create_task, bez ograniczenia liczby oczekujących tasków.",
+        "Producent wykonuje await queue.put(record) przed pobraniem kolejnego rekordu albo korzysta ze stałej liczby producentów."
+      ],
+      "correct_answer": "Producent wykonuje await queue.put(record) przed pobraniem kolejnego rekordu albo korzysta ze stałej liczby producentów.",
+      "explanation": "Ograniczona kolejka nie ogranicza liczby zadań czekających na miejsce. Backpressure musi zatrzymać producenta przed dalszym gromadzeniem rekordów.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "interview_sources": [
+        "https://www.interviewsvector.com/python"
+      ]
+    },
+    "python2-core-031": {
+      "question": "Dwie korutyny w jednym event loop robią old = balances[id], potem await validate(), następnie balances[id] = old + amount. Który wariant zapobiega utracie aktualizacji dla tego id?",
+      "type": "one_choice",
+      "answers": [
+        "Użyć wspólnego asyncio.Lock dla danego id tylko podczas przypisania balances[id], a walidację i odczyt wykonać wcześniej, aby uniknąć trzymania blokady podczas operacji I/O.",
+        "validate() jest uruchamiane przez create_task, po czym wynik jest oczekiwany przed tym samym zapisem.",
+        "Wspólny asyncio.Lock dla danego id obejmuje odczyt, walidację i zapis, a wszystkie ścieżki aktualizacji go respektują.",
+        "Wspólny Lock obejmuje tylko przypisanie balances[id] = old + amount."
+      ],
+      "correct_answer": "Wspólny asyncio.Lock dla danego id obejmuje odczyt, walidację i zapis, a wszystkie ścieżki aktualizacji go respektują.",
+      "explanation": "Po await inna korutyna może zmienić saldo. Ochrona tylko zapisu nie odświeża starej wartości; blokada musi synchronizować całe read-modify-write. W wielu procesach potrzebna jest ochrona współdzielonego magazynu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://www.interviewsvector.com/python"
+      ]
+    },
+    "python2-core-048": {
+      "question": "Serwis przechowuje dict[str, list[str]]. Metoda snapshot() ma zwrócić niezależny obraz danych: późniejsze mutacje serwisu i klienta nie mogą zmieniać drugiej strony. Który wynik spełnia kontrakt?",
+      "type": "one_choice",
+      "answers": [
+        "Utworzyć self.config.copy() i opakować kopię w MappingProxyType; mapy będą rozdzielone, a read-only interfejs zwróconej mapy ma zapobiegać modyfikacji jej współdzielonych list.",
+        "Nowy słownik z nową listą dla każdej wartości, tworzony przy spójnym odczycie stanu.",
+        "MappingProxyType(self.config), bez kopiowania wartości.",
+        "self.config.copy(), bez kopiowania list."
+      ],
+      "correct_answer": "Nowy słownik z nową listą dla każdej wartości, tworzony przy spójnym odczycie stanu.",
+      "explanation": "Płytka kopia współdzieli listy, a proxy nie jest snapshotem i nie chroni zagnieżdżeń. Dla tego konkretnego schematu skopiowanie mapy i list izoluje dane; współbieżny odczyt wymaga osobnego zapewnienia spójności.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-063": {
+      "question": "Dekorator ma mierzyć pełny czas async operacji również wtedy, gdy kończy się ona wyjątkiem lub anulowaniem, bez zmiany jej wyniku. Który układ jest poprawny?",
+      "type": "one_choice",
+      "answers": [
+        "async wrapper: start zegara monotonicznego; try: return await fn(...); finally: bezpieczny zapis pomiaru.",
+        "W zwykłym wrapperze zmierzyć czas wywołania fn(...), zapisać go w finally i zwrócić uzyskaną korutynę do await przez wywołującego, zachowując dotychczasowy kontrakt async.",
+        "async wrapper: start; result = await fn(...); zapis pomiaru; return result, bez finally.",
+        "Zwykły wrapper wywołujący asyncio.run(fn(...)) także wewnątrz aktywnego event loop."
+      ],
+      "correct_answer": "async wrapper: start zegara monotonicznego; try: return await fn(...); finally: bezpieczny zapis pomiaru.",
+      "explanation": "Wywołanie async funkcji tworzy korutynę, a nie wykonuje jej pracy. finally obejmuje ścieżki błędu i anulowania; kod metryk nie powinien przesłonić oryginalnego wyjątku.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/asyncio-task.html",
+        "https://docs.python.org/3.12/reference/compound_stmts.html#finally"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-078": {
+      "question": "Jednorazowy generator dostarcza 50 mln liczb. Potrzebujesz count i sum(x*x), stałej pamięci oraz jednego odczytu źródła. Która strategia spełnia wszystkie warunki?",
+      "type": "one_choice",
+      "answers": [
+        "Rozdzielić źródło przez itertools.tee, najpierw policzyć wszystkie rekordy w pierwszej gałęzi, a następnie sumę w drugiej; obie gałęzie pozostają leniwe, więc uznać pamięć za stałą.",
+        "Dwa aliasy iteratora: count z jednego, następnie sumę z drugiego.",
+        "Kopiec wszystkich rekordów, z którego kolejno obliczyć obie wartości.",
+        "Jedna pętla aktualizująca oba akumulatory."
+      ],
+      "correct_answer": "Jedna pętla aktualizująca oba akumulatory.",
+      "explanation": "tee buforuje różnicę postępu konsumentów; pełny pierwszy przebieg wymaga tu dużego bufora. Wspólny iterator nie daje dwóch niezależnych przebiegów.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/itertools.html#itertools.tee"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-079": {
+      "question": "Dla n zamówień kod wyszukuje klienta przez liniowy skan n klientów. Identyfikatory klientów są unikalne, zbiór mieści się w RAM i jest stały w czasie operacji. Która zmiana daje oczekiwany czas O(n) całego łączenia?",
+      "type": "one_choice",
+      "answers": [
+        "Posortować klientów raz po id, a następnie dla każdego zamówienia używać binary search; ponieważ każde wyszukiwanie jest krótsze od liniowego, uznać całe łączenie za O(n).",
+        "Zamienić listę klientów na set i dla każdego zamówienia skanować elementy, porównując id.",
+        "Zbudować raz dict po id klienta i używać go dla wszystkich zamówień.",
+        "Budować dict wszystkich klientów ponownie dla każdego zamówienia."
+      ],
+      "correct_answer": "Zbudować raz dict po id klienta i używać go dla wszystkich zamówień.",
+      "explanation": "Jednorazowy indeks ma oczekiwany koszt O(n) budowy i O(1) wyszukania. Sortowanie z binary search daje O(n log n), a samo opakowanie kolekcji nie usuwa liniowego skanu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/tutorial/datastructures.html#dictionaries"
+      ]
+    },
+    "python2-core-088": {
+      "question": "CPython z GIL: dwa wątki odczytują licznik, wykonują blokujące I/O, potem zapisują old + 1. Oba odczytały tę samą wartość. Co wynika z tego przebiegu?",
+      "type": "one_choice",
+      "answers": [
+        "Objąć wspólną blokadą wyłącznie blokujące I/O, a odczyt starej wartości i przypisanie old + 1 pozostawić poza nią; serializacja wywołań I/O ma wtedy wystarczyć do zachowania obu aktualizacji.",
+        "Jedna aktualizacja może zostać utracona; GIL nie obejmuje tej wieloetapowej operacji transakcją.",
+        "Końcowy wynik musi wzrosnąć o 2, ponieważ przypisania do liczb są chronione przez GIL.",
+        "Wynik musi być poprawny, jeśli oba wątki używają tej samej globalnej zmiennej."
+      ],
+      "correct_answer": "Jedna aktualizacja może zostać utracona; GIL nie obejmuje tej wieloetapowej operacji transakcją.",
+      "explanation": "Istotny jest cały protokół read-modify-write. I/O pozwala na przeplot, a pojedynczy bezpieczny dostęp do obiektu nie gwarantuje atomowości protokołu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/threading.html"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-089": {
+      "question": "Klasa Counter ma wiele instancji i jest używana przez wiele wątków. Metoda increment tworzy Lock() przy każdym wywołaniu. Utracone aktualizacje nie znikają. Jak uzyskać niezależną ochronę każdego licznika?",
+      "type": "one_choice",
+      "answers": [
+        "Przechowywać jeden lock w instancji i używać go dla wszystkich odczytów-modyfikacji-zapisów tej instancji.",
+        "Przechowywać lock w threading.local przypisanym do instancji licznika i obejmować nim całą aktualizację, aby uniknąć tworzenia nowej blokady przy kolejnych operacjach tego samego wątku.",
+        "Przenieść tworzenie Lock() do lokalnej funkcji dekoratora wywoływanej dla każdej operacji.",
+        "Zamknąć tylko odczyt w lock instancji, a zwiększenie i zapis wykonać po jego zwolnieniu."
+      ],
+      "correct_answer": "Przechowywać jeden lock w instancji i używać go dla wszystkich odczytów-modyfikacji-zapisów tej instancji.",
+      "explanation": "Wątki muszą rywalizować o ten sam obiekt blokady. Lokalny lock nie synchronizuje innych wywołań; zakres blokady powinien obejmować cały niezmiennik.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/threading.html#lock-objects"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-090": {
+      "question": "ProcessPoolExecutor używa startu spawn. Zadanie jest lokalną funkcją przechwytującą aktywne połączenie PostgreSQL. Jak zaprojektować granicę zadania?",
+      "type": "one_choice",
+      "answers": [
+        "Przenieść samą funkcję na poziom modułu, a aktywne połączenie przekazać jako argument initializer puli, aby każdy worker spawn używał tego samego otwartego klienta rodzica.",
+        "Zamienić closure na lambda i przechowywać połączenie jako global rodzica.",
+        "Przekazać numer deskryptora połączenia i odtworzyć ten sam obiekt klienta w każdym workerze spawn.",
+        "Funkcja dostępna na poziomie importowalnego modułu, serializowalne argumenty; jeśli potrzebuje bazy, worker tworzy własne połączenie."
+      ],
+      "correct_answer": "Funkcja dostępna na poziomie importowalnego modułu, serializowalne argumenty; jeśli potrzebuje bazy, worker tworzy własne połączenie.",
+      "explanation": "Pula procesów serializuje zadania; lokalna funkcja i aktywne połączenie nie stanowią poprawnej granicy. spawn nie dziedziczy gotowego stanu interpretera jak fork.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/concurrent.futures.html"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-094": {
+      "question": "Transfer między różnymi kontami blokuje najpierw nadawcę, potem odbiorcę. Przy A→B i B→A występują deadlocki. Która zmiana usuwa cykl oczekiwania bez pozostawiania sald bez ochrony?",
+      "type": "one_choice",
+      "answers": [
+        "Pobierać lock nadawcy, a następnie lock odbiorcy z timeoutem; po timeout ponawiać pobranie drugiego z losowym opóźnieniem, zachowując pierwszy lock do udanego ukończenia transferu.",
+        "Zwalniać lock nadawcy przed pobraniem locka odbiorcy i wykonywać zapis po pobraniu tylko tego drugiego.",
+        "Wszystkie transfery pobierają oba locki według tego samego stabilnego porządku id kont i zwalniają je przy każdym wyjściu.",
+        "Przy timeout drugiej blokady ponawiać jej pobranie, trzymając nadal pierwszą."
+      ],
+      "correct_answer": "Wszystkie transfery pobierają oba locki według tego samego stabilnego porządku id kont i zwalniają je przy każdym wyjściu.",
+      "explanation": "Spójny globalny porządek zasobów eliminuje cykl. Kolejność zależna od kierunku lub zmiennego salda nie daje tej własności; cały transfer nadal musi chronić oba konta.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-096": {
+      "question": "Po przeniesieniu krótkiego obliczenia nad wielkimi rekordami do ProcessPoolExecutor przepustowość spadła, a CPU workerów bywa bezczynne. Co najlepiej sprawdzić przed dalszym zwiększaniem puli?",
+      "type": "one_choice",
+      "answers": [
+        "Zwiększyć pulę procesów i zmniejszyć zadania do pojedynczych rekordów, pozostawiając pełną reprezentację argumentów; większa liczba jednoczesnych zadań ma skompensować koszt ich transferu.",
+        "Koszt serializacji i kopiowania względem obliczeń; zmierzyć większe partie lub przekazywanie mniejszej reprezentacji danych.",
+        "Przede wszystkim liczbę await w funkcji workera, nawet jeśli nie wykonuje ona I/O.",
+        "Zwiększyć procesy do liczby rekordów, aby ukryć koszt serializacji każdego z nich."
+      ],
+      "correct_answer": "Koszt serializacji i kopiowania względem obliczeń; zmierzyć większe partie lub przekazywanie mniejszej reprezentacji danych.",
+      "explanation": "Równoległość nie usuwa kosztu transportu danych. Krótkie zadania mogą być zdominowane przez IPC; batching wymaga pomiaru kompromisu opóźnienia i przepustowości.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/concurrent.futures.html#processpoolexecutor"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-110": {
+      "question": "Import łączy dwa jednorazowe iteratory przez zip(..., strict=True). Każda para jest od razu zapisywana i commitowana. Nierówne długości wykrywane są na końcu. Wymaganie: cały import albo żaden. Co zmienić?",
+      "type": "one_choice",
+      "answers": [
+        "Objąć iterację i wszystkie zapisy jedną transakcją, wycofywaną także przy ValueError z zip.",
+        "Pozostawić commit każdej pary, a zip(..., strict=True) otoczyć try/except ValueError, który zwróci błąd całego importu i zapisze do logów numery wszystkich wcześniej zatwierdzonych rekordów.",
+        "Zastąpić zip przez zip_longest i ignorować pary z brakującą wartością.",
+        "Zrobić tee obu iteratorów i zapisywać podczas pierwszego przebiegu, a długości porównać podczas drugiego."
+      ],
+      "correct_answer": "Objąć iterację i wszystkie zapisy jedną transakcją, wycofywaną także przy ValueError z zip.",
+      "explanation": "strict wykrywa nierówność dopiero w trakcie konsumpcji. Samo wykrycie nie cofa wcześniejszych commitów; atomowość zapisu musi zapewnić granica transakcji.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-core-111": {
+      "question": "process(data) najpierw liczy sum(1 for _ in data), potem iteruje po data i wywołuje handle. data jest jednorazowym, dużym generatorem. Końcowy count jest potrzebny dopiero po handle wszystkich rekordów. Która poprawka zachowuje stałą pamięć?",
+      "type": "one_choice",
+      "answers": [
+        "Zastosować itertools.tee, policzyć count do końca na pierwszej gałęzi, a dopiero potem wykonać handle na drugiej; dzięki leniwym iteratorom nie tworzyć jawnej listy i uznać limit pamięci za spełniony.",
+        "Użyć iter(data) przed drugim przebiegiem, aby odtworzyć jego stan.",
+        "Opakować generator w tuple, po czym wykonać dwa przebiegi.",
+        "Liczyć rekordy w tej samej pętli, która wywołuje handle."
+      ],
+      "correct_answer": "Liczyć rekordy w tej samej pętli, która wywołuje handle.",
+      "explanation": "Iterator zostaje wyczerpany. tee przy rozjechanych konsumentach buforuje rekordy; warunek dostępności count dopiero na końcu pozwala połączyć obie operacje.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-112": {
+      "question": "Funkcja zwraca generator wyrażeń z pliku otwartego w with, ale with kończy się przed iteracją. Odbiorca czasem przerywa po pierwszym wierszu i plik ma być wtedy natychmiast zamknięty. Który projekt obejmuje oba wymagania?",
+      "type": "one_choice",
+      "answers": [
+        "Przenieść with open do funkcji generatora z yield, a odbiorcy zostawić zwykłą pętlę z break i referencję do generatora; samo przerwanie pętli ma zagwarantować natychmiastowe wyjście z with.",
+        "Zamienić generator na map nad tym samym plikiem, pozostawiając obecną granicę with.",
+        "Generator utrzymuje with open przez yield, a odbiorca konsumuje go w contextlib.closing, zapewniając close także po break.",
+        "Generator utrzymuje with open przez yield, a sam break zawsze gwarantuje jego natychmiastowe close."
+      ],
+      "correct_answer": "Generator utrzymuje with open przez yield, a odbiorca konsumuje go w contextlib.closing, zapewniając close także po break.",
+      "explanation": "Zasób musi żyć podczas konsumpcji. Przerwanie pętli nie zamyka automatycznie dowolnego iteratora; jawny kontekst po stronie odbiorcy zapewnia deterministyczny cleanup.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/contextlib.html"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-126": {
+      "question": "@contextmanager ma zwolnić zasób i zachować ValueError zgłoszony wewnątrz with. Autor łapie ValueError wokół yield, loguje i kończy funkcję. Jakie zachowanie uzyska i jak je poprawić?",
+      "type": "one_choice",
+      "answers": [
+        "Po przechwyceniu ValueError zapisać go w logach i normalnie zakończyć generator, umieszczając cleanup w finally; contextmanager ma automatycznie odtworzyć wyjątek po wykonaniu sprzątania.",
+        "Wyjątek zostanie stłumiony; po logowaniu trzeba go ponownie zgłosić, a cleanup zapewnić w finally.",
+        "Wyjątek zostanie automatycznie ponownie zgłoszony przez contextmanager; wystarczy zostawić logowanie.",
+        "Wyjątek zmieni się w StopIteration; trzeba wykonać drugi yield po cleanup."
+      ],
+      "correct_answer": "Wyjątek zostanie stłumiony; po logowaniu trzeba go ponownie zgłosić, a cleanup zapewnić w finally.",
+      "explanation": "Wyjątek z bloku with jest wstrzykiwany w miejscu yield. Zakończenie generatora po jego przechwyceniu sygnalizuje obsłużenie, więc samo logowanie bez raise go tłumi.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/contextlib.html"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-127": {
+      "question": "Liczba otwieranych plików jest dynamiczna, a otwarcie trzeciego może zawieść. Który wzorzec zamknie dwa poprzednie także wtedy?",
+      "type": "one_choice",
+      "answers": [
+        "W aktywnym ExitStack wywoływać enter_context(open(path)) po kolei dla każdego pliku.",
+        "Najpierw otworzyć wszystkie pliki w list comprehension, potem utworzyć ExitStack i zarejestrować w nim każdy plik; ExitStack ma przejąć także sprzątanie błędów z wcześniejszej fazy otwierania.",
+        "Zamykać pliki w finally umieszczonym dopiero za ukończoną list comprehension otwierającą wszystkie pliki.",
+        "Otworzyć wszystkie pliki, a sprzątanie zarejestrować po zakończeniu całej pętli."
+      ],
+      "correct_answer": "W aktywnym ExitStack wywoływać enter_context(open(path)) po kolei dla każdego pliku.",
+      "explanation": "Rejestracja cleanup musi nastąpić po każdym udanym otwarciu, zanim następne może zawieść. ExitStack zwija już zarejestrowane konteksty także przy częściowym niepowodzeniu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/contextlib.html"
+      ],
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-128": {
+      "question": "Co zwróci wywołanie f() i co stanie się z błędem?\n```python\ndef f():\n    try:\n        raise ValueError(\"invalid\")\n    finally:\n        return \"fallback\"\n```",
+      "type": "one_choice",
+      "answers": [
+        "Zgłosi ValueError; return w finally wykonuje się tylko przy normalnym wyjściu.",
+        "Zgłosi ExceptionGroup zawierającą ValueError i wartość fallback.",
+        "Zwróci None, ponieważ wyjątek unieważnia każdą wartość return.",
+        "Zwróci \"fallback\"; return z finally przesłoni ValueError."
+      ],
+      "correct_answer": "Zwróci \"fallback\"; return z finally przesłoni ValueError.",
+      "explanation": "finally wykonuje się także podczas propagacji błędu. return w tym bloku zastępuje oczekujący sposób zakończenia; cleanup powinien unikać takiego tłumienia wyjątków.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-142": {
+      "question": "Funkcja tylko odczytuje zwierzęta, ale przyjmuje list[Animal]. Dlaczego list[Cat] nie jest poprawnym argumentem w statycznym typowaniu i jaki kontrakt lepiej opisuje tę funkcję?",
+      "type": "one_choice",
+      "answers": [
+        "Zmienić list[Animal] na list[object], aby poszerzyć dozwolone elementy argumentu; ponieważ Cat dziedziczy po object, lista kotów ma wtedy spełniać kontrakt bez ryzyka dodania obcego typu.",
+        "Zmienić adnotację na MutableSequence[Animal], która zabrania dopisywania innych zwierząt.",
+        "Lista jest niezmiennicza, bo można do niej dopisać inne Animal; dla odczytu przyjąć Sequence[Animal].",
+        "Listy są kowariantne; problem rozwiązuje wyłącznie wyłączenie sprawdzania typów argumentów."
+      ],
+      "correct_answer": "Lista jest niezmiennicza, bo można do niej dopisać inne Animal; dla odczytu przyjąć Sequence[Animal].",
+      "explanation": "Mutowalny pojemnik nie może bezpiecznie pozwalać na podstawienie listy kotów tam, gdzie można dodać psa. Odczytowy Sequence wyraża potrzebny, kowariantny interfejs.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-core-143": {
+      "question": "frozen dataclass zawiera tags: list[str]. Ma być stabilnym kluczem cache i snapshotem wejściowych tagów. Co jest poprawną zmianą projektu?",
+      "type": "one_choice",
+      "answers": [
+        "Pozostawić oryginalną listę i frozen=True, dodać unsafe_hash=True oraz przekazać adnotację Final do tags; razem mają one blokować append i utrzymywać hash bez kopiowania kolekcji wejściowej.",
+        "Zapisać defensywnie utworzone tuple[str, ...] zamiast listy i zachować niemutowalność wszystkich pól używanych do równości/hash.",
+        "Dodać unsafe_hash=True i pozostawić listę bez zmian.",
+        "Zwrócić id(self) z __hash__, pozostawiając równość po tagach."
+      ],
+      "correct_answer": "Zapisać defensywnie utworzone tuple[str, ...] zamiast listy i zachować niemutowalność wszystkich pól używanych do równości/hash.",
+      "explanation": "frozen blokuje przypisania do pól, a nie mutacje obiektów w polach. Lista pozostaje mutowalna i niehashowalna; tożsamościowy hash przy wartościowej równości łamie wymagania klucza.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://github.com/chernysh/python-interview-questions"
+      ]
+    },
+    "python2-core-144": {
+      "question": "Konsument zdarzeń deklaruje TypedDict z version i customer_id. JSON pochodzi od zewnętrznego producenta, który wdraża nowe wersje niezależnie. Jak chronić granicę runtime?",
+      "type": "one_choice",
+      "answers": [
+        "Zweryfikować obsługiwaną wersję i strukturę danych w runtime, następnie przekazać sprawdzoną reprezentację do logiki.",
+        "Zadeklarować TypedDict dla każdej wersji, wykonać cast(Event, json.loads(body)) i uruchamiać mypy w CI; zgodność typów producenta ma zastąpić sprawdzanie nieznanego payloadu w konsumencie.",
+        "Przypisać wynik json.loads do zmiennej Event i polegać na samym type checkerze.",
+        "Użyć TypedDict(total=False), aby dowolna przyszła struktura była bezpieczna dla obecnej logiki."
+      ],
+      "correct_answer": "Zweryfikować obsługiwaną wersję i strukturę danych w runtime, następnie przekazać sprawdzoną reprezentację do logiki.",
+      "explanation": "TypedDict opisuje statyczny kontrakt, nie waliduje obcych danych. Ewolucja wersji wymaga jawnej polityki akceptacji, odrzucenia lub migracji; cast nie sprawdza zawartości.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-web-037": {
+      "question": "DDD: sprzedaż i wsparcie inaczej definiują status klienta. Wspólna encja wymusza sprzeczne walidacje, ale obie części pozostają w jednym procesie. Która decyzja najlepiej adresuje problem?",
+      "type": "one_choice",
+      "answers": [
+        "Wydzielić dwa niezależnie wdrażane mikroserwisy i pozostawić w nich wspólną bibliotekę Customer ze wszystkimi walidacjami, aby osobne procesy stanowiły granice mimo utrzymania wspólnego modelu.",
+        "Dodać parametr department do każdej metody wspólnej encji i uznać granice modeli za ustalone.",
+        "Zachować jeden model, a wszystkie sprzeczne reguły przenieść do widoków poszczególnych działów.",
+        "Rozdzielić modele i reguły kontekstów oraz jawnie mapować wspólną tożsamość; granica modelu nie wymaga osobnego deploymentu."
+      ],
+      "correct_answer": "Rozdzielić modele i reguły kontekstów oraz jawnie mapować wspólną tożsamość; granica modelu nie wymaga osobnego deploymentu.",
+      "explanation": "Bounded context rozgranicza znaczenie modelu i reguł. Sam podział procesów nie usuwa semantycznego sprzężenia; tożsamość może być uzgodniona bez wspólnej encji.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-web-038": {
+      "question": "DDD: Order pilnuje limitu sumy pozycji. Dwa requesty wczytują wersję 7, każdy dodaje pozycję zgodną z lokalnym limitem, a łączny wynik przekroczyłby limit. Jak domknąć ochronę niezmiennika?",
+      "type": "one_choice",
+      "answers": [
+        "Zastosować kontrolę wersji przy zapisie, ale przy konflikcie ponowić sam zapis wcześniej obliczonego stanu na nowej wersji, bez ponownego wczytywania i sprawdzania limitu, aby nie powtarzać obliczeń.",
+        "Przy konflikcie wersji ponowić sam zapis wcześniej policzonego stanu, bez ponownej oceny limitu.",
+        "Połączyć kontrolę w agregacie z kontrolą wersji przy zapisie i ponownym wczytaniem oraz oceną reguły po konflikcie.",
+        "Zostawić tylko walidację w metodzie agregatu; skoro oba wywołania przeszły, oba zapisy są poprawne."
+      ],
+      "correct_answer": "Połączyć kontrolę w agregacie z kontrolą wersji przy zapisie i ponownym wczytaniem oraz oceną reguły po konflikcie.",
+      "explanation": "Agregat chroni regułę w obrębie obsługiwanej wersji stanu. Współbieżny zapis wymaga mechanizmu persystencji, np. optimistic concurrency, a konflikt może zmienić wynik decyzji domenowej.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_07_aggregate",
+        "https://www.cosmicpython.com/book/chapter_03_abstractions"
+      ],
+      "interview_sources": [
+        "https://techinterviewprep.netlify.app/domain-driven-design-interview-questions/"
+      ]
+    },
+    "python2-web-041": {
+      "question": "Reguła zakazuje anulowania opłaconego zamówienia. API i CSV używają wspólnej metody cancel(), lecz płatność może zostać zaksięgowana równocześnie. Co jest potrzebne poza współdzieleniem metody?",
+      "type": "one_choice",
+      "answers": [
+        "Sprawdzić status we wspólnej metodzie przed rozpoczęciem transakcji, następnie w atomic bezwarunkowo zapisać cancelled; wspólna implementacja i transakcja zapisu mają wystarczyć mimo równoległej płatności.",
+        "Każda ścieżka zmiany tego stanu respektuje tę samą granicę spójności, z blokadą lub kontrolą wersji obejmującą odczyt i zapis.",
+        "Walidować status przed otwarciem transakcji i zapisywać anulowanie bez ponownego warunku.",
+        "Umieścić regułę w serializerze API i pozostawić CSV z wcześniejszym odczytem statusu."
+      ],
+      "correct_answer": "Każda ścieżka zmiany tego stanu respektuje tę samą granicę spójności, z blokadą lub kontrolą wersji obejmującą odczyt i zapis.",
+      "explanation": "Jedna implementacja reguły usuwa rozjazd logiki, ale sama nie usuwa wyścigu. Wszystkie konkurujące ścieżki muszą uczestniczyć w ochronie tego samego niezmiennika.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-web-044": {
+      "question": "Transakcja oznacza zamówienie jako opłacone. Po commicie ma powstać powiadomienie w innym systemie, również po restarcie procesu tuż po commicie. Jak potraktować OrderPaid?",
+      "type": "one_choice",
+      "answers": [
+        "Zapisać fakt do outbox w tej samej transakcji i publikować z ponowieniami; odbiorca uwzględnia duplikaty.",
+        "Zarejestrować publish w on_commit, a po poprawnym zatwierdzeniu transakcji traktować zdarzenie jako dostarczone; callback usuwa możliwość wysłania przed rollback, więc osobny trwały zapis nie jest potrzebny.",
+        "Przechować zdarzenie w liście agregatu i po commicie wykonać pojedyncze publish bez trwałego zapisu.",
+        "Zrobić publish w callbacku on_commit i traktować poprawny commit jako dowód dostarczenia."
+      ],
+      "correct_answer": "Zapisać fakt do outbox w tej samej transakcji i publikować z ponowieniami; odbiorca uwzględnia duplikaty.",
+      "explanation": "Zdarzenie opisuje fakt, ale dostarczenie wymaga osobnego protokołu. Trwały zapis outbox usuwa lukę commit–publish; callback sam nie zapewnia odtworzenia po awarii procesu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://microservices.io/patterns/data/transactional-outbox.html"
+      ],
+      "interview_sources": [
+        "https://techinterviewprep.netlify.app/domain-driven-design-interview-questions/"
+      ]
+    },
+    "python2-web-045": {
+      "question": "Konsument otrzymał OrderPaid po zatwierdzeniu płatności. Brakuje zasobu do realizacji zamówienia. Które zachowanie zachowuje semantykę poleceń i zdarzeń?",
+      "type": "one_choice",
+      "answers": [
+        "Odrzucić OrderPaid z ponownym dostarczeniem, a brak zasobu traktować jak veto wykonania pierwotnej płatności; opłacone zamówienie ma pozostać niesfinalizowane aż konsument zaakceptuje historyczny fakt.",
+        "Zmienić OrderPaid w ponowione żądanie pobrania płatności, aby rozpocząć proces od początku.",
+        "Potwierdzić odbiór, usunąć lokalny ślad płatności i nie inicjować żadnego dalszego procesu.",
+        "Zarejestrować problem i uruchomić jawny proces kompensacji lub obsługi wyjątku biznesowego; nie traktować faktu jako prośby, którą można odrzucić wstecz."
+      ],
+      "correct_answer": "Zarejestrować problem i uruchomić jawny proces kompensacji lub obsługi wyjątku biznesowego; nie traktować faktu jako prośby, którą można odrzucić wstecz.",
+      "explanation": "Odrzucenie obsługi nie cofa faktu w innym systemie. Polecenie może zostać odrzucone przed wykonaniem; konsekwencje zatwierdzonego faktu wymagają jawnego procesu naprawczego.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://techinterviewprep.netlify.app/domain-driven-design-interview-questions/"
+      ]
+    },
+    "python2-web-046": {
+      "question": "Zespół proponuje Clean Architecture dla małego CRUD. Najczęstsze zmiany dotyczą pól formularza i filtrów; jedyna złożona reguła cenowa zmienia się często i trudno ją testować. Jaki pierwszy krok ma najlepsze uzasadnienie?",
+      "type": "one_choice",
+      "answers": [
+        "Przenieść wszystkie formularze, filtry i reguły do jednego generycznego serwisu z parametrami.",
+        "Zastąpić ORM adapterami HTTP dla każdej tabeli, aby uzyskać niezależność domeny.",
+        "Wyizolować regułę cenową i jej potrzebne zależności; kolejne granice wprowadzać według konkretnych problemów zmian i testów.",
+        "Utworzyć interfejs repozytorium i use case dla każdej tabeli, zanim zmieni się testy reguły."
+      ],
+      "correct_answer": "Wyizolować regułę cenową i jej potrzebne zależności; kolejne granice wprowadzać według konkretnych problemów zmian i testów.",
+      "explanation": "Koszt abstrakcji powinien mieć uzasadnienie w realnej zmienności lub izolacji reguł. Jednolite warstwy dla każdego CRUD nie są warunkiem skutecznego wydzielenia trudnej logiki.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-web-047": {
+      "question": "Przypadek użycia nie importuje ORM, ale jego port zwraca QuerySet i logika wywołuje filter oraz select_for_update. Czy izolacja jest osiągnięta?",
+      "type": "one_choice",
+      "answers": [
+        "Zachować zwracany QuerySet, ale opisać go Protocol z filter i select_for_update bez importowania Django; ukrycie nazwy klasy ma wystarczyć, mimo pozostawienia semantyki ORM i jego transakcji w logice.",
+        "Nie; kontrakt ujawnia semantykę ORM. Port powinien opisywać potrzebne operacje i granicę transakcji w języku aplikacji.",
+        "Tak; brak bezpośredniego importu ORM w tym pliku wystarcza niezależnie od typu zwracanego.",
+        "Tak, jeśli QuerySet jest opisany jako Any i nie widać zależności w adnotacjach."
+      ],
+      "correct_answer": "Nie; kontrakt ujawnia semantykę ORM. Port powinien opisywać potrzebne operacje i granicę transakcji w języku aplikacji.",
+      "explanation": "Zależność może przeciekać przez kontrakt bez jawnego importu. Ukrycie jej pod Any nie daje niezależności; aplikacja nadal musi rozumieć obce operacje i ich czas życia.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-web-048": {
+      "question": "Order zwraca tuple(self.lines), lecz elementy Line pozostają mutowalne. Kod zewnętrzny zmienia line.price, omijając kontrolę limitu. Jak przywrócić granicę agregatu?",
+      "type": "one_choice",
+      "answers": [
+        "Udostępniać niemutowalne widoki pozycji, a zmiany ceny wykonywać przez operację korzenia sprawdzającą niezmiennik.",
+        "Zwracać tuple(self.lines) z adnotacją Sequence[Line] i oznaczyć order.lines jako read-only property; brak możliwości podmiany kolekcji ma zabezpieczyć limit także wtedy, gdy odbiorca zmienia line.price.",
+        "Zwracać iter(self.lines), aby odbiorca nie widział samej listy.",
+        "Blokować jedynie przypisanie order.lines, pozostawiając możliwość modyfikacji obiektów Line."
+      ],
+      "correct_answer": "Udostępniać niemutowalne widoki pozycji, a zmiany ceny wykonywać przez operację korzenia sprawdzającą niezmiennik.",
+      "explanation": "Niemutowalność pojemnika nie zamraża jego elementów. Granica ma chronić stan wpływający na regułę, a nie tylko metodę append na liście.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "interview_sources": [
+        "https://techinterviewprep.netlify.app/domain-driven-design-interview-questions/"
+      ]
+    },
+    "python2-web-049": {
+      "question": "Dwa repozytoria PostgreSQL każde otwierają własne połączenie i commitują zapis. Dodano zewnętrzny UnitOfWork, ale awaria drugiego nadal pozostawia pierwszy zapis. Co musi zmienić implementacja?",
+      "type": "one_choice",
+      "answers": [
+        "Ustawić SERIALIZABLE na obu osobnych połączeniach i wywoływać repozytoria wewnątrz jednego obiektu UnitOfWork; niezależne commity mają stać się atomowe dzięki silniejszej izolacji każdego połączenia.",
+        "UnitOfWork powinien łapać błąd drugiego repozytorium i zwracać wspólny obiekt wyniku.",
+        "Wystarczy zmienić isolation level obu niezależnych połączeń na SERIALIZABLE.",
+        "Oba repozytoria muszą uczestniczyć w tej samej transakcji na tym samym połączeniu, a commit kontroluje UnitOfWork."
+      ],
+      "correct_answer": "Oba repozytoria muszą uczestniczyć w tej samej transakcji na tym samym połączeniu, a commit kontroluje UnitOfWork.",
+      "explanation": "Nazwa UnitOfWork nie tworzy atomowości. Niezależne transakcje mogą zakończyć się różnie; lokalna atomowość wymaga wspólnej rzeczywistej transakcji.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_06_uow.html"
+      ]
+    },
+    "python2-web-050": {
+      "question": "CRM nazywa klientem każde konto kontaktowe, a domena sprzedaży tylko podmiot z zaakceptowaną umową. Nowa wersja CRM rozszerza status active. Co powinien robić anti-corruption layer?",
+      "type": "one_choice",
+      "answers": [
+        "Dodać adapter DTO, który zmienia nazwę pola CRM active na eligible i nie ujawnia obiektów SDK; wartość przenosić bez interpretacji, aby izolacja struktury danych wystarczyła mimo innego znaczenia statusu.",
+        "Przenieść wszystkie reguły kwalifikacji do kontraktu CRM i usunąć lokalną walidację.",
+        "Jawnie tłumaczyć znaczenia i weryfikować warunki własnej domeny, zamiast utożsamiać active z uprawnieniem do zakupu.",
+        "Zmienić nazwę pola active na eligible bez zmiany wartości i przekazywać je do domeny."
+      ],
+      "correct_answer": "Jawnie tłumaczyć znaczenia i weryfikować warunki własnej domeny, zamiast utożsamiać active z uprawnieniem do zakupu.",
+      "explanation": "Tłumaczenie semantyki jest ważniejsze niż zmiana nazw pól. Zewnętrzny status nie stanowi automatycznie dowodu spełnienia lokalnych reguł biznesowych.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-arch-005": {
+      "question": "Dwa zespoły współdzielą PostgreSQL, ale inaczej definiują Product i jego cykl życia. Czy współdzielona baza dowodzi, że powinny mieć jeden bounded context?",
+      "type": "one_choice",
+      "answers": [
+        "Nie; sam podział na dwa schematy SQL rozwiąże też wszystkie różnice semantyczne.",
+        "Nie; granice wynikają ze znaczenia modeli i reguł, a współdzielona baza wymaga dodatkowo kontroli sprzężenia między kontekstami.",
+        "Tak; każda fizyczna baza definiuje dokładnie jeden bounded context.",
+        "Tak, jeśli oba modele mają ten sam identyfikator Product, nawet przy różnych regułach."
+      ],
+      "correct_answer": "Nie; granice wynikają ze znaczenia modeli i reguł, a współdzielona baza wymaga dodatkowo kontroli sprzężenia między kontekstami.",
+      "explanation": "Granica modelu jest decyzją strategiczną, a schemat bazy rozwiązaniem technicznym. Wspólny identyfikator może łączyć różne modele; fizyczny podział nie zastępuje ustalenia kontraktów.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-arch-008": {
+      "question": "Use case zależy od portu zdefiniowanego w warstwie aplikacji. Adapter SQL importuje port, a composition root przekazuje adapter do use case. Wywołanie runtime trafia do SQL. Jak ocenić kierunek zależności?",
+      "type": "one_choice",
+      "answers": [
+        "Jest zachowany: zależność kodu adaptera prowadzi do portu aplikacji, a konkretny adapter jest wstrzykiwany na zewnątrz.",
+        "Kierunek jest złamany, ponieważ runtime przechodzi z use case do SQL; port trzeba przenieść do modułu infrastruktury i importować stamtąd w aplikacji, aby implementacja i interfejs miały jednego właściciela.",
+        "Byłby zachowany dopiero, gdy use case sam importował i tworzył adapter SQL.",
+        "Byłby zachowany, gdyby port przenieść do modułu adaptera i importować go z aplikacji."
+      ],
+      "correct_answer": "Jest zachowany: zależność kodu adaptera prowadzi do portu aplikacji, a konkretny adapter jest wstrzykiwany na zewnątrz.",
+      "explanation": "Kierunek zależności źródłowych i kierunek przepływu sterowania nie są tożsame. Port należący do aplikacji pozwala delegować pracę bez importowania szczegółu infrastruktury.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-arch-009": {
+      "question": "Operacja zwraca Response frameworka i odczytuje request.user. Teraz ma działać z CLI oraz zadania kolejki z inną tożsamością wywołującego. Jak utrzymać jedną logikę autoryzacji?",
+      "type": "one_choice",
+      "answers": [
+        "Utrzymać istniejący use case oparty o HttpRequest, a CLI i kolejkę wyposażyć w sztuczne requesty z ustawianym request.user; wszystkie adaptery mają przez to automatycznie uzyskać poprawne uwierzytelnienie.",
+        "Przenieść autoryzację wyłącznie do HTTP, aby CLI i kolejka nie zależały od frameworka.",
+        "Zrobić osobne kopie operacji dla HTTP, CLI i kolejki, współdzieląc jedynie serializer.",
+        "Adaptery przekazują jawne dane operacji i zweryfikowany kontekst wykonawcy do wspólnego przypadku użycia; odpowiedź mapują u siebie."
+      ],
+      "correct_answer": "Adaptery przekazują jawne dane operacji i zweryfikowany kontekst wykonawcy do wspólnego przypadku użycia; odpowiedź mapują u siebie.",
+      "explanation": "Przypadek użycia potrzebuje informacji o wykonawcy, a nie obiektu transportowego. Rozdzielenie adapterów nie powinno tworzyć ścieżki omijającej wspólną politykę autoryzacji.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-arch-012": {
+      "question": "Adapter plikowy repository.add przy ponownym id nadpisuje rekord, a nowy adapter SQL zgłasza konflikt. Oba spełniają ten sam Protocol. Co trzeba ustalić przed podmianą?",
+      "type": "one_choice",
+      "answers": [
+        "Dodać mypy i sprawdzić wspólny Protocol z identycznymi sygnaturami; skoro oba adaptery przyjmują ten sam typ id i zwracają None, różnica między nadpisaniem a konfliktem nie wymaga dodatkowego kontraktu.",
+        "Dodać do Protocol typ kursora SQL, aby ujawnić implementację nowego adaptera.",
+        "Wspólny kontrakt zachowania dla duplikatów i błędów oraz testy kontraktowe obu adapterów.",
+        "Wystarczy zgodność nazw metod i typów argumentów sprawdzona przez mypy."
+      ],
+      "correct_answer": "Wspólny kontrakt zachowania dla duplikatów i błędów oraz testy kontraktowe obu adapterów.",
+      "explanation": "Zgodność strukturalna interfejsu nie dowodzi zgodności semantyki. Nadpisanie, konflikt i idempotentne powtórzenie to różne kontrakty, od których zależy logika aplikacji.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-arch-013": {
+      "question": "Use case przechodzi z fake repo, ale SQL adapter po błędzie unikalności pozostawia transakcję nieużywalną. Jaka weryfikacja najlepiej obejmuje tę różnicę?",
+      "type": "one_choice",
+      "answers": [
+        "Rozbudować fake repo o rzucanie IntegrityError po powtórzonym id, pozostawić prawdziwą bazę poza testami i uznać przejście tego scenariusza za sprawdzenie stanu rzeczywistej transakcji adaptera SQL.",
+        "Testy adaptera i UnitOfWork z prawdziwą bazą: konflikt, rollback i możliwość dalszej poprawnej operacji w nowej transakcji.",
+        "Dodać do fake repo licznik wywołań commit i ponowić tylko test use case.",
+        "Zamockować IntegrityError w SQL adapterze bez uruchamiania transakcji bazy."
+      ],
+      "correct_answer": "Testy adaptera i UnitOfWork z prawdziwą bazą: konflikt, rollback i możliwość dalszej poprawnej operacji w nowej transakcji.",
+      "explanation": "Fake jest użyteczny dla logiki, lecz nie odwzorowuje automatycznie stanu transakcji sterownika. Zachowanie po rzeczywistym błędzie persystencji wymaga testu integracyjnego.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_06_uow.html"
+      ]
+    },
+    "python2-arch-015": {
+      "question": "Repozytorium zwraca lazy iterator po kursorze SQL, ale zamyka połączenie przed powrotem. Ma obsługiwać miliony wierszy przy ograniczonej pamięci. Jaki kontrakt jest uczciwy i wykonalny?",
+      "type": "one_choice",
+      "answers": [
+        "Jawny kontekst strumieniowego odczytu z określonym czasem życia, mapujący wiersze na dane aplikacji podczas otwartego zasobu.",
+        "Zwrócić ten sam lazy iterator z adnotacją Iterable[Record] i mapowaniem wierszy podczas iteracji, ale połączenie nadal zamykać przed return; brak typu kursora w kontrakcie ma rozwiązać czas życia zasobu.",
+        "Przenieść cursor.close do destruktora encji domenowej i nie określać właściciela zasobu.",
+        "Zmaterializować całość do listy niezależnie od limitu pamięci, pozostawiając kontrakt streaming."
+      ],
+      "correct_answer": "Jawny kontekst strumieniowego odczytu z określonym czasem życia, mapujący wiersze na dane aplikacji podczas otwartego zasobu.",
+      "explanation": "Abstrakcja musi ujawnić istotny czas życia strumienia, nawet gdy ukrywa sterownik. Sama zmiana typu nie wydłuża życia kursora, a materializacja zmienia wymagania pamięciowe.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-arch-016": {
+      "question": "CSV import i HTTP wykonują rejestrację uczestnika. CSV wymaga atomowości całej paczki, HTTP jednej rejestracji. Jak współdzielić regułę bez przypadkowych commitów częściowych?",
+      "type": "one_choice",
+      "answers": [
+        "Niech wspólna rejestracja zawsze wykonuje commit uczestnika; importer opakuje całą pętlę zewnętrznym try/except i przy błędzie zwróci wynik nieudanego importu, uznając go za wycofanie całej paczki.",
+        "Importer wywołuje endpoint HTTP dla każdego wiersza i uznaje wszystkie requesty za jedną transakcję.",
+        "CSV kopiuje regułę do własnego adaptera, a zgodność zapewnia identyczna nazwa funkcji.",
+        "Wspólna logika rejestracji uczestniczy w przekazanej granicy UnitOfWork; warstwa aplikacji ustala transakcję dla pojedynczej operacji lub paczki."
+      ],
+      "correct_answer": "Wspólna logika rejestracji uczestniczy w przekazanej granicy UnitOfWork; warstwa aplikacji ustala transakcję dla pojedynczej operacji lub paczki.",
+      "explanation": "Współdzielenie logiki nie oznacza identycznej granicy transakcji dla każdego scenariusza. Wewnętrzny commit uniemożliwia zewnętrzne zapewnienie atomowości paczki.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_06_uow.html"
+      ]
+    },
+    "python2-arch-017": {
+      "question": "PaymentGateway zwrócił timeout; dostawca mógł już pobrać środki. API dostawcy obsługuje idempotency key i sprawdzenie statusu. Jaka polityka jest poprawna?",
+      "type": "one_choice",
+      "answers": [
+        "Po timeout wycofać lokalny UnitOfWork i ponowić płatność z nowym idempotency key, aby dostawca nie zwrócił wyniku nieudanej lokalnej transakcji; rollback ma wystarczyć do odrzucenia poprzedniej próby.",
+        "Wycofać lokalną transakcję i przyjąć, że cofnęła też pobranie środków u dostawcy.",
+        "Zachować wynik niepewny, uzgodnić status lub ponawiać tę samą operację ze stabilnym kluczem zgodnie z kontraktem dostawcy.",
+        "Uznać timeout za pewne odrzucenie i ponowić z nowym kluczem."
+      ],
+      "correct_answer": "Zachować wynik niepewny, uzgodnić status lub ponawiać tę samą operację ze stabilnym kluczem zgodnie z kontraktem dostawcy.",
+      "explanation": "Timeout nie mówi, czy zewnętrzny efekt zaszedł. Lokalny rollback nie cofa obcego systemu; ponowienie z nowym kluczem może utworzyć drugą płatność.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-arch-021": {
+      "question": "Decorator klienta send ma rejestrować czas także przy błędzie wysyłki. Awaria eksportera metryk nie może zmieniać wyniku send. Który projekt zachowuje kontrakt?",
+      "type": "one_choice",
+      "answers": [
+        "Zapisywać pomiar w finally, a w razie błędu eksportera ponowić cały send razem z pomiarem; dzięki ponowieniu wrapper ma zachować kompletną obserwowalność bez osobnego kanału błędów instrumentacji.",
+        "Delegować send dokładnie raz; mierzyć w finally i odizolować błędy instrumentacji od wyniku lub wyjątku klienta.",
+        "W razie błędu metryk ponowić cały send, aby odtworzyć pełny pomiar.",
+        "Zwrócić wynik z finally, aby zawsze zakończyć wrapper w ten sam sposób."
+      ],
+      "correct_answer": "Delegować send dokładnie raz; mierzyć w finally i odizolować błędy instrumentacji od wyniku lub wyjątku klienta.",
+      "explanation": "Instrumentacja jest dodatkowym zachowaniem i nie powinna wprowadzać powtórnych efektów ani tłumić błędów operacji. finally domyka pomiar, ale jego kod także musi respektować kontrakt.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-arch-023": {
+      "question": "Kanały e-mail/SMS mają opcjonalne retry, metryki i audyt. Retry musi liczyć próby, ale audyt biznesowy ma zapisać jedną operację. Co oprócz zastąpienia hierarchii kompozycją trzeba zaprojektować?",
+      "type": "one_choice",
+      "answers": [
+        "Kolejność wrapperów i semantykę operacji versus próby, z testem zachowania przy częściowej awarii.",
+        "Jedynie wspólną nazwę send; kolejność wrapperów nie wpływa na obserwowalne zachowanie.",
+        "Umieścić retry zawsze na zewnątrz audytu, aby każda próba tworzyła nową operację biznesową.",
+        "Włączyć audyt do obiektu wiadomości i wykonywać go przy każdym odczycie pól."
+      ],
+      "correct_answer": "Kolejność wrapperów i semantykę operacji versus próby, z testem zachowania przy częściowej awarii.",
+      "explanation": "Kompozycja ogranicza liczbę kombinacji klas, lecz nie rozwiązuje sama znaczenia efektów. Wrapper wewnątrz retry jest wykonywany per próba, a zewnętrzny może mierzyć całą operację.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-web-013": {
+      "question": "Django: lista 100 zamówień odczytuje FK customer i wszystkie reverse-FK items każdego zamówienia. Bez paginacji i dodatkowych pól chcesz dwa zapytania zamiast N+1. Który plan odpowiada relacjom?",
+      "type": "one_choice",
+      "answers": [
+        "Użyć prefetch_related(\"customer\", \"items\") i nie filtrować relacji w serializerze; ponieważ są dwie relacje, przyjąć dokładnie dwa zapytania łącznie z pobraniem samych zamówień.",
+        "select_related(\"customer\", \"items\"), aby obie relacje dołączyć przez JOIN w jednym QuerySecie.",
+        "only(\"id\", \"customer_id\") i odczyt relacji w serializerze, bez prefetch.",
+        "select_related(\"customer\").prefetch_related(\"items\"), a serializer korzysta z wczytanych relacji bez dodatkowego filtrowania."
+      ],
+      "correct_answer": "select_related(\"customer\").prefetch_related(\"items\"), a serializer korzysta z wczytanych relacji bez dodatkowego filtrowania.",
+      "explanation": "JOIN pasuje do pojedynczego FK; kolekcja wymaga osobnego pobrania. Prefetch obu relacji zwykle daje trzy zapytania, a select_related nie obsługuje reverse-FK kolekcji.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/models/querysets/"
+      ]
+    },
+    "python2-web-014": {
+      "question": "Django: prefetch_related(\"members\") nie usuwa N+1, gdy serializer dla każdego zespołu robi members.filter(active=True). Co poprawić bez pobierania nieaktywnych osób?",
+      "type": "one_choice",
+      "answers": [
+        "Pozostawić prefetch_related(\"members\"), ale zamienić filter(active=True) na exclude(active=False) i wywoływać go w każdym serializerze; równoważny filtr ma korzystać z cache już wczytanych members.",
+        "Zamienić prefetch_related na select_related(\"members\") dla relacji many-to-many.",
+        "Użyć Prefetch z filtrowanym QuerySetem i to_attr, a serializer niech czyta gotową listę z tego atrybutu.",
+        "Zostawić prefetch i zamienić filter(active=True) na exclude(active=False), aby wykorzystać ten sam cache."
+      ],
+      "correct_answer": "Użyć Prefetch z filtrowanym QuerySetem i to_attr, a serializer niech czyta gotową listę z tego atrybutu.",
+      "explanation": "Nowy filtr tworzy inne zapytanie niż prefetchem wczytane all(). Filtrowany Prefetch i to_attr pozwalają użyć dokładnie pobranego zestawu bez zapytań per obiekt.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/models/querysets/"
+      ]
+    },
+    "python2-web-016": {
+      "question": "Django: wewnątrz atomic złapano IntegrityError z create(), po czym w tym samym bloku wykonywany jest kolejny SELECT. Połączenie zgłasza TransactionManagementError. Jak zachować zewnętrzną transakcję?",
+      "type": "one_choice",
+      "answers": [
+        "Złapać IntegrityError bezpośrednio przy create wewnątrz obecnego atomic i kontynuować kolejne SELECT przez ORM; obsłużony wyjątek ma automatycznie przywrócić transakcję bez osobnego savepoint.",
+        "Ryzykowny zapis objąć wewnętrznym atomic z savepoint, a IntegrityError złapać poza tym wewnętrznym blokiem.",
+        "Złapać IntegrityError bliżej samego create, pozostawiając ten sam pojedynczy atomic.",
+        "W except wykonać commit na tym samym połączeniu, nadal wewnątrz atomic."
+      ],
+      "correct_answer": "Ryzykowny zapis objąć wewnętrznym atomic z savepoint, a IntegrityError złapać poza tym wewnętrznym blokiem.",
+      "explanation": "Po błędzie bazy transakcja pozostaje uszkodzona do rollback. Wyjście z wewnętrznego atomic cofa savepoint przed dalszym użyciem zewnętrznego kontekstu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/topics/db/transactions/"
+      ],
+      "interview_sources": [
+        "https://hackerx.org/interview-questions/django/"
+      ]
+    },
+    "python2-web-018": {
+      "question": "Flask: test tworzy dwie aplikacje o innych konfiguracjach DB. Globalne db = SQLAlchemy(app) i cache konfiguracji z importu powodują mieszanie ustawień. Jaki projekt wspiera izolację?",
+      "type": "one_choice",
+      "answers": [
+        "Niepowiązany globalny obiekt rozszerzenia, db.init_app(app) w factory i odczyt właściwej konfiguracji w kontekście bieżącej aplikacji.",
+        "Globalny pierwszy app i podmiana app.config przed każdym requestem drugiej aplikacji.",
+        "Tworzenie obu aplikacji z factory, ale inicjalizacja rozszerzenia tylko przy pierwszym wywołaniu.",
+        "Zapis konfiguracji pierwszej aplikacji do zmiennej modułu i używanie jej we wszystkich repozytoriach."
+      ],
+      "correct_answer": "Niepowiązany globalny obiekt rozszerzenia, db.init_app(app) w factory i odczyt właściwej konfiguracji w kontekście bieżącej aplikacji.",
+      "explanation": "Factory umożliwia wiele instancji aplikacji, gdy stan instancji nie zostaje utrwalony w globalnym singletonie app. Rozszerzenia wspierające init_app mogą wiązać się z każdą aplikacją oddzielnie.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://flask.palletsprojects.com/en/stable/patterns/appfactories/"
+      ]
+    },
+    "python2-web-019": {
+      "question": "DRF: POST zapisuje zamówienie z nested pozycjami. Walidacja przechodzi, ale zapis jednej pozycji może naruszyć constraint. Wymagana jest atomowość zamówienia i wszystkich pozycji. Co jest potrzebne?",
+      "type": "one_choice",
+      "answers": [
+        "Dodać is_valid(raise_exception=True) i required=True w nested serializerze, następnie zapisywać rodzica oraz pozycje bez wspólnego atomic; udana walidacja ma gwarantować brak późniejszego błędu constraint.",
+        "required=True na nested serializerze, bo cofa zapis rodzica przy błędzie dziecka.",
+        "Osobny atomic dla każdej pozycji, z commitem rodzica przed rozpoczęciem pętli.",
+        "Jawna implementacja nested create/update, określona semantyka zapisu i jedna transakcja obejmująca wszystkie zapisy."
+      ],
+      "correct_answer": "Jawna implementacja nested create/update, określona semantyka zapisu i jedna transakcja obejmująca wszystkie zapisy.",
+      "explanation": "Walidacja nie eliminuje błędów współbieżności i persystencji. Domyślny ModelSerializer nie implementuje dowolnych writable nested operacji, a atomowość trzeba zapewnić dla całego zapisu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.django-rest-framework.org/api-guide/serializers/#writable-nested-representations"
+      ]
+    },
+    "python2-web-023": {
+      "question": "FastAPI: endpoint przekazuje sesję DB z Depends z yield do zadania, które może działać po zakończeniu requestu i cleanup zależności. Jaki kontrakt zadania jest bezpieczny?",
+      "type": "one_choice",
+      "answers": [
+        "Przekazać sesję requestu i wszystkie potrzebne obiekty ORM do zadania, a uchwyt zachować w lokalnej zmiennej zadania; obecność referencji ma zablokować zamknięcie sesji przez cleanup zależności z yield.",
+        "Zastąpić zależność z yield zwykłym return i nigdy nie zamykać sesji requestu.",
+        "Przekazać trwałe identyfikatory lub dane; zadanie tworzy i zamyka własną sesję w swoim czasie życia.",
+        "Przekazać obiekt sesji, ponieważ samo przechowanie referencji blokuje cleanup zależności."
+      ],
+      "correct_answer": "Przekazać trwałe identyfikatory lub dane; zadanie tworzy i zamyka własną sesję w swoim czasie życia.",
+      "explanation": "Zasób należący do requestu nie ma kontraktu życia zadania odroczonego. Własna sesja zadania uniezależnia je od cleanup oraz ewentualnego procesu obsługującego request.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/"
+      ]
+    },
+    "python2-web-027": {
+      "question": "Django Admin: akcja masowa robi queryset.update(status=\"cancelled\"). Reguła w Order.cancel() zabrania anulowania opłaconych zamówień; wszystkie wybrane mają być anulowane albo żadne. Co spełnia wymaganie?",
+      "type": "one_choice",
+      "answers": [
+        "Iterować po cancel i commitować każdy rekord osobno, kończąc na pierwszym błędzie.",
+        "Wspólna operacja aplikacyjna sprawdza i zmienia stan wszystkich wybranych rekordów w jednej transakcji z odpowiednią ochroną współbieżności.",
+        "Dodać atomic wokół obecnego update; ORM wywoła Order.cancel na każdym rekordzie.",
+        "Przenieść regułę do save i zachować update, który automatycznie wywoła save."
+      ],
+      "correct_answer": "Wspólna operacja aplikacyjna sprawdza i zmienia stan wszystkich wybranych rekordów w jednej transakcji z odpowiednią ochroną współbieżności.",
+      "explanation": "QuerySet.update omija metody modelu i sygnały save. Sam atomic nie dodaje reguły, a commit per rekord łamie atomowość całej operacji.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/models/querysets/"
+      ]
+    },
+    "python2-web-028": {
+      "question": "DRF: has_object_permission poprawnie blokuje cudze dokumenty w detail, ale list zwraca je w paginacji. Który mechanizm chroni także dane oraz count listy?",
+      "type": "one_choice",
+      "answers": [
+        "Filtrować QuerySet według uprawnień przed paginacją; zachować osobne sprawdzanie obiektów tam, gdzie jest potrzebne.",
+        "Zostawić pełny QuerySet i policzyć count przed paginacją; dopiero na gotowej stronie wywołać has_object_permission dla każdego dokumentu i usunąć cudze rekordy, zachowując oryginalne metadane strony.",
+        "Przenieść kontrolę do serializer.to_representation i dla cudzych rekordów zwracać pusty słownik.",
+        "Dodać IsAuthenticated obok istniejącej permission, pozostawiając nieograniczony QuerySet."
+      ],
+      "correct_answer": "Filtrować QuerySet według uprawnień przed paginacją; zachować osobne sprawdzanie obiektów tam, gdzie jest potrzebne.",
+      "explanation": "DRF nie wykonuje automatycznie per-object permission dla każdego obiektu listy. Filtrowanie po paginacji może ujawniać liczebność i tworzyć niepoprawne strony.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.django-rest-framework.org/api-guide/permissions/#limitations-of-object-level-permissions"
+      ]
+    },
+    "python2-web-029": {
+      "question": "Django: wewnętrzny atomic rejestruje on_commit(send), potem zostaje cofnięty do savepoint. Zewnętrzny atomic kończy się sukcesem. Co stanie się z callbackiem i jakie są jego gwarancje?",
+      "type": "one_choice",
+      "answers": [
+        "Callback nie wykona się po rollback savepoint, ale Django zachowa jego trwały zapis do wykonania po kolejnym udanym commicie lub restarcie procesu, dlatego on_commit zastępuje trwałą kolejkę zadań.",
+        "Callback wykona się przy rollback savepoint, aby skompensować nieudany zapis.",
+        "Callback nie wykona się, ale Django trwale zapisze go do ponowienia po restarcie.",
+        "Callback z cofniętego savepoint nie wykona się; on_commit nie jest trwałą kolejką zapewniającą dostarczenie po awarii procesu."
+      ],
+      "correct_answer": "Callback z cofniętego savepoint nie wykona się; on_commit nie jest trwałą kolejką zapewniającą dostarczenie po awarii procesu.",
+      "explanation": "Callbacki z wycofanego savepoint są odrzucane. Pozostałe uruchamiają się po udanym zewnętrznym commicie; trwałość efektu zewnętrznego wymaga dodatkowego mechanizmu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/topics/db/transactions/"
+      ],
+      "interview_sources": [
+        "https://hackerx.org/interview-questions/django/"
+      ]
+    },
+    "python2-web-030": {
+      "question": "FastAPI: response_model ukrywa pola techniczne. Endpoint GET /invoices/{id} wymaga logowania, ale szuka faktury wyłącznie po id. Co usuwa możliwość odczytu cudzej faktury?",
+      "type": "one_choice",
+      "answers": [
+        "Wymagać logowania i roli invoice_reader, walidować id jako UUID oraz zwracać wyłącznie response_model bez pól technicznych; kombinacja tych trzech mechanizmów ma wykluczyć odczyt cudzej faktury bez kontroli obiektu.",
+        "Wymagać ogólnej roli invoice_reader bez sprawdzenia zakresu konkretnego obiektu.",
+        "Autoryzować dostęp do wskazanego obiektu, np. zawęzić odczyt do dozwolonego tenant i ról wykonawcy; nadal stosować bezpieczny model odpowiedzi.",
+        "Użyć response_model_exclude_unset, aby ograniczyć zwracane wartości faktury."
+      ],
+      "correct_answer": "Autoryzować dostęp do wskazanego obiektu, np. zawęzić odczyt do dozwolonego tenant i ról wykonawcy; nadal stosować bezpieczny model odpowiedzi.",
+      "explanation": "Schemat wyjścia kontroluje kształt danych, a uwierzytelnienie tożsamość. Żadne z nich samo nie dowodzi uprawnienia do konkretnej faktury.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://fastapi.tiangolo.com/tutorial/response-model/"
+      ]
+    },
+    "python2-web-058": {
+      "question": "payments.py definiuje charge. billing.py robi from payments import charge, a invoice() wywołuje charge. Test patchuje payments.charge po imporcie billing i nadal uruchamia prawdziwą płatność. Co patchować?",
+      "type": "one_choice",
+      "answers": [
+        "payments.__name__, aby zmienić wszystkie istniejące aliasy funkcji w innych modułach.",
+        "billing.charge, czyli nazwę odczytywaną przez testowany kod.",
+        "payments.charge ponownie, ale z autospec=True, bez zmiany miejsca patchowania.",
+        "billing.invoice.__module__, bo patch funkcji wywołującej zachowa jej wykonanie."
+      ],
+      "correct_answer": "billing.charge, czyli nazwę odczytywaną przez testowany kod.",
+      "explanation": "Import from wiąże nazwę w module odbiorcy. Późniejsza podmiana atrybutu modułu źródłowego nie podmienia już istniejącego powiązania billing.charge.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.python.org/3.12/library/unittest.mock.html#where-to-patch"
+      ]
+    },
+    "python2-web-063": {
+      "question": "Django z PostgreSQL: test w TestCase sugeruje, że select_for_update działa poza atomic. Produkcyjnie ten sam kod zgłasza TransactionManagementError. Jak sprawdzić rzeczywistą granicę i konkurencję?",
+      "type": "one_choice",
+      "answers": [
+        "Użyć TransactionTestCase i prawdziwych osobnych połączeń dla konkurujących transakcji, synchronizując ich przebieg.",
+        "Pozostawić TestCase, dodać atomic tylko w kodzie testu i uruchomić dwa sekwencyjne wywołania select_for_update na tym samym połączeniu; brak wyjątku ma potwierdzić produkcyjną granicę i zachowanie konkurencyjnych transakcji.",
+        "Uruchomić test blokad na SQLite, aby uniknąć wpływu transakcji PostgreSQL.",
+        "Zastąpić select_for_update mockiem i sprawdzić jedynie liczbę wywołań."
+      ],
+      "correct_answer": "Użyć TransactionTestCase i prawdziwych osobnych połączeń dla konkurujących transakcji, synchronizując ich przebieg.",
+      "explanation": "TestCase sam otacza test transakcją, co może zamaskować brak atomic w kodzie. Sprawdzenie blokad i czasu życia transakcji wymaga rzeczywistej semantyki bazy.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/models/querysets/"
+      ]
+    },
+    "python2-cms-019": {
+      "question": "Django Admin: get_queryset ogranicza zamówienia do firmy pracownika, ale formularz pozwala wskazać FK klienta innej firmy. Jaka poprawka domyka tę konkretną lukę?",
+      "type": "one_choice",
+      "answers": [
+        "Zachować get_queryset ograniczający zamówienia i ukryć FK klienta w interfejsie Admin; przesłany customer_id akceptować bez sprawdzania firmy, bo zakres głównego QuerySetu ma automatycznie ograniczać relacje zapisu.",
+        "Polegać wyłącznie na get_queryset zamówień, bo automatycznie ogranicza QuerySet wszystkich pól FK.",
+        "Ograniczyć wybór relacji i walidować dozwolone powiązania przy zapisie po stronie serwera, z zachowaniem zakresu uprawnień dla akcji.",
+        "Ukryć pole klienta CSS, pozostawiając akceptację przesłanego customer_id."
+      ],
+      "correct_answer": "Ograniczyć wybór relacji i walidować dozwolone powiązania przy zapisie po stronie serwera, z zachowaniem zakresu uprawnień dla akcji.",
+      "explanation": "Zakres listy głównego modelu nie ustala automatycznie dozwolonych relacji zapisu. Formularz oraz ścieżki zapisu i akcji muszą egzekwować spójną politykę tenantów.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ]
+    },
+    "python2-web-064": {
+      "question": "Test retry klienta przechodzi, lecz błąd w idempotency key spowodował podwójny efekt przy timeout po stronie dostawcy. Co powinien obejmować deterministyczny test tego scenariusza?",
+      "type": "one_choice",
+      "answers": [
+        "Mock zwracający sukces przy drugim wywołaniu niezależnie od parametrów, bez modelowania wykonania pierwszego.",
+        "Symulację efektu wykonanego przed timeoutem, ponowienie z tym samym kluczem i asercję jednego efektu; zegar i oczekiwanie zastąpione kontrolowanymi zależnościami.",
+        "Tylko sekwencję timeout, sukces i asercję dwóch wywołań klienta, bez kontroli klucza i efektu.",
+        "Rzeczywiste sleep przy każdej próbie i asercję, że test trwa dostatecznie długo."
+      ],
+      "correct_answer": "Symulację efektu wykonanego przed timeoutem, ponowienie z tym samym kluczem i asercję jednego efektu; zegar i oczekiwanie zastąpione kontrolowanymi zależnościami.",
+      "explanation": "Liczba wywołań nie dowodzi idempotencji. Ważna jest sytuacja niepewnego wyniku po rzeczywistym efekcie i tożsamość operacji przez ponowienia.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-ops-004": {
+      "question": "Dwa requesty sprawdzają brak konta o tym samym email, a następnie oba je zapisują. Unikalność ma dotyczyć dokładnie przechowywanego stringa. Jaka ochrona jest rozstrzygająca?",
+      "type": "one_choice",
+      "answers": [
+        "Constraint UNIQUE w bazie i poprawna obsługa konfliktu transakcji; precheck może zostać dla wygodnego komunikatu.",
+        "Zrobić SELECT sprawdzający email wewnątrz atomic w READ COMMITTED, następnie INSERT na tym samym połączeniu; wspólna transakcja ma wystarczyć do unikalności także bez constraint przy równoległym requestcie.",
+        "Lock w procesie API, gdy aplikacja ma wiele workerów i instancji.",
+        "Wysyłanie formularza tylko raz z przeglądarki i sprawdzenie is_valid przed save."
+      ],
+      "correct_answer": "Constraint UNIQUE w bazie i poprawna obsługa konfliktu transakcji; precheck może zostać dla wygodnego komunikatu.",
+      "explanation": "Precheck może przegrać wyścig z inną transakcją. Baza musi rozstrzygać unikalność dla wszystkich zapisujących; zasady normalizacji lub case-insensitive equality trzeba określić osobno.",
+      "difficulty": "medium",
+      "origin": "variant"
+    },
+    "python2-ops-012": {
+      "question": "PostgreSQL: query filtruje tenant_id = $1, porządkuje created_at DESC, id DESC i pobiera 50 kolejnych rekordów według kursora (created_at, id). Który indeks najlepiej odpowiada temu wzorcowi?",
+      "type": "one_choice",
+      "answers": [
+        "B-tree (created_at, tenant_id, id), bo kolumna sortowania zawsze musi poprzedzać filtr równości.",
+        "Osobne indeksy tenant_id oraz created_at, co gwarantuje porządek po obu polach bez sortowania.",
+        "Hash (tenant_id), bo usuwa potrzebę porządkowania wyników w ramach tenanta.",
+        "B-tree (tenant_id, created_at, id), wykorzystany z warunkiem kursora i spójnym kierunkiem sortowania."
+      ],
+      "correct_answer": "B-tree (tenant_id, created_at, id), wykorzystany z warunkiem kursora i spójnym kierunkiem sortowania.",
+      "explanation": "Równość po pierwszym polu i uporządkowana para pozostałych wspierają ten wzorzec. id rozstrzyga remisy timestampów; skuteczność i rzeczywisty plan trzeba potwierdzić na danych.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/indexes-multicolumn.html"
+      ]
+    },
+    "python2-ops-014": {
+      "question": "Po wzroście udziału aktywnych rekordów do 70% PostgreSQL wybiera Seq Scan dla filtra active = true, mimo istniejącego indeksu. Jak to ocenić?",
+      "type": "one_choice",
+      "answers": [
+        "Usunąć statystyki kolumny, aby planista przestał uwzględniać częste wartości.",
+        "Założyć awarię indeksu, skoro zapytanie zawiera dokładnie indeksowane pole.",
+        "Porównać rzeczywisty plan, bufory i statystyki; przy dużym udziale wierszy pełny skan może być tańszy od wielu odczytów heap przez indeks.",
+        "Wyłączyć enable_seqscan na stałe, bo indeks musi być szybszy niezależnie od selektywności."
+      ],
+      "correct_answer": "Porównać rzeczywisty plan, bufory i statystyki; przy dużym udziale wierszy pełny skan może być tańszy od wielu odczytów heap przez indeks.",
+      "explanation": "Istnienie indeksu nie oznacza, że jego użycie jest najtańsze. Przy dużym odsetku wyników istotny jest koszt dostępu do stron danych oraz jakość estymacji.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/using-explain.html"
+      ]
+    },
+    "python2-ops-016": {
+      "question": "Dwie transakcje blokują te same wiersze w przeciwnej kolejności. PostgreSQL przerywa jedną z nich błędem deadlock. Jaka strategia obejmuje zapobieganie i odzyskanie?",
+      "type": "one_choice",
+      "answers": [
+        "Ujednolicić kolejność blokad, ale po deadlock ponawiać wyłącznie ostatni UPDATE na tym samym połączeniu i w tej samej transakcji, aby zachować wcześniejsze odczyty i nie wykonywać rollback całej operacji.",
+        "Ujednolicić kolejność pobierania blokad, a wybraną na ofiarę transakcję ponawiać w całości z ograniczoną polityką retry.",
+        "Ponowić ostatnie zapytanie w tej samej przerwanej transakcji bez rollback.",
+        "Zwiększyć lock_timeout i zachować przeciwną kolejność, aby cykl sam zniknął."
+      ],
+      "correct_answer": "Ujednolicić kolejność pobierania blokad, a wybraną na ofiarę transakcję ponawiać w całości z ograniczoną polityką retry.",
+      "explanation": "Ofiara deadlock ma przerwaną transakcję. Retry musi odtworzyć poprawny kontekst decyzji, a stały porządek zasobów ogranicza przyczynę cyklu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/explicit-locking.html"
+      ]
+    },
+    "python2-ops-017": {
+      "question": "PostgreSQL SERIALIZABLE zgłasza serialization_failure po kilku odczytach i zapisach. Obliczona decyzja zależała od odczytanych danych. Co należy ponowić?",
+      "type": "one_choice",
+      "answers": [
+        "Całą transakcję wraz z odczytami i decyzją, z limitem prób; zewnętrzne efekty muszą mieć osobną ochronę przed duplikacją.",
+        "Po serialization_failure otworzyć nową transakcję i powtórzyć wyłącznie zapisy z wcześniej policzonymi parametrami; zakończone SELECT-y nie zmieniały danych, więc ich wyniki mają pozostać ważne bez ponownego odczytu.",
+        "Tylko COMMIT w tej samej transakcji, bo wszystkie wcześniejsze wyniki pozostają ważne.",
+        "Wszystkie zapisy w nowej transakcji, lecz bez ponawiania odczytów i obliczeń."
+      ],
+      "correct_answer": "Całą transakcję wraz z odczytami i decyzją, z limitem prób; zewnętrzne efekty muszą mieć osobną ochronę przed duplikacją.",
+      "explanation": "Konflikt oznacza, że nie można zachować założonej kolejności transakcji. Stare odczyty nie muszą uzasadniać decyzji w nowej próbie; retry obejmuje całą logikę.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/transaction-iso.html"
+      ]
+    },
+    "python2-ops-018": {
+      "question": "Tabela zdarzeń PostgreSQL jest partycjonowana miesięcznie po occurred_at. Zapytanie filtruje tylko customer_id i nadal skanuje wiele partycji. Co jest poprawnym wnioskiem?",
+      "type": "one_choice",
+      "answers": [
+        "Partycyjność po czasie automatycznie wyklucza stare partycje, nawet bez warunku czasu.",
+        "Indeks customer_id na jednej partycji wystarczy, aby wyszukiwać wszystkie partycje bez skanowania pozostałych.",
+        "Dodanie ORDER BY occurred_at zawsze ogranicza odczyt do jednej partycji niezależnie od wyników.",
+        "Brak predykatu pozwalającego wykluczyć zakresy czasu może uniemożliwić pruning; trzeba ocenić wzorzec zapytań i indeksy, zamiast zakładać automatyczne przyspieszenie."
+      ],
+      "correct_answer": "Brak predykatu pozwalającego wykluczyć zakresy czasu może uniemożliwić pruning; trzeba ocenić wzorzec zapytań i indeksy, zamiast zakładać automatyczne przyspieszenie.",
+      "explanation": "Pruning korzysta z informacji wykluczających granice partycji. Inny filtr może wymagać przeszukania wielu partycji; partycjonowanie nie zastępuje projektu indeksów.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/ddl-partitioning.html"
+      ]
+    },
+    "python2-ops-021": {
+      "question": "Backupy PostgreSQL i archiwizacja WAL raportują sukces. RPO wynosi 5 minut, RTO 30 minut. Jaki dowód najlepiej sprawdza spełnienie obu celów?",
+      "type": "one_choice",
+      "answers": [
+        "Porównanie liczby plików WAL dzisiaj i wczoraj bez odtwarzania danych.",
+        "Udany restart tej samej instancji produkcyjnej bez użycia kopii zapasowych.",
+        "Próba odtworzenia do wybranego punktu czasu z pomiarem czasu i weryfikacją danych oraz dostępnego końca WAL.",
+        "Samo potwierdzenie, że pliki backupu mają niezerowy rozmiar."
+      ],
+      "correct_answer": "Próba odtworzenia do wybranego punktu czasu z pomiarem czasu i weryfikacją danych oraz dostępnego końca WAL.",
+      "explanation": "Poprawne wykonanie backupu nie dowodzi sprawnego restore. RPO dotyczy utraty danych, RTO czasu odzyskania; oba wymagają realistycznej weryfikacji odtwarzania.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/continuous-archiving.html"
+      ]
+    },
+    "python2-ops-028": {
+      "question": "RabbitMQ: prefetch=20, ale consumer natychmiast ACKuje i uruchamia długą pracę w osobnym tasku. Liczba aktywnych prac rośnie bez ograniczenia. Co poprawić?",
+      "type": "one_choice",
+      "answers": [
+        "Zwiększyć prefetch, bo jego wartość jest maksymalną liczbą tasków w procesie niezależnie od ACK.",
+        "ACK dopiero po trwałym zakończeniu wymaganego efektu oraz jawny limit równoległych prac; retry musi uwzględniać duplikaty.",
+        "Zmniejszyć prefetch do 1, nadal ACKując przed uruchomieniem pracy.",
+        "Przenieść ACK przed deserializację, aby broker szybciej zwalniał pamięć."
+      ],
+      "correct_answer": "ACK dopiero po trwałym zakończeniu wymaganego efektu oraz jawny limit równoległych prac; retry musi uwzględniać duplikaty.",
+      "explanation": "Prefetch ogranicza niepotwierdzone dostarczenia, a nie pracę po ACK. Wczesne potwierdzenie oddaje brokerowi kredyt i osłabia możliwość odzyskania pracy po awarii.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.rabbitmq.com/docs/consumer-prefetch"
+      ]
+    },
+    "python2-ops-029": {
+      "question": "Consumer zapisuje efekt w PostgreSQL, potem ACKuje wiadomość. Może zginąć po commicie, przed ACK. Jak nie powielić efektu przy ponownym dostarczeniu?",
+      "type": "one_choice",
+      "answers": [
+        "Zapisać event_id z UNIQUE oraz efekt w jednej transakcji; duplikat rozpoznać bez ponownego wykonania efektu i bezpiecznie potwierdzić.",
+        "Trwale zapisać event_id w oddzielnej transakcji przed wykonaniem efektu, a przy każdym duplikacie od razu ACKować; taki rejestr ma gwarantować pojedynczy efekt również po awarii między zapisaniem id a wykonaniem pracy.",
+        "Pamiętać ostatnie event_id w lokalnym set procesu, bez trwałego zapisu.",
+        "Ignorować wszystkie wiadomości z redelivered, także te, których pierwsza próba nie wykonała efektu."
+      ],
+      "correct_answer": "Zapisać event_id z UNIQUE oraz efekt w jednej transakcji; duplikat rozpoznać bez ponownego wykonania efektu i bezpiecznie potwierdzić.",
+      "explanation": "Deduplikacja musi być trwała i atomowa z chronionym efektem. Flaga redelivered nie dowodzi, że efekt już zaszedł; lokalna pamięć nie przeżywa restartu.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-ops-030": {
+      "question": "Serwis commitował zamówienie i outbox razem. Publisher wysłał zdarzenie, ale zginął przed oznaczeniem outbox jako wysłanego. Jaki kontrakt pozostaje potrzebny?",
+      "type": "one_choice",
+      "answers": [
+        "Oznaczać outbox jako wysłany w transakcji przed próbą publish, a następnie wysyłać raz po commicie; dzięki temu restart nie wyśle duplikatu, a sam trwały wpis outbox ma nadal zapewniać dostarczenie.",
+        "Publisher powinien oznaczać rekord jako wysłany przed pierwszą próbą, aby nigdy nie było duplikatów.",
+        "Każde ponowienie powinno dostać nowe id, aby broker rozróżniał operacje biznesowe.",
+        "Publisher ponawia, więc konsument musi tolerować duplikaty identyfikowane stabilnym id zdarzenia."
+      ],
+      "correct_answer": "Publisher ponawia, więc konsument musi tolerować duplikaty identyfikowane stabilnym id zdarzenia.",
+      "explanation": "Outbox domyka atomowość lokalnego zapisu i zamiaru publikacji. Luka między wysłaniem a potwierdzeniem zapisu stanu publishera nadal dopuszcza duplikaty.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-ops-033": {
+      "question": "Cache-aside: reader odczytał starą wartość z DB; writer commitował nową i usunął cache; reader następnie wpisał starą wartość do cache. Co wynika z tego przeplotu?",
+      "type": "one_choice",
+      "answers": [
+        "Zachować delete po commicie i wydłużyć TTL, a readerowi pozwolić wpisać wynik rozpoczętego wcześniej odczytu; późniejsze zakończenie odczytu ma dowodzić, że wpisana przez niego wartość jest nowsza od usuniętej.",
+        "Pipeline Redis obejmujący GET i SET automatycznie izoluje też równoległą transakcję PostgreSQL.",
+        "Samo delete po commicie nie eliminuje wyścigu; trzeba określić tolerancję staleness i ewentualnie wersjonowanie lub koordynację publikacji do cache.",
+        "Delete po commicie dowodzi, że każdy późniejszy cache hit musi być aktualny."
+      ],
+      "correct_answer": "Samo delete po commicie nie eliminuje wyścigu; trzeba określić tolerancję staleness i ewentualnie wersjonowanie lub koordynację publikacji do cache.",
+      "explanation": "Cache i baza nie uczestniczą automatycznie w jednej transakcji. TTL może ograniczać czas starej wartości, lecz nie zapewnia ścisłej spójności ani nie uniemożliwia tego przeplotu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside"
+      ]
+    },
+    "python2-ops-034": {
+      "question": "Redis Pub/Sub przenosi zdarzenia rozliczeniowe. Konsument był offline i nie może utracić wiadomości. Która zmiana odpowiada temu wymaganiu?",
+      "type": "one_choice",
+      "answers": [
+        "Zastąpić SUBSCRIBE przez PSUBSCRIBE, aby wzorzec kanału przechowywał wiadomości.",
+        "Zastosować trwały mechanizm, np. Redis Streams z właściwą persystencją i retencją, ACK, odzyskiwaniem pending oraz idempotentnym odbiorcą.",
+        "Pozostać przy Pub/Sub i ponownie zasubskrybować ten sam kanał, aby odtworzyć historię.",
+        "Pozostać przy Pub/Sub, ale włączyć większą pulę połączeń po stronie konsumenta."
+      ],
+      "correct_answer": "Zastosować trwały mechanizm, np. Redis Streams z właściwą persystencją i retencją, ACK, odzyskiwaniem pending oraz idempotentnym odbiorcą.",
+      "explanation": "Pub/Sub nie zapewnia replay wiadomości dla odłączonego odbiorcy. Stream pozwala projektować odtwarzanie, ale retencja, trwałość i obsługa ponownych prób pozostają częścią kontraktu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://redis.io/docs/latest/develop/pubsub/"
+      ]
+    },
+    "python2-ops-039": {
+      "question": "Endpoint przyjmuje sortBy i direction do ORDER BY. Wartości filtrów są parametryzowane, ale nazwy kolumn składane przez f-string. Jak bezpiecznie obsłużyć sortowanie?",
+      "type": "one_choice",
+      "answers": [
+        "Mapować publiczne nazwy na zamkniętą listę dozwolonych kolumn i kierunków, a identyfikatory składać API sterownika do SQL identifiers.",
+        "Przekazać nazwę kolumny jako zwykły placeholder wartości i oczekiwać zmiany struktury ORDER BY.",
+        "Usunąć apostrofy z sortBy i pozostawić dowolny pozostały tekst SQL.",
+        "Parametryzować WHERE, a ORDER BY pozostawić bez zmian, bo nie zmienia danych."
+      ],
+      "correct_answer": "Mapować publiczne nazwy na zamkniętą listę dozwolonych kolumn i kierunków, a identyfikatory składać API sterownika do SQL identifiers.",
+      "explanation": "Placeholder wartości nie jest parametrem składni ani identyfikatora. Składnię dynamiczną trzeba ograniczyć i składać właściwym API; zapytania odczytowe także podlegają SQL injection.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.psycopg.org/psycopg3/docs/api/sql.html"
+      ]
+    },
+    "python2-ops-044": {
+      "question": "Cache odpowiedzi dokumentu jest kluczowany document_id i role. Dwaj użytkownicy tej samej roli mają różne ACL, a uprawnienia mogą być cofane. Jaki projekt jest poprawny?",
+      "type": "one_choice",
+      "answers": [
+        "Dodać user_id do klucza i pozostawić długi TTL; po cofnięciu ACL nadal zwracać zapisane odpowiedzi 200 bez ponownej kontroli, ponieważ tożsamość użytkownika w kluczu ma gwarantować aktualność jego dostępu.",
+        "Dodać wyłącznie user_id i uznać, że cofnięcie ACL nie wymaga już żadnej obsługi.",
+        "Wyłączyć cache wyłącznie dla błędów 403, pozostawiając wspólne cache odpowiedzi 200.",
+        "Uwzględnić rzeczywisty zakres dostępu w cache i sprawdzać aktualne uprawnienia przed ujawnieniem danych; zaprojektować unieważnianie zmian ACL."
+      ],
+      "correct_answer": "Uwzględnić rzeczywisty zakres dostępu w cache i sprawdzać aktualne uprawnienia przed ujawnieniem danych; zaprojektować unieważnianie zmian ACL.",
+      "explanation": "Rola nie zawsze określa pełną politykę dostępu. Tożsamość w kluczu nie rozwiązuje sama cofania uprawnień; przestarzały cache nie może zastąpić aktualnej decyzji autoryzacyjnej.",
+      "difficulty": "hard",
+      "origin": "variant"
+    },
+    "python2-ops-045": {
+      "question": "Importer pobiera URL podany przez użytkownika. Host z allowlisty przekierowuje do adresu metadanych chmury. Co powinien uwzględniać mechanizm ochrony SSRF?",
+      "type": "one_choice",
+      "answers": [
+        "Sprawdzać dokładną nazwę hosta i HTTPS w początkowym URL, a potem ufać bibliotece HTTP przy wszystkich redirectach i ponownych rozwiązaniach DNS; poprawna nazwa wejściowa ma wystarczyć do ochrony docelowego połączenia.",
+        "Tylko zakaz literalnych adresów IP, pozostawiając dowolne rozwiązywanie nazw DNS.",
+        "Walidację hostów i docelowych adresów także po przekierowaniach, ochronę przed zmianą DNS oraz ograniczenia egress do dozwolonych celów.",
+        "Tylko sprawdzenie HTTPS początkowego URL, ponieważ TLS blokuje dostęp do sieci prywatnej."
+      ],
+      "correct_answer": "Walidację hostów i docelowych adresów także po przekierowaniach, ochronę przed zmianą DNS oraz ograniczenia egress do dozwolonych celów.",
+      "explanation": "Cel po redirect lub rozwiązaniu DNS może różnić się od początkowo zatwierdzonego hosta. Ochrona musi obejmować faktyczne połączenie i politykę sieciową, nie sam string URL.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://cheatsheetseries.owasp.org/cheatsheets/Server_Side_Request_Forgery_Prevention_Cheat_Sheet.html"
+      ]
+    },
+    "python2-ops-053": {
+      "question": "Krótkotrwała awaria wspólnej DB powoduje błąd liveness wszystkich podów API i pętlę restartów. Procesy same pozostają sprawne. Jak rozdzielić sondy?",
+      "type": "one_choice",
+      "answers": [
+        "Usunąć readiness i polegać na liveness jako mechanizmie wycofania niesprawnego endpointu z ruchu.",
+        "Liveness ma wykrywać stan wymagający restartu procesu; readiness ocenia możliwość obsługi ruchu według jawnej polityki zależności.",
+        "Obie sondy powinny nadal restartować proces przy każdym błędzie wspólnej DB, ale z tym samym krótszym timeoutem.",
+        "Zamienić readiness na liveness bez zmiany zachowania restartów."
+      ],
+      "correct_answer": "Liveness ma wykrywać stan wymagający restartu procesu; readiness ocenia możliwość obsługi ruchu według jawnej polityki zależności.",
+      "explanation": "Restart zdrowego procesu nie naprawia współdzielonej bazy i może pogorszyć awarię. Readiness steruje kierowaniem ruchu, liveness decyzją restartu; polityka zależy od zdolności usługi do obsługi requestów.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/"
+      ]
+    },
+    "python2-ops-058": {
+      "question": "Rolling deploy zmienia customer_name na legal_name. Przez kilka minut działają stare i nowe instancje, a rollback ma pozostać możliwy. Jaki plan ogranicza ryzyko?",
+      "type": "one_choice",
+      "answers": [
+        "Expand-contract: kompatybilny schemat, migracja danych i etap współpracy wersji; usunięcie starego pola po zamknięciu okna zgodności i rollbacku.",
+        "Przemianować kolumnę przed uruchomieniem pierwszej nowej instancji i liczyć na retry starych requestów.",
+        "Usunąć starą kolumnę zaraz po starcie pierwszej nowej instancji, zanim skończy się rollout.",
+        "Zmienić tylko nowy kod i cofnąć migrację schematu przy każdym błędzie starej wersji."
+      ],
+      "correct_answer": "Expand-contract: kompatybilny schemat, migracja danych i etap współpracy wersji; usunięcie starego pola po zamknięciu okna zgodności i rollbacku.",
+      "explanation": "Przy wdrożeniu mieszanych wersji baza musi obsłużyć obie. Destrukcyjny krok jest osobnym etapem po usunięciu zależności i świadomym zamknięciu możliwości rollbacku.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://martinfowler.com/bliki/ParallelChange.html"
+      ]
+    },
+    "python2-ops-063": {
+      "question": "Elasticsearch: większość zapisów jest bulk, ale pojedyncza interaktywna aktualizacja ma być widoczna w następnym search po odpowiedzi zapisu. Jak nie wymuszać refresh po każdym bulk?",
+      "type": "one_choice",
+      "answers": [
+        "Polegać na udanym zwykłym indeksowaniu, które gwarantuje widoczność w search przed odpowiedzią.",
+        "Po każdym dokumencie wykonywać refresh=true we wszystkich bulkach niezależnie od potrzeb.",
+        "Sprawdzić dokument przez GET i uznać sukces real-time GET za gwarancję widoczności w search.",
+        "Dla tej operacji użyć refresh=wait_for i uwzględnić jego opóźnienie; bulk pozostawić z osobno dobraną polityką odświeżania."
+      ],
+      "correct_answer": "Dla tej operacji użyć refresh=wait_for i uwzględnić jego opóźnienie; bulk pozostawić z osobno dobraną polityką odświeżania.",
+      "explanation": "Widoczność w search zależy od refresh. wait_for czeka na odświeżenie, a real-time GET ma inną semantykę niż search; nie należy mylić tych gwarancji.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.elastic.co/docs/reference/elasticsearch/rest-apis/refresh-parameter"
+      ]
+    },
+    "python2-ops-069": {
+      "question": "SQL: po JOIN orders do order_items raport ma liczyć liczbę zamówień, również bez pozycji. Id zamówienia jest PK. Która agregacja przy LEFT JOIN zachowuje właściwą ziarnistość?",
+      "type": "one_choice",
+      "answers": [
+        "COUNT(orders.id), bez DISTINCT.",
+        "SUM(DISTINCT orders.total), traktowane jako liczba zamówień.",
+        "COUNT(DISTINCT orders.id).",
+        "COUNT(order_items.id)."
+      ],
+      "correct_answer": "COUNT(DISTINCT orders.id).",
+      "explanation": "JOIN zwielokrotnia wiersz zamówienia na pozycje. Liczenie unikalnego PK rodzica liczy zamówienia, a LEFT JOIN zachowuje te bez pozycji; suma różnych kwot nie jest licznikiem.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.postgresql.org/docs/current/queries-table-expressions.html",
+        "https://www.postgresql.org/docs/current/sql-expressions.html#SYNTAX-AGGREGATES"
+      ]
+    },
+    "python-201": {
+      "question": "React: każdy wiersz listy ma lokalny draft. Po zmianie sortowania draft trafia do innego rekordu. API dostarcza stabilne id, a lista używa key={index}. Jaka zmiana adresuje przyczynę?",
+      "type": "one_choice",
+      "answers": [
+        "Generować UUID jako key przy każdym renderze i dodać memo do wiersza; nowe klucze mają usunąć pomylenie rekordów, a memo zachować lokalny draft mimo ponownego tworzenia tożsamości elementów.",
+        "Użyć stabilnego id rekordu jako key, aby stan wiersza podążał za tożsamością rekordu.",
+        "Opakować wiersz w memo, pozostawiając key={index}.",
+        "Generować nowe UUID w key przy każdym renderze, aby zawsze odtwarzać poprawne props."
+      ],
+      "correct_answer": "Użyć stabilnego id rekordu jako key, aby stan wiersza podążał za tożsamością rekordu.",
+      "explanation": "Klucz określa tożsamość wśród rodzeństwa. Indeks wiąże stan z pozycją; losowy lub mutowalny klucz wymusza remount i utratę draftu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/learn/rendering-lists"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-205": {
+      "question": "React: komponent zwraca null przy !visible, a useState i useEffect wywołuje dopiero poniżej return. visible może zmieniać się w tej samej instancji. Która poprawka respektuje kolejność hooków?",
+      "type": "one_choice",
+      "answers": [
+        "Wywoływać hooki przed warunkowym return i warunkować pracę efektu albo wydzielić osobny komponent montowany warunkowo.",
+        "Dodać visible do dependencies efektu, pozostawiając hooki za return.",
+        "Opakować warunkowy useState w useMemo, aby zachować jego wynik.",
+        "Wywoływać hooki tylko przy pierwszym visible=true i przechować ich wyniki w module."
+      ],
+      "correct_answer": "Wywoływać hooki przed warunkowym return i warunkować pracę efektu albo wydzielić osobny komponent montowany warunkowo.",
+      "explanation": "useState i useEffect wymagają stałej kolejności wywołań w danej instancji. Zależności efektu nie naprawiają warunkowego wywołania hooka.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/reference/rules/rules-of-hooks"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-206": {
+      "question": "React: efekt z [] uruchamia interval, którego callback robi setCount(count + 1). count zatrzymuje się na 1. Interval ma nie być tworzony od nowa przy każdej zmianie licznika. Jaka poprawka spełnia wymaganie?",
+      "type": "one_choice",
+      "answers": [
+        "Opakować callback w useCallback z pustymi dependencies, pozostawić setCount(count + 1), a interval tworzyć w efekcie z []; stabilna referencja funkcji ma sprawić, że przechwycone count będzie zawsze aktualne.",
+        "Opakować callback w useCallback z [] i nadal odczytywać przechwycone count.",
+        "Zamienić setInterval na rekurencyjny setTimeout z tym samym przechwyconym count.",
+        "Użyć setCount(c => c + 1) w callbacku i zachować cleanup clearInterval."
+      ],
+      "correct_answer": "Użyć setCount(c => c + 1) w callbacku i zachować cleanup clearInterval.",
+      "explanation": "Callback przechowuje snapshot count z renderu tworzącego efekt. Funkcyjny updater otrzymuje aktualny poprzedni stan; stabilizacja referencji callbacku nie odświeża jego closure.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/reference/react/useEffect"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-208": {
+      "question": "React StrictMode w development: handler kliknięcia robi setCount(c => { analytics.track(\"increment\"); return c + 1; }). Zdarzenie bywa raportowane podwójnie. Jaka poprawka usuwa zależność efektu od wykonywania updatera?",
+      "type": "one_choice",
+      "answers": [
+        "Zapamiętać updater przez useCallback i zachować analytics.track wewnątrz niego; stabilna referencja ma uniemożliwić React ponowne wywołanie czystego sprawdzenia, bez przenoszenia efektu do handlera kliknięcia.",
+        "Dodać losowy klucz do przycisku, aby każde kliknięcie montowało nową instancję.",
+        "Wysłać analytics w handlerze kliknięcia, a updater pozostawić czysty: c => c + 1.",
+        "Opakować updater w useCallback, pozostawiając analytics wewnątrz."
+      ],
+      "correct_answer": "Wysłać analytics w handlerze kliknięcia, a updater pozostawić czysty: c => c + 1.",
+      "explanation": "Updater stanu musi być czystą funkcją i może być wywołany dodatkowo przy sprawdzaniu czystości. StrictMode nie podwaja samych event handlerów, więc efekt powiązany z kliknięciem należy do handlera.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/reference/react/useState"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-210": {
+      "question": "React: edytor lokalnego draftu otrzymuje document. Nowy obiekt props dla tego samego id nie powinien kasować edycji, ale przełączenie na inne id ma zresetować cały stan edytora. Jaki projekt odpowiada tej semantyce?",
+      "type": "one_choice",
+      "answers": [
+        "Zachować jedną instancję edytora i przy każdej zmianie referencji document wykonywać setDraft(document.body) w efekcie; synchronizacja ma odświeżać dane z serwera bez ryzyka nadpisania lokalnej edycji tego samego id.",
+        "Inicjalizować draft w edytorze, a granicę instancji określić przez key={document.id} w rodzicu.",
+        "W efekcie zależnym od całego obiektu document zawsze kopiować document.body do draftu.",
+        "Przy każdym renderze bezwarunkowo robić setDraft(document.body)."
+      ],
+      "correct_answer": "Inicjalizować draft w edytorze, a granicę instancji określić przez key={document.id} w rodzicu.",
+      "explanation": "Klucz pozwala jawnie zresetować stan wraz ze zmianą tożsamości dokumentu. Synchronizacja przy każdej nowej referencji props może nadpisywać niezapisane zmiany tego samego dokumentu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/learn/you-might-not-need-an-effect"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-212": {
+      "question": "React: efekt pobiera wyniki dla query. Żądanie A kończy się po B i nadpisuje nowszy wynik. Która ochrona działa także wtedy, gdy klient nie potrafi przerwać trwającej pracy?",
+      "type": "one_choice",
+      "answers": [
+        "Cleanup oznacza poprzednią próbę jako nieaktualną, a jej callback nie zapisuje stanu; query jest pełną zależnością efektu.",
+        "Zapamiętać setResults przez useCallback z pustymi dependencies i przekazywać go obu requestom; identyczna referencja ma pozwolić React rozpoznać, która odpowiedź należy do aktualnej wartości query.",
+        "Opakować setResults w useCallback bez zależności, aby stara odpowiedź nie mogła go wywołać.",
+        "Zawsze zapisywać wynik ostatnio zakończonego requestu, bo musi dotyczyć najnowszego query."
+      ],
+      "correct_answer": "Cleanup oznacza poprzednią próbę jako nieaktualną, a jej callback nie zapisuje stanu; query jest pełną zależnością efektu.",
+      "explanation": "Kolejność zakończenia nie odpowiada kolejności rozpoczęcia. Ignorowanie wyniku nieaktualnej próby chroni stan niezależnie od fizycznego anulowania requestu.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/reference/react/useEffect"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-216": {
+      "question": "React: kosztowny selector jest w useMemo(() => select(rows, options), [rows, options]), ale options = {status} powstaje przy każdym renderze. Profiler wskazuje zbędne obliczenia przy niezmienionych rows i status. Co poprawić?",
+      "type": "one_choice",
+      "answers": [
+        "Usunąć options z dependencies, pozostawiając useMemo zależne wyłącznie od rows; skoro options tworzone jest z props status, React ma automatycznie rozpoznać zmianę tego pola i przeliczyć wynik mimo pominiętej zależności.",
+        "Zastąpić useMemo przez useCallback z tym samym nowym obiektem w dependencies i od razu wywoływać funkcję.",
+        "Pozostawić nowy options i opakować jedynie wynik select w memo komponencie.",
+        "Tworzyć options wewnątrz useMemo i zależeć od rows oraz status albo osobno stabilizować options według rzeczywistych zależności."
+      ],
+      "correct_answer": "Tworzyć options wewnątrz useMemo i zależeć od rows oraz status albo osobno stabilizować options według rzeczywistych zależności.",
+      "explanation": "Zależności porównywane są przez tożsamość, więc nowy obiekt unieważnia cache. Pominięcie rzeczywistej zależności może dać stary wynik; memoizacja jest optymalizacją, nie mechanizmem poprawności.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/reference/react/useMemo"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-218": {
+      "question": "React: provider ma value={{theme, cursor}}. Konsument owinięty memo czyta tylko theme przez useContext, ale renderuje się przy każdej zmianie cursor. Jak ograniczyć tę propagację?",
+      "type": "one_choice",
+      "answers": [
+        "Zapamiętać wspólne value przez useMemo(() => ({theme, cursor}), [theme, cursor]) i pozostawić jednego providera; memo konsumenta ma wtedy zablokować aktualizację Context, jeśli czyta on tylko niezmienione theme.",
+        "Usunąć cursor z dependencies memoizacji wspólnego value, pozostawiając jego odczyt przez innych konsumentów.",
+        "Rozdzielić konteksty według niezależnych zmian i zapewnić stabilną wartość providera theme, gdy theme się nie zmienia.",
+        "Dodać memo konsumentowi drugi raz; memo zawsze blokuje aktualizacje z Context."
+      ],
+      "correct_answer": "Rozdzielić konteksty według niezależnych zmian i zapewnić stabilną wartość providera theme, gdy theme się nie zmienia.",
+      "explanation": "Zmiana wartości kontekstu aktualizuje konsumentów niezależnie od memo props. Memoizacja wspólnego obiektu nie zapobiega jego zmianie, gdy cursor rzeczywiście się zmienia.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://react.dev/reference/react/useContext"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/50-reactjs-interview-questions-for-experienced-developers"
+      ]
+    },
+    "python-223": {
+      "question": "Przeglądarka: długie przetwarzanie dzieli pracę przez await Promise.resolve() po każdej paczce. UI nadal nie odmalowuje się podczas łańcucha paczek. Dlaczego i co zmienić?",
+      "type": "one_choice",
+      "answers": [
+        "Zastąpić await Promise.resolve() przez queueMicrotask planujące następną paczkę, aby zachować mały koszt planowania; każda nowa microtask ma wtedy zagwarantować przeglądarce okazję do renderu przed kolejną paczką.",
+        "Kontynuacje trafiają do microtasks, które mogą nie oddać czasu renderowaniu; planować kolejne paczki w przyszłych taskach lub przenieść CPU do workera.",
+        "Promise.resolve zawsze tworzy nowy task, więc problem musi wynikać wyłącznie z React memo.",
+        "Zastąpić await przez queueMicrotask, co gwarantuje render między każdymi paczkami."
+      ],
+      "correct_answer": "Kontynuacje trafiają do microtasks, które mogą nie oddać czasu renderowaniu; planować kolejne paczki w przyszłych taskach lub przenieść CPU do workera.",
+      "explanation": "Microtask checkpoint opróżnia kolejkę także z nowych microtasks. await natychmiast spełnionej obietnicy nie gwarantuje oddania czasu do renderu; potrzebna jest odpowiednia granica planowania lub worker.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide"
+      ],
+      "interview_sources": [
+        "https://github.com/readytodev-pro/frontend-interview-questions"
+      ]
+    },
+    "python-fullstack-interview-ts-03": {
+      "question": "TypeScript strict: wynik JSON.parse z zewnętrznego API został przypisany do unknown. Kod potrzebuje Customer z id i adresem. Która granica rzeczywiście wykryje błędne dane w runtime?",
+      "type": "one_choice",
+      "answers": [
+        "Decoder walidujący pola i zagnieżdżenia, zwracający Customer albo jawny błąd walidacji.",
+        "Zdefiniować Customer, wykonać payload as Customer, a wynik sprawdzić przez satisfies Customer; dwa statyczne sprawdzenia mają zapewnić walidację także zagnieżdżonego adresu podczas obsługi odpowiedzi API.",
+        "Zamiana unknown na any przed odczytem pól i kompilacja bez błędów.",
+        "Samo satisfies Customer zastosowane do asercji payload as Customer."
+      ],
+      "correct_answer": "Decoder walidujący pola i zagnieżdżenia, zwracający Customer albo jawny błąd walidacji.",
+      "explanation": "unknown wymusza ustalenie typu przed użyciem, ale samo nie waliduje danych. Asercje i satisfies są statyczne; sprawdzenie obcego JSON wymaga wykonywanego kodu.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/2/narrowing.html"
+      ],
+      "interview_sources": [
+        "https://github.com/readytodev-pro/frontend-interview-questions",
+        "https://github.com/crisdux/paracetamol.ts"
+      ]
+    },
+    "python-fullstack-interview-ts-04": {
+      "question": "TypeScript: helper pick ma zwracać tylko wybrane pola obiektu i odrzucać nieistniejące klucze. Która sygnatura zachowuje zależność typów przy strict?",
+      "type": "one_choice",
+      "answers": [
+        "pick<T>(obj: T, keys: readonly string[]): T.",
+        "pick<T>(obj: T, keys: readonly (keyof T)[]): Partial<T>.",
+        "pick<T, K extends string>(obj: T, keys: readonly K[]): Record<K, unknown>.",
+        "pick<T, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, K>."
+      ],
+      "correct_answer": "pick<T, K extends keyof T>(obj: T, keys: readonly K[]): Pick<T, K>.",
+      "explanation": "Ograniczenie K wiąże dozwolone klucze z T, a Pick zachowuje ich konkretne typy. Partial nie reprezentuje dokładnie wybranego podzbioru, zaś string dopuszcza obce klucze.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/2/generics.html"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/typescript-interview-questions-for-senior-frontend-developers",
+        "https://github.com/aershov24/typescript-interview-questions"
+      ]
+    },
+    "python-fullstack-interview-ts-05": {
+      "question": "TypeScript strict: komponent akceptuje albo href, albo onClick, dokładnie jedno z nich. Który kontrakt zabrania podania obu także dla zmiennej mającej oba pola?",
+      "type": "one_choice",
+      "answers": [
+        "{href: string} | {onClick: () => void}.",
+        "Partial<{href: string; onClick: () => void}>.",
+        "{href: string; onClick?: never} | {href?: never; onClick: () => void}.",
+        "{href?: string; onClick?: () => void}."
+      ],
+      "correct_answer": "{href: string; onClick?: never} | {href?: never; onClick: () => void}.",
+      "explanation": "Unia strukturalna bez zakazu przeciwnego pola może przyjąć obiekt z obiema właściwościami. Pola never wyrażają wzajemne wykluczenie; jawne undefined w opcjonalnych polach zależy dodatkowo od exactOptionalPropertyTypes.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/2/narrowing.html"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/typescript-interview-questions-for-senior-frontend-developers",
+        "https://github.com/crisdux/paracetamol.ts"
+      ]
+    },
+    "python-fullstack-interview-ts-06": {
+      "question": "TypeScript: render switch obsługuje wszystkie warianty unii LoadState. Po dodaniu cancelled kompilator ma wskazać każde pominięte miejsce. Który wzorzec to umożliwia?",
+      "type": "one_choice",
+      "answers": [
+        "Ustawić status: string zamiast literalnej unii, aby nowe stany nie wymagały zmian.",
+        "W gałęzi nieobsłużonej przekazać zawężony state do assertNever(x: never), aby nowy wariant powodował błąd typu.",
+        "W default zwracać null dla każdego nowego wariantu i uznawać switch za wyczerpujący.",
+        "Przed switch rzutować state na dotychczasową unię, aby zachować stare rozgałęzienia."
+      ],
+      "correct_answer": "W gałęzi nieobsłużonej przekazać zawężony state do assertNever(x: never), aby nowy wariant powodował błąd typu.",
+      "explanation": "Po wyczerpaniu dyskryminowanej unii pozostaje never. Dodanie wariantu powoduje, że argument nie jest już never; asercja lub ogólny fallback ukrywa brak obsługi.",
+      "difficulty": "hard",
+      "origin": "variant",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/2/narrowing.html"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/typescript-interview-questions-for-senior-frontend-developers",
+        "https://github.com/readytodev-pro/frontend-interview-questions"
+      ]
+    },
+    "python-fullstack-interview-ts-07": {
+      "question": "TypeScript: User zawiera id, role, name, timezone. Klient aktualizacji profilu ma statycznie udostępniać tylko name i timezone. Który kontrakt i założenie bezpieczeństwa są poprawne?",
+      "type": "one_choice",
+      "answers": [
+        "Partial<Pick<User, \"name\" | \"timezone\">>; serwer niezależnie waliduje allowlistę i autoryzuje zmianę.",
+        "Zastosować Partial<Pick<User, \"name\" | \"timezone\">> i przesłać obiekt bez filtrowania pól; serwer może zaufać deklaracji klienta, bo utility type ma usuwać z serializowanego JSON pola id i role.",
+        "Omit<User, \"id\">; wszystkie pozostałe pola będą opcjonalne i bezpieczne do edycji.",
+        "Partial<Pick<User, \"name\" | \"timezone\">>; to wystarcza do odrzucenia dodatkowych pól każdego JSON w runtime."
+      ],
+      "correct_answer": "Partial<Pick<User, \"name\" | \"timezone\">>; serwer niezależnie waliduje allowlistę i autoryzuje zmianę.",
+      "explanation": "Pick określa edytowalne pola, Partial ich opcjonalność. Typ nie usuwa właściwości obiektu w runtime ani nie jest zabezpieczeniem serwera; strukturalność także ogranicza siłę excess property checks.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/utility-types.html"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/typescript-interview-questions-for-senior-frontend-developers",
+        "https://github.com/readytodev-pro/frontend-interview-questions"
+      ]
+    },
+    "python-fullstack-interview-ts-08": {
+      "question": "TypeScript: async fetchProfile ma wywnioskowany wynik i jest rozwijane razem z API. Typ stanu ma reprezentować rozpakowany wynik tej funkcji bez kopiowania definicji. Co wybrać?",
+      "type": "one_choice",
+      "answers": [
+        "ReturnType<typeof fetchProfile>, bez Awaited.",
+        "Parameters<typeof fetchProfile>[0].",
+        "typeof fetchProfile, bez wywołania funkcji.",
+        "Awaited<ReturnType<typeof fetchProfile>>."
+      ],
+      "correct_answer": "Awaited<ReturnType<typeof fetchProfile>>.",
+      "explanation": "ReturnType opisuje wynik wywołania, dla async zwykle Promise. Awaited wyznacza jego rozpakowany typ; Parameters opisuje wejście, a typeof samej funkcji jej kontrakt wywołania.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://www.typescriptlang.org/docs/handbook/utility-types.html"
+      ],
+      "interview_sources": [
+        "https://www.greatfrontend.com/blog/typescript-interview-questions-for-senior-frontend-developers",
+        "https://github.com/Devinterview-io/typescript-interview-questions"
+      ]
+    },
+    "python2-web-009": {
+      "question": "Pydantic v2: model wejścia ma int quantity i domyślną konfigurację. Kontrakt API ma odrzucać string \"12\" zamiast konwertować go na liczbę i odrzucać nieznane pola. Co ustawić?",
+      "type": "one_choice",
+      "answers": [
+        "Zachować domyślne ustawienia, bo adnotacja int zawsze odrzuca stringi w runtime.",
+        "Użyć wyłącznie extra=\"forbid\", co automatycznie wyłącza też konwersje znanych pól.",
+        "Zastąpić walidację przez model_construct, aby wymusić dokładne typy wejścia.",
+        "Włączyć strict validation i extra=\"forbid\" na właściwym modelu, a zachowanie zagnieżdżeń sprawdzić testami kontraktu."
+      ],
+      "correct_answer": "Włączyć strict validation i extra=\"forbid\" na właściwym modelu, a zachowanie zagnieżdżeń sprawdzić testami kontraktu.",
+      "explanation": "Pydantic domyślnie potrafi konwertować wartości. Strict kontroluje konwersje, extra określa nieznane pola, a model_construct omija walidację zamiast ją zaostrzać.",
+      "difficulty": "medium",
+      "origin": "variant",
+      "sources": [
+        "https://docs.pydantic.dev/latest/concepts/strict_mode/",
+        "https://docs.pydantic.dev/latest/api/config/#pydantic.config.ConfigDict.extra"
+      ],
+      "interview_sources": [
+        "https://github.com/AliRezaei-Code/FastAPI-interview-questions"
+      ]
+    }
+  }
+}

@@ -11,7 +11,7 @@ export const preparedExams: PreparedExam[] = [
     id: "python-pg-fullstack",
     title: "Python PG — Fullstack",
     description:
-      "40 pytań w 30 minut: 12 Python, 10 DDD/design/architektura, 8 frameworki i biblioteki Pythona, 6 React/TypeScript, 4 bazy danych i technologie dodatkowe. Objaśnienia po zakończeniu.",
+      "Poziom senior: współbieżność, transakcje, awarie integracji, wydajność i stan UI. 40 pytań w 30 minut: 12 Python, 10 DDD/design/architektura, 8 frameworki i biblioteki Pythona, 6 React/TypeScript, 4 bazy i technologie dodatkowe. Objaśnienia po zakończeniu.",
     config: {
       ...defaultConfig("python-fullstack"),
       questionCount: 40,
