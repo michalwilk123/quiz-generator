@@ -51,7 +51,7 @@ See [research and authoring notes](docs/aws-clf-c02.md) for sources, style rules
 
 ## Attempts
 
-Questions are drawn without repetition within an attempt and shuffled. Retrying draws again; questions may overlap with a previous attempt. Progress is saved in the current browser. Refreshing restores the attempt, including its original deadline. A new device or browser starts a new attempt.
+Questions are drawn without repetition within an attempt and shuffled. Retrying draws again; questions may overlap with a previous attempt. After submission, the score and all questions, answers, and explanations appear on one page, even for a paginated quiz. Refreshing preserves this complete review. Progress is saved in the current browser. Refreshing restores the attempt, including its original deadline. A new device or browser starts a new attempt.
 
 The timer is off by default. When enabled, it allows at most 90 minutes and keeps running while the page is closed. Expiry locks answers; results are revealed only when requested. Equal question weights, automatic written-answer matching, and strict choice scoring without penalties are the defaults. Grading and pagination can be changed in configuration. Text matching is a heuristic; optional self-assessment is available when wording does not capture correctness.
 

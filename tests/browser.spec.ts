@@ -175,8 +175,8 @@ test("Polish learning preset shows readable code and reveals explanations only i
     .getByRole("button", { name: "Zakończ test", exact: true })
     .first()
     .click();
-  await expect(page.locator(".feedback")).toHaveCount(1);
-  await page.getByText("Dokumentacja", { exact: true }).click();
+  await expect(page.locator(".feedback")).toHaveCount(6);
+  await page.getByText("Dokumentacja", { exact: true }).first().click();
   await expect(page.locator(".feedback a").first()).toHaveAttribute(
     "href",
     /^https:\/\//,
@@ -225,8 +225,8 @@ test("learning records unknown answers without guessing", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Zakończ test", exact: true })).toHaveCount(0);
   await page.getByRole("button", { name: "Następna", exact: true }).click();
   await page.getByRole("button", { name: "Zakończ test", exact: true }).first().click();
-  await expect(unknown).toBeDisabled();
-  await expect(page.locator(".feedback")).toContainText("Nie wiem · 0 / 1");
+  await expect(unknown.first()).toBeDisabled();
+  await expect(page.locator(".feedback").first()).toContainText("Nie wiem · 0 / 1");
   await expect(page.getByText("Nie wiem: 1 / 6", { exact: true })).toBeVisible();
 
 });
@@ -247,8 +247,9 @@ test("AWS study uses English, saves unknown answers, and reveals sourced explana
   await page.getByRole("button", { name: "Finish test", exact: true }).click();
   await expect(page.getByRole("region", { name: "Test results" })).toContainText("0 / 20 points");
   await expect(page.getByRole("list", { name: "Results by domain" }).locator("li")).toHaveCount(4);
-  await expect(page.locator(".feedback")).toContainText("I don’t know");
-  await page.getByText("Documentation", { exact: true }).click();
+  await expect(page.locator(".feedback")).toHaveCount(20);
+  await expect(page.locator(".feedback").first()).toContainText("I don’t know");
+  await page.getByText("Documentation", { exact: true }).first().click();
   await expect(page.locator(".feedback a").first()).toHaveAttribute("href", /^https:\/\/(docs\.)?aws\.amazon\.com\//);
 });
 
@@ -271,6 +272,8 @@ test("AWS demo scores all 50 questions and preserves the 90-minute timer without
   await expect(page.locator(".feedback")).toHaveCount(0);
   await page.getByRole("button", { name: "View results", exact: true }).first().click();
   await expect(page.getByRole("region", { name: "Test results" })).toContainText("/ 50 points");
+  await expect(page.locator(".feedback")).toHaveCount(50);
+  await expect(page.getByRole("navigation", { name: "Question pages", exact: true })).toHaveCount(0);
   await expect(page.getByRole("region", { name: "Test results" })).toContainText("raw practice score");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
@@ -337,4 +340,27 @@ test("direct hash navigation between presets initializes the requested exam", as
   await page.goto("./#/exam/python-pg-fullstack");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Python PG — Fullstack");
   await expect(page.getByText("Odpowiedzi: 0 / 40", { exact: true })).toBeVisible();
+});
+
+test("submitted paginated exams show every answer on one page, including after refresh", async ({ page }) => {
+  await page.goto("./#/exam/python-pg-fullstack");
+  await expect(page.locator(".question")).toHaveCount(5);
+  await expect(page.getByText("Strona 1 z 8", { exact: true })).toBeVisible();
+  for (let i = 0; i < 7; i++) {
+    await page.getByRole("button", { name: "Następna", exact: true }).click();
+  }
+  await page.getByRole("button", { name: "Zakończ test", exact: true }).click();
+  await expect(page.getByRole("region", { name: "Wyniki testu" })).toBeVisible();
+  await expect(page.locator(".question")).toHaveCount(40);
+  await expect(page.locator(".feedback")).toHaveCount(40);
+  await expect(page.getByRole("navigation", { name: "Strony pytań", exact: true })).toHaveCount(0);
+  await expect(page.getByText(/^Strona \d+ z \d+$/)).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Następna", exact: true })).toHaveCount(0);
+  await page.reload();
+  await expect(page.locator(".feedback")).toHaveCount(40);
+  await expect(page.getByRole("navigation", { name: "Strony pytań", exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Spróbuj ponownie", exact: true }).click();
+  await expect(page.locator(".question")).toHaveCount(5);
+  await expect(page.locator(".feedback")).toHaveCount(0);
+  await expect(page.getByText("Strona 1 z 8", { exact: true })).toBeVisible();
 });

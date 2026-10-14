@@ -219,9 +219,11 @@ export default function Quiz() {
   const answered = attempt.answers.filter((answer) =>
     answer === null || (Array.isArray(answer) ? answer.length > 0 : answer.trim().length > 0),
   ).length;
-  const paginated = attempt.pages.length > 1;
+  const paginated = !revealed && attempt.pages.length > 1;
   const lastPage = page >= attempt.pages.length - 1;
-  const indices = attempt.pages[Math.min(page, attempt.pages.length - 1)] ?? [];
+  const indices = revealed
+    ? attempt.questions.map((_, index) => index)
+    : attempt.pages[Math.min(page, attempt.pages.length - 1)] ?? [];
   return (
     <>
       <div className="exam-toolbar" lang={english ? "en" : "pl"}>
@@ -232,9 +234,11 @@ export default function Quiz() {
                 ? t("Przegląd odpowiedzi", "Answer review")
                 : `${t("Odpowiedzi", "Answered")}: ${answered} / ${attempt.questions.length}`}
             </p>
-            <p className="muted text-xs">
-              {t("Strona", "Page")} {page + 1} {t("z", "of")} {attempt.pages.length}
-            </p>
+            {!revealed && (
+              <p className="muted text-xs">
+                {t("Strona", "Page")} {page + 1} {t("z", "of")} {attempt.pages.length}
+              </p>
+            )}
           </div>
           {seconds !== null && (
             <span
@@ -344,39 +348,35 @@ export default function Quiz() {
             />
           ))}
         </div>
-        <nav
-          aria-label={t("Strony pytań", "Question pages")}
-          className="mt-10 flex items-center justify-between gap-3"
-        >
-          {attempt.pages.length > 1 ? (
-            <>
+        {paginated && (
+          <nav
+            aria-label={t("Strony pytań", "Question pages")}
+            className="mt-10 flex items-center justify-between gap-3"
+          >
+            <button
+              className="button secondary"
+              disabled={page === 0}
+              onClick={() => move(page - 1)}
+            >
+              {t("Poprzednia", "Previous")}
+            </button>
+            <span className="muted text-sm">
+              {page + 1} / {attempt.pages.length}
+            </span>
+            {lastPage ? (
+              <button className="button" onClick={finish}>
+                {expired ? t("Zobacz wyniki", "View results") : t("Zakończ test", "Finish test")}
+              </button>
+            ) : (
               <button
                 className="button secondary"
-                disabled={page === 0}
-                onClick={() => move(page - 1)}
+                onClick={() => move(page + 1)}
               >
-                {t("Poprzednia", "Previous")}
+                {t("Następna", "Next")}
               </button>
-              <span className="muted text-sm">
-                {page + 1} / {attempt.pages.length}
-              </span>
-              {lastPage ? (
-                !revealed && (
-                  <button className="button" onClick={finish}>
-                    {expired ? t("Zobacz wyniki", "View results") : t("Zakończ test", "Finish test")}
-                  </button>
-                )
-              ) : (
-                <button
-                  className="button secondary"
-                  onClick={() => move(page + 1)}
-                >
-                  {t("Następna", "Next")}
-                </button>
-              )}
-            </>
-          ) : null}
-        </nav>
+            )}
+          </nav>
+        )}
         {!revealed && !paginated && (
           <button className="button mt-6" onClick={finish}>
             {expired ? t("Zobacz wyniki", "View results") : t("Zakończ test", "Finish test")}
