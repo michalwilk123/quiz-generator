@@ -128,12 +128,12 @@ export default function SelectQuiz() {
             </label>
             {config.durationMinutes !== null ? (
               <label className="field mt-2">
-                <span className="text-sm">Minuty (maksymalnie 30)</span>
+                <span className="text-sm">Minuty (maksymalnie 90)</span>
                 <input
                   required
                   type="number"
                   min="1"
-                  max="30"
+                  max="90"
                   value={config.durationMinutes}
                   onChange={(event) =>
                     update({ durationMinutes: Number(event.target.value) })

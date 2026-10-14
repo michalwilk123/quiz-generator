@@ -8,6 +8,45 @@ export interface PreparedExam {
 // IDs are public links: keep them stable when updating these configurations.
 export const preparedExams: PreparedExam[] = [
   {
+    id: "python-pg-fullstack",
+    title: "Python PG — Fullstack",
+    description:
+      "40 pytań w 30 minut: 12 Python, 10 DDD/design/architektura, 8 frameworki i biblioteki Pythona, 6 React/TypeScript, 4 bazy danych i technologie dodatkowe. Objaśnienia po zakończeniu.",
+    config: {
+      ...defaultConfig("python-fullstack"),
+      questionCount: 40,
+      durationMinutes: 30,
+      questionTypes: ["one_choice", "multi_choice", "short_open"],
+      pageSize: 5,
+    },
+  },
+  {
+    id: "aws-clf-c02-study",
+    title: "AWS Certified Cloud Practitioner — Study",
+    description:
+      "20 original English questions, no timer. Review explanations for every option and AWS documentation after finishing. All four CLF-C02 domains.",
+    config: {
+      ...defaultConfig("aws-clf-c02"),
+      questionCount: 20,
+      allowUnknownAnswer: true,
+      questionTypes: ["one_choice", "multi_choice"],
+      pageSize: 1,
+    },
+  },
+  {
+    id: "aws-clf-c02-demo",
+    title: "AWS Certified Cloud Practitioner — Exam Demo",
+    description:
+      "50 scored English questions in 90 minutes. CLF-C02 domain proportions; experimental unscored questions omitted. Multiple-response answers must match the complete key. Raw practice score, not an AWS scaled score.",
+    config: {
+      ...defaultConfig("aws-clf-c02"),
+      questionCount: 50,
+      durationMinutes: 90,
+      questionTypes: ["one_choice", "multi_choice"],
+      pageSize: 1,
+    },
+  },
+  {
     id: "python-nauka2",
     title: "Programowanie python - politechnika gdanska 2 — Nauka 2",
     description:

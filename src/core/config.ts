@@ -61,9 +61,9 @@ export function validateConfig(value: unknown): ExamConfig {
     c.durationMinutes !== null &&
     (!Number.isFinite(c.durationMinutes) ||
       c.durationMinutes < 1 ||
-      c.durationMinutes > 30)
+      c.durationMinutes > 90)
   )
-    throw new Error("Limit czasu musi wynosić od 1 do 30 minut.");
+    throw new Error("Limit czasu musi wynosić od 1 do 90 minut.");
   if (!["auto", "all", 1, 5, 10, 20].includes(c.pageSize))
     throw new Error("Nieprawidłowa liczba pytań na stronie.");
   if (

@@ -9,6 +9,7 @@ export interface Question {
   scale?: number;
   explanation?: string;
   sources?: string[];
+  interview_sources?: string[];
   section?: string;
   family?: string;
   origin?: "report" | "variant";
@@ -30,9 +31,10 @@ export function validateQuestion(value: unknown): Question {
     ) ||
     (q?.difficulty !== undefined &&
       !["easy", "medium", "hard"].includes(q.difficulty)) ||
-    (q?.sources !== undefined &&
-      (!Array.isArray(q.sources) ||
-        q.sources.some((url) => {
+    [q?.sources, q?.interview_sources].some((sources) =>
+      sources !== undefined &&
+      (!Array.isArray(sources) ||
+        sources.some((url) => {
           if (typeof url !== "string") return true;
           try {
             return new URL(url).protocol !== "https:";
@@ -110,6 +112,7 @@ export async function loadBank(id: string): Promise<QuestionBank> {
           if (q.answers) Object.freeze(q.answers);
           if (q.correct_answers) Object.freeze(q.correct_answers);
           if (q.sources) Object.freeze(q.sources);
+          if (q.interview_sources) Object.freeze(q.interview_sources);
           Object.freeze(q);
         }
         Object.freeze(bank.quiz_elements);

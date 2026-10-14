@@ -3,6 +3,7 @@ import QuestionText from "./QuestionText";
 
 type Props = {
   question: Question;
+  language?: "pl" | "en";
   index: number;
   answer: Answer;
   allowUnknown: boolean;
@@ -16,6 +17,7 @@ type Props = {
 };
 export default function QuestionCardGenerator({
   question,
+  language = "pl",
   index,
   answer,
   allowUnknown,
@@ -27,22 +29,23 @@ export default function QuestionCardGenerator({
   onGrade,
   manualGrade,
 }: Props) {
+  const t = (pl: string, en: string) => language === "en" ? en : pl;
   const choice =
     question.type === "one_choice" || question.type === "multi_choice";
   const model =
     question.correct_answers ??
     (question.correct_answer ? [question.correct_answer] : []);
   return (
-    <section className="question" aria-labelledby={`question-${index}`}>
-      <h2 className="muted mb-2 text-sm">Pytanie {index + 1}</h2>
+    <section className="question" lang={language} aria-labelledby={`question-${index}`}>
+      <h2 className="muted mb-2 text-sm">{t("Pytanie", "Question")} {index + 1}</h2>
       <div id={`question-${index}`} className="question-title">
         <QuestionText text={question.question} />
       </div>
       {choice && (
         <p className="muted mt-3 text-sm">
           {question.type === "multi_choice"
-            ? "Zaznacz wszystkie poprawne odpowiedzi."
-            : "Wybierz jedną odpowiedź."}
+            ? t("Zaznacz wszystkie poprawne odpowiedzi.", `Select ${question.correct_answers?.length} answers.`)
+            : t("Wybierz jedną odpowiedź.", "Select ONE answer.")}
         </p>
       )}
       <div className="mt-4">
@@ -83,7 +86,7 @@ export default function QuestionCardGenerator({
         ) : question.type === "long_open" ? (
           <textarea
             aria-labelledby={`question-${index}`}
-            placeholder="Twoja odpowiedź"
+            placeholder={t("Twoja odpowiedź", "Your answer")}
             rows={5}
             disabled={locked}
             value={typeof answer === "string" ? answer : ""}
@@ -92,7 +95,7 @@ export default function QuestionCardGenerator({
         ) : (
           <input
             aria-labelledby={`question-${index}`}
-            placeholder="Twoja odpowiedź"
+            placeholder={t("Twoja odpowiedź", "Your answer")}
             disabled={locked}
             value={typeof answer === "string" ? answer : ""}
             onChange={(event) => onAnswer(event.target.value)}
@@ -109,7 +112,7 @@ export default function QuestionCardGenerator({
               event.target.checked ? null : question.type === "multi_choice" ? [] : "",
             )}
           />
-          <span>Nie wiem</span>
+          <span>{t("Nie wiem", "I don’t know")}</span>
         </label>
       )}
       {revealed && (
@@ -126,13 +129,13 @@ export default function QuestionCardGenerator({
             }
           >
             {answer === null
-              ? `Nie wiem · 0 / ${grade.possible}`
+              ? `${t("Nie wiem", "I don’t know")} · 0 / ${grade.possible}`
               : grade.fraction === null
-              ? "Czeka na Twoją ocenę"
-              : `${grade.fraction === 1 ? "Poprawna" : grade.fraction > 0 ? "Częściowo poprawna" : "Niepoprawna"} · ${Number(grade.earned.toFixed(2))} / ${grade.possible}`}
+              ? t("Czeka na Twoją ocenę", "Awaiting your assessment")
+              : `${grade.fraction === 1 ? t("Poprawna", "Correct") : grade.fraction > 0 ? t("Częściowo poprawna", "Partially correct") : t("Niepoprawna", "Incorrect")} · ${Number(grade.earned.toFixed(2))} / ${grade.possible}`}
           </p>
           <p className="muted mt-3 text-sm">
-            {choice ? "Poprawna odpowiedź" : "Wzorcowa odpowiedź"}
+            {choice ? t("Poprawna odpowiedź", "Correct answer") : t("Wzorcowa odpowiedź", "Model answer")}
           </p>
           <QuestionText text={model.join("\n")} />
           {question.explanation && (
@@ -142,7 +145,7 @@ export default function QuestionCardGenerator({
           )}
           {question.sources?.length ? (
             <details className="mt-4 text-sm">
-              <summary>Dokumentacja</summary>
+              <summary>{t("Dokumentacja", "Documentation")}</summary>
               <ul className="mt-2 space-y-2">
                 {question.sources.map((source) => (
                   <li key={source}>
@@ -153,6 +156,21 @@ export default function QuestionCardGenerator({
                         .filter(Boolean)
                         .at(-1) ?? "źródło"}
                     </a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ) : null}
+          {question.interview_sources?.length ? (
+            <details className="mt-4 text-sm">
+              <summary>{t("Powiązane pytania rekrutacyjne", "Related interview questions")}</summary>
+              <p className="muted mt-2">
+                {t("Źródła pytań lub tematów rekrutacyjnych. Treść quizu i opcje odpowiedzi są adaptacją do ćwiczeń.", "Sources of interview questions or topics. Quiz wording and answer options are adapted for practice.")}
+              </p>
+              <ul className="mt-2 space-y-2">
+                {question.interview_sources.map((source) => (
+                  <li key={source}>
+                    <a className="break-all" href={source} target="_blank" rel="noreferrer">{source}</a>
                   </li>
                 ))}
               </ul>

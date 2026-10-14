@@ -14,6 +14,7 @@ import {
   updateAnswer,
 } from "../core";
 import type { Attempt, ExamConfig } from "../core";
+import quizConfig from "../quiz_config";
 import { preparedExams } from "../prepared_exams";
 import QuestionCardGenerator from "./QuestionCardGenerator";
 
@@ -28,6 +29,13 @@ export default function Quiz() {
   const [celebrate, setCelebrate] = useState(false);
   const celebrated = useRef(false);
   const initialized = useRef("");
+  const subjects = attempt?.config.subjects ??
+    preparedExams.find((exam) => exam.id === id)?.config.subjects ??
+    (quiz ? [{ id: quiz, weight: 1 }] : []);
+  const english = subjects.length > 0 && subjects.every((subject) =>
+    quizConfig.find((bank) => bank.urlName === subject.id)?.language === "en",
+  );
+  const t = (pl: string, en: string) => english ? en : pl;
   useEffect(() => {
     const route = location.key;
     const routeHash = window.location.hash;
@@ -52,12 +60,15 @@ export default function Quiz() {
         const encoded = params.get("config");
         if (!encoded) throw Error("W linku do testu brakuje konfiguracji.");
         config = decodeConfig(encoded);
+        if (config.subjects.every((subject) =>
+          quizConfig.find((bank) => bank.urlName === subject.id)?.language === "en",
+        )) title = "Practice test";
       }
       let saved: Attempt | null = null;
       try {
         saved = restoreAttempt();
       } catch {
-        setWarning("Nie udało się odtworzyć postępu. Rozpoczynam nowy test.");
+        setWarning(t("Nie udało się odtworzyć postępu. Rozpoczynam nowy test.", "Saved progress could not be restored. Starting a new test."));
       }
       const fresh = Boolean(location.state?.fresh);
       if (
@@ -108,7 +119,7 @@ export default function Quiz() {
       saveAttempt(attempt);
     } catch {
       setWarning(
-        "Nie można zapisać postępu na tym urządzeniu. Pozostaw tę stronę otwartą do końca testu.",
+        t("Nie można zapisać postępu na tym urządzeniu. Pozostaw tę stronę otwartą do końca testu.", "Progress cannot be saved on this device. Keep this page open until you finish the test."),
       );
     }
   }, [attempt]);
@@ -169,22 +180,22 @@ export default function Quiz() {
   }
   if (error)
     return (
-      <div className="shell page-space">
-        <h1>Nie można otworzyć testu</h1>
+      <div className="shell page-space" lang={english ? "en" : "pl"}>
+        <h1>{t("Nie można otworzyć testu", "Unable to open test")}</h1>
         <p role="alert" className="mt-4">
           {error}
         </p>
         <p className="mt-6">
-          <Link to="/configure">Zmień konfigurację</Link>
+          <Link to="/configure">{t("Zmień konfigurację", "Change configuration")}</Link>
           <span className="mx-3">·</span>
-          <Link to="/">Wróć do testów</Link>
+          <Link to="/">{t("Wróć do testów", "Back to tests")}</Link>
         </p>
       </div>
     );
   if (!attempt || !score)
     return (
-      <div className="shell page-space" role="status">
-        Wczytywanie pytań…
+      <div className="shell page-space" role="status" lang={english ? "en" : "pl"}>
+        {t("Wczytywanie pytań…", "Loading questions…")}
       </div>
     );
   const revealed = attempt.status === "submitted";
@@ -213,40 +224,40 @@ export default function Quiz() {
   const indices = attempt.pages[Math.min(page, attempt.pages.length - 1)] ?? [];
   return (
     <>
-      <div className="exam-toolbar">
+      <div className="exam-toolbar" lang={english ? "en" : "pl"}>
         <div className="shell flex min-h-16 items-center justify-between gap-3 py-2">
           <div className="min-w-0">
             <p className="text-sm">
               {revealed
-                ? "Przegląd odpowiedzi"
-                : `Odpowiedzi: ${answered} / ${attempt.questions.length}`}
+                ? t("Przegląd odpowiedzi", "Answer review")
+                : `${t("Odpowiedzi", "Answered")}: ${answered} / ${attempt.questions.length}`}
             </p>
             <p className="muted text-xs">
-              Strona {page + 1} z {attempt.pages.length}
+              {t("Strona", "Page")} {page + 1} {t("z", "of")} {attempt.pages.length}
             </p>
           </div>
           {seconds !== null && (
             <span
               className={`timer ${seconds < 60 && !revealed ? "urgent" : ""}`}
               role="timer"
-              aria-label={`Pozostało ${Math.floor(seconds / 60)} min ${seconds % 60} s`}
+              aria-label={`${t("Pozostało", "Remaining")} ${Math.floor(seconds / 60)} min ${seconds % 60} s`}
             >
               {Math.floor(seconds / 60)}:{String(seconds % 60).padStart(2, "0")}
             </span>
           )}
           {!revealed && (!paginated || expired) && (
             <button className="button text-sm" onClick={finish}>
-              {expired ? "Zobacz wyniki" : "Zakończ test"}
+              {expired ? t("Zobacz wyniki", "View results") : t("Zakończ test", "Finish test")}
             </button>
           )}
           {revealed && (
             <button className="button text-sm" onClick={retry}>
-              Spróbuj ponownie
+              {t("Spróbuj ponownie", "Try again")}
             </button>
           )}
         </div>
       </div>
-      <div className="shell pb-12 pt-7">
+      <div className="shell pb-12 pt-7" lang={english ? "en" : "pl"}>
         <h1>{attempt.title}</h1>
         {warning && (
           <p role="status" className="mt-4 text-amber-200 text-sm">
@@ -255,28 +266,43 @@ export default function Quiz() {
         )}
         {expired && !revealed && (
           <p role="status" className="mt-5 text-amber-200">
-            Czas minął. Odpowiedzi są zablokowane. Możesz teraz przejść do
-            wyników.
+            {t("Czas minął. Odpowiedzi są zablokowane. Możesz teraz przejść do wyników.", "Time is up. Answers are locked. You can now view your results.")}
           </p>
         )}
         {revealed && (
-          <section className="result-enter mt-6" aria-label="Wyniki testu">
+          <section className="result-enter mt-6" aria-label={t("Wyniki testu", "Test results")}>
             <h2 className="text-2xl">
               {score.pending
                 ? `Zdobyte punkty: ${Number(score.earned.toFixed(2))}`
-                : `${Number(score.earned.toFixed(2))} / ${score.possible} pkt · ${Math.round(score.percentage ?? 0)}%`}
+                : `${Number(score.earned.toFixed(2))} / ${score.possible} ${t("pkt", "points")} · ${Math.round(score.percentage ?? 0)}%`}
             </h2>
             <p className="muted mt-2">
               {score.pending
                 ? `Odpowiedzi do samodzielnej oceny: ${score.pending}. Oceń je poniżej.`
                 : score.percentage === 100
-                  ? "Wszystkie odpowiedzi poprawne. Brawo!"
-                  : "Sprawdź odpowiedzi poniżej, a potem spróbuj kolejnego zestawu."}
+                  ? t("Wszystkie odpowiedzi poprawne. Brawo!", "All answers are correct. Well done!")
+                  : t("Sprawdź odpowiedzi poniżej, a potem spróbuj kolejnego zestawu.", "Review the answers below, then try another set.")}
             </p>
             {attempt.config.allowUnknownAnswer && (
               <p className="muted mt-2">
-                Nie wiem: {attempt.answers.filter((answer) => answer === null).length} / {attempt.questions.length}
+                {t("Nie wiem", "I don’t know")}: {attempt.answers.filter((answer) => answer === null).length} / {attempt.questions.length}
               </p>
+            )}
+            {english && (
+              <>
+                <p className="muted mt-2 text-sm">
+                  This is a raw practice score. AWS uses a scaled score of
+                  100–1,000 with a passing score of 700; a practice percentage
+                  cannot be converted directly into that score.
+                </p>
+                <ul className="mt-4 space-y-1 text-sm" aria-label="Results by domain">
+                  {[...new Set(attempt.questions.map((q) => q.section))].map((section) => {
+                    const indexes = attempt.questions.flatMap((q, i) => q.section === section ? [i] : []);
+                    const correct = indexes.filter((i) => score.questions[i].fraction === 1).length;
+                    return <li key={section}>{section}: {correct} / {indexes.length} correct</li>;
+                  })}
+                </ul>
+              </>
             )}
             {attempt.config.writtenGrading === "automatic" &&
               attempt.questions.some((question) =>
@@ -294,6 +320,7 @@ export default function Quiz() {
             <QuestionCardGenerator
               key={`${attempt.id}-${index}`}
               question={attempt.questions[index]}
+              language={english ? "en" : "pl"}
               index={index}
               answer={attempt.answers[index]}
               allowUnknown={!!attempt.config.allowUnknownAnswer}
@@ -318,7 +345,7 @@ export default function Quiz() {
           ))}
         </div>
         <nav
-          aria-label="Strony pytań"
+          aria-label={t("Strony pytań", "Question pages")}
           className="mt-10 flex items-center justify-between gap-3"
         >
           {attempt.pages.length > 1 ? (
@@ -328,7 +355,7 @@ export default function Quiz() {
                 disabled={page === 0}
                 onClick={() => move(page - 1)}
               >
-                Poprzednia
+                {t("Poprzednia", "Previous")}
               </button>
               <span className="muted text-sm">
                 {page + 1} / {attempt.pages.length}
@@ -336,7 +363,7 @@ export default function Quiz() {
               {lastPage ? (
                 !revealed && (
                   <button className="button" onClick={finish}>
-                    {expired ? "Zobacz wyniki" : "Zakończ test"}
+                    {expired ? t("Zobacz wyniki", "View results") : t("Zakończ test", "Finish test")}
                   </button>
                 )
               ) : (
@@ -344,7 +371,7 @@ export default function Quiz() {
                   className="button secondary"
                   onClick={() => move(page + 1)}
                 >
-                  Następna
+                  {t("Następna", "Next")}
                 </button>
               )}
             </>
@@ -352,12 +379,12 @@ export default function Quiz() {
         </nav>
         {!revealed && !paginated && (
           <button className="button mt-6" onClick={finish}>
-            {expired ? "Zobacz wyniki" : "Zakończ test"}
+            {expired ? t("Zobacz wyniki", "View results") : t("Zakończ test", "Finish test")}
           </button>
         )}
         {revealed && (
           <p className="mt-8">
-            <Link to="/">Wróć do testów</Link>
+            <Link to="/">{t("Wróć do testów", "Back to tests")}</Link>
           </p>
         )}
       </div>

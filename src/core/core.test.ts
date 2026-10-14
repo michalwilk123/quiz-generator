@@ -66,7 +66,7 @@ describe("configuration links", () => {
   it("rejects malformed links and invalid deadlines", () => {
     expect(() => decodeConfig("%%%")).toThrow();
     expect(() =>
-      validateConfig({ ...defaultConfig(), durationMinutes: 31 }),
+      validateConfig({ ...defaultConfig(), durationMinutes: 91 }),
     ).toThrow();
     expect(() =>
       validateConfig({

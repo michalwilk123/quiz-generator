@@ -2,8 +2,20 @@ export interface QuizDefinition {
   filename: string;
   name: string;
   urlName: string;
+  language?: "en";
 }
 const quizConfig: QuizDefinition[] = [
+  {
+    filename: "python-fullstack.json",
+    name: "Programowanie Python PG — Fullstack",
+    urlName: "python-fullstack",
+  },
+  {
+    filename: "aws-clf-c02.json",
+    name: "AWS Certified Cloud Practitioner (CLF-C02)",
+    urlName: "aws-clf-c02",
+    language: "en",
+  },
   {
     filename: "python2.json",
     name: "Programowanie python - politechnika gdanska 2",
