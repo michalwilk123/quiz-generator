@@ -18,6 +18,12 @@ LEVELS = {"easy": "Łatwe", "medium": "Średnie", "hard": "Trudne"}
 CHAPTERS = {
     "Django i DRF": "frameworks2",
     "Architektura i DDD": "architecture2",
+    "DDD": "architecture2",
+    "Clean Architecture": "architecture2",
+    "Architektura heksagonalna": "architecture2",
+    "Wzorce projektowe": "architecture2",
+    "Wagtail": "cms2",
+    "Django Admin": "cms2",
     "PostgreSQL": "postgres",
     "RabbitMQ i Redis": "messaging",
     "Bezpieczeństwo": "security",
@@ -59,7 +65,7 @@ def main():
     cards = []
     for i, q in enumerate(questions, 1):
         chapter = "python" if q["section"].startswith("Python —") else CHAPTERS[q["section"]]
-        if q["section"] in ("Python — asyncio i serwery", "Python — wątki i procesy"):
+        if q["section"] in ("Python — asyncio i serwery", "Python — wątki i procesy", "Python — współbieżność"):
             chapter = "async"
         card = f'<article class="question" id="q-{i}"><div class="question-meta">Pytanie {i} · {html.escape(q["section"])} · {LEVELS[q["difficulty"]]}</div>'
         card += render(q["question"])
@@ -82,7 +88,7 @@ def main():
     groups = {}
     for url in urls:
         groups.setdefault(urlparse(url).netloc, []).append(url)
-    content = '<section id="sources"><h2>Źródła i dobór tematów — 01.10.2026</h2><p>Odpowiedzi zweryfikowano w dokumentacji producentów i materiałach autorów wzorców. Priorytet wynika z zakresu zaproszenia, przydatności w pracy backendowej i podstaw nauczanych w oficjalnych tutorialach. Sylabusy PCAP/PCPP są pomocniczym porównaniem zakresu Pythona; nie opisują tego egzaminu. Nie dysponujemy jego archiwalnymi pytaniami ani statystyką występowania tematów.</p>'
+    content = '<section id="sources"><h2>Źródła i dobór tematów — 02.10.2026</h2><p>Odpowiedzi zweryfikowano w dokumentacji producentów i materiałach autorów wzorców. Priorytet wynika z zakresu zaproszenia, przydatności w pracy backendowej i podstaw nauczanych w oficjalnych tutorialach. Sylabusy PCAP/PCPP są pomocniczym porównaniem zakresu Pythona; nie opisują tego egzaminu. Nie dysponujemy jego archiwalnymi pytaniami ani statystyką występowania tematów.</p>'
     for domain, domain_urls in groups.items():
         content += '<h3>' + html.escape(domain) + '</h3><ul>' + ''.join(f'<li><a href="{html.escape(url, quote=True)}">{html.escape(url)}</a></li>' for url in domain_urls) + '</ul>'
     sheet = replace_section(sheet, "sources", content + '</section>')

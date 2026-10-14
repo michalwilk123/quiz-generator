@@ -102,7 +102,13 @@ describe("Python 2 — zakres zaproszenia", () => {
   it("covers the invitation with explained fundamentals at three difficulty levels", async () => {
     const bank = await loadBank("python2");
     expect(bank.quiz_elements).toHaveLength(288);
-    expect(bank.quiz_elements.filter((q) => q.section?.startsWith("Python —"))).toHaveLength(144);
+    expect(bank.quiz_elements.filter((q) => q.section?.startsWith("Python —"))).toHaveLength(108);
+    for (const [section, count] of [
+      ["DDD", 13], ["Clean Architecture", 10], ["Architektura heksagonalna", 10],
+      ["Wzorce projektowe", 10], ["Wagtail", 15], ["Django Admin", 10], ["PostgreSQL", 16],
+    ] as const) {
+      expect(bank.quiz_elements.filter((q) => q.section === section)).toHaveLength(count);
+    }
     expect(bank.quiz_elements.filter((q) => q.type === "long_open")).toHaveLength(6);
     expect(new Set(bank.quiz_elements.map((q) => q.question)).size).toBe(288);
     expect(new Set(bank.quiz_elements.map((q) => q.family)).size).toBe(288);
@@ -131,12 +137,34 @@ describe("Python 2 — zakres zaproszenia", () => {
         expect(questions).toHaveLength(original.config.questionCount as number);
         expect(new Set(questions.map((q) => q.family)).size).toBe(questions.length);
         if (id === "python-weryfikacja") {
-          expect(questions.filter((q) => q.section?.startsWith("Python —")).length).toBeGreaterThanOrEqual(12);
+          expect(questions.filter((q) => q.section?.startsWith("Python —")).length).toBeGreaterThanOrEqual(8);
           expect(new Set(questions.map((q) => q.section))).toEqual(
             new Set(bank.quiz_elements.filter((q) => copy.config.questionTypes.includes(q.type)).map((q) => q.section)),
           );
         }
       }
+    }
+  });
+});
+
+
+describe("Python 2 — reprezentacja zakresu w losowaniu", () => {
+  it("includes architecture and CMS throughout thirty-question sessions", async () => {
+    const bank = await loadBank("python2");
+    const preset = preparedExams.find((p) => p.id === "python-weryfikacja2")!;
+    const architecture = new Set(["DDD", "Clean Architecture", "Architektura heksagonalna", "Wzorce projektowe"]);
+    for (let seed = 1; seed <= 100; seed++) {
+      const questions = sampleQuestions(preset.config, [bank], seededRandom(seed));
+      expect(questions.filter((q) => architecture.has(q.section!)).length).toBeGreaterThanOrEqual(4);
+      for (const section of architecture) {
+        expect(questions.some((q) => q.section === section)).toBe(true);
+      }
+      expect(questions.some((q) => q.section === "Wagtail")).toBe(true);
+      expect(questions.some((q) => q.section === "Django Admin")).toBe(true);
+      expect(questions.filter((q) => q.section === "PostgreSQL").length).toBeLessThanOrEqual(2);
+      const pythonCount = questions.filter((q) => q.section?.startsWith("Python —")).length;
+      expect(pythonCount).toBeGreaterThanOrEqual(8);
+      expect(pythonCount).toBeLessThanOrEqual(12);
     }
   });
 });

@@ -17,6 +17,7 @@ export interface Question {
 export interface QuestionBank {
   name: string;
   quiz_elements: Question[];
+  section_weights?: Record<string, number>;
 }
 const files = import.meta.glob<{ default: QuestionBank }>("../quizes/*.json");
 const cache = new Map<string, Promise<QuestionBank>>();
@@ -89,6 +90,21 @@ export async function loadBank(id: string): Promise<QuestionBank> {
         const bank = structuredClone(module.default);
         if (typeof bank.name !== "string" || !Array.isArray(bank.quiz_elements))
           throw new Error(`Quiz „${id}” ma nieprawidłowy format.`);
+        if (bank.section_weights !== undefined) {
+          const weights = bank.section_weights;
+          if (
+            !weights ||
+            typeof weights !== "object" ||
+            Array.isArray(weights) ||
+            Object.entries(weights).some(
+              ([section, weight]) =>
+                !bank.quiz_elements.some((q) => q.section === section) ||
+                !Number.isFinite(weight) || weight <= 0,
+            )
+          )
+            throw new Error(`Quiz „${id}” ma nieprawidłowe wagi działów.`);
+          Object.freeze(weights);
+        }
         for (const q of bank.quiz_elements) {
           validateQuestion(q);
           if (q.answers) Object.freeze(q.answers);
@@ -132,7 +148,7 @@ export function sampleQuestions(
     if (bankIndex < 0)
       bankIndex = pools.findLastIndex((pool) => pool.length > 0);
     const pool = pools[bankIndex];
-    // Prefer a new concept and the least represented section within the drawn bank.
+    // Prefer a new concept and balance sections using optional curriculum weights.
     // Existing banks without this optional metadata retain uniform sampling.
     const indexes = pool.map((_, index) => index);
     const fresh = indexes.filter(
@@ -142,7 +158,8 @@ export function sampleQuestions(
     );
     const candidates = fresh.length ? fresh : indexes;
     const sectionCount = (index: number) =>
-      sectionCounts.get(`${bankIndex}:${pool[index].section ?? ""}`) ?? 0;
+      (sectionCounts.get(`${bankIndex}:${pool[index].section ?? ""}`) ?? 0) /
+      (banks[bankIndex].section_weights?.[pool[index].section ?? ""] ?? 1);
     const leastUsed = Math.min(...candidates.map(sectionCount));
     const balanced = candidates.filter(
       (index) => sectionCount(index) === leastUsed,

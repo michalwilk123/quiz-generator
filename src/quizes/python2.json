@@ -16,7 +16,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-001",
       "origin": "variant",
       "difficulty": "easy"
@@ -36,7 +36,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-002",
       "origin": "variant",
       "difficulty": "easy"
@@ -56,7 +56,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-003",
       "origin": "variant",
       "difficulty": "easy"
@@ -76,7 +76,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-004",
       "origin": "variant",
       "difficulty": "easy"
@@ -96,28 +96,8 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-005",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Który zapis inicjalizuje osobną listę items dla każdej instancji Basket?\n```python\nclass Basket:\n    def __init__(self):\n        # tutaj zainicjalizuj items\n        pass\n```",
-      "type": "one_choice",
-      "answers": [
-        "items = [] w ciele klasy.",
-        "global items w __init__.",
-        "items = [] przed definicją klasy i brak przypisania w instancji.",
-        "self.items = [] w __init__."
-      ],
-      "correct_answer": "self.items = [] w __init__.",
-      "explanation": "Lista przypisana do instancji powstaje przy jej inicjalizacji. Mutowalny atrybut klasy byłby współdzielony.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/abc.html"
-      ],
-      "section": "Python — model obiektowy",
-      "family": "python2-core-006",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -136,7 +116,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-007",
       "origin": "variant",
       "difficulty": "medium"
@@ -156,7 +136,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-008",
       "origin": "variant",
       "difficulty": "medium"
@@ -176,7 +156,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-009",
       "origin": "variant",
       "difficulty": "medium"
@@ -196,7 +176,7 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-010",
       "origin": "variant",
       "difficulty": "medium"
@@ -216,28 +196,8 @@
         "https://docs.python.org/3.12/tutorial/classes.html",
         "https://docs.python.org/3.12/library/abc.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-011",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Obiekt Invoice ma logiczną wartość biznesową. Co powinno porównywać jego __eq__?",
-      "type": "one_choice",
-      "answers": [
-        "Zawsze wszystkie pola, również techniczne znaczniki czasu.",
-        "Pola określające równość według wymagań domeny.",
-        "Adres pamięci zapisany przez id bez względu na domenę.",
-        "Wyłącznie tekst repr każdego obiektu."
-      ],
-      "correct_answer": "Pola określające równość według wymagań domeny.",
-      "explanation": "Równość należy zaprojektować według znaczenia obiektu. Tożsamość obiektu w pamięci i równość wartości są odrębnymi pojęciami.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/abc.html"
-      ],
-      "section": "Python — model obiektowy",
-      "family": "python2-core-012",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -255,52 +215,10 @@
       "sources": [
         "https://docs.python.org/3.12/tutorial/modules.html"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-013",
       "origin": "variant",
       "difficulty": "medium"
-    },
-    {
-      "question": "Serwis ma wykorzystywać wymienny klient płatności. Który projekt ułatwia testowanie i podmianę klienta?",
-      "type": "one_choice",
-      "answers": [
-        "Tworzyć zawsze konkretny klient w metodzie i testować wyłącznie z prawdziwą usługą.",
-        "Dziedziczyć po kliencie płatności, nawet gdy serwis jedynie go używa.",
-        "Przekazywać wyłącznie nazwę klasy jako napis i ukrywać konfigurację globalnie.",
-        "Przekazać klienta do konstruktora i delegować mu operacje."
-      ],
-      "correct_answer": "Przekazać klienta do konstruktora i delegować mu operacje.",
-      "explanation": "Kompozycja i wstrzykiwanie zależności pozwalają użyć prawdziwego klienta lub atrapy bez zmiany logiki serwisu.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/abc.html",
-        "https://peps.python.org/pep-0544/"
-      ],
-      "section": "Python — model obiektowy",
-      "family": "python2-core-014",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Klasa bazowa deklaruje, że withdraw(amount) obsługuje każdą dodatnią kwotę do salda. Podklasa odrzuca wszystkie kwoty poniżej 100. Jaki problem projektowy powstaje?",
-      "type": "one_choice",
-      "answers": [
-        "Problem dotyczy wyłącznie nazwy metody.",
-        "Takie ograniczenie naprawia użycie @staticmethod.",
-        "Podklasa wzmacnia wymagania wejściowe i może łamać podstawialność.",
-        "Podklasa automatycznie zachowuje kontrakt, bo dziedziczy."
-      ],
-      "correct_answer": "Podklasa wzmacnia wymagania wejściowe i może łamać podstawialność.",
-      "explanation": "Kod poprawny dla klasy bazowej może przestać działać z podklasą. Dziedziczenie wymaga zachowania kontraktu zachowania.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/abc.html",
-        "https://peps.python.org/pep-0544/"
-      ],
-      "section": "Python — model obiektowy",
-      "family": "python2-core-015",
-      "origin": "variant",
-      "difficulty": "hard"
     },
     {
       "question": "Klucz słownika jest własnym obiektem z równością opartą na polu code. Jak zaprojektować hash i stan klucza?",
@@ -316,7 +234,7 @@
       "sources": [
         "https://docs.python.org/3.12/reference/datamodel.html#object.__hash__"
       ],
-      "section": "Python — model obiektowy",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-016",
       "origin": "variant",
       "difficulty": "hard"
@@ -336,7 +254,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-017",
       "origin": "variant",
       "difficulty": "easy"
@@ -356,7 +274,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-018",
       "origin": "variant",
       "difficulty": "easy"
@@ -376,7 +294,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-019",
       "origin": "variant",
       "difficulty": "easy"
@@ -396,7 +314,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-020",
       "origin": "variant",
       "difficulty": "easy"
@@ -416,28 +334,8 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-021",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Asynchroniczny klient HTTP utrzymuje pulę połączeń. Jak zarządzać jego cyklem życia?",
-      "type": "one_choice",
-      "answers": [
-        "Tworzyć klienta dla każdego wywołania i pozostawić zamknięcie wyłącznie odśmiecaniu pamięci.",
-        "Przechować klienta globalnie i zakładać, że nie wymaga żadnego sprzątania podczas zamykania aplikacji.",
-        "Zamykać event loop po każdym żądaniu, bez wywoływania operacji zamknięcia klienta.",
-        "Utworzyć klienta na czas przewidziany przez aplikację i zamknąć go zgodnie z API biblioteki."
-      ],
-      "correct_answer": "Utworzyć klienta na czas przewidziany przez aplikację i zamknąć go zgodnie z API biblioteki.",
-      "explanation": "Klienty asynchroniczne również posiadają zasoby; często udostępniają async with lub metodę aclose.",
-      "sources": [
-        "https://docs.python.org/3.12/library/asyncio-task.html",
-        "https://docs.python.org/3.12/library/asyncio-sync.html"
-      ],
-      "section": "Python — asyncio i serwery",
-      "family": "python2-core-022",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -456,7 +354,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-023",
       "origin": "variant",
       "difficulty": "medium"
@@ -476,28 +374,8 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-024",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Po co ograniczać czas oczekiwania na zewnętrzną usługę?",
-      "type": "one_choice",
-      "answers": [
-        "Aby nie przetrzymywać zasobów bez końca i móc obsłużyć brak odpowiedzi.",
-        "Aby zagwarantować poprawność odpowiedzi usługi.",
-        "Aby uniemożliwić wszystkie błędy sieci.",
-        "Aby automatycznie ponowić każdą operację biznesową."
-      ],
-      "correct_answer": "Aby nie przetrzymywać zasobów bez końca i móc obsłużyć brak odpowiedzi.",
-      "explanation": "Timeout ogranicza oczekiwanie; nadal potrzebne są obsługa błędu i świadoma polityka ewentualnych ponowień.",
-      "sources": [
-        "https://docs.python.org/3.12/library/asyncio-task.html",
-        "https://docs.python.org/3.12/library/asyncio-sync.html"
-      ],
-      "section": "Python — asyncio i serwery",
-      "family": "python2-core-025",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -516,7 +394,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-026",
       "origin": "variant",
       "difficulty": "medium"
@@ -536,7 +414,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-027",
       "origin": "variant",
       "difficulty": "medium"
@@ -556,28 +434,8 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-028",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Dlaczego długi fragment obliczeń bez await może spowolnić inne zadania asyncio?",
-      "type": "one_choice",
-      "answers": [
-        "Zajmuje wątek pętli i nie daje innym zadaniom okazji do działania.",
-        "Każde dodawanie liczb uruchamia nowy event loop.",
-        "Asyncio wyłącza procesor przy obliczeniach.",
-        "Inne zadania nie mogą istnieć w jednej pętli."
-      ],
-      "correct_answer": "Zajmuje wątek pętli i nie daje innym zadaniom okazji do działania.",
-      "explanation": "Współbieżność asyncio jest kooperacyjna. Ciężką pracę CPU trzeba odpowiednio wydzielić, np. do procesów.",
-      "sources": [
-        "https://docs.python.org/3.12/library/asyncio-task.html",
-        "https://docs.python.org/3.12/library/asyncio-sync.html"
-      ],
-      "section": "Python — asyncio i serwery",
-      "family": "python2-core-029",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -596,7 +454,7 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-030",
       "origin": "variant",
       "difficulty": "medium"
@@ -616,28 +474,8 @@
         "https://docs.python.org/3.12/library/asyncio-task.html",
         "https://docs.python.org/3.12/library/asyncio-sync.html"
       ],
-      "section": "Python — asyncio i serwery",
+      "section": "Python — współbieżność",
       "family": "python2-core-031",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "W TaskGroup zadanie pobierania danych zgłasza nieobsłużony ValueError, a pozostałe zadania poprawnie reagują na anulowanie. Co jest typowym skutkiem?",
-      "type": "one_choice",
-      "answers": [
-        "TaskGroup usuwa wszystkie wyniki i kończy bez wyjątku.",
-        "Grupa anuluje pozostałe zadania, czeka na nie i zgłasza błędy w ExceptionGroup.",
-        "Błąd zostaje automatycznie zamieniony na None.",
-        "Pozostałe zadania muszą działać do wyłączenia serwera."
-      ],
-      "correct_answer": "Grupa anuluje pozostałe zadania, czeka na nie i zgłasza błędy w ExceptionGroup.",
-      "explanation": "TaskGroup traktuje awarię zadania jako awarię grupy; umożliwia sprzątanie zadań i raportuje zebrane błędy.",
-      "sources": [
-        "https://docs.python.org/3.12/library/asyncio-task.html",
-        "https://docs.python.org/3.12/library/asyncio-sync.html"
-      ],
-      "section": "Python — asyncio i serwery",
-      "family": "python2-core-032",
       "origin": "variant",
       "difficulty": "hard"
     },
@@ -657,7 +495,7 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-033",
       "origin": "variant",
       "difficulty": "easy"
@@ -678,7 +516,7 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-034",
       "origin": "variant",
       "difficulty": "easy"
@@ -699,7 +537,7 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-035",
       "origin": "variant",
       "difficulty": "easy"
@@ -720,29 +558,8 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-036",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Jak utworzyć płytką kopię listy values?",
-      "type": "one_choice",
-      "answers": [
-        "values.copy().",
-        "alias = values.",
-        "copy = iter(values).",
-        "copy = values.append([])."
-      ],
-      "correct_answer": "values.copy().",
-      "explanation": "copy tworzy osobny kontener, lecz obiekty zagnieżdżone nadal są współdzielone.",
-      "sources": [
-        "https://docs.python.org/3.12/library/copy.html",
-        "https://docs.python.org/3.12/tutorial/datastructures.html",
-        "https://docs.python.org/3.12/reference/datamodel.html"
-      ],
-      "section": "Python — pamięć i tożsamość",
-      "family": "python2-core-037",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -762,7 +579,7 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-038",
       "origin": "variant",
       "difficulty": "easy"
@@ -781,7 +598,7 @@
       "sources": [
         "https://docs.python.org/3.12/tutorial/venv.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-039",
       "origin": "variant",
       "difficulty": "medium"
@@ -802,7 +619,7 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-040",
       "origin": "variant",
       "difficulty": "medium"
@@ -823,29 +640,8 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-041",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Jak bezpiecznie zbudować trzy niezależne wiersze dwuelementowej macierzy?",
-      "type": "one_choice",
-      "answers": [
-        "[[0, 0]] * 3.",
-        "row = [0, 0]; [row, row, row].",
-        "list(([0, 0],) * 3).",
-        "[[0, 0] for _ in range(3)]."
-      ],
-      "correct_answer": "[[0, 0] for _ in range(3)].",
-      "explanation": "Każde wykonanie wyrażenia w comprehension tworzy nowy wiersz. Powielanie listy powiela referencje do tego samego wiersza.",
-      "sources": [
-        "https://docs.python.org/3.12/library/copy.html",
-        "https://docs.python.org/3.12/tutorial/datastructures.html",
-        "https://docs.python.org/3.12/reference/datamodel.html"
-      ],
-      "section": "Python — pamięć i tożsamość",
-      "family": "python2-core-042",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -865,7 +661,7 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-043",
       "origin": "variant",
       "difficulty": "medium"
@@ -884,7 +680,7 @@
       "sources": [
         "https://docs.python.org/3.12/reference/datamodel.html#object.__hash__"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-044",
       "origin": "variant",
       "difficulty": "medium"
@@ -905,52 +701,10 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-045",
       "origin": "variant",
       "difficulty": "medium"
-    },
-    {
-      "question": "Co robi del name z lokalną nazwą obiektu?",
-      "type": "one_choice",
-      "answers": [
-        "Zawsze natychmiast zamyka wszystkie zasoby obiektu.",
-        "Usuwa ten obiekt ze wszystkich list w programie.",
-        "Zamienia wszystkie aliasy obiektu na None.",
-        "Usuwa powiązanie tej nazwy, ale inne referencje mogą nadal utrzymywać obiekt."
-      ],
-      "correct_answer": "Usuwa powiązanie tej nazwy, ale inne referencje mogą nadal utrzymywać obiekt.",
-      "explanation": "del nie jest poleceniem globalnego usunięcia obiektu. Cykl życia zależy od pozostałych referencji i mechanizmu zarządzania pamięcią.",
-      "sources": [
-        "https://docs.python.org/3.12/library/copy.html",
-        "https://docs.python.org/3.12/tutorial/datastructures.html",
-        "https://docs.python.org/3.12/reference/datamodel.html"
-      ],
-      "section": "Python — pamięć i tożsamość",
-      "family": "python2-core-046",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Cache bez limitu przechowuje każdy wynik przetwarzania dużych plików. Pamięć stale rośnie. Co jest rozsądnym pierwszym działaniem?",
-      "type": "one_choice",
-      "answers": [
-        "Wyłączyć garbage collector, aby zwolnić cache.",
-        "Zwiększyć liczbę wątków zapisujących do cache.",
-        "Sprawdzić właścicieli referencji i ograniczyć wielkość lub czas życia cache.",
-        "Wywoływać del na lokalnym aliasie, zostawiając cache bez zmian."
-      ],
-      "correct_answer": "Sprawdzić właścicieli referencji i ograniczyć wielkość lub czas życia cache.",
-      "explanation": "Obiekty dostępne przez cache nadal są potrzebne z punktu widzenia zarządzania pamięcią. Trzeba zmienić retencję danych.",
-      "sources": [
-        "https://docs.python.org/3.12/library/copy.html",
-        "https://docs.python.org/3.12/tutorial/datastructures.html",
-        "https://docs.python.org/3.12/reference/datamodel.html"
-      ],
-      "section": "Python — pamięć i tożsamość",
-      "family": "python2-core-047",
-      "origin": "variant",
-      "difficulty": "hard"
     },
     {
       "question": "Funkcja ma zwrócić stan konfiguracji, ale odbiorca nie może przez wynik zmienić wewnętrznych list serwisu. Jaki projekt realizuje ten kontrakt?",
@@ -968,30 +722,10 @@
         "https://docs.python.org/3.12/tutorial/datastructures.html",
         "https://docs.python.org/3.12/reference/datamodel.html"
       ],
-      "section": "Python — pamięć i tożsamość",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-048",
       "origin": "variant",
       "difficulty": "hard"
-    },
-    {
-      "question": "Co zwraca funkcja, która dochodzi do końca bez return?",
-      "type": "one_choice",
-      "answers": [
-        "None.",
-        "Pusty słownik.",
-        "Ostatnio obliczoną wartość.",
-        "True."
-      ],
-      "correct_answer": "None.",
-      "explanation": "Brak jawnego return oznacza zwrócenie None; obliczenie wyrażenia w ciele funkcji nie zwraca go samo.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/controlflow.html",
-        "https://docs.python.org/3.12/library/functools.html"
-      ],
-      "section": "Python — funkcje i dekoratory",
-      "family": "python2-core-049",
-      "origin": "variant",
-      "difficulty": "easy"
     },
     {
       "question": "Co przyjmuje parametr *args?",
@@ -1008,7 +742,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-050",
       "origin": "variant",
       "difficulty": "easy"
@@ -1028,7 +762,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-051",
       "origin": "variant",
       "difficulty": "easy"
@@ -1048,7 +782,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-052",
       "origin": "variant",
       "difficulty": "easy"
@@ -1068,7 +802,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-053",
       "origin": "variant",
       "difficulty": "easy"
@@ -1088,28 +822,8 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-054",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Co dopuszcza sygnatura def send(message, *, urgent=False)?\n```python\ndef send(message, *, urgent=False):\n    return message, urgent\n```",
-      "type": "one_choice",
-      "answers": [
-        "message także musi być nazwany.",
-        "Funkcja przyjmuje dowolną liczbę argumentów pozycyjnych.",
-        "urgent trzeba przekazać przez nazwę, np. urgent=True.",
-        "urgent można przekazać wyłącznie jako drugi argument pozycyjny."
-      ],
-      "correct_answer": "urgent trzeba przekazać przez nazwę, np. urgent=True.",
-      "explanation": "Samodzielna gwiazdka oddziela parametry keyword-only od wcześniejszych parametrów.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/controlflow.html",
-        "https://docs.python.org/3.12/library/functools.html"
-      ],
-      "section": "Python — funkcje i dekoratory",
-      "family": "python2-core-055",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -1128,7 +842,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-056",
       "origin": "variant",
       "difficulty": "medium"
@@ -1148,7 +862,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-057",
       "origin": "variant",
       "difficulty": "medium"
@@ -1168,7 +882,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-058",
       "origin": "variant",
       "difficulty": "medium"
@@ -1188,7 +902,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-059",
       "origin": "variant",
       "difficulty": "medium"
@@ -1207,49 +921,10 @@
       "sources": [
         "https://docs.python.org/3.12/library/json.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-060",
       "origin": "variant",
       "difficulty": "medium"
-    },
-    {
-      "question": "Kiedy functools.lru_cache jest dobrym wyborem?",
-      "type": "one_choice",
-      "answers": [
-        "Dla powtarzanych obliczeń o stabilnym wyniku i hashowalnych argumentach.",
-        "Dla funkcji zwracającej bieżący czas bez tolerancji na stary wynik.",
-        "Dla każdego zapisu płatności w bazie.",
-        "Dla funkcji, której argumentem jest dowolna mutowalna lista."
-      ],
-      "correct_answer": "Dla powtarzanych obliczeń o stabilnym wyniku i hashowalnych argumentach.",
-      "explanation": "Cache ma sens, gdy pominięcie ponownego wykonania jest poprawne. Argumenty muszą nadawać się do klucza cache.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/controlflow.html",
-        "https://docs.python.org/3.12/library/functools.html"
-      ],
-      "section": "Python — funkcje i dekoratory",
-      "family": "python2-core-061",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Serwis nalicza rabat różnymi algorytmami, a testy muszą korzystać ze stałego czasu i atrapy repozytorium. Jak zaprojektować zależności, aby testować logikę bez zmieniania kodu produkcyjnego?",
-      "type": "one_choice",
-      "answers": [
-        "Dziedziczyć po nowej klasie dla każdej kombinacji rabatu, czasu i repozytorium.",
-        "W każdej funkcji samodzielnie wybierać algorytm i odczytywać czas systemowy oraz produkcyjną bazę.",
-        "Przed każdym testem zmieniać globalny czas i wspólną konfigurację produkcyjnego repozytorium.",
-        "Przekazać strategię rabatu, zegar i repozytorium przez jawny interfejs zależności."
-      ],
-      "correct_answer": "Przekazać strategię rabatu, zegar i repozytorium przez jawny interfejs zależności.",
-      "explanation": "Jawne zależności oddzielają logikę od źródeł efektów ubocznych. Test może kontrolować strategię, czas i dane, a produkcja przekazuje prawdziwe implementacje.",
-      "sources": [
-        "https://peps.python.org/pep-0544/"
-      ],
-      "section": "Python — funkcje i dekoratory",
-      "family": "python2-core-062",
-      "origin": "variant",
-      "difficulty": "hard"
     },
     {
       "question": "Dekorator mierzy czas funkcji async def. Jak zachować poprawne mierzenie całej operacji?",
@@ -1266,7 +941,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-063",
       "origin": "variant",
       "difficulty": "hard"
@@ -1286,7 +961,7 @@
         "https://docs.python.org/3.12/tutorial/controlflow.html",
         "https://docs.python.org/3.12/library/functools.html"
       ],
-      "section": "Python — funkcje i dekoratory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-064",
       "origin": "variant",
       "difficulty": "hard"
@@ -1309,31 +984,8 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-065",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Co robi sorted(values)?",
-      "type": "one_choice",
-      "answers": [
-        "Sortuje values w miejscu i zwraca None.",
-        "Zwraca iterator, który sortuje oddzielnie każdy kolejny element.",
-        "Zwraca zbiór, usuwając elementy o równych wartościach.",
-        "Zwraca nową uporządkowaną listę."
-      ],
-      "correct_answer": "Zwraca nową uporządkowaną listę.",
-      "explanation": "sorted przyjmuje iterable i tworzy listę wynikową; list.sort działa w miejscu.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/floatingpoint.html",
-        "https://docs.python.org/3.12/library/decimal.html",
-        "https://docs.python.org/3.12/library/profile.html",
-        "https://docs.python.org/3.12/library/collections.html",
-        "https://docs.python.org/3.12/library/timeit.html"
-      ],
-      "section": "Python — liczby i wydajność",
-      "family": "python2-core-066",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -1355,7 +1007,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-067",
       "origin": "variant",
       "difficulty": "easy"
@@ -1378,7 +1030,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-068",
       "origin": "variant",
       "difficulty": "easy"
@@ -1401,7 +1053,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-069",
       "origin": "variant",
       "difficulty": "easy"
@@ -1424,7 +1076,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-070",
       "origin": "variant",
       "difficulty": "medium"
@@ -1447,7 +1099,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-071",
       "origin": "variant",
       "difficulty": "medium"
@@ -1470,7 +1122,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-072",
       "origin": "variant",
       "difficulty": "medium"
@@ -1493,7 +1145,7 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-073",
       "origin": "variant",
       "difficulty": "medium"
@@ -1516,31 +1168,8 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-074",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Co oznacza stabilność sortowania w Pythonie?",
-      "type": "one_choice",
-      "answers": [
-        "Sortowanie zawsze odbywa się w miejscu bez dodatkowej pamięci.",
-        "Klucz sortowania nie może być funkcją użytkownika.",
-        "Elementy o równym kluczu zachowują względną kolejność.",
-        "Elementy o równym kluczu są usuwane jako duplikaty."
-      ],
-      "correct_answer": "Elementy o równym kluczu zachowują względną kolejność.",
-      "explanation": "Stabilność umożliwia m.in. sortowanie wieloetapowe bez utraty wcześniejszego porządku dla równych kluczy.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/floatingpoint.html",
-        "https://docs.python.org/3.12/library/decimal.html",
-        "https://docs.python.org/3.12/library/profile.html",
-        "https://docs.python.org/3.12/library/collections.html",
-        "https://docs.python.org/3.12/library/timeit.html"
-      ],
-      "section": "Python — liczby i wydajność",
-      "family": "python2-core-075",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -1562,31 +1191,8 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-076",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Dlaczego do pomiaru krótkiego fragmentu kodu warto użyć timeit zamiast pojedynczego ręcznego pomiaru?",
-      "type": "one_choice",
-      "answers": [
-        "Ułatwia powtarzalne pomiary wielu wykonań i ogranicza wpływ przypadkowego narzutu.",
-        "Gwarantuje identyczny wynik czasowy niezależnie od obciążenia systemu.",
-        "Pozwala pominąć reprezentatywność danych w każdym benchmarku.",
-        "Wskazuje wszystkie wywołania funkcji tak samo jak profiler cProfile."
-      ],
-      "correct_answer": "Ułatwia powtarzalne pomiary wielu wykonań i ogranicza wpływ przypadkowego narzutu.",
-      "explanation": "Mikropomiary wymagają powtórzeń i ostrożnej interpretacji. Realne scenariusze nadal trzeba mierzyć osobno.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/floatingpoint.html",
-        "https://docs.python.org/3.12/library/decimal.html",
-        "https://docs.python.org/3.12/library/profile.html",
-        "https://docs.python.org/3.12/library/collections.html",
-        "https://docs.python.org/3.12/library/timeit.html"
-      ],
-      "section": "Python — liczby i wydajność",
-      "family": "python2-core-077",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -1604,7 +1210,7 @@
       "sources": [
         "https://docs.python.org/3.12/tutorial/classes.html#generators"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-078",
       "origin": "variant",
       "difficulty": "hard"
@@ -1627,31 +1233,8 @@
         "https://docs.python.org/3.12/library/collections.html",
         "https://docs.python.org/3.12/library/timeit.html"
       ],
-      "section": "Python — liczby i wydajność",
+      "section": "Python — dane i wydajność",
       "family": "python2-core-079",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "Po optymalizacji średni czas jest mniejszy, ale p95 wzrósł i użycie pamięci podwoiło się. Jak ocenić zmianę?",
-      "type": "one_choice",
-      "answers": [
-        "Pominąć p95, jeśli wynik pojedynczego timeit jest dobry.",
-        "Porównać ją z wymaganiami opóźnień i pamięci na reprezentatywnym obciążeniu.",
-        "Zaakceptować ją wyłącznie na podstawie średniej.",
-        "Odrzucić ją, bo każda optymalizacja musi zmniejszyć wszystkie metryki."
-      ],
-      "correct_answer": "Porównać ją z wymaganiami opóźnień i pamięci na reprezentatywnym obciążeniu.",
-      "explanation": "Optymalizacja może mieć koszt uboczny. Miarę sukcesu trzeba odnieść do rzeczywistych ograniczeń systemu.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/floatingpoint.html",
-        "https://docs.python.org/3.12/library/decimal.html",
-        "https://docs.python.org/3.12/library/profile.html",
-        "https://docs.python.org/3.12/library/collections.html",
-        "https://docs.python.org/3.12/library/timeit.html"
-      ],
-      "section": "Python — liczby i wydajność",
-      "family": "python2-core-080",
       "origin": "variant",
       "difficulty": "hard"
     },
@@ -1672,7 +1255,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-081",
       "origin": "variant",
       "difficulty": "easy"
@@ -1694,30 +1277,8 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-082",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Co robi thread.join()?",
-      "type": "one_choice",
-      "answers": [
-        "Łączy jego pamięć z innym procesem.",
-        "Uruchamia wątek od początku.",
-        "Czeka na zakończenie wskazanego wątku, opcjonalnie z limitem czasu.",
-        "Natychmiast zabija wątek."
-      ],
-      "correct_answer": "Czeka na zakończenie wskazanego wątku, opcjonalnie z limitem czasu.",
-      "explanation": "join synchronizuje zakończenie pracy; sam nie zatrzymuje wątku.",
-      "sources": [
-        "https://docs.python.org/3.12/library/threading.html",
-        "https://docs.python.org/3.12/library/multiprocessing.html",
-        "https://docs.python.org/3.12/library/concurrent.futures.html",
-        "https://docs.python.org/3.12/library/queue.html"
-      ],
-      "section": "Python — wątki i procesy",
-      "family": "python2-core-083",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -1738,7 +1299,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-084",
       "origin": "variant",
       "difficulty": "easy"
@@ -1760,7 +1321,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-085",
       "origin": "variant",
       "difficulty": "easy"
@@ -1782,7 +1343,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-086",
       "origin": "variant",
       "difficulty": "medium"
@@ -1804,7 +1365,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-087",
       "origin": "variant",
       "difficulty": "medium"
@@ -1826,7 +1387,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-088",
       "origin": "variant",
       "difficulty": "medium"
@@ -1848,7 +1409,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-089",
       "origin": "variant",
       "difficulty": "medium"
@@ -1870,30 +1431,8 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-090",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Dlaczego przy uruchamianiu procesów używa się if __name__ == \"__main__\"?",
-      "type": "one_choice",
-      "answers": [
-        "Aby procesy współdzieliły globalne listy.",
-        "Aby automatycznie wybrać maksymalną liczbę rdzeni.",
-        "Aby kod startujący procesy nie wykonywał się ponownie przy importowaniu modułu przez proces potomny.",
-        "Aby wyłączyć wszystkie importy."
-      ],
-      "correct_answer": "Aby kod startujący procesy nie wykonywał się ponownie przy importowaniu modułu przez proces potomny.",
-      "explanation": "Ochrona punktu wejścia jest szczególnie ważna przy metodzie startu spawn, która importuje moduł.",
-      "sources": [
-        "https://docs.python.org/3.12/library/threading.html",
-        "https://docs.python.org/3.12/library/multiprocessing.html",
-        "https://docs.python.org/3.12/library/concurrent.futures.html",
-        "https://docs.python.org/3.12/library/queue.html"
-      ],
-      "section": "Python — wątki i procesy",
-      "family": "python2-core-091",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -1914,30 +1453,8 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-092",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Jaki sposób kończenia długotrwałego wątku jest zwykle rozsądny?",
-      "type": "one_choice",
-      "answers": [
-        "Sygnał kooperacyjny, np. Event, sprawdzany przez pracujący wątek.",
-        "Założenie, że del thread przerwie jego pracę.",
-        "Zmiana jego nazwy na stopped.",
-        "Anulowanie dowolnego Future jako gwarancja przerwania już działającej funkcji."
-      ],
-      "correct_answer": "Sygnał kooperacyjny, np. Event, sprawdzany przez pracujący wątek.",
-      "explanation": "Pracownik powinien mieć protokół zatrzymania i sprzątania. Anulowanie zlecenia nie oznacza siłowego przerwania trwającego kodu.",
-      "sources": [
-        "https://docs.python.org/3.12/library/threading.html",
-        "https://docs.python.org/3.12/library/multiprocessing.html",
-        "https://docs.python.org/3.12/library/concurrent.futures.html",
-        "https://docs.python.org/3.12/library/queue.html"
-      ],
-      "section": "Python — wątki i procesy",
-      "family": "python2-core-093",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -1955,30 +1472,8 @@
       "sources": [
         "https://docs.python.org/3.12/library/threading.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-094",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "Pula z jednym pracownikiem uruchamia zadanie, które wysyła do tej samej puli kolejne zadanie i czeka na jego result(). Jaki jest problem?",
-      "type": "one_choice",
-      "answers": [
-        "result natychmiast wykonuje drugie zadanie w tym samym stosie.",
-        "Zadania potomne nie mogą zwracać wyników.",
-        "Pracownik może czekać na zadanie, dla którego nie ma wolnego pracownika.",
-        "Pula zawsze automatycznie dodaje kolejny wątek."
-      ],
-      "correct_answer": "Pracownik może czekać na zadanie, dla którego nie ma wolnego pracownika.",
-      "explanation": "To klasyczna możliwość zakleszczenia w executorze. Należy unikać takich zależności albo zaprojektować orkiestrację poza pracownikami.",
-      "sources": [
-        "https://docs.python.org/3.12/library/threading.html",
-        "https://docs.python.org/3.12/library/multiprocessing.html",
-        "https://docs.python.org/3.12/library/concurrent.futures.html",
-        "https://docs.python.org/3.12/library/queue.html"
-      ],
-      "section": "Python — wątki i procesy",
-      "family": "python2-core-095",
       "origin": "variant",
       "difficulty": "hard"
     },
@@ -1999,7 +1494,7 @@
         "https://docs.python.org/3.12/library/concurrent.futures.html",
         "https://docs.python.org/3.12/library/queue.html"
       ],
-      "section": "Python — wątki i procesy",
+      "section": "Python — współbieżność",
       "family": "python2-core-096",
       "origin": "variant",
       "difficulty": "hard"
@@ -2020,29 +1515,8 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-097",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Do czego służy next(iterator)?",
-      "type": "one_choice",
-      "answers": [
-        "Do sprawdzenia kolejnego elementu bez przesuwania iteratora.",
-        "Do ponownego rozpoczęcia iteracji od początku.",
-        "Do pobrania wszystkich pozostałych elementów jako listy.",
-        "Do pobrania następnego elementu iteratora."
-      ],
-      "correct_answer": "Do pobrania następnego elementu iteratora.",
-      "explanation": "next wywołuje protokół iteratora; przy wyczerpaniu zwykle zgłasza StopIteration.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/functions.html",
-        "https://docs.python.org/3.12/library/itertools.html"
-      ],
-      "section": "Python — iteratory i generatory",
-      "family": "python2-core-098",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -2062,29 +1536,8 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-099",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Co jest typową zaletą generatora przy dużych danych?",
-      "type": "one_choice",
-      "answers": [
-        "Generator zawsze zna z góry długość wszystkich przyszłych wyników.",
-        "Może produkować elementy na żądanie bez budowania całej listy.",
-        "Można go zawsze indeksować bez generowania wcześniejszych elementów.",
-        "Każdy generator można resetować i odczytywać wielokrotnie."
-      ],
-      "correct_answer": "Może produkować elementy na żądanie bez budowania całej listy.",
-      "explanation": "Leniwa produkcja może ograniczyć pamięć i umożliwia przetwarzanie strumieniowe; wydajność czasową trzeba mierzyć.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/functions.html",
-        "https://docs.python.org/3.12/library/itertools.html"
-      ],
-      "section": "Python — iteratory i generatory",
-      "family": "python2-core-100",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -2104,7 +1557,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-101",
       "origin": "variant",
       "difficulty": "easy"
@@ -2125,7 +1578,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-102",
       "origin": "variant",
       "difficulty": "medium"
@@ -2146,7 +1599,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-103",
       "origin": "variant",
       "difficulty": "medium"
@@ -2167,7 +1620,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-104",
       "origin": "variant",
       "difficulty": "medium"
@@ -2188,50 +1641,8 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-105",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Co opisuje yield w działającym generatorze?",
-      "type": "one_choice",
-      "answers": [
-        "Kończy generator tak samo jak return i usuwa jego stan.",
-        "Przechowuje wszystkie przyszłe wyniki przed oddaniem pierwszego.",
-        "Uruchamia kolejny etap generatora w osobnym wątku.",
-        "Udostępnia wartość i zawiesza wykonanie, zachowując stan do wznowienia."
-      ],
-      "correct_answer": "Udostępnia wartość i zawiesza wykonanie, zachowując stan do wznowienia.",
-      "explanation": "Kolejne next wznawia działanie od miejsca zawieszenia; return kończy generator.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/functions.html",
-        "https://docs.python.org/3.12/library/itertools.html"
-      ],
-      "section": "Python — iteratory i generatory",
-      "family": "python2-core-106",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Po co zastosować yield from child_iterable w generatorze?",
-      "type": "one_choice",
-      "answers": [
-        "Aby utworzyć głęboką kopię stanu delegowanego iteratora.",
-        "Aby automatycznie resetować delegowany iterator po wyczerpaniu.",
-        "Aby przekazywać elementy z innego iterable do odbiorcy.",
-        "Aby oddać cały iterable jako pojedynczy element zamiast jego elementów."
-      ],
-      "correct_answer": "Aby przekazywać elementy z innego iterable do odbiorcy.",
-      "explanation": "yield from pozwala delegować iterowanie; jest czytelne przy składaniu generatorów.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/classes.html",
-        "https://docs.python.org/3.12/library/functions.html",
-        "https://docs.python.org/3.12/library/itertools.html"
-      ],
-      "section": "Python — iteratory i generatory",
-      "family": "python2-core-107",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -2251,7 +1662,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-108",
       "origin": "variant",
       "difficulty": "medium"
@@ -2270,7 +1681,7 @@
       "sources": [
         "https://docs.python.org/3.12/tutorial/modules.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-109",
       "origin": "variant",
       "difficulty": "medium"
@@ -2289,7 +1700,7 @@
       "sources": [
         "https://docs.python.org/3.12/library/functions.html#zip"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-110",
       "origin": "variant",
       "difficulty": "hard"
@@ -2310,7 +1721,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-111",
       "origin": "variant",
       "difficulty": "hard"
@@ -2331,7 +1742,7 @@
         "https://docs.python.org/3.12/library/functions.html",
         "https://docs.python.org/3.12/library/itertools.html"
       ],
-      "section": "Python — iteratory i generatory",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-112",
       "origin": "variant",
       "difficulty": "hard"
@@ -2352,7 +1763,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-113",
       "origin": "variant",
       "difficulty": "easy"
@@ -2373,29 +1784,8 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-114",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Co robi raise ValueError(\"invalid age\")?",
-      "type": "one_choice",
-      "answers": [
-        "Wypisuje komunikat i zawsze kontynuuje następną linię.",
-        "Tworzy nowy typ liczbowy.",
-        "Zgłasza wyjątek z komunikatem.",
-        "Zwraca tekst jako poprawny wynik funkcji."
-      ],
-      "correct_answer": "Zgłasza wyjątek z komunikatem.",
-      "explanation": "raise przerywa normalny przepływ i przekazuje sterowanie do pasującego handlera albo wywołującego.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/errors.html",
-        "https://docs.python.org/3.12/library/contextlib.html",
-        "https://docs.python.org/3.12/library/exceptions.html"
-      ],
-      "section": "Python — wyjątki i zasoby",
-      "family": "python2-core-115",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -2415,29 +1805,8 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-116",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Jaki wyjątek zwykle zgłasza int(\"abc\")?\n```python\nvalue = int(\"abc\")\n```",
-      "type": "one_choice",
-      "answers": [
-        "ValueError.",
-        "KeyError.",
-        "FileNotFoundError.",
-        "StopIteration."
-      ],
-      "correct_answer": "ValueError.",
-      "explanation": "Argument ma akceptowany typ tekstowy, ale nie jest poprawną reprezentacją liczby całkowitej.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/errors.html",
-        "https://docs.python.org/3.12/library/contextlib.html",
-        "https://docs.python.org/3.12/library/exceptions.html"
-      ],
-      "section": "Python — wyjątki i zasoby",
-      "family": "python2-core-117",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -2457,7 +1826,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-118",
       "origin": "variant",
       "difficulty": "medium"
@@ -2478,7 +1847,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-119",
       "origin": "variant",
       "difficulty": "medium"
@@ -2499,7 +1868,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-120",
       "origin": "variant",
       "difficulty": "medium"
@@ -2520,50 +1889,8 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-121",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Kiedy wykonuje się else w konstrukcji try/except/else?",
-      "type": "one_choice",
-      "answers": [
-        "Gdy dowolny wyjątek obsłużono w except.",
-        "Zawsze przed try.",
-        "Wyłącznie po KeyboardInterrupt.",
-        "Gdy blok try kończy się normalnie bez wyjątku."
-      ],
-      "correct_answer": "Gdy blok try kończy się normalnie bez wyjątku.",
-      "explanation": "else wykonuje się po normalnym zakończeniu try bez wyjątku. Opuszczenie try przez return, break lub continue pomija else.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/errors.html",
-        "https://docs.python.org/3.12/library/contextlib.html",
-        "https://docs.python.org/3.12/library/exceptions.html"
-      ],
-      "section": "Python — wyjątki i zasoby",
-      "family": "python2-core-122",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Funkcja ma osobno obsłużyć brak pliku i inne błędy systemowe. Co należy poprawić w kolejności handlerów?\n```python\ntry:\n    read_config()\nexcept OSError:\n    report_system_error()\nexcept FileNotFoundError:\n    report_missing_config()\n```",
-      "type": "one_choice",
-      "answers": [
-        "Umieścić oba handlery przed try.",
-        "Dodać finally, które zawsze zwraca komunikat o braku pliku.",
-        "Umieścić except FileNotFoundError przed except OSError.",
-        "Usunąć FileNotFoundError, bo brak pliku nie jest wyjątkiem."
-      ],
-      "correct_answer": "Umieścić except FileNotFoundError przed except OSError.",
-      "explanation": "Zbyt ogólny handler umieszczony wcześniej przechwyci również wyjątki podklas.",
-      "sources": [
-        "https://docs.python.org/3.12/tutorial/errors.html",
-        "https://docs.python.org/3.12/library/contextlib.html",
-        "https://docs.python.org/3.12/library/exceptions.html"
-      ],
-      "section": "Python — wyjątki i zasoby",
-      "family": "python2-core-123",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -2583,7 +1910,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-124",
       "origin": "variant",
       "difficulty": "medium"
@@ -2604,7 +1931,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-125",
       "origin": "variant",
       "difficulty": "medium"
@@ -2623,7 +1950,7 @@
       "sources": [
         "https://docs.python.org/3.12/library/contextlib.html#contextlib.contextmanager"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-126",
       "origin": "variant",
       "difficulty": "hard"
@@ -2642,7 +1969,7 @@
       "sources": [
         "https://docs.python.org/3.12/library/contextlib.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-127",
       "origin": "variant",
       "difficulty": "hard"
@@ -2663,7 +1990,7 @@
         "https://docs.python.org/3.12/library/contextlib.html",
         "https://docs.python.org/3.12/library/exceptions.html"
       ],
-      "section": "Python — wyjątki i zasoby",
+      "section": "Python — funkcje, iteracja i zasoby",
       "family": "python2-core-128",
       "origin": "variant",
       "difficulty": "hard"
@@ -2684,48 +2011,8 @@
         "https://docs.python.org/3.12/library/dataclasses.html",
         "https://peps.python.org/pep-0484/"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-129",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Co oznacza adnotacja list[str]?",
-      "type": "one_choice",
-      "answers": [
-        "Napis zawierający reprezentację listy.",
-        "Dowolną listę z jednym argumentem nazwanym str.",
-        "Niemutowalny zbiór napisów.",
-        "Listę, której elementy według kontraktu typów są napisami."
-      ],
-      "correct_answer": "Listę, której elementy według kontraktu typów są napisami.",
-      "explanation": "Parametr typu określa oczekiwany typ elementów kolekcji; sama adnotacja nie sprawdza każdej mutacji w runtime.",
-      "sources": [
-        "https://docs.python.org/3.12/library/typing.html",
-        "https://docs.python.org/3.12/library/dataclasses.html"
-      ],
-      "section": "Python — typowanie i dataclasses",
-      "family": "python2-core-130",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Co oznacza typ str | None?",
-      "type": "one_choice",
-      "answers": [
-        "Wartość musi być jednocześnie napisem i None.",
-        "Funkcja nie może zwrócić żadnej wartości.",
-        "Wartość może być napisem albo None.",
-        "Napis musi zawsze być niepusty."
-      ],
-      "correct_answer": "Wartość może być napisem albo None.",
-      "explanation": "Unia dopuszcza alternatywne typy; jest równoważna Optional[str].",
-      "sources": [
-        "https://docs.python.org/3.12/library/typing.html",
-        "https://docs.python.org/3.12/library/dataclasses.html"
-      ],
-      "section": "Python — typowanie i dataclasses",
-      "family": "python2-core-131",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -2744,7 +2031,7 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-132",
       "origin": "variant",
       "difficulty": "easy"
@@ -2764,7 +2051,7 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-133",
       "origin": "variant",
       "difficulty": "easy"
@@ -2784,28 +2071,8 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-134",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Po co stosować __post_init__ w dataclass?",
-      "type": "one_choice",
-      "answers": [
-        "Do importowania klasy po jej usunięciu.",
-        "Do przechwytywania każdego wyjątku całego programu.",
-        "Do dodatkowej inicjalizacji lub walidacji po wygenerowanym __init__.",
-        "Do automatycznego zamykania obiektu po każdym odczycie pola."
-      ],
-      "correct_answer": "Do dodatkowej inicjalizacji lub walidacji po wygenerowanym __init__.",
-      "explanation": "__post_init__ umożliwia np. sprawdzenie zakresu wartości lub wyliczenie pola zależnego od innych pól.",
-      "sources": [
-        "https://docs.python.org/3.12/library/typing.html",
-        "https://docs.python.org/3.12/library/dataclasses.html"
-      ],
-      "section": "Python — typowanie i dataclasses",
-      "family": "python2-core-135",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -2825,7 +2092,7 @@
         "https://docs.python.org/3.12/library/dataclasses.html",
         "https://peps.python.org/pep-0484/"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-136",
       "origin": "variant",
       "difficulty": "medium"
@@ -2845,7 +2112,7 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-137",
       "origin": "variant",
       "difficulty": "medium"
@@ -2865,7 +2132,7 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-138",
       "origin": "variant",
       "difficulty": "medium"
@@ -2885,28 +2152,8 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-139",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Jak poprawnie opisać funkcję oczekującą tylko możliwości iteracji po napisach, bez indeksowania?",
-      "type": "one_choice",
-      "answers": [
-        "dict[str, bytes].",
-        "Iterable[str].",
-        "list[int].",
-        "Callable[[], int]."
-      ],
-      "correct_answer": "Iterable[str].",
-      "explanation": "Iterable wyraża minimalny potrzebny kontrakt; przyjmie m.in. listę, tuple lub generator napisów.",
-      "sources": [
-        "https://docs.python.org/3.12/library/typing.html",
-        "https://docs.python.org/3.12/library/dataclasses.html"
-      ],
-      "section": "Python — typowanie i dataclasses",
-      "family": "python2-core-140",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -2924,7 +2171,7 @@
       "sources": [
         "https://docs.python.org/3.12/howto/logging.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-141",
       "origin": "variant",
       "difficulty": "medium"
@@ -2945,7 +2192,7 @@
         "https://docs.python.org/3.12/library/dataclasses.html",
         "https://peps.python.org/pep-0484/"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-142",
       "origin": "variant",
       "difficulty": "hard"
@@ -2965,7 +2212,7 @@
         "https://docs.python.org/3.12/library/typing.html",
         "https://docs.python.org/3.12/library/dataclasses.html"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-143",
       "origin": "variant",
       "difficulty": "hard"
@@ -2986,7 +2233,7 @@
         "https://docs.python.org/3.12/library/dataclasses.html",
         "https://peps.python.org/pep-0484/"
       ],
-      "section": "Python — typowanie i dataclasses",
+      "section": "Python — obiekty i typowanie",
       "family": "python2-core-144",
       "origin": "variant",
       "difficulty": "hard"
@@ -3064,26 +2311,6 @@
       ],
       "section": "Django i DRF",
       "family": "python2-web-004",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Wagtail. Redaktor zapisuje zmiany istniejącej strony jako szkic, ale ich nie publikuje. Co powinni widzieć zwykli odwiedzający?",
-      "type": "one_choice",
-      "answers": [
-        "Dotychczas opublikowaną wersję, dopóki zmiany nie zostaną opublikowane.",
-        "Najnowszy szkic natychmiast po zapisaniu.",
-        "Błąd 404 aż do ponownej publikacji każdej edycji.",
-        "Automatycznie połączoną treść szkicu i starej wersji."
-      ],
-      "correct_answer": "Dotychczas opublikowaną wersję, dopóki zmiany nie zostaną opublikowane.",
-      "explanation": "Szkic i publikacja są osobnymi stanami procesu redakcyjnego. Rewizje przechowują kolejne wersje, a zapis szkicu nie musi zmieniać publicznej strony.",
-      "sources": [
-        "https://docs.wagtail.org/en/stable/getting_started/tutorial.html",
-        "https://docs.wagtail.org/en/stable/reference/pages/theory.html"
-      ],
-      "section": "Django i DRF",
-      "family": "python2-web-005",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -3199,25 +2426,6 @@
       ],
       "section": "Django i DRF",
       "family": "python2-web-011",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Wagtail. Który opis najlepiej oddaje jego zastosowanie?",
-      "type": "one_choice",
-      "answers": [
-        "Silnik szablonów obsługujący wyłącznie statyczne strony bez redaktorów.",
-        "CMS oparty na Django, umożliwiający modelowanie i redagowanie treści.",
-        "Panel administracyjny dla dowolnej bazy SQL, niezależny od frameworka aplikacji.",
-        "Rozszerzenie Django przeznaczone przede wszystkim do budowy kontraktów REST."
-      ],
-      "correct_answer": "CMS oparty na Django, umożliwiający modelowanie i redagowanie treści.",
-      "explanation": "Wagtail dodaje do Django mechanizmy zarządzania treścią, stronami i procesem publikacji.",
-      "sources": [
-        "https://docs.wagtail.org/en/stable/topics/pages.html"
-      ],
-      "section": "Django i DRF",
-      "family": "python2-web-012",
       "origin": "variant",
       "difficulty": "easy"
     },
@@ -3432,84 +2640,6 @@
       "difficulty": "medium"
     },
     {
-      "question": "Django Admin. Chcesz dodać kolumny, filtry i wyszukiwanie na liście modelu. Gdzie jest typowe miejsce konfiguracji?",
-      "type": "one_choice",
-      "answers": [
-        "W dekoratorze @staticmethod modelu.",
-        "W klasie ModelAdmin: list_display, list_filter i search_fields.",
-        "W pliku migracji dodającym model.",
-        "W konfiguracji routingu Nginx."
-      ],
-      "correct_answer": "W klasie ModelAdmin: list_display, list_filter i search_fields.",
-      "explanation": "ModelAdmin konfiguruje panel dla zarejestrowanego modelu, w tym jego listę i formularze.",
-      "sources": [
-        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
-      ],
-      "section": "Django i DRF",
-      "family": "python2-web-024",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Django Admin. Zamówienie ma pozycje jako modele powiązane ForeignKey. Jak wygodnie edytować je na stronie zamówienia?",
-      "type": "one_choice",
-      "answers": [
-        "Użyć odpowiedniego InlineModelAdmin.",
-        "Dodać pola pozycji wyłącznie do list_display.",
-        "Zmienić relację na zwykły tekst JSON bez potrzeby modelowania.",
-        "Wyłączyć formularz zamówienia."
-      ],
-      "correct_answer": "Użyć odpowiedniego InlineModelAdmin.",
-      "explanation": "Inline pozwala edytować powiązane rekordy w formularzu obiektu nadrzędnego; nadal obowiązują uprawnienia i walidacja.",
-      "sources": [
-        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
-      ],
-      "section": "Django i DRF",
-      "family": "python2-web-025",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Wagtail. Redaktor ma układać treść z bloków tekstu, obrazów i cytatów. Jaki mechanizm pasuje do tego zadania?",
-      "type": "one_choice",
-      "answers": [
-        "RichTextField jako jedno pole z pełnym dowolnym HTML, bez modelowania bloków.",
-        "InlineModelAdmin konfigurujący formularz każdego bloku Django Admin.",
-        "QuerySet.values() przekształcający wynik SQL na listę fragmentów HTML.",
-        "StreamField z zadeklarowanymi typami bloków."
-      ],
-      "correct_answer": "StreamField z zadeklarowanymi typami bloków.",
-      "explanation": "StreamField przechowuje sekwencję strukturalnych bloków, które można komponować w interfejsie redakcyjnym.",
-      "sources": [
-        "https://docs.wagtail.org/en/stable/topics/streamfield.html"
-      ],
-      "section": "Django i DRF",
-      "family": "python2-web-026",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Django 5.2 Admin. Reguła „opłaconego zamówienia nie można anulować” jest sprawdzana w Order.cancel(). Akcja masowa wykonuje queryset.update(status=\"cancelled\"). Jak zapewnić stosowanie tej reguły także w akcji?",
-      "type": "one_choice",
-      "answers": [
-        "Przenieść regułę do nadpisanego save(), pozostawiając akcję opartą na queryset.update.",
-        "Ukryć przycisk anulowania w zwykłym formularzu Admin, pozostawiając akcję masową bez kontroli.",
-        "Wywołać wspólną operację anulowania dla wybranych zamówień i świadomie obsłużyć błędy oraz granicę transakcji.",
-        "Objąć samo queryset.update blokiem atomic, bo wywoła on Order.cancel dla każdego rekordu."
-      ],
-      "correct_answer": "Wywołać wspólną operację anulowania dla wybranych zamówień i świadomie obsłużyć błędy oraz granicę transakcji.",
-      "explanation": "QuerySet.update wykonuje SQL, bez wywołania metod biznesowych, save ani sygnałów zapisu. Sama transakcja nie dodaje brakującej reguły domenowej. Akcja musi korzystać z reguły wspólnej z innymi drogami anulowania i określić, czy błędny rekord cofa całą grupę, czy daje częściowy wynik.",
-      "sources": [
-        "https://docs.djangoproject.com/en/5.2/ref/models/querysets/",
-        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/",
-        "https://www.cosmicpython.com/book/chapter_04_service_layer"
-      ],
-      "section": "Django i DRF",
-      "family": "python2-web-027",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
       "question": "DRF. Endpoint listuje prywatne dokumenty. has_object_permission sprawdza właściciela przy odczycie szczegółów. Co trzeba zrobić, aby lista nie ujawniała cudzych dokumentów?",
       "type": "one_choice",
       "answers": [
@@ -3564,391 +2694,6 @@
       ],
       "section": "Django i DRF",
       "family": "python2-web-030",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "Clean Architecture. W którą stronę powinny kierować się zależności kodu?",
-      "type": "one_choice",
-      "answers": [
-        "Obustronnie między domeną i infrastrukturą, aby uniknąć dodatkowych interfejsów.",
-        "Zawsze od przypadków użycia do konkretnych kontrolerów HTTP.",
-        "Od szczegółów infrastruktury w stronę reguł aplikacji i domeny.",
-        "Od modelu domeny w stronę konkretnych adapterów i frameworków."
-      ],
-      "correct_answer": "Od szczegółów infrastruktury w stronę reguł aplikacji i domeny.",
-      "explanation": "Reguły biznesowe powinny być niezależne od zewnętrznych szczegółów, takich jak interfejs HTTP czy konkretna baza.",
-      "sources": [
-        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-031",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Architektura heksagonalna. Czym są port i adapter?",
-      "type": "one_choice",
-      "answers": [
-        "Oba pojęcia oznaczają dowolny model ORM.",
-        "Port określa kontrakt komunikacji, adapter realizuje go dla konkretnej technologii.",
-        "Port to zawsze port TCP, adapter to karta sieciowa.",
-        "Port jest tabelą bazy, adapter jest indeksem."
-      ],
-      "correct_answer": "Port określa kontrakt komunikacji, adapter realizuje go dla konkretnej technologii.",
-      "explanation": "Aplikacja komunikuje się ze światem przez kontrakty. Można do nich podłączać różne adaptery, np. bazę i implementację testową.",
-      "sources": [
-        "https://alistair.cockburn.us/hexagonal-architecture"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-032",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "DDD. Co oznacza ubiquitous language?",
-      "type": "one_choice",
-      "answers": [
-        "Wspólny język pojęć domeny używany przez ekspertów i programistów.",
-        "Obowiązek pisania całego systemu w jednym języku programowania.",
-        "Nazwy klas generowane wyłącznie przez framework.",
-        "Uniwersalny słownik identyczny we wszystkich firmach."
-      ],
-      "correct_answer": "Wspólny język pojęć domeny używany przez ekspertów i programistów.",
-      "explanation": "Uzgodnione terminy powinny być obecne w rozmowach i modelu, aby ograniczyć nieporozumienia dotyczące reguł biznesowych.",
-      "sources": [
-        "https://martinfowler.com/bliki/BoundedContext.html",
-        "https://www.cosmicpython.com/book/chapter_04_service_layer"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-033",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "DDD. Co wyróżnia encję (Entity) względem Value Object?",
-      "type": "one_choice",
-      "answers": [
-        "Encja jest określana wyłącznie przez równość wszystkich atrybutów.",
-        "Value Object jest identyfikowany przez trwały identyfikator niezależnie od wartości.",
-        "Encja to każdy obiekt zapisany w bazie, niezależnie od jego znaczenia w domenie.",
-        "Encja ma trwałą tożsamość, nawet gdy zmieniają się jej atrybuty."
-      ],
-      "correct_answer": "Encja ma trwałą tożsamość, nawet gdy zmieniają się jej atrybuty.",
-      "explanation": "Klient pozostaje tym samym klientem po zmianie adresu. Obiekty wartości, np. pieniądze, opisuje się przede wszystkim ich wartościami.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_07_aggregate"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-034",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Jaka jest rola repozytorium w architekturze aplikacji?",
-      "type": "one_choice",
-      "answers": [
-        "Generuje reprezentację JSON oraz waliduje request.body.",
-        "Przechowuje wszystkie reguły biznesowe, a domena zawiera tylko pola.",
-        "Udostępnia operacje na obiektach domeny, ukrywając szczegóły trwałego przechowywania.",
-        "Steruje przepływem całego przypadku użycia i wysyła odpowiedź HTTP."
-      ],
-      "correct_answer": "Udostępnia operacje na obiektach domeny, ukrywając szczegóły trwałego przechowywania.",
-      "explanation": "Repozytorium tworzy granicę między modelem a sposobem zapisu, dzięki czemu logikę można testować bez konkretnej bazy.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_02_repository"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-035",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Na czym polega dependency injection?",
-      "type": "one_choice",
-      "answers": [
-        "Komponent dziedziczy po zależności i korzysta z jej pól wewnętrznych.",
-        "Dostarczaniu zależności do komponentu z zewnątrz.",
-        "Komponent sam wybiera konkretną klasę zależności i tworzy ją w każdej metodzie.",
-        "Każda zależność jest globalnym singletonem dostępnym przez import."
-      ],
-      "correct_answer": "Dostarczaniu zależności do komponentu z zewnątrz.",
-      "explanation": "Obiekt lub funkcja otrzymuje np. repozytorium zamiast samodzielnie tworzyć konkretny adapter. Pozwala to kontrolować konfigurację i testować komponent.",
-      "sources": [
-        "https://alistair.cockburn.us/hexagonal-architecture",
-        "https://www.cosmicpython.com/book/chapter_02_repository"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-036",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "DDD. W sprzedaży „klient” oznacza nabywcę, a w wsparciu użytkownika zgłaszającego problem. Jak traktować te modele?",
-      "type": "one_choice",
-      "answers": [
-        "W odrębnych bounded contexts pojęcie może mieć inne znaczenie i model.",
-        "Zawsze scalać je w jedną klasę zawierającą wszystkie pola obu działów.",
-        "Przyjąć, że różne znaczenia oznaczają błąd w DDD.",
-        "Zabronić komunikacji między działami."
-      ],
-      "correct_answer": "W odrębnych bounded contexts pojęcie może mieć inne znaczenie i model.",
-      "explanation": "Granica kontekstu wskazuje, gdzie obowiązuje dany model i język. Integracja kontekstów wymaga świadomego mapowania pojęć.",
-      "sources": [
-        "https://martinfowler.com/bliki/BoundedContext.html"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-037",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "DDD. Po co wyznaczać agregat i jego korzeń?",
-      "type": "one_choice",
-      "answers": [
-        "Aby umieścić wszystkie tabele systemu w jednej transakcji.",
-        "Aby każda encja mogła dowolnie zmieniać wnętrze innych agregatów.",
-        "Aby zrezygnować z walidacji reguł biznesowych.",
-        "Aby kontrolować spójność powiązanych obiektów przez jedną granicę reguł biznesowych."
-      ],
-      "correct_answer": "Aby kontrolować spójność powiązanych obiektów przez jedną granicę reguł biznesowych.",
-      "explanation": "Aggregate root kontroluje zmiany wewnątrz agregatu. Granice powinny wynikać z niezmienników, a nie samej wygody ładowania relacji.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_07_aggregate"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-038",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Architektura aplikacji. Jakie zadanie ma warstwa przypadków użycia (service layer)?",
-      "type": "one_choice",
-      "answers": [
-        "Implementuje wyłącznie pojedyncze zapytania bazodanowe.",
-        "Zastępuje walidację domenową mapowaniem modeli na JSON.",
-        "Koordynuje scenariusz biznesowy, np. pobranie danych, operację domenową i zapis.",
-        "Definiuje szczegóły transportu i serializacji każdego endpointu."
-      ],
-      "correct_answer": "Koordynuje scenariusz biznesowy, np. pobranie danych, operację domenową i zapis.",
-      "explanation": "Warstwa aplikacji organizuje przepływ, a domena rozstrzyga reguły biznesowe; adapter wejściowy tłumaczy żądanie na wywołanie scenariusza.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_04_service_layer"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-039",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Czym jest Unit of Work w aplikacji z kilkoma zapisami?",
-      "type": "one_choice",
-      "answers": [
-        "Określa sposób stronicowania kolekcji podczas odczytu.",
-        "Grupuje operacje jednej jednostki biznesowej i kontroluje ich zatwierdzenie lub wycofanie.",
-        "Wymusza niezależne zatwierdzanie zmian w każdym repozytorium.",
-        "Ogranicza odpowiedź HTTP do jednego obiektu domenowego."
-      ],
-      "correct_answer": "Grupuje operacje jednej jednostki biznesowej i kontroluje ich zatwierdzenie lub wycofanie.",
-      "explanation": "Unit of Work daje przypadkowi użycia jedną granicę trwałości, zamiast ukrytych commitów w poszczególnych repozytoriach.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_06_uow"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-040",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Reguła „zamówienia opłaconego nie można anulować” ma obowiązywać dla API i importu CSV. Gdzie umieścić jej wspólną implementację?",
-      "type": "one_choice",
-      "answers": [
-        "W domenie lub wspólnym przypadku użycia, wywoływanym przez oba adaptery.",
-        "Tylko w walidacji formularza przeglądarki.",
-        "Osobno w każdym adapterze, bez wspólnej logiki.",
-        "Tylko w szablonie wyświetlającym przycisk anulowania."
-      ],
-      "correct_answer": "W domenie lub wspólnym przypadku użycia, wywoływanym przez oba adaptery.",
-      "explanation": "Reguła biznesowa powinna być dostępna dla wszystkich dróg wykonania operacji. Adaptery sprawdzają format wejścia i delegują operację.",
-      "sources": [
-        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
-        "https://www.cosmicpython.com/book/chapter_04_service_layer"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-041",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Chcesz wymieniać algorytm wyliczania rabatu bez rozbudowywania warunków w koszyku. Jaki wzorzec pasuje?",
-      "type": "one_choice",
-      "answers": [
-        "Factory Method: tworzenie wybranego obiektu koszyka zamiast wydzielenia algorytmu.",
-        "Decorator: dopisywanie zachowania do koszyka bez osobnego kontraktu wyboru algorytmu.",
-        "Observer: powiadamianie odbiorców po zmianie zawartości koszyka.",
-        "Strategy: przekazanie implementacji wspólnego kontraktu wyliczenia rabatu."
-      ],
-      "correct_answer": "Strategy: przekazanie implementacji wspólnego kontraktu wyliczenia rabatu.",
-      "explanation": "Strategy oddziela wybór algorytmu od klienta, który go używa. W Pythonie strategią może być również przekazana funkcja.",
-      "sources": [
-        "https://refactoring.guru/design-patterns/strategy"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-042",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Zewnętrzny klient płatności ma inny interfejs niż port PaymentGateway aplikacji. Jaki wzorzec pomoże?",
-      "type": "one_choice",
-      "answers": [
-        "Repository przechowujący odpowiedzi klienta w bazie.",
-        "Strategy wybierający różne reguły naliczania należności.",
-        "Adapter tłumaczący kontrakt aplikacji na interfejs dostawcy.",
-        "Observer powiadamiający aplikację o każdym wywołaniu klienta."
-      ],
-      "correct_answer": "Adapter tłumaczący kontrakt aplikacji na interfejs dostawcy.",
-      "explanation": "Adapter izoluje techniczny interfejs dostawcy od aplikacji. Dzięki temu przypadek użycia zależy od własnego kontraktu.",
-      "sources": [
-        "https://alistair.cockburn.us/hexagonal-architecture"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-043",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Do czego służy zdarzenie domenowe, np. OrderPaid?",
-      "type": "one_choice",
-      "answers": [
-        "Określa format żądania HTTP dla publicznego endpointu.",
-        "Opisuje fakt biznesowy, na który mogą reagować inne części systemu.",
-        "Żąda wykonania działania i musi zostać przyjęte przez wskazanego wykonawcę.",
-        "Jest reprezentacją bieżącego stanu całej bazy przeznaczoną do backupu."
-      ],
-      "correct_answer": "Opisuje fakt biznesowy, na który mogą reagować inne części systemu.",
-      "explanation": "Zdarzenie opisuje coś, co już zaszło. Nie jest tym samym co polecenie wymagające wykonania działania.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_08_events_and_message_bus"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-044",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Który opis trafnie odróżnia polecenie od zdarzenia?",
-      "type": "one_choice",
-      "answers": [
-        "Polecenie żąda działania, a zdarzenie informuje o fakcie, który zaszedł.",
-        "Polecenie zawsze używa HTTP, a zdarzenie zawsze RabbitMQ.",
-        "Zdarzenie musi być synchroniczne, a polecenie asynchroniczne.",
-        "Oba pojęcia oznaczają wyłącznie wyjątek w Pythonie."
-      ],
-      "correct_answer": "Polecenie żąda działania, a zdarzenie informuje o fakcie, który zaszedł.",
-      "explanation": "Znaczenie komunikatu nie wynika z transportu. „Opłać zamówienie” i „Zamówienie opłacone” mają odmienne role.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_08_events_and_message_bus"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-045",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Niewielki zespół rozwija prostą aplikację o wspólnym cyklu wdrożeń. Rozważa podział na mikroserwisy wyłącznie dlatego, że baza kodu rośnie. Co najlepiej uzasadnia decyzję?",
-      "type": "one_choice",
-      "answers": [
-        "Wzrost liczby plików sam w sobie uzasadnia osobny serwis dla każdego modułu.",
-        "Ocenić potrzebę niezależnych wdrożeń i granice domeny wobec kosztu komunikacji, spójności i utrzymania; rozważyć modularny monolit.",
-        "Podzielić aplikację według tabel, zachowując wspólne bezpośrednie zapisy wszystkich serwisów do tej samej bazy.",
-        "Najpierw zastąpić wszystkie wywołania funkcji żądaniami HTTP, a granice odpowiedzialności ustalić później."
-      ],
-      "correct_answer": "Ocenić potrzebę niezależnych wdrożeń i granice domeny wobec kosztu komunikacji, spójności i utrzymania; rozważyć modularny monolit.",
-      "explanation": "Mikroserwisy mogą pomagać w niezależnym wdrażaniu i wyznaczaniu granic odpowiedzialności. Dodają jednak komunikację sieciową, awarie częściowe, problemy spójności i koszt operacyjny. Sam rozmiar kodu nie rozstrzyga decyzji; modularny monolit może zachować wyraźne granice przy prostszym wdrożeniu.",
-      "sources": [
-        "https://martinfowler.com/articles/microservice-trade-offs.html"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-046",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Domena importuje klasę HTTPRequest i klienta konkretnego ORM. Chcesz ją testować bez serwera i bazy. Która zmiana najlepiej izoluje reguły biznesowe?",
-      "type": "one_choice",
-      "answers": [
-        "Połączyć kontroler, model i adapter w jedną klasę.",
-        "Oznaczyć wszystkie importy domeny jako opcjonalne bez zmiany zależności.",
-        "Przekazywać dane przypadku użycia i własne porty, a tłumaczenie HTTP oraz ORM pozostawić adapterom.",
-        "Podmieniać każdą wewnętrzną metodę ORM w każdym teście domeny."
-      ],
-      "correct_answer": "Przekazywać dane przypadku użycia i własne porty, a tłumaczenie HTTP oraz ORM pozostawić adapterom.",
-      "explanation": "Oddzielenie kontraktów od technologii usuwa zależność reguł od infrastruktury. Test może dostarczyć prosty adapter pamięciowy.",
-      "sources": [
-        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
-        "https://alistair.cockburn.us/hexagonal-architecture"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-047",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "W agregacie Zamówienie suma pozycji nie może przekraczać limitu. Inny komponent dopisuje pozycje bezpośrednio do listy, omijając jego metody. Co należy poprawić?",
-      "type": "one_choice",
-      "answers": [
-        "Przenieść wszystkie zamówienia do jednego globalnego agregatu.",
-        "Kontrolować zmiany przez operacje korzenia agregatu, które chronią niezmiennik.",
-        "Sprawdzać limit wyłącznie przy renderowaniu odpowiedzi.",
-        "Dodać logowanie każdego przekroczenia bez blokowania zapisu."
-      ],
-      "correct_answer": "Kontrolować zmiany przez operacje korzenia agregatu, które chronią niezmiennik.",
-      "explanation": "Granica agregatu ma sens, gdy chroni dopuszczalne zmiany. Publicznie modyfikowalny stan umożliwiający obejście reguł osłabia tę ochronę.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_07_aggregate"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-048",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "Dwa repozytoria zapisują zamówienie i rezerwację w tej samej bazie PostgreSQL. Każde samodzielnie commitując powoduje częściowy sukces przy awarii drugiego zapisu. Jak poprawić granicę transakcji?",
-      "type": "one_choice",
-      "answers": [
-        "Objąć oba zapisy jednym Unit of Work i wspólną transakcją tej bazy kontrolowaną przez przypadek użycia.",
-        "Dodać trzeci commit po błędzie drugiego repozytorium.",
-        "Wywoływać repozytoria w odwrotnej kolejności bez wspólnej transakcji.",
-        "Przechwycić wyjątek i zawsze zwrócić sukces."
-      ],
-      "correct_answer": "Objąć oba zapisy jednym Unit of Work i wspólną transakcją tej bazy kontrolowaną przez przypadek użycia.",
-      "explanation": "Granica trwałości musi odpowiadać operacji biznesowej. Niezależne commity repozytoriów nie zapewniają atomowości całego scenariusza. Oba repozytoria muszą uczestniczyć w tej samej transakcji i zgodnie korzystać z jej połączenia lub sesji. Nie jest to gwarancja atomowości dwóch niezależnych baz.",
-      "sources": [
-        "https://www.cosmicpython.com/book/chapter_06_uow"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-049",
-      "origin": "variant",
-      "difficulty": "hard"
-    },
-    {
-      "question": "System wsparcia integruje się z zewnętrznym CRM o innych pojęciach i regułach. Jak ograniczyć wpływ modelu CRM na własną domenę?",
-      "type": "one_choice",
-      "answers": [
-        "Używać surowych odpowiedzi CRM jako encji domenowych w całym systemie.",
-        "Kopiować nazwy pól CRM do każdej reguły biznesowej.",
-        "Przenieść całą walidację domeny do konfiguracji CRM.",
-        "Wydzielić adapter tłumaczący zewnętrzne dane i pojęcia na własny model."
-      ],
-      "correct_answer": "Wydzielić adapter tłumaczący zewnętrzne dane i pojęcia na własny model.",
-      "explanation": "Warstwa tłumacząca pomaga zachować znaczenie własnych pojęć i ogranicza rozprzestrzenianie zmian zewnętrznego kontraktu.",
-      "sources": [
-        "https://martinfowler.com/bliki/BoundedContext.html",
-        "https://alistair.cockburn.us/hexagonal-architecture"
-      ],
-      "section": "Architektura i DDD",
-      "family": "python2-web-050",
       "origin": "variant",
       "difficulty": "hard"
     },
@@ -4440,44 +3185,6 @@
       "difficulty": "medium"
     },
     {
-      "question": "Co oznacza atomowość transakcji przelewu między dwoma kontami?",
-      "type": "one_choice",
-      "answers": [
-        "Zmiany każdej instrukcji są zatwierdzane niezależnie od pozostałych.",
-        "Po odczycie salda żaden inny proces nie może go zmienić.",
-        "Transakcja ma zawsze stały i krótki czas wykonania.",
-        "Obie zmiany sald zatwierdzają się razem albo obie są wycofane."
-      ],
-      "correct_answer": "Obie zmiany sald zatwierdzają się razem albo obie są wycofane.",
-      "explanation": "Transakcja grupuje zmiany w operację typu wszystko albo nic.",
-      "sources": [
-        "https://www.postgresql.org/docs/17/tutorial-transactions.html"
-      ],
-      "section": "PostgreSQL",
-      "family": "python2-ops-005",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Do czego służy ROLLBACK?",
-      "type": "one_choice",
-      "answers": [
-        "Do wycofania niezatwierdzonych zmian bieżącej transakcji.",
-        "Do trwałego zatwierdzenia zmian bieżącej transakcji.",
-        "Do odwrócenia każdej wcześniej zatwierdzonej transakcji.",
-        "Do ponownego wykonania wszystkich instrukcji bieżącej transakcji."
-      ],
-      "correct_answer": "Do wycofania niezatwierdzonych zmian bieżącej transakcji.",
-      "explanation": "ROLLBACK kończy transakcję przez odrzucenie jej zmian; COMMIT je zatwierdza.",
-      "sources": [
-        "https://www.postgresql.org/docs/17/tutorial-transactions.html"
-      ],
-      "section": "PostgreSQL",
-      "family": "python2-ops-006",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
       "question": "Tabela customers ma id, tabela orders ma customer_id. Które zapytanie zachowa wszystkich klientów, także bez zamówień?",
       "type": "one_choice",
       "answers": [
@@ -4513,64 +3220,6 @@
       ],
       "section": "PostgreSQL",
       "family": "python2-ops-008",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Jak znaleźć klientów bez zamówień, używając podzapytania skorelowanego?",
-      "type": "one_choice",
-      "answers": [
-        "EXISTS sprawdzające zamówienie danego klienta.",
-        "INNER JOIN z orders i filtr orders.id IS NULL.",
-        "LEFT JOIN z orders i filtr orders.id IS NOT NULL.",
-        "NOT EXISTS sprawdzające zamówienie danego klienta."
-      ],
-      "correct_answer": "NOT EXISTS sprawdzające zamówienie danego klienta.",
-      "explanation": "NOT EXISTS wyraża brak powiązanego wiersza, bez zależności od NULL w kolumnie podzapytania.",
-      "sources": [
-        "https://www.postgresql.org/docs/17/functions-subquery.html",
-        "https://www.postgresql.org/docs/17/tutorial-join.html"
-      ],
-      "section": "PostgreSQL",
-      "family": "python2-ops-009",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Jaki jest typowy koszt dodania indeksu do dużej tabeli?",
-      "type": "one_choice",
-      "answers": [
-        "Dodatkowe miejsce oraz praca przy INSERT, UPDATE i DELETE.",
-        "Wyłącznie większe zużycie miejsca, bez wpływu na zapisy.",
-        "Wyłącznie wolniejszy odczyt; zapisy pozostają bez zmian.",
-        "Wyłącznie koszt utworzenia, bez późniejszego utrzymania."
-      ],
-      "correct_answer": "Dodatkowe miejsce oraz praca przy INSERT, UPDATE i DELETE.",
-      "explanation": "Indeks może przyspieszyć odczyty, ale trzeba go przechowywać i aktualizować.",
-      "sources": [
-        "https://www.postgresql.org/docs/17/indexes-intro.html"
-      ],
-      "section": "PostgreSQL",
-      "family": "python2-ops-010",
-      "origin": "variant",
-      "difficulty": "easy"
-    },
-    {
-      "question": "Zapytania często filtrują zamówienia po customer_id. Jaki krok może przyspieszyć odczyt?",
-      "type": "one_choice",
-      "answers": [
-        "Wykonać VACUUM po każdym SELECT.",
-        "Rozważyć indeks na customer_id i sprawdzić plan zapytania.",
-        "Dodać indeks do każdej kolumny bez analizy.",
-        "Zastąpić warunek WHERE sortowaniem w Pythonie."
-      ],
-      "correct_answer": "Rozważyć indeks na customer_id i sprawdzić plan zapytania.",
-      "explanation": "Dobór indeksu wynika z wzorca zapytań; rzeczywistą korzyść należy zweryfikować.",
-      "sources": [
-        "https://www.postgresql.org/docs/17/indexes-intro.html"
-      ],
-      "section": "PostgreSQL",
-      "family": "python2-ops-011",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -4725,25 +3374,6 @@
       ],
       "section": "PostgreSQL",
       "family": "python2-ops-019",
-      "origin": "variant",
-      "difficulty": "medium"
-    },
-    {
-      "question": "Duże dane klienta są współdzielone przez tysiące zamówień i często się zmieniają. Co przemawia za referencją?",
-      "type": "one_choice",
-      "answers": [
-        "Automatyczne usunięcie kosztów każdego odczytu.",
-        "Możliwość pominięcia modelowania danych.",
-        "Aktualizacja jednej encji zamiast wielu zduplikowanych kopii.",
-        "Pewność, że baza nigdy nie potrzebuje indeksów."
-      ],
-      "correct_answer": "Aktualizacja jednej encji zamiast wielu zduplikowanych kopii.",
-      "explanation": "Referencje ograniczają duplikację, ale mogą wymagać dodatkowych odczytów lub łączenia danych.",
-      "sources": [
-        "https://www.mongodb.com/docs/manual/data-modeling/embedding/"
-      ],
-      "section": "PostgreSQL",
-      "family": "python2-ops-020",
       "origin": "variant",
       "difficulty": "medium"
     },
@@ -5733,6 +4363,1329 @@
       "family": "python2-ops-072",
       "origin": "variant",
       "difficulty": "hard"
+    },
+    {
+      "question": "DDD. Co oznacza ubiquitous language?",
+      "type": "one_choice",
+      "answers": [
+        "Wspólny język pojęć domeny używany przez ekspertów i programistów.",
+        "Wspólna lista bibliotek obowiązkowych w każdym zespole.",
+        "Nazwy pól ustalane tylko przez administratora bazy danych.",
+        "Jeden globalny słownik identyczny we wszystkich kontekstach firmy."
+      ],
+      "correct_answer": "Wspólny język pojęć domeny używany przez ekspertów i programistów.",
+      "explanation": "Uzgodnione terminy powinny być obecne w rozmowach i modelu, aby ograniczyć nieporozumienia dotyczące reguł biznesowych.",
+      "sources": [
+        "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf"
+      ],
+      "section": "DDD",
+      "family": "python2-web-033",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "DDD. Co wyróżnia encję (Entity) względem Value Object?",
+      "type": "one_choice",
+      "answers": [
+        "Encja jest określana wyłącznie przez równość wszystkich atrybutów.",
+        "Value Object jest identyfikowany przez trwały identyfikator niezależnie od wartości.",
+        "Encja to każdy obiekt zapisany w bazie, niezależnie od jego znaczenia w domenie.",
+        "Encja ma trwałą tożsamość, nawet gdy zmieniają się jej atrybuty."
+      ],
+      "correct_answer": "Encja ma trwałą tożsamość, nawet gdy zmieniają się jej atrybuty.",
+      "explanation": "Klient pozostaje tym samym klientem po zmianie adresu. Obiekty wartości, np. pieniądze, opisuje się przede wszystkim ich wartościami.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_07_aggregate"
+      ],
+      "section": "DDD",
+      "family": "python2-web-034",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "DDD. W sprzedaży „klient” oznacza nabywcę, a w wsparciu użytkownika zgłaszającego problem. Jak traktować te modele?",
+      "type": "one_choice",
+      "answers": [
+        "Ujednolicić znaczenie słowa w kodzie bez uzgadniania procesów obu działów.",
+        "Zachować oddzielne nazwy, ale współdzielić wszystkie reguły obu modeli.",
+        "W odrębnych bounded contexts pojęcie może mieć inne znaczenie i model.",
+        "Utworzyć jeden wspólny model z polami obu działów i identycznymi regułami."
+      ],
+      "correct_answer": "W odrębnych bounded contexts pojęcie może mieć inne znaczenie i model.",
+      "explanation": "Granica kontekstu wskazuje, gdzie obowiązuje dany model i język. Integracja kontekstów wymaga świadomego mapowania pojęć.",
+      "sources": [
+        "https://martinfowler.com/bliki/BoundedContext.html"
+      ],
+      "section": "DDD",
+      "family": "python2-web-037",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "DDD. Po co wyznaczać agregat i jego korzeń?",
+      "type": "one_choice",
+      "answers": [
+        "Aby zastąpić reguły biznesowe samymi relacjami kluczy obcych.",
+        "Aby kontrolować spójność powiązanych obiektów przez jedną granicę reguł biznesowych.",
+        "Aby objąć wszystkie tabele systemu jedną granicą spójności.",
+        "Aby umożliwić bezpośrednie modyfikowanie dowolnego wewnętrznego obiektu."
+      ],
+      "correct_answer": "Aby kontrolować spójność powiązanych obiektów przez jedną granicę reguł biznesowych.",
+      "explanation": "Aggregate root kontroluje zmiany wewnątrz agregatu. Granice powinny wynikać z niezmienników, a nie samej wygody ładowania relacji.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_07_aggregate"
+      ],
+      "section": "DDD",
+      "family": "python2-web-038",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Do czego służy zdarzenie domenowe, np. OrderPaid?",
+      "type": "one_choice",
+      "answers": [
+        "Opisuje fakt biznesowy, na który mogą reagować inne części systemu.",
+        "Określa format żądania HTTP dla publicznego endpointu.",
+        "Żąda wykonania działania i musi zostać przyjęte przez wskazanego wykonawcę.",
+        "Jest reprezentacją bieżącego stanu całej bazy przeznaczoną do backupu."
+      ],
+      "correct_answer": "Opisuje fakt biznesowy, na który mogą reagować inne części systemu.",
+      "explanation": "Zdarzenie opisuje coś, co już zaszło. Nie jest tym samym co polecenie wymagające wykonania działania.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_08_events_and_message_bus"
+      ],
+      "section": "DDD",
+      "family": "python2-web-044",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Który opis trafnie odróżnia polecenie od zdarzenia?",
+      "type": "one_choice",
+      "answers": [
+        "Polecenie opisuje fakt zakończony, a zdarzenie żąda zmiany stanu.",
+        "Rozróżnienie wynika wyłącznie z użycia HTTP albo brokera wiadomości.",
+        "Zdarzenie jest zawsze błędem, a polecenie zawsze udanym wynikiem.",
+        "Polecenie żąda działania, a zdarzenie informuje o fakcie, który zaszedł."
+      ],
+      "correct_answer": "Polecenie żąda działania, a zdarzenie informuje o fakcie, który zaszedł.",
+      "explanation": "Znaczenie komunikatu nie wynika z transportu. „Opłać zamówienie” i „Zamówienie opłacone” mają odmienne role.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_08_events_and_message_bus"
+      ],
+      "section": "DDD",
+      "family": "python2-web-045",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "W agregacie Zamówienie suma pozycji nie może przekraczać limitu. Inny komponent dopisuje pozycje bezpośrednio do listy, omijając jego metody. Co należy poprawić?",
+      "type": "one_choice",
+      "answers": [
+        "Zachować bezpośrednią listę, a kontrolę dodać tylko w jednym formularzu.",
+        "Przenosić kontrolę limitu do osobnych kopii kodu dla każdego komponentu.",
+        "Kontrolować zmiany przez operacje korzenia agregatu, które chronią niezmiennik.",
+        "Sprawdzać limit dopiero podczas budowania odpowiedzi po zapisie."
+      ],
+      "correct_answer": "Kontrolować zmiany przez operacje korzenia agregatu, które chronią niezmiennik.",
+      "explanation": "Granica agregatu ma sens, gdy chroni dopuszczalne zmiany. Publicznie modyfikowalny stan umożliwiający obejście reguł osłabia tę ochronę.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_07_aggregate"
+      ],
+      "section": "DDD",
+      "family": "python2-web-048",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "System wsparcia integruje się z zewnętrznym CRM o innych pojęciach i regułach. Jak ograniczyć wpływ modelu CRM na własną domenę?",
+      "type": "one_choice",
+      "answers": [
+        "Przenieść własny model do klas klienta CRM i używać ich także bez integracji.",
+        "Wydzielić adapter tłumaczący zewnętrzne dane i pojęcia na własny model.",
+        "Przekazywać surowe modele CRM bezpośrednio do wszystkich operacji domenowych.",
+        "Dostosowywać własne reguły do każdej zmiany pól zewnętrznego dostawcy."
+      ],
+      "correct_answer": "Wydzielić adapter tłumaczący zewnętrzne dane i pojęcia na własny model.",
+      "explanation": "Warstwa tłumacząca pomaga zachować znaczenie własnych pojęć i ogranicza rozprzestrzenianie zmian zewnętrznego kontraktu.",
+      "sources": [
+        "https://martinfowler.com/bliki/BoundedContext.html",
+        "https://alistair.cockburn.us/hexagonal-architecture"
+      ],
+      "section": "DDD",
+      "family": "python2-web-050",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "DDD. Co oznacza domena aplikacji obsługującej zapisy na szkolenia?",
+      "type": "one_choice",
+      "answers": [
+        "Obszar problemu: szkolenia, uczestnictwo i zasady zapisów.",
+        "Zestaw adresów internetowych serwera obsługującego formularz.",
+        "Wyłącznie schemat tabel zawierających dane uczestników.",
+        "Zbiór bibliotek używanych do budowy interfejsu."
+      ],
+      "correct_answer": "Obszar problemu: szkolenia, uczestnictwo i zasady zapisów.",
+      "explanation": "Domena to problem, który program pomaga rozwiązać. Modele danych i technologie powinny wspierać rozpoznane pojęcia oraz reguły tego problemu.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_01_domain_model"
+      ],
+      "section": "DDD",
+      "family": "python2-arch-001",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "DDD. Jaki jest cel modelu domeny?",
+      "type": "one_choice",
+      "answers": [
+        "Odwzorować wszystkie cechy rzeczywistości, także nieużywane przez aplikację.",
+        "Wyłącznie odtworzyć nazwy kolumn z istniejącej bazy.",
+        "Wyznaczyć sposób uruchomienia serwera i routingu HTTP.",
+        "Opisać istotne pojęcia i zachowania problemu rozwiązywanego przez program."
+      ],
+      "correct_answer": "Opisać istotne pojęcia i zachowania problemu rozwiązywanego przez program.",
+      "explanation": "Model jest użytecznym uproszczeniem. Dla zapisów ważny może być limit uczestników, podczas gdy opis wystroju sali pozostaje poza potrzebami modelu.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_01_domain_model"
+      ],
+      "section": "DDD",
+      "family": "python2-arch-002",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "DDD. Kwota składa się z liczby i waluty. Jak rozumieć równość dwóch obiektów wartości Money w tym modelu?",
+      "type": "one_choice",
+      "answers": [
+        "Są równe, gdy ich osobne identyfikatory bazodanowe są zgodne.",
+        "Są równe, gdy liczba jest taka sama, nawet przy różnych walutach.",
+        "Są równe, gdy liczba i waluta mają te same wartości.",
+        "Są równe tylko, gdy mają ten sam adres w pamięci."
+      ],
+      "correct_answer": "Są równe, gdy liczba i waluta mają te same wartości.",
+      "explanation": "Value Object identyfikuje jego wartość według reguł modelu. Waluta należy do znaczenia kwoty, więc nie można jej pominąć w porównaniu.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_01_domain_model",
+        "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf"
+      ],
+      "section": "DDD",
+      "family": "python2-arch-003",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "DDD. Wyliczenie ceny zależy od rodzaju szkolenia i uprawnień uczestnika; nie pasuje naturalnie do jednego z tych obiektów. Gdzie można umieścić tę regułę?",
+      "type": "one_choice",
+      "answers": [
+        "W kodzie uruchamiającym aplikację i wybierającym połączenie bazy.",
+        "W usłudze domenowej przyjmującej potrzebne dane modelu.",
+        "W adapterze HTTP, aby reguła działała tylko dla żądań webowych.",
+        "W repozytorium, którego główną odpowiedzialnością ma być zapis danych."
+      ],
+      "correct_answer": "W usłudze domenowej przyjmującej potrzebne dane modelu.",
+      "explanation": "Usługa domenowa realizuje operację biznesową niewpisującą się naturalnie w pojedynczą encję lub obiekt wartości. Usługa aplikacyjna koordynuje jej użycie w scenariuszu.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_01_domain_model",
+        "https://www.cosmicpython.com/book/chapter_04_service_layer"
+      ],
+      "section": "DDD",
+      "family": "python2-arch-004",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "DDD. Czym różnią się projektowanie strategiczne i taktyczne?",
+      "type": "one_choice",
+      "answers": [
+        "Strategiczne określa granice modeli i ich współpracę; taktyczne buduje model wewnątrz tych granic.",
+        "Strategiczne dobiera algorytmy sortowania; taktyczne ustawia pipeline CI.",
+        "Strategiczne dotyczy tylko klas encji; taktyczne wyłącznie podziału na mikroserwisy.",
+        "Strategiczne tworzy schemat SQL; taktyczne zastępuje rozmowy z ekspertami."
+      ],
+      "correct_answer": "Strategiczne określa granice modeli i ich współpracę; taktyczne buduje model wewnątrz tych granic.",
+      "explanation": "Strategia obejmuje m.in. konteksty i relacje między nimi. Taktyczne wzorce, takie jak encja i agregat, pomagają wyrazić reguły konkretnego modelu.",
+      "sources": [
+        "https://www.domainlanguage.com/wp-content/uploads/2016/05/DDD_Reference_2015-03.pdf",
+        "https://martinfowler.com/bliki/BoundedContext.html"
+      ],
+      "section": "DDD",
+      "family": "python2-arch-005",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Clean Architecture. W którą stronę powinny kierować się zależności kodu?",
+      "type": "one_choice",
+      "answers": [
+        "Obustronnie między domeną i infrastrukturą, aby uniknąć dodatkowych interfejsów.",
+        "Zawsze od przypadków użycia do konkretnych kontrolerów HTTP.",
+        "Od modelu domeny w stronę konkretnych adapterów i frameworków.",
+        "Od szczegółów infrastruktury w stronę reguł aplikacji i domeny."
+      ],
+      "correct_answer": "Od szczegółów infrastruktury w stronę reguł aplikacji i domeny.",
+      "explanation": "Reguły biznesowe powinny być niezależne od zewnętrznych szczegółów, takich jak interfejs HTTP czy konkretna baza.",
+      "sources": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-web-031",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Architektura aplikacji. Jakie zadanie ma warstwa przypadków użycia (service layer)?",
+      "type": "one_choice",
+      "answers": [
+        "Zastępuje walidację domenową mapowaniem modeli na JSON.",
+        "Definiuje szczegóły transportu i serializacji każdego endpointu.",
+        "Koordynuje scenariusz biznesowy, np. pobranie danych, operację domenową i zapis.",
+        "Implementuje wyłącznie pojedyncze zapytania bazodanowe."
+      ],
+      "correct_answer": "Koordynuje scenariusz biznesowy, np. pobranie danych, operację domenową i zapis.",
+      "explanation": "Warstwa aplikacji organizuje przepływ, a domena rozstrzyga reguły biznesowe; adapter wejściowy tłumaczy żądanie na wywołanie scenariusza.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_04_service_layer"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-web-039",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Reguła „zamówienia opłaconego nie można anulować” ma obowiązywać dla API i importu CSV. Gdzie umieścić jej wspólną implementację?",
+      "type": "one_choice",
+      "answers": [
+        "W kodzie formatowania odpowiedzi, już po zatwierdzeniu operacji.",
+        "W domenie lub wspólnym przypadku użycia, wywoływanym przez oba adaptery.",
+        "Tylko w formularzu przeglądarki, a API i import polegają na jego poprawności.",
+        "Osobno w każdym adapterze, synchronizując kopie reguły ręcznie."
+      ],
+      "correct_answer": "W domenie lub wspólnym przypadku użycia, wywoływanym przez oba adaptery.",
+      "explanation": "Reguła biznesowa powinna być dostępna dla wszystkich dróg wykonania operacji. Adaptery sprawdzają format wejścia i delegują operację.",
+      "sources": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+        "https://www.cosmicpython.com/book/chapter_04_service_layer"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-web-041",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Prosta aplikacja CRUD ma niewiele reguł i jedną drogę wejścia. Zespół rozważa rozbudowane warstwy Clean Architecture. Co należy ocenić przed ich dodaniem?",
+      "type": "one_choice",
+      "answers": [
+        "Czy konkretne granice, zmiany i testy uzasadniają koszt dodatkowych abstrakcji.",
+        "Czy można utworzyć każdą proponowaną warstwę nawet bez odrębnej odpowiedzialności.",
+        "Czy nazwy nowych katalogów zastąpią wspólną implementację reguł biznesowych.",
+        "Czy każda tabela może mieć identyczny zestaw interfejsów niezależnie od potrzeby."
+      ],
+      "correct_answer": "Czy konkretne granice, zmiany i testy uzasadniają koszt dodatkowych abstrakcji.",
+      "explanation": "Separacja może ułatwiać rozwój i testowanie, ale każda granica ma koszt. Prosty system może korzystać z czytelnego podziału odpowiedzialności bez pełnego zestawu warstw i interfejsów.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_03_abstractions"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-web-046",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Domena importuje klasę HTTPRequest i klienta konkretnego ORM. Chcesz ją testować bez serwera i bazy. Która zmiana najlepiej izoluje reguły biznesowe?",
+      "type": "one_choice",
+      "answers": [
+        "Dodać kolejne mocki szczegółów HTTP i ORM do każdego testu domeny.",
+        "Przenieść domenę do kontrolera, żeby wszystkie zależności były w jednym module.",
+        "Zachować zależności, ale ukryć je wewnątrz każdej metody zamiast importować na początku.",
+        "Przekazywać dane przypadku użycia i własne porty, a tłumaczenie HTTP oraz ORM pozostawić adapterom."
+      ],
+      "correct_answer": "Przekazywać dane przypadku użycia i własne porty, a tłumaczenie HTTP oraz ORM pozostawić adapterom.",
+      "explanation": "Oddzielenie kontraktów od technologii usuwa zależność reguł od infrastruktury. Test może dostarczyć prosty adapter pamięciowy.",
+      "sources": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+        "https://alistair.cockburn.us/hexagonal-architecture"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-web-047",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Dwa repozytoria zapisują zamówienie i rezerwację w tej samej bazie PostgreSQL. Każde samodzielnie commitując powoduje częściowy sukces przy awarii drugiego zapisu. Jak poprawić granicę transakcji?",
+      "type": "one_choice",
+      "answers": [
+        "Przechwycić błąd drugiego zapisu, pozostawiając pierwszy commit jako pełny sukces.",
+        "Umieścić tylko drugi zapis we wspólnej abstrakcji, bez zmiany pierwszego commitu.",
+        "Objąć oba zapisy jednym Unit of Work i wspólną transakcją tej bazy kontrolowaną przez przypadek użycia.",
+        "Zatwierdzać zapisy osobno, ale wykonać drugi przed pierwszym."
+      ],
+      "correct_answer": "Objąć oba zapisy jednym Unit of Work i wspólną transakcją tej bazy kontrolowaną przez przypadek użycia.",
+      "explanation": "Granica trwałości musi odpowiadać operacji biznesowej. Niezależne commity repozytoriów nie zapewniają atomowości całego scenariusza. Oba repozytoria muszą uczestniczyć w tej samej transakcji i zgodnie korzystać z jej połączenia lub sesji. Nie jest to gwarancja atomowości dwóch niezależnych baz.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_06_uow"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-web-049",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Clean Architecture. Co należy do zewnętrznych szczegółów technicznych aplikacji?",
+      "type": "one_choice",
+      "answers": [
+        "Znaczenie potwierdzenia zapisu ustalone z organizatorem.",
+        "Framework HTTP i implementacja dostępu do bazy.",
+        "Reguła dopuszczalnej liczby uczestników szkolenia.",
+        "Warunek poprawności kwoty w modelu wartości."
+      ],
+      "correct_answer": "Framework HTTP i implementacja dostępu do bazy.",
+      "explanation": "Transport i sposób przechowywania są szczegółami infrastruktury. W centrum znajdują się reguły problemu oraz operacje aplikacji, które korzystają z tych reguł.",
+      "sources": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-arch-006",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Clean Architecture. Który opis jest przypadkiem użycia systemu szkoleń?",
+      "type": "one_choice",
+      "answers": [
+        "Zapisz uczestnika na wybrane szkolenie.",
+        "Otwórz połączenie TCP z serwerem bazy.",
+        "Zamień słownik odpowiedzi na tekst JSON.",
+        "Przekaż plik statyczny do przeglądarki."
+      ],
+      "correct_answer": "Zapisz uczestnika na wybrane szkolenie.",
+      "explanation": "Przypadek użycia opisuje cel użytkownika. Pozostałe operacje są szczegółami technicznej realizacji komunikacji lub zapisu.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_04_service_layer",
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-arch-007",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Clean Architecture. Przypadek użycia wywołuje repository.get(), a przekazany obiekt jest adapterem SQL. Czy to samo w sobie łamie kierunek zależności?",
+      "type": "one_choice",
+      "answers": [
+        "Tak, każdy wywołany obiekt musi pochodzić z wewnętrznej warstwy.",
+        "Tak, odczyt bazy jest dopuszczalny wyłącznie bezpośrednio w widoku HTTP.",
+        "Nie, nawet jeśli kod domeny sam importuje i tworzy konkretny adapter SQL.",
+        "Nie, jeśli kod zna kontrakt repozytorium i otrzymuje implementację z zewnątrz."
+      ],
+      "correct_answer": "Nie, jeśli kod zna kontrakt repozytorium i otrzymuje implementację z zewnątrz.",
+      "explanation": "Kolejność wywołań podczas działania i zależności definicji kodu to różne sprawy. Wstrzyknięta implementacja wykonuje operację, ale przypadek użycia może zależeć tylko od własnego kontraktu.",
+      "sources": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+        "https://www.cosmicpython.com/book/chapter_13_dependency_injection"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-arch-008",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Clean Architecture. Przypadek użycia przyjmuje HttpRequest i zwraca obiekt Response frameworka. Ma teraz działać również z CLI. Która zmiana utrzyma jedną logikę operacji?",
+      "type": "one_choice",
+      "answers": [
+        "Skopiować przypadek użycia do modułu CLI wraz z niezależną implementacją reguł.",
+        "Przenieść całą operację do serializera HTTP i wywoływać go z każdej drogi wejścia.",
+        "Przyjmować dane operacji i zwracać jej wynik; HTTP i CLI tłumaczą wejście oraz odpowiedź.",
+        "Utworzyć sztuczny HttpRequest w CLI i zachować zależność przypadku użycia od frameworka."
+      ],
+      "correct_answer": "Przyjmować dane operacji i zwracać jej wynik; HTTP i CLI tłumaczą wejście oraz odpowiedź.",
+      "explanation": "Granica danych oddziela scenariusz biznesowy od transportu. Adaptery obsługują format i prezentację błędów, a wspólny przypadek użycia działa na danych potrzebnych do realizacji celu.",
+      "sources": [
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html",
+        "https://www.cosmicpython.com/book/chapter_04_service_layer"
+      ],
+      "section": "Clean Architecture",
+      "family": "python2-arch-009",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Architektura heksagonalna. Czym są port i adapter?",
+      "type": "one_choice",
+      "answers": [
+        "Port i adapter są nazwami tego samego komponentu i nie różnią się rolą.",
+        "Port określa kontrakt komunikacji, adapter realizuje go dla konkretnej technologii.",
+        "Port jest konkretnym klientem biblioteki, adapter opisuje ogólny kontrakt.",
+        "Port opisuje jedynie dane, a adapter zawiera wszystkie wspólne reguły domeny."
+      ],
+      "correct_answer": "Port określa kontrakt komunikacji, adapter realizuje go dla konkretnej technologii.",
+      "explanation": "Aplikacja komunikuje się ze światem przez kontrakty. Można do nich podłączać różne adaptery, np. bazę i implementację testową.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-web-032",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Jaka jest rola repozytorium w architekturze aplikacji?",
+      "type": "one_choice",
+      "answers": [
+        "Udostępnia operacje na obiektach domeny, ukrywając szczegóły trwałego przechowywania.",
+        "Generuje reprezentację JSON oraz waliduje request.body.",
+        "Przechowuje wszystkie reguły biznesowe, a domena zawiera tylko pola.",
+        "Steruje przepływem całego przypadku użycia i wysyła odpowiedź HTTP."
+      ],
+      "correct_answer": "Udostępnia operacje na obiektach domeny, ukrywając szczegóły trwałego przechowywania.",
+      "explanation": "Repozytorium tworzy granicę między modelem a sposobem zapisu, dzięki czemu logikę można testować bez konkretnej bazy.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_02_repository"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-web-035",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Architektura heksagonalna. Widok HTTP tłumaczy JSON i wywołuje przypadek użycia. Jaką pełni rolę?",
+      "type": "one_choice",
+      "answers": [
+        "Portu wyjściowego dostępu do bazy.",
+        "Repozytorium modelu domenowego.",
+        "Korzenia agregatu kontrolującego zapis.",
+        "Adaptera wejściowego."
+      ],
+      "correct_answer": "Adaptera wejściowego.",
+      "explanation": "Adapter wejściowy inicjuje operację aplikacji, tłumacząc dane z określonej technologii. Ten sam port wejściowy może obsługiwać także CLI lub test.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-010",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Architektura heksagonalna. Aplikacja potrzebuje wysyłania powiadomień przez kontrakt send(recipient, text). Czym jest ten kontrakt?",
+      "type": "one_choice",
+      "answers": [
+        "Encją domenową identyfikującą użytkownika.",
+        "Composition root tworzącym wszystkie komponenty.",
+        "Portem wyjściowym potrzebnym aplikacji.",
+        "Adapterem wejściowym wybierającym trasę HTTP."
+      ],
+      "correct_answer": "Portem wyjściowym potrzebnym aplikacji.",
+      "explanation": "Port wyjściowy opisuje potrzebę aplikacji wobec otoczenia. Adapter e-mail lub SMS realizuje tę potrzebę konkretną technologią.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-011",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Architektura heksagonalna. Chcesz zastąpić zapis do pliku adapterem PostgreSQL. Co powinno pozostać wspólne dla obu adapterów?",
+      "type": "one_choice",
+      "answers": [
+        "Sposób tworzenia połączenia i obsługę jego protokołu.",
+        "Kontrakt operacji i ich oczekiwane zachowanie z perspektywy aplikacji.",
+        "Dokładny format pliku i strukturę tabel SQL.",
+        "Nazwy metod wewnętrznych sterownika obu technologii."
+      ],
+      "correct_answer": "Kontrakt operacji i ich oczekiwane zachowanie z perspektywy aplikacji.",
+      "explanation": "Zgodność portu dotyczy użytecznej umowy, nie tylko nazw metod. Szczegóły przechowywania różnią się wewnątrz adapterów.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture",
+        "https://www.cosmicpython.com/book/chapter_02_repository"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-012",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Architektura heksagonalna. Test przypadku użycia przechodzi z repozytorium pamięciowym. Co jeszcze trzeba sprawdzić przed zaufaniem adapterowi SQL?",
+      "type": "one_choice",
+      "answers": [
+        "Mapowanie danych i zachowanie prawdziwego zapisu w testach integracyjnych.",
+        "Wyłącznie to, czy adapter SQL ma taką samą liczbę metod prywatnych.",
+        "Tylko nazwy klas, bo zgodny interfejs dowodzi poprawności zapytań.",
+        "Powtórzyć ten sam test z mockiem całego adaptera SQL zamiast użyć bazy."
+      ],
+      "correct_answer": "Mapowanie danych i zachowanie prawdziwego zapisu w testach integracyjnych.",
+      "explanation": "Adapter pamięciowy pomaga testować logikę niezależnie od infrastruktury. Nie wykryje błędnego zapytania, mapowania lub niezgodnych ograniczeń rzeczywistej bazy.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_02_repository"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-013",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Architektura heksagonalna. Gdzie zwykle tworzy się adapter SQL i przekazuje go do przypadku użycia?",
+      "type": "one_choice",
+      "answers": [
+        "W metodzie encji przy każdej zmianie jej stanu.",
+        "W pliku definiującym kontrakt jako obowiązkowy globalny obiekt.",
+        "W każdym teście przez modyfikację prywatnych pól modelu domeny.",
+        "W miejscu składania aplikacji przy uruchomieniu, czyli composition root."
+      ],
+      "correct_answer": "W miejscu składania aplikacji przy uruchomieniu, czyli composition root.",
+      "explanation": "Composition root zna konkretne komponenty i łączy je. Dzięki temu przypadek użycia nie wybiera sam technologii, a konfiguracja produkcyjna i testowa mogą być różne.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_13_dependency_injection"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-014",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Architektura heksagonalna. Port repozytorium zwraca kursor konkretnego sterownika SQL, który domena musi obsłużyć. Jaki problem warto rozwiązać?",
+      "type": "one_choice",
+      "answers": [
+        "Kursor musi zostać przekazany również do formularza, aby wyrównać zależności.",
+        "Model domeny powinien dziedziczyć po klasie kursora.",
+        "Kontrakt przecieka technologią; adapter powinien tłumaczyć wynik na dane potrzebne aplikacji.",
+        "Port ma za mało metod i musi udostępnić jeszcze wszystkie operacje sterownika."
+      ],
+      "correct_answer": "Kontrakt przecieka technologią; adapter powinien tłumaczyć wynik na dane potrzebne aplikacji.",
+      "explanation": "Umowa portu powinna opisywać rozmowę aplikacji z otoczeniem, nie narzucać całemu wnętrzu detali jednej biblioteki. Adapter odpowiada za tłumaczenie tych detali.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture",
+        "https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-015",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Architektura heksagonalna. Import CSV i endpoint HTTP mają realizować identyczny zapis uczestnika. Jak je połączyć?",
+      "type": "one_choice",
+      "answers": [
+        "Oba adaptery muszą mieć taki sam format danych wejściowych.",
+        "Dwa adaptery wejściowe wywołują ten sam port przypadku użycia.",
+        "Endpoint HTTP wywołuje importer CSV, który zawiera jedyną kopię reguł.",
+        "Każdy adapter ma własną wersję reguły i zapisuje bezpośrednio do bazy."
+      ],
+      "correct_answer": "Dwa adaptery wejściowe wywołują ten sam port przypadku użycia.",
+      "explanation": "Różne adaptery tłumaczą własne wejście na wspólną operację. Pozwala to współdzielić reguły, zachowując różnice formatów i sposobów wywołania.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture",
+        "https://www.cosmicpython.com/book/chapter_04_service_layer"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-016",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Architektura heksagonalna. Port PaymentGateway określa charge(id, amount), ale milczy o timeoutach. Adapter pamięciowy nie zawodzi, a realny dostawca może pobrać środki przed utratą odpowiedzi. Co doprecyzować?",
+      "type": "one_choice",
+      "answers": [
+        "Kontrakt wyniku niepewnego i ponowień, a testy adaptera oprzeć także na takich scenariuszach.",
+        "Zamieniać każdy timeout na pewne odrzucenie płatności i od razu ponawiać nową operację.",
+        "Uznać adapter za zgodny, jeśli tylko nazwa metody i liczba argumentów są takie same.",
+        "Przenieść szczegóły klienta dostawcy do każdej encji wykonującej płatność."
+      ],
+      "correct_answer": "Kontrakt wyniku niepewnego i ponowień, a testy adaptera oprzeć także na takich scenariuszach.",
+      "explanation": "Podmienialność wymaga zgodnych znaczeń i obsługi awarii, nie tylko sygnatury. Umowa portu powinna pozwalać aplikacji świadomie obsłużyć niepewny rezultat bez nieuzasadnionego powielenia skutku.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture",
+        "https://www.cosmicpython.com/book/chapter_02_repository"
+      ],
+      "section": "Architektura heksagonalna",
+      "family": "python2-arch-017",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Na czym polega dependency injection?",
+      "type": "one_choice",
+      "answers": [
+        "Komponent dziedziczy po zależności i korzysta z jej pól wewnętrznych.",
+        "Komponent sam wybiera konkretną klasę zależności i tworzy ją w każdej metodzie.",
+        "Każda zależność jest globalnym singletonem dostępnym przez import.",
+        "Dostarczaniu zależności do komponentu z zewnątrz."
+      ],
+      "correct_answer": "Dostarczaniu zależności do komponentu z zewnątrz.",
+      "explanation": "Obiekt lub funkcja otrzymuje np. repozytorium zamiast samodzielnie tworzyć konkretny adapter. Pozwala to kontrolować konfigurację i testować komponent.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture",
+        "https://www.cosmicpython.com/book/chapter_02_repository"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-web-036",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Czym jest Unit of Work w aplikacji z kilkoma zapisami?",
+      "type": "one_choice",
+      "answers": [
+        "Wymusza niezależne zatwierdzanie zmian w każdym repozytorium.",
+        "Ogranicza odpowiedź HTTP do jednego obiektu domenowego.",
+        "Grupuje operacje jednej jednostki biznesowej i kontroluje ich zatwierdzenie lub wycofanie.",
+        "Określa sposób stronicowania kolekcji podczas odczytu."
+      ],
+      "correct_answer": "Grupuje operacje jednej jednostki biznesowej i kontroluje ich zatwierdzenie lub wycofanie.",
+      "explanation": "Unit of Work daje przypadkowi użycia jedną granicę trwałości, zamiast ukrytych commitów w poszczególnych repozytoriach.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_06_uow"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-web-040",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Chcesz wymieniać algorytm wyliczania rabatu bez rozbudowywania warunków w koszyku. Jaki wzorzec pasuje?",
+      "type": "one_choice",
+      "answers": [
+        "Observer: powiadamianie odbiorców po zmianie zawartości koszyka.",
+        "Strategy: przekazanie implementacji wspólnego kontraktu wyliczenia rabatu.",
+        "Factory Method: tworzenie wybranego obiektu koszyka zamiast wydzielenia algorytmu.",
+        "Decorator: dopisywanie zachowania do koszyka bez osobnego kontraktu wyboru algorytmu."
+      ],
+      "correct_answer": "Strategy: przekazanie implementacji wspólnego kontraktu wyliczenia rabatu.",
+      "explanation": "Strategy oddziela wybór algorytmu od klienta, który go używa. W Pythonie strategią może być również przekazana funkcja.",
+      "sources": [
+        "https://github.com/fluentpython/example-code-2e/blob/master/10-dp-1class-func/strategy.py"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-web-042",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Zewnętrzny klient płatności ma inny interfejs niż port PaymentGateway aplikacji. Jaki wzorzec pomoże?",
+      "type": "one_choice",
+      "answers": [
+        "Adapter tłumaczący kontrakt aplikacji na interfejs dostawcy.",
+        "Repository przechowujący odpowiedzi klienta w bazie.",
+        "Strategy wybierający różne reguły naliczania należności.",
+        "Observer powiadamiający aplikację o każdym wywołaniu klienta."
+      ],
+      "correct_answer": "Adapter tłumaczący kontrakt aplikacji na interfejs dostawcy.",
+      "explanation": "Adapter izoluje techniczny interfejs dostawcy od aplikacji. Dzięki temu przypadek użycia zależy od własnego kontraktu.",
+      "sources": [
+        "https://alistair.cockburn.us/hexagonal-architecture"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-web-043",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Jaki jest główny cel wzorca projektowego?",
+      "type": "one_choice",
+      "answers": [
+        "Dostarczyć gotowy algorytm, który pasuje do każdej aplikacji.",
+        "Wyznaczyć obowiązkową liczbę klas w każdym module.",
+        "Zastąpić analizę wymagań listą nazw technicznych.",
+        "Nazwać i opisać sprawdzone rozwiązanie powtarzającego się problemu projektu."
+      ],
+      "correct_answer": "Nazwać i opisać sprawdzone rozwiązanie powtarzającego się problemu projektu.",
+      "explanation": "Wzorzec pomaga rozpoznać problem i rozmawiać o strukturze rozwiązania. Jego użycie wymaga oceny kontekstu i kosztu, a implementacja zależy od języka.",
+      "sources": [
+        "https://python-patterns.guide/gang-of-four/composition-over-inheritance/"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-arch-018",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Jaka jest podstawowa rola fabryki obiektów?",
+      "type": "one_choice",
+      "answers": [
+        "Powiadamianie obserwatorów o każdej mutacji modelu.",
+        "Przekształcanie interfejsu już istniejącego obiektu na inny.",
+        "Tworzenie odpowiednio skonfigurowanych obiektów bez rozrzucania szczegółów ich konstrukcji.",
+        "Wyliczanie równości wszystkich obiektów w pamięci."
+      ],
+      "correct_answer": "Tworzenie odpowiednio skonfigurowanych obiektów bez rozrzucania szczegółów ich konstrukcji.",
+      "explanation": "Fabryka skupia tworzenie obiektów. W Pythonie może nią być zwykła funkcja albo wywoływalna klasa; nie wymaga od razu rozbudowanej hierarchii.",
+      "sources": [
+        "https://python-patterns.guide/gang-of-four/factory-method/",
+        "https://docs.python.org/3.12/library/logging.config.html#user-defined-objects"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-arch-019",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Co oznacza kompozycja obiektów w projekcie serwisu?",
+      "type": "one_choice",
+      "answers": [
+        "Serwis zmienia klasy współpracowników globalnie przy imporcie.",
+        "Serwis ma współpracujący obiekt i deleguje mu określone zadania.",
+        "Serwis dziedziczy po każdej klasie, z której korzysta.",
+        "Serwis kopiuje kod metod współpracownika do własnych metod."
+      ],
+      "correct_answer": "Serwis ma współpracujący obiekt i deleguje mu określone zadania.",
+      "explanation": "Kompozycja opisuje relację współpracy przez posiadanie lub otrzymanie obiektu. Pozwala łączyć zachowania bez tworzenia podklasy dla każdej kombinacji.",
+      "sources": [
+        "https://python-patterns.guide/gang-of-four/composition-over-inheritance/"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-arch-020",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Chcesz dodać pomiar czasu do klienta wysyłającego powiadomienia, zachowując ten sam interfejs send(). Jaki wzorzec pasuje?",
+      "type": "one_choice",
+      "answers": [
+        "Decorator opakowujący klienta i delegujący wywołanie po dodaniu pomiaru.",
+        "Adapter zmieniający send() na odmienny kontrakt zapisu pliku.",
+        "Factory tworząca nowy model użytkownika dla każdej wiadomości.",
+        "Repository zamieniające każdą wysyłkę w odczyt rekordów."
+      ],
+      "correct_answer": "Decorator opakowujący klienta i delegujący wywołanie po dodaniu pomiaru.",
+      "explanation": "Decorator dodaje zachowanie wokół istniejącego obiektu, zachowując używany interfejs. Adapter ma inny główny cel: dopasowanie różniących się interfejsów.",
+      "sources": [
+        "https://python-patterns.guide/gang-of-four/composition-over-inheritance/"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-arch-021",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Po potwierdzeniu zapisu szkolenia system ma uruchomić kilka niezależnych reakcji. Co opisuje podejście z obserwatorami lub handlerami zdarzenia?",
+      "type": "one_choice",
+      "answers": [
+        "Nadawca wybiera jeden algorytm ceny, który zastępuje wszystkie reakcje.",
+        "Każdy odbiorca tworzy nową kopię aplikacji zamiast obsłużyć zdarzenie.",
+        "Odbiorcy muszą dziedziczyć po konkretnym adapterze bazy nadawcy.",
+        "Nadawca publikuje fakt, a zarejestrowani odbiorcy wykonują przypisane reakcje."
+      ],
+      "correct_answer": "Nadawca publikuje fakt, a zarejestrowani odbiorcy wykonują przypisane reakcje.",
+      "explanation": "Oddzielenie faktu od reakcji ogranicza wiedzę nadawcy o odbiorcach. Samo użycie observerów lub handlerów nie gwarantuje trwałego dostarczenia komunikatu.",
+      "sources": [
+        "https://www.cosmicpython.com/book/chapter_08_events_and_message_bus"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-arch-022",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Klient powiadomień ma niezależnie zmienne: kanał (e-mail/SMS) i opcjonalne zachowania (pomiar/logowanie). Rosną podklasy dla każdej kombinacji. Jak uprościć projekt?",
+      "type": "one_choice",
+      "answers": [
+        "Umieścić wszystkie kombinacje w jednej metodzie i przekazywać globalne flagi.",
+        "Rozszerzyć każdą encję użytkownika o implementacje wszystkich kanałów i pomiarów.",
+        "Składać klienta z adaptera kanału i opakowań dodających wymagane zachowania.",
+        "Dla każdej nowej kombinacji tworzyć kolejną podklasę zawierającą oba rodzaje zmian."
+      ],
+      "correct_answer": "Składać klienta z adaptera kanału i opakowań dodających wymagane zachowania.",
+      "explanation": "Kompozycja oddziela niezależne osie zmian. Adapter realizuje kontrakt kanału, a opakowania dodają zachowanie bez mnożenia klas dla całego iloczynu kombinacji.",
+      "sources": [
+        "https://python-patterns.guide/gang-of-four/composition-over-inheritance/"
+      ],
+      "section": "Wzorce projektowe",
+      "family": "python2-arch-023",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Wagtail. Który opis najlepiej oddaje jego zastosowanie?",
+      "type": "one_choice",
+      "answers": [
+        "CMS oparty na Django, umożliwiający modelowanie i redagowanie treści.",
+        "Silnik szablonów obsługujący wyłącznie statyczne strony bez redaktorów.",
+        "Panel administracyjny dla dowolnej bazy SQL, niezależny od frameworka aplikacji.",
+        "Rozszerzenie Django przeznaczone przede wszystkim do budowy kontraktów REST."
+      ],
+      "correct_answer": "CMS oparty na Django, umożliwiający modelowanie i redagowanie treści.",
+      "explanation": "Wagtail dodaje do Django mechanizmy zarządzania treścią, stronami i procesem publikacji.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/pages.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-web-012",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Wagtail. Redaktor zapisuje zmiany istniejącej strony jako szkic, ale ich nie publikuje. Co powinni widzieć zwykli odwiedzający?",
+      "type": "one_choice",
+      "answers": [
+        "Najnowszy szkic natychmiast po zapisaniu.",
+        "Błąd 404 aż do ponownej publikacji każdej edycji.",
+        "Automatycznie połączoną treść szkicu i starej wersji.",
+        "Dotychczas opublikowaną wersję, dopóki zmiany nie zostaną opublikowane."
+      ],
+      "correct_answer": "Dotychczas opublikowaną wersję, dopóki zmiany nie zostaną opublikowane.",
+      "explanation": "Szkic i publikacja są osobnymi stanami procesu redakcyjnego. Rewizje przechowują kolejne wersje, a zapis szkicu nie musi zmieniać publicznej strony.",
+      "sources": [
+        "https://guide.wagtail.org/en/how-to-guides/manage-pages/",
+        "https://guide.wagtail.org/en/concepts/page-status/"
+      ],
+      "section": "Wagtail",
+      "family": "python2-web-005",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Wagtail. Programista dodaje typ strony ArticlePage(Page). Co jest główną rolą tego modelu?",
+      "type": "one_choice",
+      "answers": [
+        "Zastępuje cały projekt Django i jego konfigurację.",
+        "Opisuje wyłącznie styl CSS artykułu.",
+        "Opisuje dane i zachowanie artykułu jako strony serwisu.",
+        "Tworzy osobny serwer HTTP dla każdego artykułu."
+      ],
+      "correct_answer": "Opisuje dane i zachowanie artykułu jako strony serwisu.",
+      "explanation": "Model strony dziedziczący po Page dodaje pola i zachowanie konkretnego rodzaju treści. Wygląd zwykle określa szablon; infrastruktura aplikacji pozostaje oparta na Django.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/pages.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-001",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Wagtail. Pod stroną „Aktualności” umieszczono strony artykułów. Co oznacza ta relacja rodzic–dziecko?",
+      "type": "one_choice",
+      "answers": [
+        "Automatyczne skopiowanie treści rodzica do wszystkich artykułów.",
+        "Położenie stron w drzewie treści serwisu.",
+        "Obowiązek użycia identycznych pól i szablonu dla wszystkich dzieci.",
+        "Dziedziczenie klas Pythona między instancjami stron."
+      ],
+      "correct_answer": "Położenie stron w drzewie treści serwisu.",
+      "explanation": "Drzewo organizuje strony i ich adresy. Relacja między stronami w drzewie różni się od dziedziczenia modeli, np. ArticlePage po Page.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/pages.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-002",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Wagtail. W typowym projekcie kto określa dostępne typy stron i pola, a kto wprowadza ich treść?",
+      "type": "one_choice",
+      "answers": [
+        "Programista definiuje modele i edytor, a redaktor uzupełnia udostępnione pola.",
+        "Redaktor musi zmieniać kod modelu przy każdej korekcie tekstu.",
+        "Programista musi wdrażać nową wersję kodu po każdej zmianie akapitu.",
+        "Każdy odwiedzający może dodawać dowolne pola do modelu przez publiczną stronę."
+      ],
+      "correct_answer": "Programista definiuje modele i edytor, a redaktor uzupełnia udostępnione pola.",
+      "explanation": "Wagtail oddziela implementację struktury od codziennej pracy nad treścią. Zakres możliwości redaktora wynika z modeli, konfiguracji panelu i uprawnień.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/pages.html",
+        "https://guide.wagtail.org/en/how-to-guides/manage-pages/"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-003",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Wagtail. Redaktor chce sprawdzić wygląd nieopublikowanego artykułu przed pokazaniem go odbiorcom. Co powinien zrobić?",
+      "type": "one_choice",
+      "answers": [
+        "Opublikować artykuł, bo szkicu nie można wyświetlić w podglądzie.",
+        "Zmienić status wszystkich stron na opublikowane.",
+        "Utworzyć drugi publiczny artykuł jako jedyny sposób obejrzenia zmian.",
+        "Użyć podglądu strony dostępnego w procesie edycji."
+      ],
+      "correct_answer": "Użyć podglądu strony dostępnego w procesie edycji.",
+      "explanation": "Podgląd pomaga ocenić stronę przed publikacją. Obejrzenie szkicu przez redaktora nie oznacza automatycznego udostępnienia go wszystkim odwiedzającym.",
+      "sources": [
+        "https://guide.wagtail.org/en/how-to-guides/manage-pages/"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-004",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Wagtail. Redaktor ma układać treść z bloków tekstu, obrazów i cytatów. Jaki mechanizm pasuje do tego zadania?",
+      "type": "one_choice",
+      "answers": [
+        "InlineModelAdmin konfigurujący formularz każdego bloku Django Admin.",
+        "QuerySet.values() przekształcający wynik SQL na listę fragmentów HTML.",
+        "StreamField z zadeklarowanymi typami bloków.",
+        "RichTextField jako jedno pole z pełnym dowolnym HTML, bez modelowania bloków."
+      ],
+      "correct_answer": "StreamField z zadeklarowanymi typami bloków.",
+      "explanation": "StreamField przechowuje sekwencję strukturalnych bloków, które można komponować w interfejsie redakcyjnym.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/streamfield.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-web-026",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. Model strony przechowuje tytuł i treść. Jaka jest rola szablonu przy standardowym wyświetlaniu strony?",
+      "type": "one_choice",
+      "answers": [
+        "Przy każdym wyświetleniu automatycznie publikuje najnowszy szkic.",
+        "Określa, jak dane strony zostają przedstawione jako HTML.",
+        "Nadaje redaktorom uprawnienia do edycji całego drzewa.",
+        "Zastępuje migracje opisujące strukturę tabel."
+      ],
+      "correct_answer": "Określa, jak dane strony zostają przedstawione jako HTML.",
+      "explanation": "Szablon otrzymuje dane strony i opisuje ich prezentację. Modelowanie danych, publikacja i uprawnienia są odrębnymi odpowiedzialnościami.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/pages.html",
+        "https://docs.wagtail.org/en/stable/topics/writing_templates.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-005",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. Do czego przede wszystkim służą rewizje strony?",
+      "type": "one_choice",
+      "answers": [
+        "Do zachowania wersji treści i przeglądania historii zmian.",
+        "Do automatycznego usuwania historii po każdym zapisie.",
+        "Do zastępowania każdej migracji bazy danych.",
+        "Do zapewnienia, że każdy zapis natychmiast zmienia publiczną stronę."
+      ],
+      "correct_answer": "Do zachowania wersji treści i przeglądania historii zmian.",
+      "explanation": "Rewizja opisuje zapisaną wersję treści. Historia umożliwia porównanie i powrót do wcześniejszej wersji; wybór wersji do publikacji pozostaje osobną operacją.",
+      "sources": [
+        "https://guide.wagtail.org/en/how-to-guides/manage-pages/",
+        "https://docs.wagtail.org/en/stable/reference/pages/theory.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-006",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. Artykuł przed publikacją musi zostać zaakceptowany przez wyznaczony zespół. Jaki mechanizm organizuje taki proces?",
+      "type": "one_choice",
+      "answers": [
+        "StreamField z dodatkowym blokiem tekstowym „zaakceptowano”.",
+        "Zmiana szablonu HTML bez zmiany procesu redakcyjnego.",
+        "Indeks wyszukiwania jako mechanizm zatwierdzania treści.",
+        "Workflow z zadaniami moderacji i odpowiednimi uprawnieniami."
+      ],
+      "correct_answer": "Workflow z zadaniami moderacji i odpowiednimi uprawnieniami.",
+      "explanation": "Workflow określa etapy zatwierdzania i osoby uprawnione do wykonania zadań. Sama deklaracja pola lub tekst w treści nie ustanawia procesu moderacji.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/permissions.html",
+        "https://guide.wagtail.org/en/how-to-guides/configure-workflows-for-moderation/"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-007",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. Zespół rekrutacji ma edytować strony tylko w swoim dziale. Jak zwykle ograniczyć jego zakres pracy?",
+      "type": "one_choice",
+      "answers": [
+        "Zmienić nazwy modeli pozostałych działów, pozostawiając pełne uprawnienia.",
+        "Nadać całemu zespołowi superuser, a pozostałe działy ukryć w menu.",
+        "Przypisać grupie odpowiednie uprawnienia do wskazanej części drzewa stron.",
+        "Ograniczyć wyłącznie publiczny szablon strony głównej."
+      ],
+      "correct_answer": "Przypisać grupie odpowiednie uprawnienia do wskazanej części drzewa stron.",
+      "explanation": "Wagtail umożliwia zarządzanie uprawnieniami grup do części drzewa. Ukrycie linku lub zmiana nazwy modelu nie jest kontrolą dostępu.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/permissions.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-008",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. Dane autora mają być edytowane w jednym miejscu i używane przez wiele artykułów, bez osobnej strony w drzewie. Co pasuje do tego zadania?",
+      "type": "one_choice",
+      "answers": [
+        "Nowy model Page wymagany dla każdego współdzielonego obiektu.",
+        "Snippet autora oraz odwołania do niego z artykułów.",
+        "Wyłącznie stały napis zapisany w kodzie szablonu.",
+        "Osobna kopia wszystkich danych autora w każdym bloku tekstowym."
+      ],
+      "correct_answer": "Snippet autora oraz odwołania do niego z artykułów.",
+      "explanation": "Snippets pozwalają zarządzać treściami, które nie muszą stanowić samodzielnych stron. Relacja do obiektu autora umożliwia współdzielenie zamiast ręcznego utrzymywania wielu kopii.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/snippets/"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-009",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. To samo zdjęcie jest używane jako mała miniatura i duża ilustracja. Do czego służą renditions?",
+      "type": "one_choice",
+      "answers": [
+        "Do uzyskiwania wariantów obrazu, np. o zadanym rozmiarze lub kadrowaniu.",
+        "Do publikowania szkiców stron zawierających zdjęcie.",
+        "Do zastępowania obrazu dowolnym tekstem z wyszukiwarki.",
+        "Do zmiany praw redaktora przy każdym pobraniu zdjęcia."
+      ],
+      "correct_answer": "Do uzyskiwania wariantów obrazu, np. o zadanym rozmiarze lub kadrowaniu.",
+      "explanation": "Rendition jest przetworzonym wariantem obrazu powstałym według wybranego filtra. Pozwala dostosować grafikę do miejsca wyświetlania bez ręcznego tworzenia wszystkich rozmiarów.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/images.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-010",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Wagtail. Publiczna wyszukiwarka dla niezalogowanych użytkowników korzysta z Page.objects.all().search(query). Wyniki nie mogą zawierać szkiców ani stron prywatnych. Jaka zmiana wyraża właściwy zakres danych?",
+      "type": "one_choice",
+      "answers": [
+        "Ograniczyć wyłącznie liczbę wyników, bez zmiany ich zakresu.",
+        "Wyświetlać wszystkie wyniki, a przy szczegółach sprawdzać dostęp do strony.",
+        "Pobrać najnowszą rewizję każdej znalezionej strony i pokazać ją bez sprawdzenia statusu.",
+        "Wyszukiwać w QuerySecie ograniczonym do stron live() i public()."
+      ],
+      "correct_answer": "Wyszukiwać w QuerySecie ograniczonym do stron live() i public().",
+      "explanation": "Wyszukiwanie powinno rozpoczynać się od zbioru stron przeznaczonych dla danego odbiorcy. live() wybiera strony opublikowane, a public() wyklucza strony z ograniczeniami prywatności. Lista wyników również stanowi ujawnienie danych; nie wystarczy chronić samych szczegółów.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/pages.html",
+        "https://docs.wagtail.org/en/stable/topics/search/searching.html",
+        "https://docs.wagtail.org/en/stable/reference/pages/queryset_reference.html"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-011",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Wagtail. Autorzy mają przygotowywać aktualności, kierownik ma je zatwierdzać, a odwiedzający widzieć tylko opublikowaną wersję. Który projekt uwzględnia cały ten kontrakt?",
+      "type": "one_choice",
+      "answers": [
+        "Ograniczyć publiczny dostęp do całej witryny, bez określenia praw autorów i zatwierdzających.",
+        "Dać wszystkim autorom superuser i potraktować zapis szkicu jako zatwierdzenie kierownika.",
+        "Rozdzielić uprawnienia autorów i osób publikujących, skonfigurować workflow oraz zachować publiczne wyświetlanie opublikowanej treści.",
+        "Zastąpić workflow polem tekstowym „zaakceptowane”, bez kontroli uprawnień publikacji."
+      ],
+      "correct_answer": "Rozdzielić uprawnienia autorów i osób publikujących, skonfigurować workflow oraz zachować publiczne wyświetlanie opublikowanej treści.",
+      "explanation": "Kontrakt obejmuje trzy odpowiedzialności: edycję, zatwierdzanie/publikację i zakres publicznego wyświetlania. Workflow organizuje moderację, a role i uprawnienia ograniczają wykonywanie działań. Szkic nadal nie powinien zastępować opublikowanej wersji dla zwykłych odbiorców.",
+      "sources": [
+        "https://docs.wagtail.org/en/stable/topics/permissions.html",
+        "https://guide.wagtail.org/en/how-to-guides/manage-pages/",
+        "https://guide.wagtail.org/en/how-to-guides/configure-workflows-for-moderation/"
+      ],
+      "section": "Wagtail",
+      "family": "python2-cms-012",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Django Admin. Do czego przede wszystkim służy ten komponent?",
+      "type": "one_choice",
+      "answers": [
+        "Do zastąpienia serwera bazy danych i wykonywania SQL bez bazy.",
+        "Do zarządzania danymi modeli przez uprawnionych użytkowników w panelu administracyjnym.",
+        "Do automatycznego wystawienia każdego modelu jako zabezpieczonego API REST.",
+        "Do automatycznego tworzenia kompletnego publicznego interfejsu produktu."
+      ],
+      "correct_answer": "Do zarządzania danymi modeli przez uprawnionych użytkowników w panelu administracyjnym.",
+      "explanation": "Admin tworzy interfejs zarządzania zarejestrowanymi modelami. Jest przeznaczony dla zaufanych użytkowników; publiczne widoki i API projektuje się osobno.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-013",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Django 5.2 Admin, domyślny system uprawnień. Użytkownik ma is_staff=True, ale nie jest superuser i nie ma praw do modelu Order. Co z tego wynika?",
+      "type": "one_choice",
+      "answers": [
+        "Sam status staff nie daje mu automatycznie prawa edycji wszystkich zamówień.",
+        "Może edytować każdy model, bo staff jest równoważne superuser.",
+        "Dostaje prawa zapisu do każdego modelu pokazanego przez list_display.",
+        "Każde wejście do panelu automatycznie nadaje mu uprawnienie change_order."
+      ],
+      "correct_answer": "Sam status staff nie daje mu automatycznie prawa edycji wszystkich zamówień.",
+      "explanation": "is_staff pozwala aktywnemu użytkownikowi spełnić podstawowy warunek dostępu do panelu, lecz operacje na modelach podlegają osobnym uprawnieniom. Staff i superuser to różne role.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-014",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Django Admin. Formularz modelu ma wiele pól, które operator powinien widzieć w grupach „Dane podstawowe” i „Dostawa”. Co służy do takiej organizacji?",
+      "type": "one_choice",
+      "answers": [
+        "list_filter jako układ pól formularza.",
+        "search_fields jako układ sekcji formularza.",
+        "list_display jako podział formularza na grupy.",
+        "fieldsets w ModelAdmin."
+      ],
+      "correct_answer": "fieldsets w ModelAdmin.",
+      "explanation": "fieldsets grupuje pola formularza w sekcje. list_display, list_filter i search_fields konfigurują przede wszystkim ekran listy rekordów.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-015",
+      "origin": "variant",
+      "difficulty": "easy"
+    },
+    {
+      "question": "Django Admin. Chcesz dodać kolumny, filtry i wyszukiwanie na liście modelu. Gdzie jest typowe miejsce konfiguracji?",
+      "type": "one_choice",
+      "answers": [
+        "Wyłącznie przez zmianę metody __str__ modelu.",
+        "W definicji migracji, jako właściwości tabeli SQL.",
+        "W klasie ModelAdmin: list_display, list_filter i search_fields.",
+        "Wyłącznie w Meta.fields formularza, bez konfiguracji ModelAdmin."
+      ],
+      "correct_answer": "W klasie ModelAdmin: list_display, list_filter i search_fields.",
+      "explanation": "ModelAdmin konfiguruje panel dla zarejestrowanego modelu, w tym jego listę i formularze.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-web-024",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Django Admin. Zamówienie ma pozycje jako modele powiązane ForeignKey. Jak wygodnie edytować je na stronie zamówienia?",
+      "type": "one_choice",
+      "answers": [
+        "Użyć search_fields, które zastąpią edycję powiązanych rekordów.",
+        "Użyć odpowiedniego InlineModelAdmin.",
+        "Umieścić nazwy pól pozycji wyłącznie w list_filter zamówienia.",
+        "Dodać kolumnę tekstową do list_display, co samo utworzy formularze pozycji."
+      ],
+      "correct_answer": "Użyć odpowiedniego InlineModelAdmin.",
+      "explanation": "Inline pozwala edytować powiązane rekordy w formularzu obiektu nadrzędnego; nadal obowiązują uprawnienia i walidacja.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-web-025",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Django Admin. Operator zaznacza kilka rekordów i chce uruchomić na nich operację „Wyślij przypomnienie”. Jaki mechanizm odpowiada za taką funkcję?",
+      "type": "one_choice",
+      "answers": [
+        "Akcja administracyjna pracująca na wybranym QuerySecie.",
+        "list_display jako automatyczny wykonawca operacji biznesowych.",
+        "search_fields uruchamiające wysyłkę po wpisaniu tekstu.",
+        "Migracja schematu wykonywana po każdym zaznaczeniu rekordu."
+      ],
+      "correct_answer": "Akcja administracyjna pracująca na wybranym QuerySecie.",
+      "explanation": "Admin actions umożliwiają wykonywanie operacji na zaznaczonych rekordach. Implementacja powinna sprawdzać odpowiednie uprawnienia i jasno raportować wynik; sam mechanizm nie określa reguł biznesowych.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/actions/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-016",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Django Admin. Formularz zamówienia ma ForeignKey do setek tysięcy klientów. Jak ograniczyć ładowanie wielkiego pola wyboru?",
+      "type": "one_choice",
+      "answers": [
+        "Załadować wszystkich klientów i zwiększyć wysokość select.",
+        "Dodać klientów do list_filter, bez zmiany formularza relacji.",
+        "Usunąć relację i zastąpić klienta dowolnym tekstem, bez wymagań domeny.",
+        "Użyć autocomplete_fields i skonfigurować search_fields w ModelAdmin klienta."
+      ],
+      "correct_answer": "Użyć autocomplete_fields i skonfigurować search_fields w ModelAdmin klienta.",
+      "explanation": "Autocomplete wyszukuje powiązane obiekty zamiast renderować od razu wszystkie opcje. Powiązany ModelAdmin musi umożliwiać wyszukiwanie; nadal trzeba uwzględnić uprawnienia i wydajność zapytań.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-017",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Django Admin. Lista zamówień wyświetla customer.name i wykonuje dodatkowe zapytanie dla każdego wiersza. Jak zwykle przygotować relację ForeignKey?",
+      "type": "one_choice",
+      "answers": [
+        "Przenieść customer.name do metody wyświetlania, zachowując te same zapytania na wiersz.",
+        "Dodać customer do readonly_fields i pozostawić pobieranie listy bez zmian.",
+        "Ustawić list_select_related dla customer albo odpowiednio zoptymalizować get_queryset.",
+        "Zwiększyć list_per_page, aby wykonać jeszcze więcej odczytów naraz."
+      ],
+      "correct_answer": "Ustawić list_select_related dla customer albo odpowiednio zoptymalizować get_queryset.",
+      "explanation": "select_related pobiera relację ForeignKey razem z rekordem w zapytaniu ze złączeniem. ModelAdmin pozwala wskazać list_select_related; przy własnej logice należy zmierzyć liczbę zapytań.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-018",
+      "origin": "variant",
+      "difficulty": "medium"
+    },
+    {
+      "question": "Django 5.2 Admin. Reguła „opłaconego zamówienia nie można anulować” jest sprawdzana w Order.cancel(). Akcja masowa wykonuje queryset.update(status=\"cancelled\"). Jak zapewnić stosowanie tej reguły także w akcji?",
+      "type": "one_choice",
+      "answers": [
+        "Objąć samo queryset.update blokiem atomic, bo wywoła on Order.cancel dla każdego rekordu.",
+        "Wywołać wspólną operację anulowania dla wybranych zamówień i świadomie obsłużyć błędy oraz granicę transakcji.",
+        "Przenieść regułę do nadpisanego save(), pozostawiając akcję opartą na queryset.update.",
+        "Ukryć przycisk anulowania w zwykłym formularzu Admin, pozostawiając akcję masową bez kontroli."
+      ],
+      "correct_answer": "Wywołać wspólną operację anulowania dla wybranych zamówień i świadomie obsłużyć błędy oraz granicę transakcji.",
+      "explanation": "QuerySet.update wykonuje SQL, bez wywołania metod biznesowych, save ani sygnałów zapisu. Sama transakcja nie dodaje brakującej reguły domenowej. Akcja musi korzystać z reguły wspólnej z innymi drogami anulowania i określić, czy błędny rekord cofa całą grupę, czy daje częściowy wynik.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/models/querysets/#update",
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/actions/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-web-027",
+      "origin": "variant",
+      "difficulty": "hard"
+    },
+    {
+      "question": "Django Admin. Pracownik ma obsługiwać zamówienia wyłącznie swojej firmy. Ukryto firmę w readonly_fields, ale listę i akcje pozostawiono bez ograniczeń. Co rzeczywiście realizuje wymaganą kontrolę dostępu?",
+      "type": "one_choice",
+      "answers": [
+        "Ograniczyć get_queryset do dozwolonych danych i egzekwować uprawnienia również przy szczegółach, zapisie i akcjach.",
+        "Pozostawić listę bez zmian, bo readonly_fields automatycznie blokuje odczyt cudzych rekordów.",
+        "Usunąć kolumnę firmy z list_display, zostawiając dostęp do wszystkich rekordów.",
+        "Sprawdzać uprawnienia tylko w publicznym API, bo staff może zarządzać każdą firmą w Admin."
+      ],
+      "correct_answer": "Ograniczyć get_queryset do dozwolonych danych i egzekwować uprawnienia również przy szczegółach, zapisie i akcjach.",
+      "explanation": "readonly_fields zmienia formularz, ale nie tworzy izolacji danych między firmami. Zakres rekordów oraz dozwolone operacje trzeba kontrolować w odpowiednich ścieżkach ModelAdmin i wspólnej logice aplikacji. Same ukryte pola nie chronią adresów szczegółów ani akcji.",
+      "sources": [
+        "https://docs.djangoproject.com/en/5.2/ref/contrib/admin/"
+      ],
+      "section": "Django Admin",
+      "family": "python2-cms-019",
+      "origin": "variant",
+      "difficulty": "hard"
     }
-  ]
+  ],
+  "section_weights": {
+    "Python — dane i wydajność": 2,
+    "Python — funkcje, iteracja i zasoby": 2,
+    "Python — obiekty i typowanie": 2,
+    "Python — współbieżność": 2
+  }
 }

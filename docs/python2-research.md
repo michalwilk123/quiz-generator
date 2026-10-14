@@ -2,6 +2,20 @@
 
 Data: 01.10.2026. Zakres: bank `src/quizes/python2.json` i ściąga 2 w sąsiednim repozytorium `job-seek-dashboard`.
 
+## Korekta pokrycia i losowania — 02.10.2026
+
+Po uwadze użytkownika sprawdzono faktyczne losowanie. Wagtail miał tylko 3 pytania ukryte w dziale Django, a 20 pytań architektury tworzyło jeden dział wobec dziewięciu działów Pythona. Regresja na prawdziwym presecie wykazała tylko 2 pytania architektury w sesji 30 pytań. Równoważenie samych nazw działów utrwalało tę dysproporcję.
+
+Trzech subagentów ponownie przejrzało architekturę, CMS/Admin oraz zbędne powtórzenia Python/SQL. Zachowano 288 pytań i poziomy 96/144/48. Nowy podział: Python 108, DDD 13, Clean Architecture 10, heksagon 10, wzorce 10, Wagtail 15, Django Admin 10, Django/API 24, SQL 16; pozostałe działy 72. Zastąpiono 36 pytań Pythona i 6 SQL; wcześniejsze 20 architektury i 6 CMS zachowano oraz dopracowano.
+
+Python ma teraz cztery działy z wagą 2, a każdy z pozostałych działów wagę 1. Waga oznacza docelową częstość względem innych działów, nie procent banku. Kod losowania porównuje liczbę wybranych pytań podzieloną przez wagę, nadal preferując nieużyte rodziny. Dotychczasowe banki bez wag zachowują dotychczasowe zasady. Test regresji obejmuje 100 deterministycznych losowań: 8–12 pytań Python, minimum 4 architektury/wzorców, obecność Wagtail i Admin oraz najwyżej 2 SQL. Nie ustala proporcji poziomów trudności ani struktury prawdziwego egzaminu.
+
+Pytania CMS obejmują cel narzędzia, Page, drzewo treści, szablony, szkice i publikację, rewizje, workflow, StreamField, snippets, obrazy, wyszukiwanie oraz konfigurację i uprawnienia Admina. Architektura obejmuje pojęcia domeny, granice modeli i spójności, przypadki użycia, zależności, porty, adaptery oraz praktyczne wzorce. Odpowiedzi odsyłają do dokumentacji Django/Wagtail, autorów wzorców i autorów Cosmic Python. Rozbudowaną ściągę z poprzedniego kroku zsynchronizowano w `/tmp/python2-expanded`; repozytorium dashboardu pozostaje poza dozwolonym zakresem zapisu tej sesji.
+
+## Poprzedni przegląd — 01.10.2026
+
+Poniższy raport dokumentuje wcześniejszy podział przed powyższą korektą.
+
 ## Wynik i metoda
 
 Baza ma nadal 288 pytań. Trzech subagentów niezależnie przejrzało Python, web/architekturę/testy oraz dane/infrastrukturę/bezpieczeństwo. Następnie dokonano wzajemnej recenzji: Python sprawdził web, web sprawdził Python i dane, a autor części danych sprawdził Python i web. Główny agent skontrolował pokrycie zaproszenia, powtórzenia, założenia pytań, jakość błędnych opcji i spójność materiałów.

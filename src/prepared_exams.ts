@@ -24,7 +24,7 @@ export const preparedExams: PreparedExam[] = [
     id: "python-weryfikacja2",
     title: "Programowanie python - politechnika gdanska 2 — Weryfikacja 2",
     description:
-      "Trudne pytania z kodem i scenariusze backendowe. 30 pytań w 20 minut, pełny zestaw odpowiedzi albo zero punktów.",
+      "Python i pełny zakres backendu, w tym DDD, Clean, heksagon, Wagtail i Admin. 30 pytań w 20 minut, pełny zestaw odpowiedzi albo zero punktów.",
     config: {
       ...defaultConfig("python2"),
       questionCount: 30,

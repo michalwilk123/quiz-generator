@@ -4,13 +4,14 @@
 
 Bank `src/quizes/python2.json`, ID `python2`, ma **288 pytań**, tyle samo co przed przeglądem. Przewaga zagadek o szczegółach interpretera została zastąpiona podstawami języka, praktycznymi przykładami oraz scenariuszami backendowymi. Wersja 1 pozostaje osobnym bankiem.
 
-- 144 pytania o Pythonie: dane i referencje, funkcje, OOP, dekoratory, iteracja, zasoby, typowanie, wydajność i współbieżność.
-- 72 pytania o webie, architekturze, testowaniu i współpracy.
-- 72 pytania o danych, infrastrukturze, bezpieczeństwie i pozostałych narzędziach z zaproszenia.
+- 108 pytań o Pythonie: dane i referencje, funkcje, OOP, dekoratory, iteracja, zasoby, typowanie, wydajność i współbieżność.
+- 43 pytania o DDD, Clean Architecture, architekturze heksagonalnej i wzorcach.
+- 15 pytań Wagtail, 10 Django Admin, 24 Django/API i 16 SQL.
+- 72 pytania o testach, infrastrukturze, bezpieczeństwie, współpracy i pozostałych tematach, w tym sześć zadań projektowych.
 - Poziomy zapisane w `difficulty`: 96 `easy`, 144 `medium`, 48 `hard`. Są oceną redakcyjną; trudne pytania sprawdzają połączenie mechanizmów i decyzje projektowe. Rozkład dotyczy całego banku, a nie sztywnej liczby na każdy losowany test.
 - Sześć długich zadań projektowych służy samoocenie. Presety `python-nauka2` (6 pytań bez timera) i `python-weryfikacja2` (30 pytań / 20 minut) zachowują swoje ustawienia.
 
-Losowanie nadal równoważy działy i preferuje różne rodziny. Dziewięć działów Pythona zapewnia mu około połowy pytań w sesji weryfikacyjnej. Źródła, objaśnienia i jednoznaczny klucz odpowiedzi znajdują się przy każdym pytaniu. Metadane trudności nie wprowadzają dodatkowego filtra ani gwarancji proporcji poziomów w pojedynczym losowaniu.
+Losowanie nadal równoważy działy i preferuje różne rodziny. Cztery działy Pythona mają wagę 2, pozostałe wagę 1 (`section_weights`). DDD, Clean, heksagon, wzorce, Wagtail i Admin mają osobne działy. Regresja sprawdza 100 losowań po 30 pytań: 8–12 Python, co najmniej 4 architektura/wzorce, co najmniej jedno Wagtail i jedno Admin oraz maksymalnie 2 SQL. Źródła, objaśnienia i jednoznaczny klucz odpowiedzi znajdują się przy każdym pytaniu. Metadane trudności nie wprowadzają dodatkowego filtra ani gwarancji proporcji poziomów w pojedynczym losowaniu.
 
 Ściąga 2 w `job-seek-dashboard/public/materialy/python-egzamin2.html` zawiera ten sam komplet pytań, odpowiedzi i poziomów, z wyszukiwaniem oraz drukiem. Odpowiadający plik `.txt` jest identyczną kopią źródła HTML. Rozdziały Python, asyncio, SQL i bezpieczeństwo zostały przepisane wokół fundamentów. Rozdział „trudnych pułapek” zastąpiono zadaniami praktycznymi; pozostałe przydatne omówienia zachowano i uzupełniono wprowadzeniami.
 
